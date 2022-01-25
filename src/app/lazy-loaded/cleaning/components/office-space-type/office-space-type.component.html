@@ -1,0 +1,128 @@
+<p-panel [toggleable]="false" class="no-borders">
+    <ng-template pTemplate="header">
+        <h2>Space Type</h2>
+    </ng-template>
+    <ng-template pTemplate="content">
+        <ng-container [formGroup]="$any(controlContainer.control)">
+            <div formGroupName="space_type">
+                <div class="row mt-2">
+                    <div class="col-6 controls">
+                        <label class="label-title">Number of enclosed offices</label>
+                    </div>
+                    <div class="col-6 controls">
+                        <p-inputNumber class="inputNumber"
+                            formControlName="enclosedOffices" 
+                            [showButtons]="true" 
+                            buttonLayout="horizontal" 
+                            spinnerMode="horizontal"
+                            decrementButtonClass="p-button-danger" 
+                            incrementButtonClass="p-button-success" 
+                            incrementButtonIcon="pi pi-plus" 
+                            decrementButtonIcon="pi pi-minus">
+                        </p-inputNumber>
+                    </div>
+
+                    <div class="col-6 controls">
+                        <label class="label-title">Number of people work stations</label>
+                    </div>
+                    <div class="col-6 controls">
+                        <p-inputNumber class="inputNumber"
+                            formControlName="workStations" 
+                            [showButtons]="true" 
+                            buttonLayout="horizontal" 
+                            spinnerMode="horizontal"
+                            decrementButtonClass="p-button-danger" 
+                            incrementButtonClass="p-button-success" 
+                            incrementButtonIcon="pi pi-plus" 
+                            decrementButtonIcon="pi pi-minus">
+                        </p-inputNumber>
+                    </div>
+
+                    <div class="col-6 controls">
+                        <label class="label-title">Number of meeting rooms</label>
+                    </div>
+                    <div class="col-6 controls">
+                        <p-inputNumber class="inputNumber"
+                            formControlName="meetingRooms" 
+                            [showButtons]="true" 
+                            buttonLayout="horizontal" 
+                            spinnerMode="horizontal"
+                            decrementButtonClass="p-button-danger" 
+                            incrementButtonClass="p-button-success" 
+                            incrementButtonIcon="pi pi-plus" 
+                            decrementButtonIcon="pi pi-minus">
+                        </p-inputNumber>
+                    </div>
+
+                    <div class="col-6 controls">
+                        <label class="label-title">Number of men & women bathroom</label>
+                    </div>
+                    <div class="col-6 controls">
+                        <p-inputNumber class="inputNumber"
+                            formControlName="bathrooms" 
+                            [showButtons]="true" 
+                            buttonLayout="horizontal" 
+                            spinnerMode="horizontal"
+                            decrementButtonClass="p-button-danger" 
+                            incrementButtonClass="p-button-success" 
+                            incrementButtonIcon="pi pi-plus" 
+                            decrementButtonIcon="pi pi-minus">
+                        </p-inputNumber>
+                    </div>
+
+                    <div class="col-6 controls">
+                        <label class="label-title">Number of toilet stalls & urinals</label>
+                    </div>
+                    <div class="col-6 controls">
+                        <p-inputNumber class="inputNumber"
+                            formControlName="toilets" 
+                            [showButtons]="true" 
+                            buttonLayout="horizontal" 
+                            spinnerMode="horizontal"
+                            decrementButtonClass="p-button-danger" 
+                            incrementButtonClass="p-button-success" 
+                            incrementButtonIcon="pi pi-plus" 
+                            decrementButtonIcon="pi pi-minus">
+                        </p-inputNumber>
+                    </div>
+
+                    <div class="col-6 controls">
+                        <label class="label-title">Number of hallways</label>
+                    </div>
+                    <div class="col-6 controls">
+                        <p-inputNumber class="inputNumber"
+                            formControlName="hallways" 
+                            [showButtons]="true" 
+                            buttonLayout="horizontal" 
+                            spinnerMode="horizontal"
+                            decrementButtonClass="p-button-danger" 
+                            incrementButtonClass="p-button-success" 
+                            incrementButtonIcon="pi pi-plus" 
+                            decrementButtonIcon="pi pi-minus">
+                        </p-inputNumber>
+                    </div>
+
+                    <div class="col-6 controls">
+                        <label class="label-title">Number of cafeterias & dining areas</label>
+                    </div>
+                    <div class="col-6 controls">
+                        <p-inputNumber class="inputNumber"
+                            formControlName="cafeterias" 
+                            [showButtons]="true" 
+                            buttonLayout="horizontal" 
+                            spinnerMode="horizontal"
+                            decrementButtonClass="p-button-danger" 
+                            incrementButtonClass="p-button-success" 
+                            incrementButtonIcon="pi pi-plus" 
+                            decrementButtonIcon="pi pi-minus">
+                        </p-inputNumber>
+                    </div>
+    
+                    <div class="col-12">
+                        <p-divider></p-divider>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+    </ng-template>
+</p-panel>   

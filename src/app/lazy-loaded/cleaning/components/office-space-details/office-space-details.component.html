@@ -1,0 +1,62 @@
+<p-panel [toggleable]="false" class="no-borders">
+    <ng-template pTemplate="header">
+        <h2>Space Details</h2>
+    </ng-template>
+    <ng-template pTemplate="content">
+        <ng-container [formGroup]="$any(controlContainer.control)">
+            <div formGroupName="space_details">
+                <div class="row mt-2">
+                    <div class="col-6 controls">
+                        <label class="label-title">Total square meters of entire area</label>
+                    </div>
+                    <div class="col-6 controls">
+                        <input type=text pInputText placeholder="Enter the square meters for the total area" formControlName=totalSquareMeters>
+                    </div>
+
+                    <div class="col-6 controls">
+                        <label class="label-title">Total number of persons in the space</label>
+                    </div>
+                    <div class="col-6 controls">
+                        <p-dropdown 
+                            [options]="numberOfPersons" 
+                            optionLabel="label"
+                            placeholder="Select number of persons"
+                            [showClear]="true"
+                            formControlName="numberOfPersons">
+                        </p-dropdown>
+                    </div>
+    
+                    <div class="col-6 controls">
+                        <label class="label-title">Frequency period of cleaning</label>
+                    </div>
+                    <div class="col-6 controls">
+                        <p-dropdown 
+                            [options]="frequency" 
+                            optionLabel="label"
+                            placeholder="Select frequency"
+                            [showClear]="true"
+                            formControlName="frequencyOfCleaning">
+                        </p-dropdown>
+                    </div>
+    
+                    <div class="col-6 controls">
+                        <label class="label-title">Preferred time of the day for cleaning</label>
+                    </div>
+                    <div class="col-6 controls">
+                        <p-dropdown 
+                            [options]="timeOfTheDay" 
+                            optionLabel="label"
+                            placeholder="Select time of the day"
+                            [showClear]="true"
+                            formControlName="dayTime">
+                        </p-dropdown>
+                    </div>
+    
+                    <div class="col-12">
+                        <p-divider></p-divider>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+    </ng-template>
+</p-panel>   

@@ -1,0 +1,35 @@
+:host ::ng-deep .no-borders {
+    .p-panel .p-panel-content {
+        padding: 0;
+        border: none;
+    }
+
+    .p-panel .p-panel-header {
+        padding: 0;
+        background: #ffffff;
+        border: none;
+    }
+}
+
+:host ::ng-deep .inputNumber {
+    .p-inputtext{
+        width: 70px;
+        text-align: center;
+    }
+    justify-self: right;
+}
+
+.controls {
+    display: grid;
+    padding: 10px;
+}
+
+.label-title {
+    font-size: 20px;
+    color: #4c4e50;
+}
+
+h2 {
+    font-size: 20px;
+    color: #65686a;
+}

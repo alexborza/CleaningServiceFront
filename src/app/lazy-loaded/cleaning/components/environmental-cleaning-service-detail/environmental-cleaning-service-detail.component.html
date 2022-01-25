@@ -1,0 +1,74 @@
+<p-panel [toggleable]="false" class="no-borders">
+    <ng-template pTemplate="header">
+        <h2>Cleaning Details</h2>
+    </ng-template>
+    <ng-template pTemplate="content">
+        <ng-container [formGroup]="$any(controlContainer.control)">
+            <div formGroupName="cleaning_details">
+                <div class="row mt-2">
+                    <div class="col-6 controls">
+                        <label class="label-title">Property type</label>
+                    </div>
+                    <div class="col-6 controls">
+                        <p-dropdown 
+                            [options]="properties" 
+                            optionLabel="label"
+                            placeholder="Select property type"
+                            [showClear]="true"
+                            formControlName="property">
+                        </p-dropdown>
+                    </div>
+
+                    <ng-container *ngIf="isPostConstructionCleaning">
+                        <div class="col-6 controls">
+                            <label class="label-title">Total number of rooms</label>
+                        </div>
+                        <div class="col-6 controls">
+                            <p-dropdown 
+                                [options]="rooms" 
+                                optionLabel="label"
+                                placeholder="Select number of rooms"
+                                [showClear]="true"
+                                formControlName="rooms">
+                            </p-dropdown>
+                        </div>
+                    </ng-container>
+      
+                    <div class="col-6 controls">
+                        <label class="label-title">Total Square Meters</label>
+                    </div>
+                    <div class="col-6 controls">
+                        <input type=text pInputText placeholder="Total Square Meters" formControlName=squareMeters>
+                    </div>
+    
+                    <div class="col-6 controls">
+                        <label class="label-title">Parking</label>
+                    </div>
+                    <div class="col-6 controls">
+                        <p-selectButton
+                        [options]="parking" 
+                        optionLabel="label" 
+                        formControlName="parking"></p-selectButton>
+                    </div>
+    
+                    <div class="col-6 controls">
+                        <label class="label-title">How to access the home?</label>
+                    </div>
+                    <div class="col-6 controls">
+                        <p-dropdown 
+                            [options]="homeAccess" 
+                            optionLabel="label"
+                            placeholder="Select home access way"
+                            [showClear]="true"
+                            formControlName="homeAccess">
+                        </p-dropdown>
+                    </div>
+    
+                    <div class="col-12">
+                        <p-divider></p-divider>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+    </ng-template>
+</p-panel>   

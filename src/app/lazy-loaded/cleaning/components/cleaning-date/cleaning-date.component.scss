@@ -1,0 +1,30 @@
+.controls {
+    display: grid;
+    padding: 10px;
+}
+
+:host ::ng-deep .no-borders {
+    .p-panel .p-panel-content {
+        padding: 0;
+        border: none;
+    }
+
+    .p-panel .p-panel-header {
+        padding: 0;
+        background: #ffffff;
+        border: none;
+    }
+}
+
+:host ::ng-deep .p-dropdown {
+    width: 100%;
+}
+
+:host ::ng-deep .p-calendar {
+    width: 100%;
+}
+
+h2 {
+    font-size: 20px;
+    color: #65686a;
+}

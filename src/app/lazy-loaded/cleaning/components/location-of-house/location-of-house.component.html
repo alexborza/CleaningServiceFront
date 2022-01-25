@@ -1,0 +1,40 @@
+<p-panel [toggleable]="false" class="no-borders">
+    <ng-template pTemplate="header">
+        <h2>Location of the house</h2>
+    </ng-template>
+    <ng-template pTemplate="content">
+        <ng-container [formGroup]="$any(controlContainer.control)">
+            <div formGroupName="location">
+                <div class="row mt-2">
+                    <div class="col-6 controls">
+                        <label>County</label>
+                        <p-dropdown 
+                            [options]="counties" 
+                            optionLabel="nume"
+                            optionValue="nume"
+                            placeholder="Select a Country"
+                            [showClear]="true"
+                            formControlName="county">
+                        </p-dropdown>
+                    </div>
+                    
+                    <div class="col-6 controls">
+                        <label>City</label>
+                        <input type=text pInputText placeholder="City" formControlName=city>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-12 controls">
+                        <label>Street Address</label>
+                        <input type=text pInputText placeholder="Address(Str, Nr, Bl, Sc)" formControlName=address>
+                    </div>
+
+                    <div class="col-12">
+                        <p-divider></p-divider>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+    </ng-template>
+</p-panel>

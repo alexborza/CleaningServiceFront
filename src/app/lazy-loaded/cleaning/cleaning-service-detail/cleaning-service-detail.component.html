@@ -1,0 +1,41 @@
+<h1>{{title}}</h1>
+<div class="mt-5 container">
+    <div class="mt-5 row">
+        <div class="col-8">
+            <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+                <app-contact-info></app-contact-info>
+                <app-location-of-house></app-location-of-house>
+                <app-standard-cleaning-service-detail *ngIf="isStandardDetail()"
+                    [bedroomPrices]="bedroomPrices"
+                    [bathroomPrices]="bathroomPrices"
+                    [kitchenPrices]="kitchenPrices"
+                ></app-standard-cleaning-service-detail>
+                <app-environmental-cleaning-service-detail *ngIf="!isStandardDetail()"
+                    [propertyPrices]="propertyPrices"
+                    [roomPrices]="roomPrices"
+                ></app-environmental-cleaning-service-detail>
+                <app-cleaning-frequency *ngIf="isStandardDetail()"></app-cleaning-frequency>
+                <app-cleaning-date [bookedHours]="bookedHours"></app-cleaning-date>
+                <app-payment-details></app-payment-details>
+
+                <div class="row">
+                    <div class="col-12 p-5" style="text-align: center;">
+                        <button pButton pRipple type="submit" label="Book Now"></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-4 summary">
+            <app-booking-summary
+                [cleaningServicePrice]="cleaningServicePrice"
+                [cleaningDetailsPrices]="cleaningDetailsPrices"
+                [discount]="discount"
+                [frequency]="frequency"
+                [cleaningDate]="cleaningDate"
+                [hour]="hour"
+            ></app-booking-summary>
+        </div>
+    </div>
+
+</div>
+"

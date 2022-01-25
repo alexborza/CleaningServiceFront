@@ -1,0 +1,38 @@
+<p-panel [toggleable]="false" class="no-borders">
+    <ng-template pTemplate="header">
+        <h2>Contact Information</h2>
+    </ng-template>
+    <ng-template pTemplate="content">
+        <ng-container [formGroup]="$any(controlContainer.control)">
+            <div formGroupName="contact_info">
+                <div class="row mt-2">
+                    <div class="col-6 controls">
+                        <label>First Name</label>
+                        <input type=text pInputText placeholder="First Name" formControlName=firstName>
+                    </div>
+                    
+                    <div class="col-6 controls">
+                        <label>Last Name</label>
+                        <input type=text pInputText placeholder="Last Name" formControlName=lastName>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-6 controls">
+                        <label>Email Address</label>
+                        <input type=text pInputText placeholder="Email" formControlName=email>
+                    </div>
+        
+                    <div class="col-6 controls">
+                        <label>Phone Number</label>
+                        <input type=text pInputText placeholder="Phone Number" formControlName=phoneNumber>
+                    </div>
+                    
+                    <div class="col-12">
+                        <p-divider></p-divider>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+    </ng-template>
+</p-panel>

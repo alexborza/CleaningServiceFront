@@ -1,0 +1,36 @@
+<p-panel [toggleable]="false" class="no-borders">
+    <ng-template pTemplate="header">
+        <h2>Cleaning Date</h2>
+    </ng-template>
+    <ng-template pTemplate="content">
+        <ng-container [formGroup]="$any(controlContainer.control)">
+            <div formGroupName="cleaning_date">
+                <div class="row mt-2">
+                    <div class="col-6 controls">
+                        <p-calendar 
+                            formControlName="cleaningDate"
+                            [showIcon]="true"
+                            dateFormat="yy-mm-dd"
+                            dataType="string">
+                    </p-calendar>
+                    </div>
+
+                    <div class="col-6 controls">
+                        <p-dropdown 
+                            [options]="availableHours" 
+                            optionLabel="hour"
+                            optionValue="hour"
+                            placeholder="Select an available hour"
+                            [showClear]="true"
+                            formControlName="hour">
+                        </p-dropdown>
+                    </div>
+
+                    <div class="col-12">
+                        <p-divider></p-divider>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+    </ng-template>
+</p-panel>
