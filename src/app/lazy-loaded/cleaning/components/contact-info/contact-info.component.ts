@@ -8,9 +8,12 @@ import { ControlContainer } from '@angular/forms';
 })
 export class ContactInfoComponent implements OnInit {
 
+  contactInfoForm: any;
+
   constructor(public controlContainer: ControlContainer) { }
 
   ngOnInit(): void {
+    this.contactInfoForm = this.controlContainer.control;
   }
 
 }

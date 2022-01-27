@@ -24,3 +24,16 @@ h2 {
     font-size: 20px;
     color: #65686a;
 }
+
+.required-star {
+    color:red;
+}
+
+.required-err-message {
+    color: red;
+    contain: size;
+}
+
+span {
+    font-size: 15px;
+}

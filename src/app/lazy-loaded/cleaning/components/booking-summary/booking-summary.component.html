@@ -4,6 +4,11 @@
     </ng-template>
     <ng-template pTemplate="content">
         <div class="row">
+            <div class="col-12" *ngIf="property">
+                <i class="fa fa-building-o" aria-hidden="true"></i>
+                <span style="float: right;">{{property.label}}</span>
+            </div>
+
             <div class="col-12" *ngIf="cleaningDate">
                 <i class="fa fa-calendar" aria-hidden="true"></i>
                 <span style="float: right;">{{cleaningDate | date}}</span>
@@ -22,7 +27,7 @@
         </div>
         <div class="row">
             <div class="col-12">
-                <span>Cleaning Service</span>
+                <span>{{type}}</span>
                 <span style="float: right;">${{cleaningServicePrice + cleaningDetailsPrices}}</span>
             </div>
 

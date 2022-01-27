@@ -3,20 +3,25 @@
         <h2>Space Details</h2>
     </ng-template>
     <ng-template pTemplate="content">
-        <ng-container [formGroup]="$any(controlContainer.control)">
+        <ng-container [formGroup]="spaceDetailsForm">
             <div formGroupName="space_details">
                 <div class="row mt-2">
                     <div class="col-6 controls">
-                        <label class="label-title">Total square meters of entire area</label>
+                        <label class="label-title">Total square meters of entire area<span class="required-star">*</span></label>
                     </div>
-                    <div class="col-6 controls">
+                    <div class="col-6 p-3 controls">
                         <input type=text pInputText placeholder="Enter the square meters for the total area" formControlName=totalSquareMeters>
+                        <span class="required-err-message" 
+                        *ngIf="(spaceDetailsForm.get('space_details').get('totalSquareMeters')?.touched && 
+                                spaceDetailsForm.get('space_details').get('totalSquareMeters')?.errors?.required) ||
+                                spaceDetailsForm.get('space_details').get('totalSquareMeters').hasError('missing')"
+                        >The field is required</span>
                     </div>
 
                     <div class="col-6 controls">
-                        <label class="label-title">Total number of persons in the space</label>
+                        <label class="label-title">Total number of persons in the space<span class="required-star">*</span></label>
                     </div>
-                    <div class="col-6 controls">
+                    <div class="col-6 p-3 controls">
                         <p-dropdown 
                             [options]="numberOfPersons" 
                             optionLabel="label"
@@ -24,12 +29,17 @@
                             [showClear]="true"
                             formControlName="numberOfPersons">
                         </p-dropdown>
+                        <span class="required-err-message" 
+                        *ngIf="(spaceDetailsForm.get('space_details').get('numberOfPersons')?.touched && 
+                                spaceDetailsForm.get('space_details').get('numberOfPersons')?.errors?.required) ||
+                                spaceDetailsForm.get('space_details').get('numberOfPersons').hasError('missing')"
+                        >The field is required</span>
                     </div>
     
                     <div class="col-6 controls">
-                        <label class="label-title">Frequency period of cleaning</label>
+                        <label class="label-title">Frequency period of cleaning<span class="required-star">*</span></label>
                     </div>
-                    <div class="col-6 controls">
+                    <div class="col-6 p-3 controls">
                         <p-dropdown 
                             [options]="frequency" 
                             optionLabel="label"
@@ -37,12 +47,17 @@
                             [showClear]="true"
                             formControlName="frequencyOfCleaning">
                         </p-dropdown>
+                        <span class="required-err-message" 
+                        *ngIf="(spaceDetailsForm.get('space_details').get('frequencyOfCleaning')?.touched && 
+                                spaceDetailsForm.get('space_details').get('frequencyOfCleaning')?.errors?.required) ||
+                                spaceDetailsForm.get('space_details').get('frequencyOfCleaning').hasError('missing')"
+                        >The field is required</span>
                     </div>
     
                     <div class="col-6 controls">
-                        <label class="label-title">Preferred time of the day for cleaning</label>
+                        <label class="label-title">Preferred time of the day for cleaning<span class="required-star">*</span></label>
                     </div>
-                    <div class="col-6 controls">
+                    <div class="col-6 p-3 controls">
                         <p-dropdown 
                             [options]="timeOfTheDay" 
                             optionLabel="label"
@@ -50,9 +65,14 @@
                             [showClear]="true"
                             formControlName="dayTime">
                         </p-dropdown>
+                        <span class="required-err-message" 
+                        *ngIf="(spaceDetailsForm.get('space_details').get('dayTime')?.touched && 
+                                spaceDetailsForm.get('space_details').get('dayTime')?.errors?.required) ||
+                                spaceDetailsForm.get('space_details').get('dayTime').hasError('missing')"
+                        >The field is required</span>
                     </div>
     
-                    <div class="col-12">
+                    <div class="col-12 p-3">
                         <p-divider></p-divider>
                     </div>
                 </div>

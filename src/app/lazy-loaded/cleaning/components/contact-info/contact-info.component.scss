@@ -16,7 +16,25 @@
     }
 }
 
+:host ::ng-deep .p-inputmask {
+    min-width: -webkit-fill-available;
+    width: 100%;
+}
+
 h2 {
     font-size: 20px;
     color: #65686a;
+}
+
+.required-star {
+    color:red;
+}
+
+.required-err-message {
+    color: red;
+    contain: size;
+}
+
+span {
+    font-size: 15px;
 }

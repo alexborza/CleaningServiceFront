@@ -25,6 +25,8 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { OfficeSpaceTypeComponent } from './components/office-space-type/office-space-type.component';
 import { CleaningServiceDetailComponent } from './cleaning-service-detail/cleaning-service-detail.component';
 import { ButtonModule } from 'primeng/button';
+import { ToastModule } from 'primeng/toast';
+import { NgxTrimDirectiveModule } from 'ngx-trim-directive';
 
 @NgModule({
   declarations: [
@@ -54,7 +56,9 @@ import { ButtonModule } from 'primeng/button';
     CardModule,
     InputMaskModule,
     InputNumberModule,
-    ButtonModule
+    ButtonModule,
+    ToastModule,
+    NgxTrimDirectiveModule
   ]
 })
 export class CleaningModule { }

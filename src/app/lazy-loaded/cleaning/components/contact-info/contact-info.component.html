@@ -3,32 +3,52 @@
         <h2>Contact Information</h2>
     </ng-template>
     <ng-template pTemplate="content">
-        <ng-container [formGroup]="$any(controlContainer.control)">
+        <ng-container [formGroup]="contactInfoForm">
             <div formGroupName="contact_info">
                 <div class="row mt-2">
-                    <div class="col-6 controls">
-                        <label>First Name</label>
-                        <input type=text pInputText placeholder="First Name" formControlName=firstName>
+                    <div class="col-6 p-3 controls">
+                        <label>First Name<span class="required-star">*</span></label>
+                        <input type=text pInputText placeholder="First Name" formControlName=firstName trim="blur">
+                        <span class="required-err-message" 
+                        *ngIf="(contactInfoForm.get('contact_info').get('firstName')?.touched && 
+                                contactInfoForm.get('contact_info').get('firstName')?.errors?.required) ||
+                                contactInfoForm.get('contact_info').get('firstName').hasError('missing')"
+                        >The field is required</span>
                     </div>
                     
-                    <div class="col-6 controls">
-                        <label>Last Name</label>
-                        <input type=text pInputText placeholder="Last Name" formControlName=lastName>
+                    <div class="col-6 p-3 controls">
+                        <label>Last Name<span class="required-star">*</span></label>
+                        <input type=text pInputText placeholder="Last Name" formControlName=lastName trim="blur">
+                        <span class="required-err-message" 
+                        *ngIf="(contactInfoForm.get('contact_info').get('lastName')?.touched && 
+                                contactInfoForm.get('contact_info').get('lastName')?.errors?.required) ||
+                                contactInfoForm.get('contact_info').get('lastName').hasError('missing')"
+                        >The field is required</span>
                     </div>
                 </div>
                 
                 <div class="row">
-                    <div class="col-6 controls">
-                        <label>Email Address</label>
-                        <input type=text pInputText placeholder="Email" formControlName=email>
+                    <div class="col-6 p-3 controls">
+                        <label>Email Address<span class="required-star">*</span></label>
+                        <input type=text pInputText placeholder="Email" formControlName=email trim="blur">
+                        <span class="required-err-message" 
+                        *ngIf="(contactInfoForm.get('contact_info').get('email')?.touched && 
+                                contactInfoForm.get('contact_info').get('email')?.errors?.required) ||
+                                contactInfoForm.get('contact_info').get('email').hasError('missing')"
+                        >The field is required</span>
                     </div>
         
-                    <div class="col-6 controls">
-                        <label>Phone Number</label>
-                        <input type=text pInputText placeholder="Phone Number" formControlName=phoneNumber>
+                    <div class="col-6 p-3 controls">
+                        <label>Phone Number<span class="required-star">*</span></label>
+                        <p-inputMask placeholder="Phone Number" mask="9999 999 999" formControlName=phoneNumber></p-inputMask>
+                        <span class="required-err-message" 
+                        *ngIf="(contactInfoForm.get('contact_info').get('phoneNumber')?.touched && 
+                                contactInfoForm.get('contact_info').get('phoneNumber')?.errors?.required) ||
+                                contactInfoForm.get('contact_info').get('phoneNumber').hasError('missing')"
+                        >The field is required</span>
                     </div>
                     
-                    <div class="col-12">
+                    <div class="col-12 p-3">
                         <p-divider></p-divider>
                     </div>
                 </div>

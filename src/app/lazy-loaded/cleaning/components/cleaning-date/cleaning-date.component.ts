@@ -8,13 +8,17 @@ import { ControlContainer } from '@angular/forms';
 })
 export class CleaningDateComponent implements OnInit, OnChanges {
 
+  cleaningDateForm: any;
   @Input() bookedHours: string[] = [];
   hours: {hour: string}[] = [];
   availableHours: {hour: string}[] = [];
+  minimumDate: Date = new Date();
 
   constructor(public controlContainer: ControlContainer) { }
 
   ngOnInit(): void {
+    this.cleaningDateForm = this.controlContainer.control;
+    console.log(+new Date().toTimeString().split(" ")[0].split(":")[0]);
     this.hours = [
       {hour: "08:00 - 10:00"}, {hour: "10:00 - 12:00"}, {hour: "12:00 - 14:00"}, {hour: "14:00 - 16:00"}, {hour: "16:00 - 18:00"}
     ];

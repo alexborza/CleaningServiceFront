@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { MessageService } from 'primeng/api';
 import { CleaningDateDto } from 'src/app/core/dto/CleaningDateDto';
 import { CleaningFrequencyEnum } from 'src/app/core/dto/CleaningFrequencyEnum';
 import { CleaningServiceDto } from 'src/app/core/dto/CleaningServiceDto';
@@ -11,12 +12,14 @@ import { LocationDto } from 'src/app/core/dto/LocationDto';
 import { PostConstructionCleaningDetailsDto } from 'src/app/core/dto/PostConstructionCleaningDetailsDto';
 import { StandardCleaningDetailsDto } from 'src/app/core/dto/StandardCleaningDetailsDto';
 import { CleaningApiService } from 'src/app/core/services/cleaning-api.service';
+import { checkRequiredFields } from 'src/app/core/services/error/validate';
 import { CleaningServiceType } from '../models/cleaning-service-type';
 
 @Component({
   selector: 'app-cleaning-service-detail',
   templateUrl: './cleaning-service-detail.component.html',
-  styleUrls: ['./cleaning-service-detail.component.scss']
+  styleUrls: ['./cleaning-service-detail.component.scss'],
+  providers: [MessageService]
 })
 export class CleaningServiceDetailComponent implements OnInit {
 
@@ -30,6 +33,7 @@ export class CleaningServiceDetailComponent implements OnInit {
   frequency: string = '';
   cleaningDate: any;
   hour: string = '';
+  property: string = '';
   bookedHours: string[] = [];
   bedroomPrices: number[] = [];
   bathroomPrices: number[] = [];
@@ -40,7 +44,8 @@ export class CleaningServiceDetailComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
-    private cleaningApi: CleaningApiService
+    private cleaningApi: CleaningApiService,
+    private messageService: MessageService
     ) {}
 
   ngOnInit(): void {
@@ -92,31 +97,31 @@ export class CleaningServiceDetailComponent implements OnInit {
   private buildForm(){
     this.form = this.fb.group({
       contact_info: this.fb.group({
-        firstName: '',
-        lastName: '',
-        email: '',
-        phoneNumber: ''
+        firstName: new FormControl(null, [Validators.required]),
+        lastName: new FormControl(null, [Validators.required]),
+        email: new FormControl(null, [Validators.required]),
+        phoneNumber: new FormControl(null, [Validators.required])
       }),
       location: this.fb.group({
-        county: null,
-        city: '',
-        address: ''
+        county: new FormControl(null, [Validators.required]),
+        city: new FormControl(null, [Validators.required]),
+        address: new FormControl(null, [Validators.required]),
       }),
       cleaning_details: this.fb.group({
-        squareMeters: null,
-        parking: null,
-        homeAccess: null,
+        squareMeters: new FormControl(null, [Validators.required]),
+        parking: new FormControl(null, [Validators.required]),
+        homeAccess: new FormControl(null, [Validators.required]),
       }),
       cleaning_date: this.fb.group({
-        cleaningDate: null,
-        hour: null
+        cleaningDate: new FormControl(null, [Validators.required]),
+        hour: new FormControl(null, [Validators.required]),
       }),
       payment: this.fb.group({
         paymentMethod: null,
-        cardNumber: '',
-        expirationDate: '',
-        cvc: '',
-        holderName: ''
+        cardNumber: null,
+        expirationDate: null,
+        cvc: null,
+        holderName: null
       })
     })
 
@@ -146,14 +151,21 @@ export class CleaningServiceDetailComponent implements OnInit {
 
   private addCleaningDetailsControls(cleaning_details: FormGroup, controls: string[]){
     controls.forEach(control => {
-      cleaning_details.addControl(control, this.fb.control(null));
+      cleaning_details.addControl(control, new FormControl(null, [Validators.required]));
     })
   }
 
   public onSubmit(formValue: any){
-    this.cleaningService = this.getCleaningServiceDto(formValue);
-    console.log(this.cleaningService);
-    this.cleaningApi.createCleaningService(this.cleaningService).subscribe();
+    this.checkRequiredFields();
+    
+    if(this.form.valid){
+      this.messageService.add({severity:'success', summary:'Success', detail:'Successfully booked a ' + this.type + ' Service'});
+      this.cleaningService = this.getCleaningServiceDto(formValue);
+      console.log(this.cleaningService);
+      // this.cleaningApi.createCleaningService(this.cleaningService).subscribe();
+    } else {
+      this.messageService.add({severity:'error', summary:'Error', detail:'The field is required'});
+    }
   }
 
   private getCleaningServiceDto(formValue: any){
@@ -177,7 +189,6 @@ export class CleaningServiceDetailComponent implements OnInit {
 
   private createCleaningDateDto(formValue: any){
     const cleaningDate = new CleaningDateDto();
-    console.log(new Date().getTime() > new Date(formValue.cleaning_date.cleaningDate).getTime());
     cleaningDate.cleaningDate = formValue.cleaning_date.cleaningDate;
     cleaningDate.cleaningHour = formValue.cleaning_date.hour;
     return cleaningDate;
@@ -247,25 +258,40 @@ export class CleaningServiceDetailComponent implements OnInit {
     return disinfectionCleaningDetailsDto;
   }
 
+  private checkRequiredFields(){
+    checkRequiredFields((this.form.get('contact_info') as FormGroup).controls);
+    checkRequiredFields((this.form.get('location') as FormGroup).controls);
+    checkRequiredFields((this.form.get('cleaning_details') as FormGroup).controls);
+    checkRequiredFields((this.form.get('cleaning_date') as FormGroup).controls);
+  }
+
   private setBookingSummary(){
     const cleaning_details = this.form.get('cleaning_details') as FormGroup;
     const cleaning_date = this.form.get('cleaning_date') as FormGroup;
     this.form.valueChanges.subscribe(res => {
-      let cleaningPrice: number = 0;
-      Object.keys(cleaning_details.controls).forEach(key => {
-        if(cleaning_details.controls[key].value?.price != undefined){
-          cleaningPrice += cleaning_details.controls[key].value?.price;
-        }
-      });
-      this.cleaningDetailsPrices = cleaningPrice;
-      if(this.form.get('frequency')?.value?.discount != undefined){
-        this.discount = this.form.get('frequency')?.value?.discount;
-        this.frequency = this.form.get('frequency')?.value?.label;
-      }
-
+      this.cleaningDetailsPrices = this.getCleaningDetailsPrice(cleaning_details);
+      this.property = cleaning_details.get('property')?.value;
+      this.getFrequencyForBookingSummary();
       this.cleaningDate = cleaning_date.get('cleaningDate')?.value != null ? new Date(cleaning_date.get('cleaningDate')?.value) : null ;
       this.hour = cleaning_date.get('hour')?.value;
     })
+  }
+
+  private getCleaningDetailsPrice(cleaning_details: FormGroup){
+    let cleaningPrice: number = 0;
+    Object.keys(cleaning_details.controls).forEach(key => {
+      if(cleaning_details.controls[key].value?.price != undefined){
+        cleaningPrice += cleaning_details.controls[key].value?.price;
+      }
+    });
+    return cleaningPrice;
+  }
+
+  private getFrequencyForBookingSummary(){
+    if(this.form.get('frequency')?.value?.discount != undefined){
+      this.discount = this.form.get('frequency')?.value?.discount;
+      this.frequency = this.form.get('frequency')?.value?.label;
+    }
   }
 
   private getBookedHoursForDate(){

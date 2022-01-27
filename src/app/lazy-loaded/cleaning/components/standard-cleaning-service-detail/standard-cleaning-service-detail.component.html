@@ -3,13 +3,13 @@
         <h2>Cleaning Details</h2>
     </ng-template>
     <ng-template pTemplate="content">
-        <ng-container [formGroup]="$any(controlContainer.control)">
+        <ng-container [formGroup]="standardCleaningForm">
             <div formGroupName="cleaning_details">
                 <div class="row mt-2">
                     <div class="col-6 controls">
-                        <label class="label-title">Bedrooms</label>
+                        <label class="label-title">Bedrooms<span class="required-star">*</span></label>
                     </div>
-                    <div class="col-6 controls">
+                    <div class="col-6 p-3 controls">
                         <p-dropdown 
                             [options]="bedrooms" 
                             optionLabel="label"
@@ -17,12 +17,17 @@
                             [showClear]="true"
                             formControlName="bedrooms">
                         </p-dropdown>
+                        <span class="required-err-message" 
+                        *ngIf="(standardCleaningForm.get('cleaning_details').get('bedrooms')?.touched && 
+                                standardCleaningForm.get('cleaning_details').get('bedrooms')?.errors?.required) ||
+                                standardCleaningForm.get('cleaning_details').get('bedrooms').hasError('missing')"
+                        >The field is required</span>
                     </div>
     
                     <div class="col-6 controls">
-                        <label class="label-title">Bathrooms</label>
+                        <label class="label-title">Bathrooms<span class="required-star">*</span></label>
                     </div>
-                    <div class="col-6 controls">
+                    <div class="col-6 p-3 controls">
                         <p-dropdown 
                             [options]="bathrooms" 
                             optionLabel="label"
@@ -30,12 +35,17 @@
                             [showClear]="true"
                             formControlName="bathrooms">
                         </p-dropdown>
+                        <span class="required-err-message" 
+                        *ngIf="(standardCleaningForm.get('cleaning_details').get('bathrooms')?.touched && 
+                                standardCleaningForm.get('cleaning_details').get('bathrooms')?.errors?.required) ||
+                                standardCleaningForm.get('cleaning_details').get('bathrooms').hasError('missing')"
+                        >The field is required</span>
                     </div>
     
                     <div class="col-6 controls">
-                        <label class="label-title">Kitchens</label>
+                        <label class="label-title">Kitchens<span class="required-star">*</span></label>
                     </div>
-                    <div class="col-6 controls">
+                    <div class="col-6 p-3 controls">
                         <p-dropdown 
                             [options]="kitchens" 
                             optionLabel="label"
@@ -43,29 +53,44 @@
                             [showClear]="true"
                             formControlName="kitchens">
                         </p-dropdown>
+                        <span class="required-err-message" 
+                        *ngIf="(standardCleaningForm.get('cleaning_details').get('kitchens')?.touched && 
+                                standardCleaningForm.get('cleaning_details').get('kitchens')?.errors?.required) ||
+                                standardCleaningForm.get('cleaning_details').get('kitchens').hasError('missing')"
+                        >The field is required</span>
                     </div>
     
                     <div class="col-6 controls">
-                        <label class="label-title">Total Square Meters</label>
+                        <label class="label-title">Total Square Meters<span class="required-star">*</span></label>
                     </div>
-                    <div class="col-6 controls">
-                        <input type=text pInputText placeholder="Total Square Meters" formControlName=squareMeters>
+                    <div class="col-6 p-3 controls">
+                        <input type=number pInputText placeholder="Total Square Meters" formControlName=squareMeters>
+                        <span class="required-err-message" 
+                        *ngIf="(standardCleaningForm.get('cleaning_details').get('squareMeters')?.touched && 
+                                standardCleaningForm.get('cleaning_details').get('squareMeters')?.errors?.required) ||
+                                standardCleaningForm.get('cleaning_details').get('squareMeters').hasError('missing')"
+                        >The field is required</span>
                     </div>
     
                     <div class="col-6 controls">
-                        <label class="label-title">Parking</label>
+                        <label class="label-title">Parking<span class="required-star">*</span></label>
                     </div>
-                    <div class="col-6 controls">
+                    <div class="col-6 p-3 controls">
                         <p-selectButton
                         [options]="parking" 
                         optionLabel="label" 
                         formControlName="parking"></p-selectButton>
+                        <span class="required-err-message" 
+                        *ngIf="(standardCleaningForm.get('cleaning_details').get('parking')?.touched && 
+                                standardCleaningForm.get('cleaning_details').get('parking')?.errors?.required) ||
+                                standardCleaningForm.get('cleaning_details').get('parking').hasError('missing')"
+                        >The field is required</span>
                     </div>
     
                     <div class="col-6 controls">
-                        <label class="label-title">How to access the home?</label>
+                        <label class="label-title">How to access the home?<span class="required-star">*</span></label>
                     </div>
-                    <div class="col-6 controls">
+                    <div class="col-6 p-3 controls">
                         <p-dropdown 
                             [options]="homeAccess" 
                             optionLabel="label"
@@ -73,9 +98,14 @@
                             [showClear]="true"
                             formControlName="homeAccess">
                         </p-dropdown>
+                        <span class="required-err-message" 
+                        *ngIf="(standardCleaningForm.get('cleaning_details').get('homeAccess')?.touched && 
+                                standardCleaningForm.get('cleaning_details').get('homeAccess')?.errors?.required) ||
+                                standardCleaningForm.get('cleaning_details').get('homeAccess').hasError('missing')"
+                        >The field is required</span>
                     </div>
     
-                    <div class="col-12">
+                    <div class="col-12 p-3">
                         <p-divider></p-divider>
                     </div>
                 </div>

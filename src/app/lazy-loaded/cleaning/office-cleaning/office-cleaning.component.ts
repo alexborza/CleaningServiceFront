@@ -1,22 +1,34 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { MessageService } from 'primeng/api';
+import { ContactInfoDto } from 'src/app/core/dto/ContactInfoDto';
+import { LocationDto } from 'src/app/core/dto/LocationDto';
+import { OfficeCleaningDto } from 'src/app/core/dto/OfficeCleaningDto';
+import { SpaceDetailsDto } from 'src/app/core/dto/SpaceDetailsDto';
+import { SpaceTypeDto } from 'src/app/core/dto/SpaceTypeDto';
+import { checkRequiredFields } from 'src/app/core/services/error/validate';
+import { OfficeCleaningApiService } from 'src/app/core/services/office-cleaning-api.service';
 import { CleaningServiceType } from '../models/cleaning-service-type';
 
 @Component({
   selector: 'app-office-cleaning',
   templateUrl: './office-cleaning.component.html',
-  styleUrls: ['./office-cleaning.component.scss']
+  styleUrls: ['./office-cleaning.component.scss'],
+  providers: [MessageService]
 })
 export class OfficeCleaningComponent implements OnInit {
 
   form!: FormGroup;
   title: string = '';
   type!: CleaningServiceType;
+  officeCleaning!: OfficeCleaningDto;
 
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
+    private officeApi: OfficeCleaningApiService,
+    private messageService: MessageService
     ) {}
 
   ngOnInit(): void {
@@ -32,10 +44,10 @@ export class OfficeCleaningComponent implements OnInit {
   private buildForm(){
     this.form = this.fb.group({
       space_details: this.fb.group({
-        totalSquareMeters: '',
-        numberOfPersons: null,
-        frequencyOfCleaning: null,
-        dayTime: null,
+        totalSquareMeters: new FormControl(null, [Validators.required]),
+        numberOfPersons: new FormControl(null, [Validators.required]),
+        frequencyOfCleaning: new FormControl(null, [Validators.required]),
+        dayTime: new FormControl(null, [Validators.required]),
       }),
       space_type: this.fb.group({
         enclosedOffices: 0,
@@ -47,16 +59,80 @@ export class OfficeCleaningComponent implements OnInit {
         cafeterias: 0
       }),
       contact_info: this.fb.group({
-        firstName: '',
-        lastName: '',
-        email: '',
-        phoneNumber: ''
+        firstName: new FormControl(null, [Validators.required]),
+        lastName: new FormControl(null, [Validators.required]),
+        email: new FormControl(null, [Validators.required]),
+        phoneNumber: new FormControl(null, [Validators.required]),
       }),
       location: this.fb.group({
-        county: null,
-        city: '',
-        address: ''
+        county: new FormControl(null, [Validators.required]),
+        city: new FormControl(null, [Validators.required]),
+        address: new FormControl(null, [Validators.required]),
       }),
     })
+  }
+
+  onSubmit(formValue: any){
+    this.checkRequiredFields();
+    if(this.form.valid){
+      this.officeCleaning = this.getOfficeCleaningDto(formValue);
+      console.log(this.officeCleaning);
+      // this.officeApi.quoteRequestForOfficeCleaning(this.officeCleaning).subscribe();
+      this.messageService.add({severity:'success', summary:'Success', detail:'Successfully requested a quote for an ' + this.type + ' Service'});
+    } else {
+      this.messageService.add({severity:'error', summary:'Error', detail:'The field is required'});
+    }
+  }
+
+  private getOfficeCleaningDto(formValue: any): OfficeCleaningDto{
+    const spaceDetails = this.createSpaceDetailsDto(formValue.space_details);
+    const spaceType = this.createSpaceTypeDto(formValue.space_type);
+    const contactInfo = this.createContactInfoDto(formValue.contact_info);
+    const location = this.createLocationDto(formValue.location);
+    return new OfficeCleaningDto(spaceDetails, spaceType, contactInfo, location);
+  }
+
+  private createSpaceDetailsDto(space_details: any){
+    const spaceDetails = new SpaceDetailsDto();
+    spaceDetails.totalSquareMeters = space_details.totalSquareMeters;
+    spaceDetails.numberOfPersons = space_details.numberOfPersons.label;
+    spaceDetails.frequencyOfCleaning = space_details.frequencyOfCleaning.value;
+    spaceDetails.dayTime = space_details.dayTime.value;
+    return spaceDetails;
+  }
+
+  private createSpaceTypeDto(space_type: any){
+    const spaceType = new SpaceTypeDto();
+    spaceType.enclosedOffices = space_type.enclosedOffices;
+    spaceType.workStations = space_type.workStations;
+    spaceType.meetingRooms = space_type.meetingRooms;
+    spaceType.bathrooms = space_type.bathrooms;
+    spaceType.toilets = space_type.toilets;
+    spaceType.hallways = space_type.hallways;
+    spaceType.cafeterias = space_type.cafeterias;
+    return spaceType;
+  }
+
+  private createContactInfoDto(contact_info: any){
+    const contactInfo = new ContactInfoDto();
+    contactInfo.firstName = contact_info.firstName;
+    contactInfo.lastName = contact_info.lastName;
+    contactInfo.email = contact_info.email;
+    contactInfo.phoneNumber = contact_info.phoneNumber;
+    return contactInfo;
+  }
+
+  private createLocationDto(formValueLocation: any){
+    const location = new LocationDto();
+    location.county = formValueLocation.county;
+    location.city = formValueLocation.city;
+    location.address = formValueLocation.address;
+    return location;
+  }
+
+  private checkRequiredFields(){
+    checkRequiredFields((this.form.get('contact_info') as FormGroup).controls);
+    checkRequiredFields((this.form.get('location') as FormGroup).controls);
+    checkRequiredFields((this.form.get('space_details') as FormGroup).controls);
   }
 }

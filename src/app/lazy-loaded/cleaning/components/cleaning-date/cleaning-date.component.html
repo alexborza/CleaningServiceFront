@@ -3,19 +3,25 @@
         <h2>Cleaning Date</h2>
     </ng-template>
     <ng-template pTemplate="content">
-        <ng-container [formGroup]="$any(controlContainer.control)">
+        <ng-container [formGroup]="cleaningDateForm">
             <div formGroupName="cleaning_date">
                 <div class="row mt-2">
-                    <div class="col-6 controls">
+                    <div class="col-6 p-3 controls">
                         <p-calendar 
                             formControlName="cleaningDate"
                             [showIcon]="true"
+                            [minDate]="minimumDate"
                             dateFormat="yy-mm-dd"
                             dataType="string">
                     </p-calendar>
+                    <span class="required-err-message" 
+                        *ngIf="(cleaningDateForm.get('cleaning_date').get('cleaningDate')?.touched && 
+                                cleaningDateForm.get('cleaning_date').get('cleaningDate')?.errors?.required) ||
+                                cleaningDateForm.get('cleaning_date').get('cleaningDate').hasError('missing')"
+                        >The field is required</span>
                     </div>
 
-                    <div class="col-6 controls">
+                    <div class="col-6 p-3 controls">
                         <p-dropdown 
                             [options]="availableHours" 
                             optionLabel="hour"
@@ -24,9 +30,14 @@
                             [showClear]="true"
                             formControlName="hour">
                         </p-dropdown>
+                        <span class="required-err-message" 
+                        *ngIf="(cleaningDateForm.get('cleaning_date').get('hour')?.touched && 
+                                cleaningDateForm.get('cleaning_date').get('hour')?.errors?.required) ||
+                                cleaningDateForm.get('cleaning_date').get('hour').hasError('missing')"
+                        >The field is required</span>
                     </div>
 
-                    <div class="col-12">
+                    <div class="col-12 p-3">
                         <p-divider></p-divider>
                     </div>
                 </div>

@@ -12,6 +12,7 @@ import { PropertyEnum } from 'src/app/core/dto/PropertyEnum';
 })
 export class EnvironmentalCleaningServiceDetailComponent implements OnInit {
 
+  environmentCleaningForm: any;
   @Input() roomPrices: number[] = [];
   @Input() propertyPrices: number[] = [];
   properties: Property[] = [];
@@ -26,6 +27,7 @@ export class EnvironmentalCleaningServiceDetailComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
+    this.environmentCleaningForm = this.controlContainer.control;
     this.isPostConstruction();
 
     this.properties = [
