@@ -5,6 +5,7 @@ import { MessageService } from 'primeng/api';
 import { ContactInfoDto } from 'src/app/core/dto/ContactInfoDto';
 import { LocationDto } from 'src/app/core/dto/LocationDto';
 import { OfficeCleaningDto } from 'src/app/core/dto/OfficeCleaningDto';
+import { OfficeCleaningStatusEnum } from 'src/app/core/dto/OfficeCleaningStatusEnum';
 import { SpaceDetailsDto } from 'src/app/core/dto/SpaceDetailsDto';
 import { SpaceTypeDto } from 'src/app/core/dto/SpaceTypeDto';
 import { checkRequiredFields } from 'src/app/core/services/error/validate';
@@ -44,6 +45,7 @@ export class OfficeCleaningComponent implements OnInit {
   private buildForm(){
     this.form = this.fb.group({
       space_details: this.fb.group({
+        primaryUse: new FormControl(null, [Validators.required]),
         totalSquareMeters: new FormControl(null, [Validators.required]),
         numberOfPersons: new FormControl(null, [Validators.required]),
         frequencyOfCleaning: new FormControl(null, [Validators.required]),
@@ -77,8 +79,9 @@ export class OfficeCleaningComponent implements OnInit {
     if(this.form.valid){
       this.officeCleaning = this.getOfficeCleaningDto(formValue);
       console.log(this.officeCleaning);
-      // this.officeApi.quoteRequestForOfficeCleaning(this.officeCleaning).subscribe();
-      this.messageService.add({severity:'success', summary:'Success', detail:'Successfully requested a quote for an ' + this.type + ' Service'});
+      this.officeApi.quoteRequestForOfficeCleaning(this.officeCleaning).subscribe(res => {
+        this.messageService.add({severity:'success', summary:'Success', detail:'Successfully requested a quote for an ' + this.type + ' Service'});  
+      });
     } else {
       this.messageService.add({severity:'error', summary:'Error', detail:'The field is required'});
     }
@@ -89,11 +92,12 @@ export class OfficeCleaningComponent implements OnInit {
     const spaceType = this.createSpaceTypeDto(formValue.space_type);
     const contactInfo = this.createContactInfoDto(formValue.contact_info);
     const location = this.createLocationDto(formValue.location);
-    return new OfficeCleaningDto(spaceDetails, spaceType, contactInfo, location);
+    return new OfficeCleaningDto(spaceDetails, spaceType, contactInfo, location, OfficeCleaningStatusEnum.NotSent);
   }
 
   private createSpaceDetailsDto(space_details: any){
     const spaceDetails = new SpaceDetailsDto();
+    spaceDetails.primaryUseOfSpace = space_details.primaryUse.value;
     spaceDetails.totalSquareMeters = space_details.totalSquareMeters;
     spaceDetails.numberOfPersons = space_details.numberOfPersons.label;
     spaceDetails.frequencyOfCleaning = space_details.frequencyOfCleaning.value;

@@ -159,10 +159,11 @@ export class CleaningServiceDetailComponent implements OnInit {
     this.checkRequiredFields();
     
     if(this.form.valid){
-      this.messageService.add({severity:'success', summary:'Success', detail:'Successfully booked a ' + this.type + ' Service'});
       this.cleaningService = this.getCleaningServiceDto(formValue);
       console.log(this.cleaningService);
-      // this.cleaningApi.createCleaningService(this.cleaningService).subscribe();
+      this.cleaningApi.createCleaningService(this.cleaningService).subscribe(res => {
+        this.messageService.add({severity:'success', summary:'Success', detail:'Successfully booked a ' + this.type + ' Service'});
+      });
     } else {
       this.messageService.add({severity:'error', summary:'Error', detail:'The field is required'});
     }

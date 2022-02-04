@@ -1,5 +1,5 @@
 export enum DayTimeOfficeCleaningEnum {
-    DuringRegularBusinessHours="DuringRegularBusinessHours",
-    AfterRegularBusinessHours="AfterRegularBusinessHours",
-    GraveyardShift="GraveyardShift"
+    DuringRegularBusinessHours="During Regular Business Hours",
+    AfterRegularBusinessHours="After Regular Business Hours",
+    GraveyardShift="Graveyard Shift"
 }

@@ -1,0 +1,42 @@
+<div class="wrapper">
+    <div class="sidenav">
+        <div class="main-item">
+            <div class="item">
+                <a routerLink="/administrator">Dashboard</a>
+                <p-divider></p-divider>
+            </div>
+        </div>
+        <div class="main-item">
+            <div class="item">
+                <a routerLink="/administrator">Employees</a>
+                <div class="children">
+                    <div class="child-item">
+                        <a routerLink="/administrator">New contract</a>
+                    </div>
+                    <div class="child-item">
+                        <a routerLink="/administrator">Pay salary</a>
+                    </div>
+                </div>
+                <p-divider></p-divider>
+            </div>
+        </div>
+        <div class="main-item">
+            <div class="item">
+                <a routerLink="/administrator">Services History</a>
+                <p-divider></p-divider>
+            </div>
+        </div>
+        <div class="main-item">
+            <div class="item">
+                <a routerLink="quote-requests">Quote Requests</a>
+                <p-divider></p-divider>
+            </div>
+        </div>
+    </div>
+    
+    <div class="content">
+        <div class="container p-4">
+            <router-outlet></router-outlet>    
+        </div>
+    </div>    
+</div>

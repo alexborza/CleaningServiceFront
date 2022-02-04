@@ -1,6 +1,6 @@
 export enum HomeAccessEnum {
     Meet = "Meet",
-    KeyMailbox = "KeyMailbox",
-    PickupKey = "PickupKey",
+    KeyMailbox = "Key In Mailbox",
+    PickupKey = "Pickup Key",
     Call = "Call"
 }

@@ -1,9 +1,9 @@
 export enum OfficeCleaningFrequencyEnum {
-    DailyIncludingWeekends="DailyIncludingWeekends",
-    DailyWeekdaysOnly="DailyWeekdaysOnly",
-    TwiceWeek="TwiceWeek",
+    DailyIncludingWeekends="Daily Including Weekends",
+    DailyWeekdaysOnly="Daily Weekdays Only",
+    TwiceWeek="Twice Week",
     Weekly="Weekly",
-    Every2Weeks="Every2Weeks",
+    Every2Weeks="Every 2 Weeks",
     Monthly="Monthly",
-    ToBeDetermined="ToBeDetermined"
+    ToBeDetermined="To Be Determined"
 }

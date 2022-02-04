@@ -19,6 +19,10 @@ const routes: Routes = [
     loadChildren:() => import('./lazy-loaded/cleaning/cleaning.module').then(m=>m.CleaningModule)
   },
   {
+    path: 'administrator',
+    loadChildren:() => import('./lazy-loaded/administrator/administrator.module').then(m=>m.AdministratorModule)
+  },
+  {
     path: '',
     redirectTo: '/home',
     pathMatch: 'full'

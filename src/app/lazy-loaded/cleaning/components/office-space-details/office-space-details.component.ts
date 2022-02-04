@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ControlContainer } from '@angular/forms';
 import { DayTimeOfficeCleaningEnum } from 'src/app/core/dto/DayTimeOfficeCleaningEnum';
 import { OfficeCleaningFrequencyEnum } from 'src/app/core/dto/OfficeCleaningFrequencyEnum';
+import { PrimaryUseOfSpaceEnum } from 'src/app/core/dto/PrimaryUseOfSpaceEnum';
 
 @Component({
   selector: 'app-office-space-details',
@@ -12,6 +13,7 @@ export class OfficeSpaceDetailsComponent implements OnInit {
 
   spaceDetailsForm: any;
   numberOfPersons: {label: string;}[] = [];
+  primaryUse: {label: string; value: PrimaryUseOfSpaceEnum}[] = [];
   frequency: {label: string; value: OfficeCleaningFrequencyEnum}[] = [];
   timeOfTheDay: {label: string; value: DayTimeOfficeCleaningEnum}[] = [];
 
@@ -19,6 +21,11 @@ export class OfficeSpaceDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.spaceDetailsForm = this.controlContainer.control;
+    this.primaryUse = [
+      {label: "Office space", value: PrimaryUseOfSpaceEnum.OfficeSpace},
+      {label: "Office & Some Industrial", value: PrimaryUseOfSpaceEnum.OfficeAndSomeIndustrial},
+      {label: "Primarily Industrial", value: PrimaryUseOfSpaceEnum.PrimarilyIndustrial}
+    ];
     this.numberOfPersons = [
       {label: "1-10"},
       {label: "10-30"},

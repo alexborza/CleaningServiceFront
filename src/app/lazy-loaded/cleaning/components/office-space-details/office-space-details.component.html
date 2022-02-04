@@ -7,6 +7,25 @@
             <div formGroupName="space_details">
                 <div class="row mt-2">
                     <div class="col-6 controls">
+                        <label class="label-title">Primary use of the space<span class="required-star">*</span></label>
+                    </div>
+                    <div class="col-6 p-3 controls">
+                        <p-dropdown 
+                            [options]="primaryUse" 
+                            optionLabel="label"
+                            placeholder="Select primary use"
+                            [showClear]="true"
+                            formControlName="primaryUse">
+                        </p-dropdown>
+                        <span class="required-err-message" 
+                        *ngIf="(spaceDetailsForm.get('space_details').get('primaryUse')?.touched && 
+                                spaceDetailsForm.get('space_details').get('primaryUse')?.errors?.required) ||
+                                spaceDetailsForm.get('space_details').get('primaryUse').hasError('missing')"
+                        >The field is required</span>
+                    </div>
+
+
+                    <div class="col-6 controls">
                         <label class="label-title">Total square meters of entire area<span class="required-star">*</span></label>
                     </div>
                     <div class="col-6 p-3 controls">
