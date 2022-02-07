@@ -11,16 +11,6 @@ h4 {
 }
 
 :host ::ng-deep .p-datatable .p-datatable-tbody > tr > td {
-    white-space: nowrap;
     text-align: center;
-}
-
-.sent {
-    background-color: #c8e6c9;
-    color: #256029;
-}
-
-.not-sent {
-    background-color: #ffcdd2;
-    color: #c63737;
+    white-space: nowrap;
 }

@@ -185,6 +185,7 @@ export class CleaningServiceDetailComponent implements OnInit {
     cleaningServiceDto.cleaningDate = cleaningDate;
     cleaningServiceDto.paymentMethod = formValue.payment.paymentMethod;
     cleaningServiceDto.total = this.cleaningServicePrice + this.cleaningDetailsPrices - ((this.cleaningServicePrice + this.cleaningDetailsPrices) * this.discount/100);
+    cleaningServiceDto.type = this.type;
     return cleaningServiceDto;
   }
 

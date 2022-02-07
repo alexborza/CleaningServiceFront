@@ -12,13 +12,17 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { ToastModule } from 'primeng/toast';
+import { ServicesHistoryComponent } from './services-history/services-history.component';
+import { CleaningServiceComponent } from './cleaning-service/cleaning-service.component';
 
 
 @NgModule({
   declarations: [
     AdministratorComponent,
     QuoteRequestsComponent,
-    QuoteRequestComponent
+    QuoteRequestComponent,
+    ServicesHistoryComponent,
+    CleaningServiceComponent
   ],
   imports: [
     CommonModule,
