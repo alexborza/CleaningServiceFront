@@ -28,7 +28,7 @@ export class QuoteRequestComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');
-    this.getQuoteRequest(this.id);
+    this.getQuoteRequest();
     this.buildForm();
   }
 
@@ -39,21 +39,19 @@ export class QuoteRequestComponent implements OnInit {
     })
   }
 
-  getQuoteRequest(id: number){
+  getQuoteRequest(){
     this.officeCleaningApi.getQuoteRequest(+this.id).subscribe(res => {
       this.officeCleaningDto = res;
-      console.log(this.officeCleaningDto)
     })
   }
 
   onSubmit(formValue: any){
-    console.log(formValue)
     this.checkRequiredFields();
     if(this.form.valid){
       const quoteRequest: OfficeCleaningQuoteRequestDto =  this.createQuoteRequest(formValue);
       this.officeCleaningApi.updateQuoteRequestForOfficeCleaning(this.id, quoteRequest).subscribe(res => {
         this.messageService.add({severity:'success', summary:'Success', detail:'Successfully sent a quote request'});
-        this.getQuoteRequest(this.id);
+        this.getQuoteRequest();
       });
     } else {
       this.messageService.add({severity:'error', summary:'Error', detail:'The field is required'});

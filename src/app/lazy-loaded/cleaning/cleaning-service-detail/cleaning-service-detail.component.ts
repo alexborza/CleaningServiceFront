@@ -160,7 +160,6 @@ export class CleaningServiceDetailComponent implements OnInit {
     
     if(this.form.valid){
       this.cleaningService = this.getCleaningServiceDto(formValue);
-      console.log(this.cleaningService);
       this.cleaningApi.createCleaningService(this.cleaningService).subscribe(res => {
         this.messageService.add({severity:'success', summary:'Success', detail:'Successfully booked a ' + this.type + ' Service'});
       });

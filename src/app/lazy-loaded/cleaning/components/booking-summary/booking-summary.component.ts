@@ -26,7 +26,7 @@ export class BookingSummaryComponent implements OnInit, AfterViewInit, OnDestroy
   }
 
   ngAfterViewInit(){
-    this.menuPosition = 150;
+    this.menuPosition = 100;
   }
   
   @HostListener('window:scroll', ['$event'])

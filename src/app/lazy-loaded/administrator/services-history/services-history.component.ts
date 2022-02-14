@@ -25,7 +25,6 @@ export class ServicesHistoryComponent implements OnInit {
   private getCleaningServices(){
     this.cleaningServiceApi.getCleaningServices().subscribe(res => {
       this.cleaningServices = res;
-      console.log(this.cleaningServices)
     })
   }
 

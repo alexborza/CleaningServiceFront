@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthenticationGuard } from './core/guard/authentication.guard';
+import { AuthorizationGuard } from './core/guard/authorization.guard';
 
 const routes: Routes = [
   {
@@ -12,15 +14,34 @@ const routes: Routes = [
   },
   {
     path: 'contact',
-    loadChildren:() => import('./lazy-loaded/contact-us/contact-us.module').then(m=>m.ContactUsModule)
+    loadChildren:() => import('./lazy-loaded/contact-us/contact-us.module').then(m=>m.ContactUsModule),
+    canActivate: [AuthorizationGuard],
+    data: {
+      role: "ROLE_USER",
+      canActivateWithoutAuthentication: true
+    }
   },
   {
     path: 'book-a-cleaning',
-    loadChildren:() => import('./lazy-loaded/cleaning/cleaning.module').then(m=>m.CleaningModule)
+    loadChildren:() => import('./lazy-loaded/cleaning/cleaning.module').then(m=>m.CleaningModule),
+    canActivate: [AuthorizationGuard],
+    data: {
+      role: "ROLE_USER",
+      canActivateWithoutAuthentication: true
+    }
   },
   {
     path: 'administrator',
-    loadChildren:() => import('./lazy-loaded/administrator/administrator.module').then(m=>m.AdministratorModule)
+    loadChildren:() => import('./lazy-loaded/administrator/administrator.module').then(m=>m.AdministratorModule),
+    canActivate: [AuthorizationGuard],
+    data: {
+      role: "ROLE_ADMIN",
+    }
+  },
+  {
+    path: 'login',
+    loadChildren:() => import('./lazy-loaded/login/login.module').then(m=>m.LoginModule),
+    canActivate: [AuthenticationGuard],
   },
   {
     path: '',

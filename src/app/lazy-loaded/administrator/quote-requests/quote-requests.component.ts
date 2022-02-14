@@ -24,7 +24,6 @@ export class QuoteRequestsComponent implements OnInit {
   getQuoteRequests(){
     this.officeCleaningApi.getQuoteRequests().subscribe(res => {
       this.quoteRequests = res;
-      console.log(this.quoteRequests);
     });
   }
 

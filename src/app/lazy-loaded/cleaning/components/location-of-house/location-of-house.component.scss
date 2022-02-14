@@ -6,6 +6,7 @@
 :host ::ng-deep .no-borders {
     .p-panel .p-panel-content {
         padding: 0;
+        margin-left: 15px;
         border: none;
     }
 
@@ -21,7 +22,7 @@
 }
 
 h2 {
-    font-size: 20px;
+    font-size: 24px;
     color: #65686a;
 }
 

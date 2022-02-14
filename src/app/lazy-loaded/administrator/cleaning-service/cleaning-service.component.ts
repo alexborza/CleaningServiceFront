@@ -26,7 +26,6 @@ export class CleaningServiceComponent implements OnInit {
   private getCleaningService(){
     this.cleaningApi.getCleaningService(this.id).subscribe(res => {
       this.cleaningService = res;
-      console.log(this.cleaningService);
     })
   }
 

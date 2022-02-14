@@ -1,34 +1,25 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container-fluid">
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link" aria-current="page" routerLink="/home">Home</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Book Online
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" routerLink="book-a-cleaning/standard-cleaning">Standard Cleaning</a></li>
-            <li><a class="dropdown-item" routerLink="book-a-cleaning/disinfection-cleaning">Environmental Cleaning and Disinfection</a></li>
-            <li><a class="dropdown-item" routerLink="book-a-cleaning/post-construction-cleaning">Post Construction Cleaning</a></li>
-            <li><a class="dropdown-item" routerLink="book-a-cleaning/office-cleaning">Request a Quoute for Office Cleaning</a></li>
-            <li><a class="dropdown-item" routerLink="book-a-cleaning/deep-cleaning">Deep Cleaning</a></li>
-          </ul>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/services">Services</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/contact">Contact Us</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/administrator">Administrator</a>
-        </li>
-      </ul>
-    </div>
-  </div>
+<nav style="position: sticky; top: 0; z-index: 20;">
+  <label class="logo">BMACleaning</label>
+  <ul>
+    
+     <li><a routerLink="/home">Home</a></li>
+     <li>
+        <a *ngIf="!hasAdminRole()" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Book Online</a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <li><a routerLink="book-a-cleaning/standard-cleaning">Standard Cleaning</a></li>
+          <li><a routerLink="book-a-cleaning/disinfection-cleaning">Environmental Cleaning and Disinfection</a></li>
+          <li><a routerLink="book-a-cleaning/post-construction-cleaning">Post Construction Cleaning</a></li>
+          <li><a routerLink="book-a-cleaning/office-cleaning">Request a Quoute for Office Cleaning</a></li>
+          <li><a routerLink="book-a-cleaning/deep-cleaning">Deep Cleaning</a></li>
+        </ul>
+     </li>
+     <li><a class="nav-link" routerLink="/services">Services</a></li>
+     <li *ngIf="!hasAdminRole()"><a class="nav-link" routerLink="/contact">Contact Us</a></li>
+     <li *ngIf="hasAdminRole()"><a class="nav-link" routerLink="/administrator">Administrator</a></li>
+     <li *ngIf="!isLoggedIn"><a class="nav-link" routerLink="/login/signin">Sign In</a></li>
+     <li *ngIf="!isLoggedIn"><a class="nav-link" routerLink="/login/signup">Sign Up</a></li>
+     <li *ngIf="isLoggedIn"><a class="nav-link" (click)="logout()" style="cursor: pointer;">Logout</a></li>
+  </ul>
 </nav>
 
 <router-outlet></router-outlet>

@@ -78,7 +78,6 @@ export class OfficeCleaningComponent implements OnInit {
     this.checkRequiredFields();
     if(this.form.valid){
       this.officeCleaning = this.getOfficeCleaningDto(formValue);
-      console.log(this.officeCleaning);
       this.officeApi.quoteRequestForOfficeCleaning(this.officeCleaning).subscribe(res => {
         this.messageService.add({severity:'success', summary:'Success', detail:'Successfully requested a quote for an ' + this.type + ' Service'});  
       });
