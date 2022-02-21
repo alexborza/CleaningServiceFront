@@ -13,13 +13,13 @@ import { PostConstructionCleaningDetailsDto } from 'src/app/core/dto/PostConstru
 import { StandardCleaningDetailsDto } from 'src/app/core/dto/StandardCleaningDetailsDto';
 import { CleaningApiService } from 'src/app/core/services/cleaning-api.service';
 import { checkRequiredFields } from 'src/app/core/services/error/validate';
+import { TokenStorageService } from 'src/app/core/services/token-storage.service';
 import { CleaningServiceType } from '../models/cleaning-service-type';
 
 @Component({
   selector: 'app-cleaning-service-detail',
   templateUrl: './cleaning-service-detail.component.html',
-  styleUrls: ['./cleaning-service-detail.component.scss'],
-  providers: [MessageService]
+  styleUrls: ['./cleaning-service-detail.component.scss']
 })
 export class CleaningServiceDetailComponent implements OnInit {
 
@@ -45,6 +45,7 @@ export class CleaningServiceDetailComponent implements OnInit {
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private cleaningApi: CleaningApiService,
+    private tokenStorage: TokenStorageService,
     private messageService: MessageService
     ) {}
 
@@ -160,7 +161,8 @@ export class CleaningServiceDetailComponent implements OnInit {
     
     if(this.form.valid){
       this.cleaningService = this.getCleaningServiceDto(formValue);
-      this.cleaningApi.createCleaningService(this.cleaningService).subscribe(res => {
+      const user = this.tokenStorage.getUser();
+      this.cleaningApi.createCleaningService(user?.id === undefined ? null : user.id, this.cleaningService).subscribe(res => {
         this.messageService.add({severity:'success', summary:'Success', detail:'Successfully booked a ' + this.type + ' Service'});
       });
     } else {

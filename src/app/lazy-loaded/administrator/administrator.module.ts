@@ -8,13 +8,25 @@ import { QuoteRequestsComponent } from './quote-requests/quote-requests.componen
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { QuoteRequestComponent } from './quote-request/quote-request.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { ToastModule } from 'primeng/toast';
 import { ServicesHistoryComponent } from './services-history/services-history.component';
 import { CleaningServiceComponent } from './cleaning-service/cleaning-service.component';
-
+import { EmployeeContractComponent } from './employee-contract/employee-contract.component';
+import { StepsModule } from 'primeng/steps';
+import { EmployeeAccountComponent } from './employee-contract/employee-account/employee-account.component';
+import { PersonalInformationComponent } from './employee-contract/personal-information/personal-information.component';
+import { JobInformationComponent } from './employee-contract/job-information/job-information.component';
+import { EmergencyContactInformationComponent } from './employee-contract/emergency-contact-information/emergency-contact-information.component';
+import { CardModule } from 'primeng/card';
+import { ConfirmationComponent } from './employee-contract/confirmation/confirmation.component';
+import { PasswordModule } from 'primeng/password';
+import { InputMaskModule } from 'primeng/inputmask';
+import { CalendarModule } from 'primeng/calendar';
+import { DropdownModule } from 'primeng/dropdown';
+import { EmployeesComponent } from './employees/employees.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +34,14 @@ import { CleaningServiceComponent } from './cleaning-service/cleaning-service.co
     QuoteRequestsComponent,
     QuoteRequestComponent,
     ServicesHistoryComponent,
-    CleaningServiceComponent
+    CleaningServiceComponent,
+    EmployeeContractComponent,
+    EmployeeAccountComponent,
+    PersonalInformationComponent,
+    JobInformationComponent,
+    EmergencyContactInformationComponent,
+    ConfirmationComponent,
+    EmployeesComponent
   ],
   imports: [
     CommonModule,
@@ -33,7 +52,14 @@ import { CleaningServiceComponent } from './cleaning-service/cleaning-service.co
     ReactiveFormsModule,
     InputTextModule,
     InputTextareaModule,
-    ToastModule
+    ToastModule,
+    StepsModule,
+    FormsModule,
+    CardModule,
+    PasswordModule,
+    InputMaskModule,
+    CalendarModule,
+    DropdownModule
   ]
 })
 export class AdministratorModule { }

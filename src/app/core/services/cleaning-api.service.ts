@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CleaningServiceDto } from '../dto/CleaningServiceDto';
@@ -14,8 +14,12 @@ export class CleaningApiService {
     this.baseUrl = "http://localhost:8080/api/booking/cleaning-service";
   }
 
-  createCleaningService(cleaningServiceDto: CleaningServiceDto) {
-    return this.http.post(this.baseUrl, cleaningServiceDto);
+  createCleaningService(userId: number, cleaningServiceDto: CleaningServiceDto) {
+    if(userId === null){
+      return this.http.post(this.baseUrl, cleaningServiceDto);  
+    } else {
+      return this.http.post(this.baseUrl, cleaningServiceDto, { params: new HttpParams().set('userId', userId)});  
+    }
   }
 
   getBookedHoursForDate(date: string): Observable<string[]>{

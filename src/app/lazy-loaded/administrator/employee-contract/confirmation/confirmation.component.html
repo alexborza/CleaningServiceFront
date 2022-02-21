@@ -1,0 +1,100 @@
+<div style="margin-bottom: 80px;">
+    <p-card>
+        <ng-template pTemplate="title">
+            Contract Confimation
+        </ng-template>
+        <ng-template pTemplate="content">
+            <div class="section">
+                <h4>Account Information</h4>
+                <div class="row">
+                    <div class="col-4">
+                        <label>Username</label>
+                        <b>{{ employeeDto.username }}</b>
+                    </div>
+                    <div class="col-4">
+                        <label>Email</label>
+                        <b>{{ employeeDto.email }}</b>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h4>Personal Information</h4>
+                <div class="row">
+                    <div class="col-4">
+                        <label>Full name</label>
+                        <b>{{ employeeDto.userInformation.fullName }}</b>
+                    </div>
+                    <div class="col-4">
+                        <label>Address</label>
+                        <b>{{ employeeDto.userInformation.address }}</b>
+                    </div>
+                    <div class="col-4">
+                        <label>Phone number</label>
+                        <b>{{ employeeDto.userInformation.phoneNumber }}</b>
+                    </div>
+                    <div class="col-4">
+                        <label>Date of birth</label>
+                        <b>{{ employeeDto.userInformation.birthDate }}</b>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h4>Job Information</h4>
+                <div class="row">
+                    <div class="col-4">
+                        <label>Title</label>
+                        <b>{{ employeeDto.employeeInformation.jobInformation.title }}</b>
+                    </div>
+                    <div class="col-4">
+                        <label>Supervisor</label>
+                        <b>{{ employeeDto.employeeInformation.jobInformation.supervisor }}</b>
+                    </div>
+                    <div class="col-4">
+                        <label>Work phone</label>
+                        <b>{{ employeeDto.employeeInformation.jobInformation.workPhone }}</b>
+                    </div>
+                    <div class="col-4">
+                        <label>Employment status</label>
+                        <b>{{ employeeDto.employeeInformation.jobInformation.employmentStatus }}</b>
+                    </div>
+                    <div class="col-4">
+                        <label>Date of hiring</label>
+                        <b>{{ employeeDto.employeeInformation.jobInformation.hiringDate }}</b>
+                    </div>
+                    <div class="col-4">
+                        <label>Salary</label>
+                        <b>{{ employeeDto.employeeInformation.jobInformation.salary }}</b>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h4>Emergency Contact Information</h4>
+                <div class="row">
+                    <div class="col-4">
+                        <label>Full name</label>
+                        <b>{{ employeeDto.employeeInformation.emergencyContactInformation.fullName }}</b>
+                    </div>
+                    <div class="col-4">
+                        <label>Address</label>
+                        <b>{{ employeeDto.employeeInformation.emergencyContactInformation.address }}</b>
+                    </div>
+                    <div class="col-4">
+                        <label>Phone number</label>
+                        <b>{{ employeeDto.employeeInformation.emergencyContactInformation.phoneNumber }}</b>
+                    </div>
+                    <div class="col-4">
+                        <label>Relationship</label>
+                        <b>{{ employeeDto.employeeInformation.emergencyContactInformation.relationship }}</b>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="footer">
+            <p-button label="Back" (onClick)="prevPage()" icon="pi pi-angle-left"></p-button>
+            <p-button class="rightButton" label="Create" (onClick)="nextPage()" icon="pi pi-angle-right" iconPos="right"></p-button>
+        </ng-template>
+    </p-card>
+</div>

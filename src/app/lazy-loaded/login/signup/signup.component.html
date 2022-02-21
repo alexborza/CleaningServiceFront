@@ -6,29 +6,29 @@
             <div class="control">
                 <label class="label">Username<span class="required-star">*</span></label>
                 <input type=text pInputText placeholder="Username" formControlName=username trim="blur">
-                <span class="required-err-message" 
+                <small class="required-err-message" 
                 *ngIf="(form.get('username')?.touched && 
                         form.get('username')?.errors?.['required']) ||
                         form.get('username')?.hasError('missing')"
-                >The field is required</span>
+                >The field is required</small>
             </div>
             <div class="control">
                 <label class="label">Password<span class="required-star">*</span></label>
                 <p-password class="pass" placeholder="Password" formControlName="password" [toggleMask]="showEye" [feedback]="false" (onFocus)="onFocus()"></p-password>
-                <span class="required-err-message" 
+                <small class="required-err-message" 
                 *ngIf="(form.get('password')?.touched && 
                         form.get('password')?.errors?.['required']) ||
                         form.get('password')?.hasError('missing')"
-                >The field is required</span>
+                >The field is required</small>
             </div>
             <div class="control" *ngIf="action === 'signup'">
                 <label class="label">Email<span class="required-star">*</span></label>
                 <input type=text pInputText placeholder="Email" formControlName=email trim="blur">
-                <span class="required-err-message" 
+                <small class="required-err-message" 
                 *ngIf="(form.get('email')?.touched && 
                         form.get('email')?.errors?.['required']) ||
                         form.get('email')?.hasError('missing')"
-                >The field is required</span>
+                >The field is required</small>
             </div>
             <div class="control">
                 <button pButton pRipple type="submit" [label]="setButtonLabel()" style="margin-top: 15px;"></button>

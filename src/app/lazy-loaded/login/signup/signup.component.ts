@@ -9,8 +9,7 @@ import { TokenStorageService } from 'src/app/core/services/token-storage.service
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.scss'],
-  providers: [MessageService]
+  styleUrls: ['./signup.component.scss']
 })
 export class SignupComponent implements OnInit {
   form!: FormGroup;
@@ -74,13 +73,21 @@ export class SignupComponent implements OnInit {
       this.roles = this.tokenStorage.getUser().roles;
       this.reloadPage();
       this.messageService.add({severity:'success', summary:'Success', detail:'Successfully logged in'});
+    },
+    err => {
+      this.messageService.add({severity:'error', summary:'Error', detail: 'Invalid username and/or password', life: 5000});
     });
   }
 
   private register(formValue: any){
-    this.authService.register(formValue.username, formValue.email, formValue.password).subscribe(res => {
-      this.messageService.add({severity:'success', summary:'Success', detail:'Successfully registered your account'});
-    })
+    this.authService.register(formValue.username, formValue.email, formValue.password).subscribe(
+      res => {
+        this.messageService.add({severity:'success', summary:'Success', detail:'Successfully registered your account'});
+        this.form.reset();
+      }, 
+      err => {
+        this.messageService.add({severity:'error', summary:'Error', detail: err.error.message, life: 5000});
+      })
   }
 
   private reloadPage(): void {

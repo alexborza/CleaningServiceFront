@@ -29,7 +29,7 @@
                         <label class="label-title">Total square meters of entire area<span class="required-star">*</span></label>
                     </div>
                     <div class="col-6 p-3 controls">
-                        <input type=text pInputText placeholder="Enter the square meters for the total area" formControlName=totalSquareMeters>
+                        <input type=number pInputText placeholder="Total square meters" formControlName=totalSquareMeters>
                         <span class="required-err-message" 
                         *ngIf="(spaceDetailsForm.get('space_details').get('totalSquareMeters')?.touched && 
                                 spaceDetailsForm.get('space_details').get('totalSquareMeters')?.errors?.required) ||

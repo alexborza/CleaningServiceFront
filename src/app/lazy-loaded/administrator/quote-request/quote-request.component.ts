@@ -10,8 +10,7 @@ import { OfficeCleaningApiService } from 'src/app/core/services/office-cleaning-
 @Component({
   selector: 'app-quote-request',
   templateUrl: './quote-request.component.html',
-  styleUrls: ['./quote-request.component.scss'],
-  providers: [MessageService]
+  styleUrls: ['./quote-request.component.scss']
 })
 export class QuoteRequestComponent implements OnInit {
 

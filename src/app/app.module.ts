@@ -9,6 +9,8 @@ import { AuthInterceptor } from './core/helpers/auth.interceptors';
 import { AuthorizationGuard } from './core/guard/authorization.guard';
 import { AuthenticationGuard } from './core/guard/authentication.guard';
 import { ToastModule } from 'primeng/toast';
+import { EmployeeContractGuard } from './core/guard/employee-contract.guard';
+import { MessageService } from 'primeng/api';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { ToastModule } from 'primeng/toast';
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     AuthorizationGuard,
-    AuthenticationGuard
+    AuthenticationGuard,
+    EmployeeContractGuard,
+    MessageService
   ],
   bootstrap: [AppComponent]
 })

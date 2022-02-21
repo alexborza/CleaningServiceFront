@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { OfficeCleaningDto } from '../dto/OfficeCleaningDto';
@@ -15,8 +15,12 @@ export class OfficeCleaningApiService {
     this.baseUrl = "http://localhost:8080/api/office-cleaning-service";
   }
 
-  quoteRequestForOfficeCleaning(dto: OfficeCleaningDto): Observable<OfficeCleaningDto>{
-    return this.http.post<OfficeCleaningDto>(this.baseUrl + "/quote-request", dto);
+  quoteRequestForOfficeCleaning(userId: number, dto: OfficeCleaningDto): Observable<OfficeCleaningDto>{
+    if(userId === null){
+      return this.http.post<OfficeCleaningDto>(this.baseUrl + "/quote-request", dto);
+    } else {
+      return this.http.post<OfficeCleaningDto>(this.baseUrl + "/quote-request", dto, { params: new HttpParams().set('userId', userId)});  
+    }
   }
 
   updateQuoteRequestForOfficeCleaning(id: number, dto: OfficeCleaningQuoteRequestDto) {

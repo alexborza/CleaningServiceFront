@@ -10,13 +10,13 @@ import { SpaceDetailsDto } from 'src/app/core/dto/SpaceDetailsDto';
 import { SpaceTypeDto } from 'src/app/core/dto/SpaceTypeDto';
 import { checkRequiredFields } from 'src/app/core/services/error/validate';
 import { OfficeCleaningApiService } from 'src/app/core/services/office-cleaning-api.service';
+import { TokenStorageService } from 'src/app/core/services/token-storage.service';
 import { CleaningServiceType } from '../models/cleaning-service-type';
 
 @Component({
   selector: 'app-office-cleaning',
   templateUrl: './office-cleaning.component.html',
-  styleUrls: ['./office-cleaning.component.scss'],
-  providers: [MessageService]
+  styleUrls: ['./office-cleaning.component.scss']
 })
 export class OfficeCleaningComponent implements OnInit {
 
@@ -29,6 +29,7 @@ export class OfficeCleaningComponent implements OnInit {
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private officeApi: OfficeCleaningApiService,
+    private tokenStorage: TokenStorageService,
     private messageService: MessageService
     ) {}
 
@@ -78,7 +79,8 @@ export class OfficeCleaningComponent implements OnInit {
     this.checkRequiredFields();
     if(this.form.valid){
       this.officeCleaning = this.getOfficeCleaningDto(formValue);
-      this.officeApi.quoteRequestForOfficeCleaning(this.officeCleaning).subscribe(res => {
+      const user = this.tokenStorage.getUser();
+      this.officeApi.quoteRequestForOfficeCleaning(user?.id === undefined ? null : user.id, this.officeCleaning).subscribe(res => {
         this.messageService.add({severity:'success', summary:'Success', detail:'Successfully requested a quote for an ' + this.type + ' Service'});  
       });
     } else {

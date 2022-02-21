@@ -8,11 +8,14 @@ h4 {
 :host ::ng-deep .p-datatable .p-datatable-thead > tr > th {
     white-space: nowrap;
     text-align: center;
+    background: #0D5477;
+    color: #ffffff;
 }
 
 :host ::ng-deep .p-datatable .p-datatable-tbody > tr > td {
     white-space: nowrap;
     text-align: center;
+    padding-top: 20px;
 }
 
 .sent {

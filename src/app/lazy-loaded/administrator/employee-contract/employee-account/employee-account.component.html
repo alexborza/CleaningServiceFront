@@ -1,0 +1,35 @@
+<div style="margin-bottom: 80px;">
+    <p-card>
+        <ng-template pTemplate="title">
+            Employee Account
+        </ng-template>
+        <ng-template pTemplate="subtitle">
+            Enter employees credentials
+        </ng-template>
+        <ng-template pTemplate="content">
+            <div class="row">
+                <div class="col-12 control">
+                    <label for="username">Username</label>
+                    <input #username="ngModel" name="username" (ngModelChange)="existingControl(username)" id="username" placeholder="Username" type="text" required pInputText [(ngModel)]="employeeDto.username" [ngClass]="{'ng-dirty': (username.touched && username.invalid) || (username.invalid && submitted) || (username.dirty && username.invalid)}"> 
+                    <small class="p-error" *ngIf="(username.invalid && submitted && !username.control.hasError('duplicate')) || (username.dirty && username.invalid && !username.control.hasError('duplicate')) || (username.touched && username.invalid && !username.control.hasError('duplicate'))">Username is required.</small>
+                    <small class="p-error" *ngIf="username.control.hasError('duplicate')">Username already exists.</small>
+                </div>
+                <div class="col-12 control">
+                    <label for="email">Email</label>
+                    <input #email="ngModel" name="email" (ngModelChange)="existingControl(email)" id="email" placeholder="Email" type="text" required pInputText [(ngModel)]="employeeDto.email" [ngClass]="{'ng-dirty': (email.touched && username.invalid) || (email.invalid && submitted) || (email.dirty && email.invalid)}"> 
+                    <small class="p-error" *ngIf="(email.invalid && submitted && !email.control.hasError('duplicate'))|| (email.dirty && email.invalid && !email.control.hasError('duplicate')) || (email.touched && email.invalid && !email.control.hasError('duplicate'))">Email is required.</small>
+                    <small class="p-error" *ngIf="email.control.hasError('duplicate')">Email already exists.</small>
+                </div>
+                <div class="col-12 control">
+                    <label for="password">Password</label>
+                    <p-password #password="ngModel" class="pass" placeholder="Password" [(ngModel)]="employeeDto.password" required [toggleMask]="showEye" [feedback]="false" (onFocus)="onFocus()" [ngClass]="{'ng-dirty': (password.touched && username.invalid) || (password.invalid && submitted) || (password.dirty && password.invalid)}"></p-password>
+                    <small class="p-error" *ngIf="(password.invalid && submitted) || (password.dirty && password.invalid) || (password.touched && password.invalid)">Password is required.</small>
+                </div>
+            </div>
+            
+            <div style="margin-top: 30px; margin-bottom: 60px;">
+                <p-button label="Next" (onClick)="nextPage(username.control, email.control, password.control)" icon="pi pi-angle-right" iconPos="right"></p-button>
+            </div>
+        </ng-template>
+    </p-card>
+</div>

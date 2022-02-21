@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { UserCredentialDto } from '../dto/UserCredentialDto';
 const AUTH_API = 'http://localhost:8080/api/auth/';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -22,5 +23,8 @@ export class AuthService {
       email,
       password
     }, httpOptions);
+  }
+  getExistingUserCredentials(): Observable<UserCredentialDto[]> {
+    return this.http.get<UserCredentialDto[]>(AUTH_API + 'existing-credentials');
   }
 }
