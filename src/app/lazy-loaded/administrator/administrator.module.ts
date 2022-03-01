@@ -7,13 +7,11 @@ import { DividerModule } from 'primeng/divider';
 import { QuoteRequestsComponent } from './quote-requests/quote-requests.component';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
-import { QuoteRequestComponent } from './quote-request/quote-request.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { ToastModule } from 'primeng/toast';
 import { ServicesHistoryComponent } from './services-history/services-history.component';
-import { CleaningServiceComponent } from './cleaning-service/cleaning-service.component';
 import { EmployeeContractComponent } from './employee-contract/employee-contract.component';
 import { StepsModule } from 'primeng/steps';
 import { EmployeeAccountComponent } from './employee-contract/employee-account/employee-account.component';
@@ -27,14 +25,14 @@ import { InputMaskModule } from 'primeng/inputmask';
 import { CalendarModule } from 'primeng/calendar';
 import { DropdownModule } from 'primeng/dropdown';
 import { EmployeesComponent } from './employees/employees.component';
+import { MenuModule } from 'primeng/menu';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
     AdministratorComponent,
     QuoteRequestsComponent,
-    QuoteRequestComponent,
     ServicesHistoryComponent,
-    CleaningServiceComponent,
     EmployeeContractComponent,
     EmployeeAccountComponent,
     PersonalInformationComponent,
@@ -59,7 +57,9 @@ import { EmployeesComponent } from './employees/employees.component';
     PasswordModule,
     InputMaskModule,
     CalendarModule,
-    DropdownModule
+    DropdownModule,
+    MenuModule,
+    SharedModule
   ]
 })
 export class AdministratorModule { }

@@ -48,3 +48,7 @@ label {
 :host ::ng-deep .p-toast-message.p-toast-message-success {
     border-radius: 20px;
 }
+
+:host ::ng-deep .p-card .p-card-content {
+    padding: 1.25rem 40px;
+}

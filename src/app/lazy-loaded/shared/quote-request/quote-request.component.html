@@ -1,0 +1,165 @@
+<div class="container p-4 mb-5" *ngIf="officeCleaningDto">
+    <p-card>
+        <h3 style="text-align: center; padding: 15px; margin-bottom: 20px;">Office Cleaning Quote Request</h3>
+        <div class="section">
+            <h4>Space Details</h4>
+            <div class="row">
+                <div class="col-4">
+                    <label>Primary use of the space</label>
+                    <b>{{ officeCleaningDto.spaceDetails.primaryUseOfSpace }}</b>
+                </div>
+                <div class="col-4">
+                    <label>Total number of persons in the space</label>
+                    <b>{{ officeCleaningDto.spaceDetails.numberOfPersons }}</b>
+                </div>
+                <div class="col-4">
+                    <label>Total square meters of entire area</label>
+                    <b>{{ officeCleaningDto.spaceDetails.totalSquareMeters }}</b>
+                </div>
+            </div>
+        
+            <div class="row">
+                <div class="col-4">
+                    <label>Frequency period of cleaning</label>
+                    <b>{{ officeCleaningDto.spaceDetails.frequencyOfCleaning }}</b>
+                </div>
+                <div class="col-4">
+                    <label>Preferred time of the day for cleaning</label>
+                    <b>{{ officeCleaningDto.spaceDetails.dayTime }}</b>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h4>Space Type</h4>
+            <div class="row">
+                <div class="col-4">
+                    <label>Number of enclosed offices</label>
+                    <b>{{ officeCleaningDto.spaceType.enclosedOffices }}</b>
+                </div>
+                <div class="col-4">
+                    <label>Number of people work stations</label>
+                    <b>{{ officeCleaningDto.spaceType.workStations }}</b>
+                </div>
+                <div class="col-4">
+                    <label>Number of meeting rooms</label>
+                    <b>{{ officeCleaningDto.spaceType.meetingRooms }}</b>
+                </div>
+            </div>
+        
+            <div class="row">
+                <div class="col-4">
+                    <label>Number of men & women bathroom</label>
+                    <b>{{ officeCleaningDto.spaceType.bathrooms }}</b>
+                </div>
+                <div class="col-4">
+                    <label>Number of toilet stalls & urinals</label>
+                    <b>{{ officeCleaningDto.spaceType.toilets }}</b>
+                </div>
+                <div class="col-4">
+                    <label>Number of hallways</label>
+                    <b>{{ officeCleaningDto.spaceType.hallways }}</b>
+                </div>
+            </div>
+    
+            <div class="row">
+                <div class="col-4">
+                    <label>Number of cafeterias & dining areas</label>
+                    <b>{{ officeCleaningDto.spaceType.cafeterias }}</b>
+                </div>
+            </div>
+        </div>
+    
+        <div class="section">
+            <h4>Client Information</h4>
+            <div class="row">
+                <div class="col-4">
+                    <label>First Name</label>
+                    <b>{{ officeCleaningDto.contactInfo.firstName }}</b>
+                </div>
+                <div class="col-4">
+                    <label>Last Name</label>
+                    <b>{{ officeCleaningDto.contactInfo.lastName }}</b>
+                </div>
+                <div class="col-4">
+                    <label>Email Address</label>
+                    <b>{{ officeCleaningDto.contactInfo.email }}</b>
+                </div>
+            </div>
+        
+            <div class="row">
+                <div class="col-4">
+                    <label>Phone Number</label>
+                    <b>{{ officeCleaningDto.contactInfo.phoneNumber }}</b>
+                </div>
+                <div class="col-4">
+                    <label>County</label>
+                    <b>{{ officeCleaningDto.location.county }}</b>
+                </div>
+                <div class="col-4">
+                    <label>City</label>
+                    <b>{{ officeCleaningDto.location.city }}</b>
+                </div>
+            </div>
+    
+            <div class="row">
+                <div class="col-4">
+                    <label>Street Address</label>
+                    <b>{{ officeCleaningDto.location.address }}</b>
+                </div>
+            </div>
+        </div>
+    
+        <div class="section" *ngIf="officeCleaningDto.quoteRequest">
+            <h4>Quote Request</h4>
+            <div class="row">
+                <div class="col-4" style="align-self: baseline;">
+                    <label>Price</label>
+                    <b>{{ officeCleaningDto.quoteRequest.price }}</b>
+                </div>
+                <div class="col-8">
+                    <label>Description</label>
+                    <b>{{ officeCleaningDto.quoteRequest.description }}</b>
+                </div>
+            </div>
+        </div>
+    
+        <div class="section" *ngIf="hasAdminRole">
+            <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+                <div class="row controls">
+                    <div class="col-6">
+                        <label class="label-title">Price<span class="required-star">*</span></label>
+                    </div>
+        
+                    <div class="col-6 pb-5 control controls">
+                        <input type=number pInputText placeholder="Price" formControlName=price>
+                        <span class="required-err-message" 
+                            *ngIf="(form.get('price')?.touched && 
+                                    form.get('price')?.errors?.['required']) ||
+                                    form.get('price')?.hasError('missing')"
+                        >The field is required</span>
+                    </div>
+    
+                    <div class="col-4">
+                        <label class="label-title">Description<span class="required-star">*</span></label>
+                    </div>
+        
+                    <div class="col-8 control controls">
+                        <textarea pInputTextarea placeholder="Description" formControlName=description></textarea>
+                        <span class="required-err-message" 
+                            *ngIf="(form.get('description')?.touched && 
+                                    form.get('description')?.errors?.['required']) ||
+                                    form.get('description')?.hasError('missing')"
+                        >The field is required</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <button pButton type="submit" label="Send" style="float: right;"></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </p-card>
+</div>
+<p-toast></p-toast>

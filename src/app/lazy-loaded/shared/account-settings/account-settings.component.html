@@ -1,0 +1,68 @@
+<div class="container" style="margin-bottom: 80px;" *ngIf="userDto">
+    <p-card>
+        <ng-template pTemplate="header">
+            <h3>Account Settings</h3>
+        </ng-template>
+    
+        <ng-template pTemplate="content">
+            <div class="row">
+                <div class="col-12">
+                    <div class="row section">
+                        <div class="col-9">
+                            <b>EMAIL</b>
+                            <label>{{userDto.email}}</label>
+                        </div>
+                        <div class="col-2">
+                            <button pButton type="button" label="Modify" (click)="modifyEmail()"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="row section">
+                        <div class="col-9">
+                            <b>PASSWORD</b>
+                            <label>**********</label>
+                        </div>
+                        <div class="col-2">
+                            <button pButton type="button" label="Modify" (click)="modifyPasssword()"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="row section">
+                        <div class="col-9">
+                            <b>PERSONAL INFORMATION</b>
+                            <div class="row mb-1">
+                                <div class="col-4">
+                                    <span>Name:</span>
+                                </div>
+                                <div class="col-8">
+                                    <label>{{getFullName()}}</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <span>Date of birth:</span>
+                                </div>
+                                <div class="col-8">
+                                    <label>{{getBirthDate()}}</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <button pButton type="button" label="Modify" (click)="modifyPersonalInfo()"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+    </p-card>
+</div>
+
+<p-toast></p-toast>

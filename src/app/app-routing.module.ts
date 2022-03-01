@@ -39,6 +39,14 @@ const routes: Routes = [
     }
   },
   {
+    path: 'client/:userId',
+    loadChildren:() => import('./lazy-loaded/client/client.module').then(m=>m.ClientModule),
+    canActivate: [AuthorizationGuard],
+    data: {
+      role: "ROLE_USER",
+    }
+  },
+  {
     path: 'login',
     loadChildren:() => import('./lazy-loaded/login/login.module').then(m=>m.LoginModule),
     canActivate: [AuthenticationGuard],

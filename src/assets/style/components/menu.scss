@@ -1,0 +1,29 @@
+.p-menu .p-menuitem {
+    border-top: 1px solid #c8c8c8;
+}
+  
+.p-menu {
+    border: none;
+}
+  
+.p-menu ul:last-child {
+    border-bottom: 1px solid #c8c8c8;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+.p-menu .p-menuitem.active {
+    border-left: 6px solid #124c69;
+    span {
+        color: black;
+        margin-left: -6px;
+    }
+}
+
+.p-menu .p-menuitem-link-active {
+    border-left: 6px solid #124c69 !important;
+    span {
+        color: black!important;
+        margin-left: -6px;
+    }
+}

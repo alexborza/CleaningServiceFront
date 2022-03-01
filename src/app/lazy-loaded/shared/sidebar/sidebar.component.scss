@@ -1,0 +1,19 @@
+#sticky-sidebar {
+    width: 100%;
+    z-index: 3;
+    box-shadow: 5px 0 10px rgba(0, 0, 0, 0.10);
+    min-height: 100vh;
+}
+  
+.margin-for-header {
+    top: 80px;
+}
+
+.name-to-display {
+  font-size: 1.2rem;
+  font-weight: 700;
+  padding-top: 0.85rem;
+  padding-left: 0.85rem;
+  word-break: break-all;
+  margin-bottom: 60px;
+}

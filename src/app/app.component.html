@@ -1,7 +1,6 @@
 <nav style="position: sticky; top: 0; z-index: 1004;">
   <label class="logo">BMACleaning</label>
   <ul>
-    
      <li><a routerLink="/home">Home</a></li>
      <li>
         <a *ngIf="!hasAdminRole()" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Book Online</a>
@@ -16,6 +15,7 @@
      <li><a class="nav-link" routerLink="/services">Services</a></li>
      <li *ngIf="!hasAdminRole()"><a class="nav-link" routerLink="/contact">Contact Us</a></li>
      <li *ngIf="hasAdminRole()"><a class="nav-link" routerLink="/administrator">Administrator</a></li>
+     <li *ngIf="isClient"><a class="nav-link" [routerLink]="['/client', user.id]">Profile</a></li>
      <li *ngIf="!isLoggedIn"><a class="nav-link" routerLink="/login/signin">Sign In</a></li>
      <li *ngIf="!isLoggedIn"><a class="nav-link" routerLink="/login/signup">Sign Up</a></li>
      <li *ngIf="isLoggedIn"><a class="nav-link" (click)="logout()" style="cursor: pointer;">Logout</a></li>

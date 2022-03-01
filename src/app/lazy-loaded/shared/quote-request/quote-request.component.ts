@@ -6,6 +6,7 @@ import { OfficeCleaningDto } from 'src/app/core/dto/OfficeCleaningDto';
 import { OfficeCleaningQuoteRequestDto } from 'src/app/core/dto/OfficeCleaningQuoteRequestDto';
 import { checkRequiredFields } from 'src/app/core/services/error/validate';
 import { OfficeCleaningApiService } from 'src/app/core/services/office-cleaning-api.service';
+import { TokenStorageService } from 'src/app/core/services/token-storage.service';
 
 @Component({
   selector: 'app-quote-request',
@@ -17,25 +18,32 @@ export class QuoteRequestComponent implements OnInit {
   id: any;
   officeCleaningDto!: OfficeCleaningDto;
   form!: FormGroup;
+  hasAdminRole = false;
 
   constructor(
       private route: ActivatedRoute,
+      private tokenStorage: TokenStorageService,
       private fb: FormBuilder,
       private messageService: MessageService,
       private officeCleaningApi: OfficeCleaningApiService          
     ) { }
 
   ngOnInit(): void {
+    if(this.tokenStorage.getUser().roles.includes('ROLE_ADMIN')){
+      this.hasAdminRole = true;
+    }
     this.id = this.route.snapshot.paramMap.get('id');
     this.getQuoteRequest();
     this.buildForm();
   }
 
   buildForm(){
-    this.form = this.fb.group({
-      description: new FormControl(null, [Validators.required]),
-      price: new FormControl(null, [Validators.required])
-    })
+    if(this.hasAdminRole){
+      this.form = this.fb.group({
+        description: new FormControl(null, [Validators.required]),
+        price: new FormControl(null, [Validators.required])
+      })
+    }
   }
 
   getQuoteRequest(){

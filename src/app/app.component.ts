@@ -10,17 +10,17 @@ export class AppComponent {
   private roles: string[] = [];
   user: any;
   isLoggedIn = false;
-  showAdminBoard = false;
-  showModeratorBoard = false;
   username?: string;
+  isClient = false;
+
   constructor(private tokenStorageService: TokenStorageService) { }
+
   ngOnInit(): void {
     this.isLoggedIn = !!this.tokenStorageService.getToken();
     if (this.isLoggedIn) {
       this.user = this.tokenStorageService.getUser();
       this.roles = this.user.roles;
-      this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
-      this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
+      this.isClient = this.roles.includes('ROLE_USER');
       this.username = this.user.username;
     }
   }

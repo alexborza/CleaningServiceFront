@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MenuItem } from 'primeng/api';
+import { TokenStorageService } from 'src/app/core/services/token-storage.service';
 
 @Component({
   selector: 'app-administrator',
@@ -7,9 +9,32 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdministratorComponent implements OnInit {
 
-  constructor() { }
+  items!: MenuItem[];
+  username: string = "";
+
+  constructor(
+    private tokenStorage: TokenStorageService
+  ) { }
 
   ngOnInit(): void {
+    this.menuInit();
+    this.getUser()
+  }
+
+  private menuInit(){
+    this.items = [
+      {label: 'Dashboard', routerLink: '/administrator', routerLinkActiveOptions: {exact: true}},
+      {label: 'Employees', routerLink: 'employees', routerLinkActiveOptions: {exact: true}},
+      {label: 'New contract', routerLink: 'employee-contract', routerLinkActiveOptions: {exact: false} },
+      {label: 'Pay salary', routerLink: '/administrator', routerLinkActiveOptions: {exact: true}},
+      {label: 'Services History', routerLink: 'services-history', routerLinkActiveOptions: {exact: false}},
+      {label: 'Quote Requests', routerLink: 'quote-requests', routerLinkActiveOptions: {exact: false}},
+    ]
+  }
+
+  private getUser(){
+    const user = this.tokenStorage.getUser();
+    this.username = user.username;
   }
 
 }

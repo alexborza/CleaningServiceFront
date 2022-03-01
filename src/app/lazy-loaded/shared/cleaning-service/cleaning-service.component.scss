@@ -18,3 +18,7 @@ label {
 .firstRow {
     margin-bottom: 30px;
 }
+
+:host ::ng-deep .p-card .p-card-content {
+    padding: 1.25rem 40px;
+}
