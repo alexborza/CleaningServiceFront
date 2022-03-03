@@ -2,10 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
-import { UserDto } from 'src/app/core/dto/UserDto';
+import { EmergencyContactInformationDto } from 'src/app/core/dto/EmergencyContactInformationDto';
+import { RoleEnum } from 'src/app/core/dto/RoleEnum';
 import { UserInformationDto } from 'src/app/core/dto/UserInformationDto';
-import { ClientService } from 'src/app/core/services/client.service';
+import { TokenStorageService } from 'src/app/core/services/token-storage.service';
+import { UserApiService } from 'src/app/core/services/user-api.service';
+import { JobInfoDetailsComponent } from '../components/job-info-details/job-info-details.component';
 import { ModifyEmailComponent } from '../components/modify-email/modify-email.component';
+import { ModifyEmergencyContactInfoComponent } from '../components/modify-emergency-contact-info/modify-emergency-contact-info.component';
 import { ModifyPasswordComponent } from '../components/modify-password/modify-password.component';
 import { ModifyPersonalInfoComponent } from '../components/modify-personal-info/modify-personal-info.component';
 
@@ -18,12 +22,14 @@ import { ModifyPersonalInfoComponent } from '../components/modify-personal-info/
 export class AccountSettingsComponent implements OnInit {
 
   id!: number;
-  userDto!: UserDto;
+  userDto!: any;
+  isEmployee = false;
 
   constructor(
     private route: ActivatedRoute,
-    private clientApi: ClientService,
+    private userApi: UserApiService,
     public dialogService: DialogService,
+    private tokenStorage: TokenStorageService,
     private messageService: MessageService
   ) { }
 
@@ -31,12 +37,19 @@ export class AccountSettingsComponent implements OnInit {
     this.route.parent?.params.subscribe(params => {
       this.id = Number.parseInt(params['userId']);
     });
+    this.hasEmployeeRole();
     this.getUser();
   }
 
+  private hasEmployeeRole(){
+    const user = this.tokenStorage.getUser();
+    this.isEmployee = user.roles.includes(RoleEnum.ROLE_EMPLOYEE);
+  }
+
   private getUser(){
-    this.clientApi.getUser(this.id).subscribe(res => {
+    this.userApi.getUser(this.id).subscribe(res => {
       this.userDto = res;
+      console.log(this.userDto)
     })
   }
 
@@ -88,8 +101,36 @@ export class AccountSettingsComponent implements OnInit {
     ref.onClose.subscribe((dto: UserInformationDto) => {
       if (dto) {
         this.getUser();
-        this.messageService.add({severity:'success', summary: 'Success', detail: 'Successfully modified personal information'});
+        this.messageService.add({severity:'success', summary: 'Success', detail: 'Successfully modified personal information!'});
       }
+    });
+  }
+
+  modifyEmergencyContactInfo(){
+    const ref = this.dialogService.open(ModifyEmergencyContactInfoComponent, {
+      data: {
+        id: this.id,
+        dto: this.userDto.employeeInformation.emergencyContactInformation
+      },
+      header: 'Modify emergency contact information',
+      width: '50%'
+    });
+
+    ref.onClose.subscribe((dto: EmergencyContactInformationDto) => {
+      if (dto) {
+        this.getUser();
+        this.messageService.add({severity:'success', summary: 'Success', detail: 'Successfully modified emergency contact info!'});
+      }
+    });
+  }
+
+  onJobInfoDetails() {
+    this.dialogService.open(JobInfoDetailsComponent, {
+      data: {
+        dto: this.userDto.employeeInformation.jobInformation
+      },
+      header: 'Job Information Details',
+      width: '50%'
     });
   }
 

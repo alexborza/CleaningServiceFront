@@ -5,6 +5,7 @@ import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { ModifyPassswordDto } from 'src/app/core/dto/ModifyPasswordDto';
 import { ClientService } from 'src/app/core/services/client.service';
 import { checkRequiredFields } from 'src/app/core/services/error/validate';
+import { UserApiService } from 'src/app/core/services/user-api.service';
 
 @Component({
   selector: 'app-modify-password',
@@ -20,7 +21,7 @@ export class ModifyPasswordComponent implements OnInit {
   constructor(
     public config: DynamicDialogConfig,
     public ref: DynamicDialogRef,
-    private clientApi: ClientService
+    private userApi: UserApiService
   ) {
     this.id = this.config.data?.id;
   }
@@ -40,7 +41,7 @@ export class ModifyPasswordComponent implements OnInit {
     this.checkRequiredFields();
     if(this.form.valid){
       let modifyPasswordDto = new ModifyPassswordDto(formValue.password, formValue.newPassword)
-      this.clientApi.modifyPassword(this.id, modifyPasswordDto).subscribe(res => {
+      this.userApi.modifyPassword(this.id, modifyPasswordDto).subscribe(res => {
         this.ref.close(res.message);
       },
       err => {

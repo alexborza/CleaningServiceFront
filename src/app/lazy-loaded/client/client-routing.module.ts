@@ -14,8 +14,7 @@ const routes: Routes = [
       { path: 'orders/cleaning-service/:id', component: CleaningServiceComponent },
       { path: 'orders/quote-request/:id', component: QuoteRequestComponent }
     ]
-},
-  
+  },
 ];
 
 @NgModule({

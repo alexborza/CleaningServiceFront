@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { ClientService } from 'src/app/core/services/client.service';
 import { checkRequiredFields } from 'src/app/core/services/error/validate';
+import { UserApiService } from 'src/app/core/services/user-api.service';
 
 @Component({
   selector: 'app-modify-email',
@@ -18,7 +19,7 @@ export class ModifyEmailComponent implements OnInit {
   constructor(
     public config: DynamicDialogConfig,
     public ref: DynamicDialogRef,
-    private clientApi: ClientService
+    private userApi: UserApiService
   ) { 
     this.email = this.config.data?.email;
     this.id = this.config.data?.id;
@@ -38,7 +39,7 @@ export class ModifyEmailComponent implements OnInit {
   onSubmit(formValue: any){
     this.checkRequiredFields();
     if(this.form.valid){
-      this.clientApi.modifyEmail(this.id, formValue.newEmail).subscribe(res => {
+      this.userApi.modifyEmail(this.id, formValue.newEmail).subscribe(res => {
         this.ref.close(formValue.newEmail);
       });
     }

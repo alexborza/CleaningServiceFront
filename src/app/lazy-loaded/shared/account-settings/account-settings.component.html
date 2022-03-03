@@ -61,6 +61,64 @@
                     </div>
                 </div>
             </div>
+
+            <div class="row" *ngIf="isEmployee">
+                <div class="col-12">
+                    <div class="row section">
+                        <div class="col-9">
+                            <b>EMERGENCY CONTACT INFORMATION</b>
+                            <div class="row mb-1">
+                                <div class="col-4">
+                                    <span>Name:</span>
+                                </div>
+                                <div class="col-8">
+                                    <label>{{userDto.employeeInformation.emergencyContactInformation.fullName}}</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <span>Relationship:</span>
+                                </div>
+                                <div class="col-8">
+                                    <label>{{userDto.employeeInformation.emergencyContactInformation.relationship}}</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <button pButton type="button" label="Modify" (click)="modifyEmergencyContactInfo()"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" *ngIf="isEmployee">
+                <div class="col-12">
+                    <div class="row section">
+                        <div class="col-9">
+                            <b>JOB INFORMATION</b>
+                            <div class="row mb-1">
+                                <div class="col-4">
+                                    <span>Hiring date:</span>
+                                </div>
+                                <div class="col-8">
+                                    <label>{{userDto.employeeInformation.jobInformation.hiringDate}}</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <span>Salary:</span>
+                                </div>
+                                <div class="col-8">
+                                    <label>{{userDto.employeeInformation.jobInformation.salary}} $</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <button pButton type="button" label="Details" (click)="onJobInfoDetails()"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </ng-template>
     </p-card>
 </div>

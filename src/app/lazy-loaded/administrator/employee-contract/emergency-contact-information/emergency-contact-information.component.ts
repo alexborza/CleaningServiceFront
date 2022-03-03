@@ -19,6 +19,8 @@ export class EmergencyContactInformationComponent implements OnInit {
   ngOnInit() {
     this.relationshipOptions = [
       {label: "Mother"},
+      {label: "Husband"},
+      {label: "Wife"},
       {label: "Father"},
       {label: "Daughter"},
       {label: "Son"},

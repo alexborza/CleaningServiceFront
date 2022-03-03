@@ -21,6 +21,8 @@ import { DropdownModule } from 'primeng/dropdown';
 import { CleaningServiceComponent } from './cleaning-service/cleaning-service.component';
 import { QuoteRequestComponent } from './quote-request/quote-request.component';
 import { InputTextareaModule } from 'primeng/inputtextarea';
+import { ModifyEmergencyContactInfoComponent } from './components/modify-emergency-contact-info/modify-emergency-contact-info.component';
+import { JobInfoDetailsComponent } from './components/job-info-details/job-info-details.component';
 
 
 @NgModule({
@@ -31,7 +33,9 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
     ModifyPasswordComponent,
     ModifyPersonalInfoComponent,
     CleaningServiceComponent,
-    QuoteRequestComponent
+    QuoteRequestComponent,
+    ModifyEmergencyContactInfoComponent,
+    JobInfoDetailsComponent
   ],
   imports: [
     CommonModule,

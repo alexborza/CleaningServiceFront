@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { RoleEnum } from './core/dto/RoleEnum';
 import { TokenStorageService } from './core/services/token-storage.service';
 
 @Component({
@@ -12,6 +13,8 @@ export class AppComponent {
   isLoggedIn = false;
   username?: string;
   isClient = false;
+  isAdmin = false;
+  isEmployee = false;
 
   constructor(private tokenStorageService: TokenStorageService) { }
 
@@ -20,23 +23,15 @@ export class AppComponent {
     if (this.isLoggedIn) {
       this.user = this.tokenStorageService.getUser();
       this.roles = this.user.roles;
-      this.isClient = this.roles.includes('ROLE_USER');
+      this.isClient = this.roles.includes(RoleEnum.ROLE_USER);
+      this.isAdmin = this.roles.includes(RoleEnum.ROLE_ADMIN);
+      this.isEmployee = this.roles.includes(RoleEnum.ROLE_EMPLOYEE);
       this.username = this.user.username;
     }
   }
+
   logout(): void {
     this.tokenStorageService.signOut();
     window.location.reload();
-  }
-
-  hasAdminRole(){
-    let i;
-    for(i = 0; i < this.roles.length; i++)
-      if(this.roles[i] === 'ROLE_ADMIN')
-        break;
-
-    if(i < this.roles.length) 
-      return true;
-    return false;
   }
 }

@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { ModifyPassswordDto } from 'src/app/core/dto/ModifyPasswordDto';
 import { UserInformationDto } from 'src/app/core/dto/UserInformationDto';
-import { ClientService } from 'src/app/core/services/client.service';
 import { checkRequiredFields } from 'src/app/core/services/error/validate';
+import { UserApiService } from 'src/app/core/services/user-api.service';
 
 @Component({
   selector: 'app-modify-personal-info',
@@ -23,7 +22,7 @@ export class ModifyPersonalInfoComponent implements OnInit {
   constructor(
     public config: DynamicDialogConfig,
     public ref: DynamicDialogRef,
-    private clientApi: ClientService
+    private userApi: UserApiService
   ) {
     this.id = this.config.data?.id;
     this.userInfoDto = this.config.data?.dto;
@@ -73,7 +72,7 @@ export class ModifyPersonalInfoComponent implements OnInit {
   }
 
   private modifyPersonalInfo (userInfoDto: UserInformationDto){
-    this.clientApi.modifyPersonalInfo(this.id, userInfoDto).subscribe(res => {
+    this.userApi.modifyPersonalInfo(this.id, userInfoDto).subscribe(res => {
       this.ref.close(userInfoDto);
     });
   }

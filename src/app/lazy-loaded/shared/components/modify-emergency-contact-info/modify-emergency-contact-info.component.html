@@ -1,0 +1,55 @@
+<div class="container">
+    <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+        <div class="row">
+            <div class="col-12">
+                <label>Full Name<span class="required-star">*</span></label>
+                <input type=text pInputText placeholder="Enter full name" formControlName=fullName>
+                <small class="p-error" 
+                *ngIf="(form.get('fullName')?.touched && 
+                        form.get('fullName')?.errors?.['required']) ||
+                        form.get('fullName')?.hasError('missing')"
+                >The field is required</small>
+            </div>
+            <div class="col-12">
+                <label class="label">Address<span class="required-star">*</span></label>
+                <input type=text pInputText placeholder="Enter address" formControlName=address>
+                <small class="p-error" 
+                *ngIf="(form.get('address')?.touched && 
+                        form.get('address')?.errors?.['required']) ||
+                        form.get('address')?.hasError('missing')"
+                >The field is required</small>
+            </div>
+            <div class="col-12">
+                <label>Phone Number<span class="required-star">*</span></label>
+                <p-inputMask placeholder="Phone Number" mask="9999 999 999" formControlName=phoneNumber></p-inputMask>
+                <small class="p-error" 
+                *ngIf="(form.get('phoneNumber')?.touched && 
+                        form.get('phoneNumber')?.errors?.['required']) ||
+                        form.get('phoneNumber')?.hasError('missing')"
+                >The field is required</small>
+            </div>
+            <div class="col-12">
+                <label>Relationship<span class="required-star">*</span></label>
+                <p-dropdown 
+                    [options]="relationshipOptions" 
+                    placeholder="Select Relationship"
+                    optionLabel="label"
+                    optionValue="label"
+                    [showClear]="true"
+                    formControlName="relationship">
+                </p-dropdown>
+                <small class="p-error" 
+                *ngIf="(form.get('relationship')?.touched && 
+                        form.get('relationship')?.errors?.['required']) ||
+                        form.get('relationship')?.hasError('missing')"
+                >The field is required</small>
+            </div>
+                
+            <div class="mt-3">
+                <button pButton class="p-button-danger" pRipple type="button" label="Cancel" (click)="onClose()"></button>
+                <button pButton class="rightButton" pRipple type="submit" label="Modify"></button>
+            </div>
+        </div>
+
+    </form>
+</div>

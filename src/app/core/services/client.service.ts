@@ -19,22 +19,6 @@ export class ClientService {
     this.baseUrl = "http://localhost:8080/api/client/";
   }
 
-  getUser(userId: number): Observable<UserDto>{
-    return this.http.get<UserDto>(this.baseUrl + userId);
-  }
-
-  modifyEmail(userId: number, email: string) {
-    return this.http.post(this.baseUrl + "email/" + userId, email);
-  }
-
-  modifyPassword(userId: number, dto: ModifyPassswordDto): Observable<MessageResponseDto> {
-    return this.http.post<MessageResponseDto>(this.baseUrl + "password/" + userId, dto);
-  }
-
-  modifyPersonalInfo(userId: number, dto: UserInformationDto) {
-    return this.http.post(this.baseUrl + "personal-info/" + userId, dto);
-  }
-
   getClientsCleaningServices(userId: number): Observable<CleaningServiceDto[]> {
     return this.http.get<CleaningServiceDto[]>(this.baseUrl + "cleaning-services/" + userId);
   }

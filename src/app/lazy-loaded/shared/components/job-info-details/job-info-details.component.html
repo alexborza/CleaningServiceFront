@@ -1,0 +1,38 @@
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <label>Title</label>
+            <b>{{jobInfoDto.title}}</b>
+        </div>
+        <div class="col-6">
+            <label>Supervisor</label>
+            <b>{{jobInfoDto.supervisor}}</b>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <label>Work Phone</label>
+            <b>{{jobInfoDto.workPhone}}</b>
+        </div>
+        <div class="col-6">
+            <label>Employment Status</label>
+            <b>{{jobInfoDto.employmentStatus}}</b>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <label>Hiring Date</label>
+            <b>{{jobInfoDto.hiringDate}}</b>
+        </div>
+        <div class="col-6">
+            <label>Salary</label>
+            <b>{{jobInfoDto.salary}} $</b>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-12">
+            <button pButton class="p-button-danger" pRipple type="button" label="Cancel" (click)="onClose()"></button>
+        </div>
+    </div>
+</div>
