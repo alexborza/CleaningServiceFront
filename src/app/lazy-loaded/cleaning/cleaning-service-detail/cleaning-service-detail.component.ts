@@ -8,10 +8,12 @@ import { CleaningServiceDto } from 'src/app/core/dto/CleaningServiceDto';
 import { CleaningTypeEnum } from 'src/app/core/dto/CleaningTypeEnum';
 import { ContactInfoDto } from 'src/app/core/dto/ContactInfoDto';
 import { DisinfectionCleaningDetailsDto } from 'src/app/core/dto/DisinfectionCleaningDetailsDto';
+import { EmployeesDayAgenda } from 'src/app/core/dto/EmployeesDayAgenda';
 import { LocationDto } from 'src/app/core/dto/LocationDto';
 import { PostConstructionCleaningDetailsDto } from 'src/app/core/dto/PostConstructionCleaningDetailsDto';
 import { StandardCleaningDetailsDto } from 'src/app/core/dto/StandardCleaningDetailsDto';
 import { CleaningApiService } from 'src/app/core/services/cleaning-api.service';
+import { EmployeeApiService } from 'src/app/core/services/employee-api.service';
 import { checkRequiredFields } from 'src/app/core/services/error/validate';
 import { TokenStorageService } from 'src/app/core/services/token-storage.service';
 import { CleaningServiceType } from '../models/cleaning-service-type';
@@ -34,7 +36,8 @@ export class CleaningServiceDetailComponent implements OnInit {
   cleaningDate: any;
   hour: string = '';
   property: string = '';
-  bookedHours: string[] = [];
+  timeEstimation!: number;
+  employeesDayAgenda: EmployeesDayAgenda[] = []
   bedroomPrices: number[] = [];
   bathroomPrices: number[] = [];
   kitchenPrices: number[] = [];
@@ -45,6 +48,7 @@ export class CleaningServiceDetailComponent implements OnInit {
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private cleaningApi: CleaningApiService,
+    private employeeApi: EmployeeApiService,
     private tokenStorage: TokenStorageService,
     private messageService: MessageService
     ) {}
@@ -54,7 +58,7 @@ export class CleaningServiceDetailComponent implements OnInit {
     this.setCleaningPrices();
     this.buildForm();
     this.setBookingSummary();
-    this.getBookedHoursForDate();
+    this.getEmployeesAgendaForDate();
   }
 
   private getRouteData(){
@@ -114,7 +118,7 @@ export class CleaningServiceDetailComponent implements OnInit {
         homeAccess: new FormControl(null, [Validators.required]),
       }),
       cleaning_date: this.fb.group({
-        cleaningDate: new FormControl(null, [Validators.required]),
+        cleaningDate: new FormControl({value: null, disabled: true}, [Validators.required]),
         hour: new FormControl(null, [Validators.required]),
       }),
       payment: this.fb.group({
@@ -161,10 +165,11 @@ export class CleaningServiceDetailComponent implements OnInit {
     
     if(this.form.valid){
       this.cleaningService = this.getCleaningServiceDto(formValue);
+      console.log(this.cleaningService)
       const user = this.tokenStorage.getUser();
-      this.cleaningApi.createCleaningService(user?.id === undefined ? null : user.id, this.cleaningService).subscribe(res => {
-        this.messageService.add({severity:'success', summary:'Success', detail:'Successfully booked a ' + this.type + ' Service'});
-      });
+      // this.cleaningApi.createCleaningService(user?.id === undefined ? null : user.id, this.cleaningService).subscribe(res => {
+      //   this.messageService.add({severity:'success', summary:'Success', detail:'Successfully booked a ' + this.type + ' Service'});
+      // });
     } else {
       this.messageService.add({severity:'error', summary:'Error', detail:'The field is required'});
     }
@@ -187,13 +192,15 @@ export class CleaningServiceDetailComponent implements OnInit {
     cleaningServiceDto.paymentMethod = formValue.payment.paymentMethod;
     cleaningServiceDto.total = this.cleaningServicePrice + this.cleaningDetailsPrices - ((this.cleaningServicePrice + this.cleaningDetailsPrices) * this.discount/100);
     cleaningServiceDto.type = this.type;
+    cleaningServiceDto.timeEstimation = this.timeEstimation;
     return cleaningServiceDto;
   }
 
   private createCleaningDateDto(formValue: any){
     const cleaningDate = new CleaningDateDto();
     cleaningDate.cleaningDate = formValue.cleaning_date.cleaningDate;
-    cleaningDate.cleaningHour = formValue.cleaning_date.hour;
+    cleaningDate.startingHour = formValue.cleaning_date.hour.startingHour;
+    cleaningDate.finishingHour = formValue.cleaning_date.hour.finishingHour;
     return cleaningDate;
   }
 
@@ -271,6 +278,21 @@ export class CleaningServiceDetailComponent implements OnInit {
   private setBookingSummary(){
     const cleaning_details = this.form.get('cleaning_details') as FormGroup;
     const cleaning_date = this.form.get('cleaning_date') as FormGroup;
+    cleaning_details.get('squareMeters')?.valueChanges.subscribe(res => {
+      if(res > 0){
+        cleaning_date.get('cleaningDate')?.enable();
+      } else {
+        cleaning_date.get('cleaningDate')?.disable();
+      }
+      this.timeEstimation = res * 2;
+      let hours = Math.floor(this.timeEstimation / 60);
+      let minutes = this.timeEstimation % 60;
+      if(minutes > 0){
+        this.timeEstimation = hours + 1; 
+      } else if(minutes === 0){
+        this.timeEstimation = hours;
+      }
+    })
     this.form.valueChanges.subscribe(res => {
       this.cleaningDetailsPrices = this.getCleaningDetailsPrice(cleaning_details);
       this.property = cleaning_details.get('property')?.value;
@@ -297,12 +319,14 @@ export class CleaningServiceDetailComponent implements OnInit {
     }
   }
 
-  private getBookedHoursForDate(){
+  private getEmployeesAgendaForDate(){
     const cleaning_date = this.form.get('cleaning_date') as FormGroup;
     cleaning_date.get('cleaningDate')?.valueChanges.subscribe(cleaningDate => {
-      this.cleaningApi.getBookedHoursForDate(cleaningDate).subscribe(res => {
-        this.bookedHours = res;
-      })
+      if(cleaningDate != null){
+        this.employeeApi.getEmployeesAgendaForDate(cleaningDate).subscribe(res => {
+          this.employeesDayAgenda = res;
+        })
+      }
     });
   }
 }

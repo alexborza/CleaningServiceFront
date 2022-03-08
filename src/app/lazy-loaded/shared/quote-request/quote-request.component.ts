@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { MessageService } from 'primeng/api';
+import { EmploymentStatusEnum } from 'src/app/core/dto/EmploymentStatusEnum';
 import { OfficeCleaningDto } from 'src/app/core/dto/OfficeCleaningDto';
 import { OfficeCleaningQuoteRequestDto } from 'src/app/core/dto/OfficeCleaningQuoteRequestDto';
+import { OfficeCleaningStatusEnum } from 'src/app/core/dto/OfficeCleaningStatusEnum';
 import { checkRequiredFields } from 'src/app/core/services/error/validate';
 import { OfficeCleaningApiService } from 'src/app/core/services/office-cleaning-api.service';
 import { TokenStorageService } from 'src/app/core/services/token-storage.service';
@@ -25,7 +27,7 @@ export class QuoteRequestComponent implements OnInit {
       private tokenStorage: TokenStorageService,
       private fb: FormBuilder,
       private messageService: MessageService,
-      private officeCleaningApi: OfficeCleaningApiService          
+      private officeCleaningApi: OfficeCleaningApiService
     ) { }
 
   ngOnInit(): void {
@@ -38,7 +40,7 @@ export class QuoteRequestComponent implements OnInit {
   }
 
   buildForm(){
-    if(this.hasAdminRole){
+    if(this.hasAdminRole && this.officeCleaningDto.status === OfficeCleaningStatusEnum.NotSent){
       this.form = this.fb.group({
         description: new FormControl(null, [Validators.required]),
         price: new FormControl(null, [Validators.required])
@@ -49,6 +51,7 @@ export class QuoteRequestComponent implements OnInit {
   getQuoteRequest(){
     this.officeCleaningApi.getQuoteRequest(+this.id).subscribe(res => {
       this.officeCleaningDto = res;
+      console.log(res);
     })
   }
 
@@ -74,6 +77,20 @@ export class QuoteRequestComponent implements OnInit {
     quoteRequest.price = formValue.price;
     quoteRequest.description = formValue.description;
     return quoteRequest;
+  }
+
+  onSetStatusRequest(status: string){
+    if(status === OfficeCleaningStatusEnum.Accepted){
+      this.officeCleaningApi.updateRequestStatus(this.id, OfficeCleaningStatusEnum.Accepted).subscribe(res => {
+        this.messageService.add({severity:'success', summary:'Success', detail:'Quote request has been accepted'});
+        this.getQuoteRequest();
+      });
+    } else if(status === OfficeCleaningStatusEnum.Declined){
+      this.officeCleaningApi.updateRequestStatus(this.id, OfficeCleaningStatusEnum.Declined).subscribe(res => {
+        this.messageService.add({severity:'success', summary:'Success', detail:'Quote request has been declined'});
+        this.getQuoteRequest();
+      });
+    }
   }
 
 }

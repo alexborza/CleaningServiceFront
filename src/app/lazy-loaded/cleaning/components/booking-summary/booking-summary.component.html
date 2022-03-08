@@ -23,6 +23,11 @@
                 <i class="fa fa-refresh" aria-hidden="true"></i>
                 <span style="float: right;">{{frequency}}</span>
             </div>
+
+            <div class="col-12" *ngIf="timeEstimation">
+                <i class="fa fa-bell-o" aria-hidden="true"></i>
+                <span style="float: right;">{{timeEstimation}} h</span>
+            </div>
             <p-divider></p-divider>
         </div>
         <div class="row">

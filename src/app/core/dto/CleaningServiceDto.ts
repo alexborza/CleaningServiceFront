@@ -15,4 +15,5 @@ export class CleaningServiceDto {
     paymentMethod!: PaymentMethodEnum;
     total!: number;
     type!: CleaningServiceType;
+    timeEstimation!: number;
 }

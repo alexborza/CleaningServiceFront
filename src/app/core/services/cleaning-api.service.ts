@@ -2,6 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CleaningServiceDto } from '../dto/CleaningServiceDto';
+import { EmployeesDayAgenda } from '../dto/EmployeesDayAgenda';
 
 @Injectable({
   providedIn: 'root'
@@ -20,10 +21,6 @@ export class CleaningApiService {
     } else {
       return this.http.post(this.baseUrl, cleaningServiceDto, { params: new HttpParams().set('userId', userId)});  
     }
-  }
-
-  getBookedHoursForDate(date: string): Observable<string[]>{
-    return this.http.get<string[]>(this.baseUrl + "/booked-hours?date=" + date);
   }
 
   getCleaningServices(): Observable<CleaningServiceDto[]> {

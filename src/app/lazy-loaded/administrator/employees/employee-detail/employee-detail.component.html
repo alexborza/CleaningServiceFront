@@ -1,0 +1,82 @@
+<div class="container mb-5 pb-4" *ngIf="employee">
+    <p-card>
+        <div class="section">
+            <h3>Personal information</h3>
+            <div class="row">
+                <div class="col-4">
+                    <label>Full name</label>
+                    <b>{{employee.userInformation.fullName}}</b>
+                </div>
+                <div class="col-4">
+                    <label>Address</label>
+                    <b>{{employee.userInformation.address}}</b>
+                </div>
+                <div class="col-4">
+                    <label>Phone number</label>
+                    <b>{{employee.userInformation.phoneNumber}}</b>
+                </div>
+                <div class="col-4">
+                    <label>Birth date</label>
+                    <b>{{employee.userInformation.birthDate}}</b>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header">
+                <h3>Job information</h3>
+                <i class="fa fa-pencil-square-o m-1" style="cursor: pointer;" aria-hidden="true" (click)="onEditJobInfo()"></i>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <label>Title</label>
+                    <b>{{employee.employeeInformation.jobInformation.title}}</b>
+                </div>
+                <div class="col-4">
+                    <label>Supervisor</label>
+                    <b>{{employee.employeeInformation.jobInformation.supervisor}}</b>
+                </div>
+                <div class="col-4">
+                    <label>Work Phone</label>
+                    <b>{{employee.employeeInformation.jobInformation.workPhone}}</b>
+                </div>
+                <div class="col-4">
+                    <label>Employment Status</label>
+                    <b>{{employee.employeeInformation.jobInformation.employmentStatus}}</b>
+                </div>
+                <div class="col-4">
+                    <label>Hiring Date</label>
+                    <b>{{employee.employeeInformation.jobInformation.hiringDate}}</b>
+                </div>
+                <div class="col-4">
+                    <label>Salary</label>
+                    <b>{{employee.employeeInformation.jobInformation.salary}} $</b>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>Emergency Contact Information</h3>
+            <div class="row">
+                <div class="col-4">
+                    <label>Full name</label>
+                    <b>{{employee.employeeInformation.emergencyContactInformation.fullName}}</b>
+                </div>
+                <div class="col-4">
+                    <label>Address</label>
+                    <b>{{employee.employeeInformation.emergencyContactInformation.address}}</b>
+                </div>
+                <div class="col-4">
+                    <label>Phone number</label>
+                    <b>{{employee.employeeInformation.emergencyContactInformation.phoneNumber}}</b>
+                </div>
+                <div class="col-4">
+                    <label>Relationship</label>
+                    <b>{{employee.employeeInformation.emergencyContactInformation.relationship}}</b>
+                </div>
+            </div>
+        </div>
+    </p-card>
+</div>
+
+<p-toast></p-toast>

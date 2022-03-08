@@ -10,3 +10,25 @@
 :host ::ng-deep .p-toast-message.p-toast-message-success {
     border-radius: 20px;
 }
+
+:host ::ng-deep .p-datatable .p-paginator-bottom {
+    border-width: 0;
+}
+
+:host ::ng-deep .p-paginator {
+    margin-top: 15px;
+    justify-content: end;
+}
+
+:host ::ng-deep .p-datatable .p-datatable-tbody > tr > td {
+    border: none;
+    border-width: 0;
+}
+
+:host ::ng-deep .p-button {
+    padding: 0.1rem 1.25rem;
+}
+
+.table {
+    padding: 20px 40px;
+}

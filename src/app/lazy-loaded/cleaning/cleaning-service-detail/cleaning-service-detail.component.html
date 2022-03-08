@@ -15,7 +15,10 @@
                     [roomPrices]="roomPrices"
                 ></app-environmental-cleaning-service-detail>
                 <app-cleaning-frequency *ngIf="isStandardDetail()"></app-cleaning-frequency>
-                <app-cleaning-date [bookedHours]="bookedHours"></app-cleaning-date>
+                <app-cleaning-date 
+                    [employeesDayAgenda]="employeesDayAgenda"
+                    [timeEstimation]="timeEstimation"
+                ></app-cleaning-date>
                 <app-payment-details></app-payment-details>
 
                 <div class="row">
@@ -35,6 +38,7 @@
                 [hour]="hour"
                 [type]="type"
                 [property]="property"
+                [timeEstimation]="timeEstimation"
             ></app-booking-summary>
         </div>
     </div>

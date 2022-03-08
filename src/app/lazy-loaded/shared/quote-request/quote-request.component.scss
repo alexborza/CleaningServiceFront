@@ -52,3 +52,11 @@ label {
 :host ::ng-deep .p-card .p-card-content {
     padding: 1.25rem 40px;
 }
+
+.accept-request {
+    float: right;
+}
+
+:host ::ng-deep .request-button {
+    padding: 0.3rem 1.25rem;
+}

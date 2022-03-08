@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { OfficeCleaningDto } from '../dto/OfficeCleaningDto';
 import { OfficeCleaningQuoteRequestDto } from '../dto/OfficeCleaningQuoteRequestDto';
+import { OfficeCleaningStatusEnum } from '../dto/OfficeCleaningStatusEnum';
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +26,10 @@ export class OfficeCleaningApiService {
 
   updateQuoteRequestForOfficeCleaning(id: number, dto: OfficeCleaningQuoteRequestDto) {
     return this.http.put(this.baseUrl + "/quote-request/" + id, dto);
+  }
+
+  updateRequestStatus(id: number, status: OfficeCleaningStatusEnum) {
+    return this.http.put(this.baseUrl + "/request-status/" + id + "?status=" + status, {});
   }
 
   getQuoteRequests(): Observable<OfficeCleaningDto[]> {

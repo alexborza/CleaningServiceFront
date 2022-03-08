@@ -1,5 +1,9 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { ControlContainer } from '@angular/forms';
+import { ControlContainer, FormGroup } from '@angular/forms';
+import { AvailableHour } from 'src/app/core/dto/AvailableHour';
+import { AvailableInterval } from 'src/app/core/dto/AvailableInterval';
+import { EmployeesDayAgenda } from 'src/app/core/dto/EmployeesDayAgenda';
+import { EmployeeApiService } from 'src/app/core/services/employee-api.service';
 
 @Component({
   selector: 'app-cleaning-date',
@@ -9,45 +13,86 @@ import { ControlContainer } from '@angular/forms';
 export class CleaningDateComponent implements OnInit, OnChanges {
 
   cleaningDateForm: any;
-  @Input() bookedHours: string[] = [];
-  hours: {hour: string}[] = [];
-  availableHours: {hour: string}[] = [];
+  totalEmployees!: number;
+  @Input() employeesDayAgenda: EmployeesDayAgenda[] = [];
+  @Input() timeEstimation!: number;
+  availableHours: AvailableHour[] = [];
   minimumDate: Date = new Date();
 
-  constructor(public controlContainer: ControlContainer) { }
+  constructor(
+    public controlContainer: ControlContainer,
+    private employeeApi: EmployeeApiService
+    ) { }
 
   ngOnInit(): void {
+    this.getTotalNumberOfEmployees();
     this.cleaningDateForm = this.controlContainer.control;
     console.log('mai trebuie sa te ocupi de date',+new Date().toTimeString().split(" ")[0].split(":")[0]);
-    this.hours = [
-      {hour: "08:00 - 10:00"}, {hour: "10:00 - 12:00"}, {hour: "12:00 - 14:00"}, {hour: "14:00 - 16:00"}, {hour: "16:00 - 18:00"}
-    ];
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if(this.bookedHours.length === 0){
-      this.availableHours = Object.assign([], this.hours);
-    } else {
-        this.availableHours = Object.assign([], this.hours);
-        this.getAvailableHours();
+    if(this.employeesDayAgenda.length !== 0){
+      this.getAvailableHoursForCleaning(this.employeesDayAgenda, this.timeEstimation);
     }
   }
+  
+  private getAvailableHoursForCleaning(employeesAgenda: EmployeesDayAgenda[], timeEstimation: number){
+    let avHours: {employeeId: number, interval: AvailableInterval, label: string}[] = []; // export class AvailableCleaningHours
+    employeesAgenda.forEach(agenda => {
+      this.getAvailableHoursForAgenda(agenda, timeEstimation, avHours);
+    })
+    this.availableHours = avHours;
+  }
 
-  private getAvailableHours(){
-    this.bookedHours.forEach(bookedHour => {
-      this.availableHours.forEach(hour => {
-        if(hour.hour === bookedHour){
-          this.deleteBookedHour(hour);
-        }
-      })
+  private getAvailableHoursForAgenda(agenda: EmployeesDayAgenda, timeEstimation: number, avHours: {employeeId: number, interval: AvailableInterval, label: string}[]){
+    agenda.availableIntervals.forEach(interval => {
+      if(interval.endingHour - interval.startingHour >= timeEstimation){
+        this.getAvailableHoursForInterval(agenda, interval, timeEstimation, avHours);
+      }
     })
   }
 
-  private deleteBookedHour(hour: any){
-    const index = this.availableHours.indexOf(hour, 0);
-    if (index > -1) {
-      this.availableHours.splice(index, 1);
+  private getAvailableHoursForInterval(agenda: EmployeesDayAgenda, interval: AvailableInterval, timeEstimation: number, avHours: {employeeId: number, interval: AvailableInterval, label: string}[]){
+    if(interval.endingHour - interval.startingHour === timeEstimation && !this.intervalAlreadyExists(interval, avHours)){
+      avHours.push(new AvailableHour(agenda.employeeId, interval, this.setIntervalLabel(interval)));
+    } else {
+      let leftInterval = this.createInterval(interval.startingHour, interval.startingHour + timeEstimation);
+      let rightInterval = this.createInterval(interval.endingHour - timeEstimation, interval.endingHour);
+      this.addIntervals(agenda, avHours, [leftInterval, rightInterval]);
     }
   }
 
+  private intervalAlreadyExists(interval: AvailableInterval, avHours: {employeeId: number, interval: AvailableInterval, label: string}[]){
+    for(let i = 0; i < avHours.length; i++){
+      if(avHours[i].interval.startingHour === interval.startingHour && avHours[i].interval.endingHour === interval.endingHour){
+        return true;
+      }
+    }
+    return false;
+  }
+
+  private setIntervalLabel(interval: AvailableInterval){
+    return (interval.startingHour === 9 ? '09:00 - ' : interval.startingHour.toString() + ':00 - ') + interval.endingHour.toString() + ':00';
+  }
+
+  private createInterval(startingHour: number, endingHour: number){
+    let interval = new AvailableInterval();
+    interval.startingHour = startingHour;
+    interval.endingHour = endingHour;
+    return interval;
+  }
+
+  private addIntervals(agenda: EmployeesDayAgenda, avHours: AvailableHour[], intervals: AvailableInterval[]){
+    intervals.forEach(interval => {
+      if(!this.intervalAlreadyExists(interval, avHours)){
+        avHours.push(new AvailableHour(agenda.employeeId, interval, this.setIntervalLabel(interval)));
+      }
+    })
+  }
+
+  getTotalNumberOfEmployees(){
+    this.employeeApi.getTotalNumberOfEmployees().subscribe(res => {
+      this.totalEmployees = res;
+    })
+  }
 }

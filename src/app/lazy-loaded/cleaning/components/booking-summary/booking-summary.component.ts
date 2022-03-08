@@ -1,5 +1,4 @@
 import { AfterViewInit, Component, ElementRef, HostListener, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { PropertyEnum } from 'src/app/core/dto/PropertyEnum';
 import { CleaningServiceType } from '../../models/cleaning-service-type';
 
 @Component({
@@ -17,6 +16,7 @@ export class BookingSummaryComponent implements OnInit, AfterViewInit, OnDestroy
   @Input() hour: string = '';
   @Input() type!: CleaningServiceType;
   @Input() property: any;
+  @Input() timeEstimation: number = 0;
   sticky: boolean = false;
   menuPosition: any;
   

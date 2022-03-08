@@ -1,9 +1,22 @@
-<div class="container">
-    <div class="row">
-        <div class="col-12">
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</p>
+
+<div class="container p-4">
+    <p-card>
+        <h3 style="text-align: center;">Employees</h3>
+        <div class="table">
+            <p-table [value]="employees" [paginator]="employees.length > 10 ? true : false" [rows]="10" responsiveLayout="scroll"
+            [rowsPerPageOptions]="[10,25,50]">
+                <ng-template pTemplate="body" let-employee>
+                    <tr>
+                        <td>{{employee.userInformation.fullName}}</td>
+                        <td>{{employee.employeeInformation.jobInformation.workPhone}}</td>
+                        <td>{{employee.employeeInformation.jobInformation.title}}</td>
+                        <td>{{employee.employeeInformation.jobInformation.employmentStatus}}</td>
+                        <td><button pButton type="button" label="Details" (click)="toEmployeesDetails(employee.id)"></button></td>
+                    </tr>
+                </ng-template>
+            </p-table>
         </div>
-    </div>
+    </p-card>
 </div>
 
 <p-toast></p-toast>

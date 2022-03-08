@@ -27,6 +27,9 @@ import { DropdownModule } from 'primeng/dropdown';
 import { EmployeesComponent } from './employees/employees.component';
 import { MenuModule } from 'primeng/menu';
 import { SharedModule } from '../shared/shared.module';
+import { EmployeeDetailComponent } from './employees/employee-detail/employee-detail.component';
+import { ModifyJobInfoComponent } from './employees/employee-detail/modify-job-info/modify-job-info.component';
+import { DynamicDialogModule } from 'primeng/dynamicdialog';
 
 @NgModule({
   declarations: [
@@ -39,7 +42,9 @@ import { SharedModule } from '../shared/shared.module';
     JobInformationComponent,
     EmergencyContactInformationComponent,
     ConfirmationComponent,
-    EmployeesComponent
+    EmployeesComponent,
+    EmployeeDetailComponent,
+    ModifyJobInfoComponent
   ],
   imports: [
     CommonModule,
@@ -59,7 +64,8 @@ import { SharedModule } from '../shared/shared.module';
     CalendarModule,
     DropdownModule,
     MenuModule,
-    SharedModule
+    SharedModule,
+    DynamicDialogModule
   ]
 })
 export class AdministratorModule { }

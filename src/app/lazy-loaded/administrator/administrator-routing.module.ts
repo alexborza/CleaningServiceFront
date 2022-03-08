@@ -13,6 +13,7 @@ import { EmployeesComponent } from './employees/employees.component';
 import { QuoteRequestComponent } from '../../lazy-loaded/shared/quote-request/quote-request.component';
 import { QuoteRequestsComponent } from './quote-requests/quote-requests.component';
 import { ServicesHistoryComponent } from './services-history/services-history.component';
+import { EmployeeDetailComponent } from './employees/employee-detail/employee-detail.component';
 
 const routes: Routes = [
   {
@@ -24,6 +25,7 @@ const routes: Routes = [
       { path: 'services-history' , component: ServicesHistoryComponent },
       { path: 'services-history/:id' , component: CleaningServiceComponent },
       { path: 'employees', component: EmployeesComponent },
+      { path: 'employees/:id', component: EmployeeDetailComponent },
       { path: 'employee-contract' , component: EmployeeContractComponent, children: [
         { path: '', redirectTo: 'account', pathMatch: 'full'},
         { path: 'account', component: EmployeeAccountComponent },

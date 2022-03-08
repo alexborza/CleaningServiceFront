@@ -24,9 +24,8 @@ export class AdministratorComponent implements OnInit {
   private menuInit(){
     this.items = [
       {label: 'Dashboard', routerLink: '/administrator', routerLinkActiveOptions: {exact: true}},
-      {label: 'Employees', routerLink: 'employees', routerLinkActiveOptions: {exact: true}},
+      {label: 'Employees', routerLink: 'employees', routerLinkActiveOptions: {exact: false}},
       {label: 'New contract', routerLink: 'employee-contract', routerLinkActiveOptions: {exact: false} },
-      {label: 'Pay salary', routerLink: '/administrator', routerLinkActiveOptions: {exact: true}},
       {label: 'Services History', routerLink: 'services-history', routerLinkActiveOptions: {exact: false}},
       {label: 'Quote Requests', routerLink: 'quote-requests', routerLinkActiveOptions: {exact: false}},
     ]
