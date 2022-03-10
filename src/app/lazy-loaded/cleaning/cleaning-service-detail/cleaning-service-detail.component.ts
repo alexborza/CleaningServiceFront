@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { MessageService } from 'primeng/api';
+import { AvailableHour } from 'src/app/core/dto/AvailableHour';
 import { CleaningDateDto } from 'src/app/core/dto/CleaningDateDto';
 import { CleaningFrequencyEnum } from 'src/app/core/dto/CleaningFrequencyEnum';
 import { CleaningServiceDto } from 'src/app/core/dto/CleaningServiceDto';
@@ -34,7 +35,7 @@ export class CleaningServiceDetailComponent implements OnInit {
   discount: number = 0;
   frequency: string = '';
   cleaningDate: any;
-  hour: string = '';
+  hour!: AvailableHour;
   property: string = '';
   timeEstimation!: number;
   employeesDayAgenda: EmployeesDayAgenda[] = []
@@ -165,11 +166,12 @@ export class CleaningServiceDetailComponent implements OnInit {
     
     if(this.form.valid){
       this.cleaningService = this.getCleaningServiceDto(formValue);
+      const employeeId = formValue.cleaning_date.hour.employeeId;
       console.log(this.cleaningService)
       const user = this.tokenStorage.getUser();
-      // this.cleaningApi.createCleaningService(user?.id === undefined ? null : user.id, this.cleaningService).subscribe(res => {
-      //   this.messageService.add({severity:'success', summary:'Success', detail:'Successfully booked a ' + this.type + ' Service'});
-      // });
+      this.cleaningApi.createCleaningService(employeeId, user?.id === undefined ? null : user.id, this.cleaningService).subscribe(res => {
+        this.messageService.add({severity:'success', summary:'Success', detail:'Successfully booked a ' + this.type + ' Service'});
+      });
     } else {
       this.messageService.add({severity:'error', summary:'Error', detail:'The field is required'});
     }
@@ -197,10 +199,11 @@ export class CleaningServiceDetailComponent implements OnInit {
   }
 
   private createCleaningDateDto(formValue: any){
+    console.log('form Value for date', formValue)
     const cleaningDate = new CleaningDateDto();
     cleaningDate.cleaningDate = formValue.cleaning_date.cleaningDate;
-    cleaningDate.startingHour = formValue.cleaning_date.hour.startingHour;
-    cleaningDate.finishingHour = formValue.cleaning_date.hour.finishingHour;
+    cleaningDate.startingHour = formValue.cleaning_date.hour.interval.startingHour;
+    cleaningDate.finishingHour = formValue.cleaning_date.hour.interval.endingHour;
     return cleaningDate;
   }
 

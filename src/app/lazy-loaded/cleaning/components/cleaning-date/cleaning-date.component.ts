@@ -37,14 +37,14 @@ export class CleaningDateComponent implements OnInit, OnChanges {
   }
   
   private getAvailableHoursForCleaning(employeesAgenda: EmployeesDayAgenda[], timeEstimation: number){
-    let avHours: {employeeId: number, interval: AvailableInterval, label: string}[] = []; // export class AvailableCleaningHours
+    let avHours: AvailableHour[] = []; // export class AvailableCleaningHours
     employeesAgenda.forEach(agenda => {
       this.getAvailableHoursForAgenda(agenda, timeEstimation, avHours);
     })
     this.availableHours = avHours;
   }
 
-  private getAvailableHoursForAgenda(agenda: EmployeesDayAgenda, timeEstimation: number, avHours: {employeeId: number, interval: AvailableInterval, label: string}[]){
+  private getAvailableHoursForAgenda(agenda: EmployeesDayAgenda, timeEstimation: number, avHours: AvailableHour[]){
     agenda.availableIntervals.forEach(interval => {
       if(interval.endingHour - interval.startingHour >= timeEstimation){
         this.getAvailableHoursForInterval(agenda, interval, timeEstimation, avHours);
@@ -52,7 +52,7 @@ export class CleaningDateComponent implements OnInit, OnChanges {
     })
   }
 
-  private getAvailableHoursForInterval(agenda: EmployeesDayAgenda, interval: AvailableInterval, timeEstimation: number, avHours: {employeeId: number, interval: AvailableInterval, label: string}[]){
+  private getAvailableHoursForInterval(agenda: EmployeesDayAgenda, interval: AvailableInterval, timeEstimation: number, avHours: AvailableHour[]){
     if(interval.endingHour - interval.startingHour === timeEstimation && !this.intervalAlreadyExists(interval, avHours)){
       avHours.push(new AvailableHour(agenda.employeeId, interval, this.setIntervalLabel(interval)));
     } else {
@@ -62,7 +62,7 @@ export class CleaningDateComponent implements OnInit, OnChanges {
     }
   }
 
-  private intervalAlreadyExists(interval: AvailableInterval, avHours: {employeeId: number, interval: AvailableInterval, label: string}[]){
+  private intervalAlreadyExists(interval: AvailableInterval, avHours: AvailableHour[]){
     for(let i = 0; i < avHours.length; i++){
       if(avHours[i].interval.startingHour === interval.startingHour && avHours[i].interval.endingHour === interval.endingHour){
         return true;

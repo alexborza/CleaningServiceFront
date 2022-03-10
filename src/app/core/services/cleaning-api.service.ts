@@ -1,6 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { AvailableInterval } from '../dto/AvailableInterval';
 import { CleaningServiceDto } from '../dto/CleaningServiceDto';
 import { EmployeesDayAgenda } from '../dto/EmployeesDayAgenda';
 
@@ -15,11 +16,11 @@ export class CleaningApiService {
     this.baseUrl = "http://localhost:8080/api/booking/cleaning-service";
   }
 
-  createCleaningService(userId: number, cleaningServiceDto: CleaningServiceDto) {
+  createCleaningService(employeeId: number, userId: number, cleaningServiceDto: CleaningServiceDto) {
     if(userId === null){
-      return this.http.post(this.baseUrl, cleaningServiceDto);  
+      return this.http.post(this.baseUrl + "?employeeId=" + employeeId, cleaningServiceDto);
     } else {
-      return this.http.post(this.baseUrl, cleaningServiceDto, { params: new HttpParams().set('userId', userId)});  
+      return this.http.post(this.baseUrl + "?employeeId=" + employeeId + "&userId=" + userId, cleaningServiceDto);
     }
   }
 
