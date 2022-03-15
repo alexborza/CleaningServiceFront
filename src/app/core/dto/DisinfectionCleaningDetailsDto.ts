@@ -6,7 +6,7 @@ import { PropertyEnum } from "./PropertyEnum";
 export class DisinfectionCleaningDetailsDto {
     type!: CleaningTypeEnum;
     property!: PropertyEnum;
-    squareMeters!: number;
+    squareMeters!: string;
     parking!: ParkingEnum;
     homeAccess!: HomeAccessEnum;
 }

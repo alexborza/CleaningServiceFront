@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { CleaningServiceDto } from '../dto/CleaningServiceDto';
 import { EmergencyContactInformationDto } from '../dto/EmergencyContactInformationDto';
 import { EmployeeDto } from '../dto/EmployeeDto';
 import { EmployeesDayAgenda } from '../dto/EmployeesDayAgenda';
@@ -29,11 +30,11 @@ export class EmployeeApiService {
     return this.http.get<EmployeeDto>(this.baseUrl + id);
   }
 
-  getTotalNumberOfEmployees(): Observable<number> {
-    return this.http.get<number>(this.baseUrl + "total-employees");
-  }
-
   getEmployeesAgendaForDate(date: string): Observable<EmployeesDayAgenda[]>{
     return this.http.get<EmployeesDayAgenda[]>(this.baseUrl + "employees-day-agenda?date=" + date);
+  }
+
+  getEmployeeCleaningServicesForDate(id: number, date: string): Observable<CleaningServiceDto[]> {
+    return this.http.get<CleaningServiceDto[]>(this.baseUrl + 'employee-agenda/' + id + "?date=" + date);
   }
 }

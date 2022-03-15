@@ -1,9 +1,8 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { ControlContainer, FormGroup } from '@angular/forms';
+import { ControlContainer } from '@angular/forms';
 import { AvailableHour } from 'src/app/core/dto/AvailableHour';
 import { AvailableInterval } from 'src/app/core/dto/AvailableInterval';
 import { EmployeesDayAgenda } from 'src/app/core/dto/EmployeesDayAgenda';
-import { EmployeeApiService } from 'src/app/core/services/employee-api.service';
 
 @Component({
   selector: 'app-cleaning-date',
@@ -20,12 +19,10 @@ export class CleaningDateComponent implements OnInit, OnChanges {
   minimumDate: Date = new Date();
 
   constructor(
-    public controlContainer: ControlContainer,
-    private employeeApi: EmployeeApiService
+    public controlContainer: ControlContainer
     ) { }
 
   ngOnInit(): void {
-    this.getTotalNumberOfEmployees();
     this.cleaningDateForm = this.controlContainer.control;
     console.log('mai trebuie sa te ocupi de date',+new Date().toTimeString().split(" ")[0].split(":")[0]);
   }
@@ -38,9 +35,11 @@ export class CleaningDateComponent implements OnInit, OnChanges {
   
   private getAvailableHoursForCleaning(employeesAgenda: EmployeesDayAgenda[], timeEstimation: number){
     let avHours: AvailableHour[] = []; // export class AvailableCleaningHours
-    employeesAgenda.forEach(agenda => {
-      this.getAvailableHoursForAgenda(agenda, timeEstimation, avHours);
-    })
+    if(timeEstimation !== 0){
+      employeesAgenda.forEach(agenda => {
+        this.getAvailableHoursForAgenda(agenda, timeEstimation, avHours);
+      })
+    }
     this.availableHours = avHours;
   }
 
@@ -87,12 +86,6 @@ export class CleaningDateComponent implements OnInit, OnChanges {
       if(!this.intervalAlreadyExists(interval, avHours)){
         avHours.push(new AvailableHour(agenda.employeeId, interval, this.setIntervalLabel(interval)));
       }
-    })
-  }
-
-  getTotalNumberOfEmployees(){
-    this.employeeApi.getTotalNumberOfEmployees().subscribe(res => {
-      this.totalEmployees = res;
     })
   }
 }

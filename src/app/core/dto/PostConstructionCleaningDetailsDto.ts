@@ -7,7 +7,7 @@ export class PostConstructionCleaningDetailsDto {
     type!: CleaningTypeEnum;
     property!: PropertyEnum;
     rooms!: number;
-    squareMeters!: number;
+    squareMeters!: string;
     parking!: ParkingEnum;
     homeAccess!: HomeAccessEnum;
 }

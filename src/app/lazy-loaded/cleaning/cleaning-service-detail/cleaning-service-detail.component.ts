@@ -163,7 +163,6 @@ export class CleaningServiceDetailComponent implements OnInit {
 
   public onSubmit(formValue: any){
     this.checkRequiredFields();
-    
     if(this.form.valid){
       this.cleaningService = this.getCleaningServiceDto(formValue);
       const employeeId = formValue.cleaning_date.hour.employeeId;
@@ -199,7 +198,6 @@ export class CleaningServiceDetailComponent implements OnInit {
   }
 
   private createCleaningDateDto(formValue: any){
-    console.log('form Value for date', formValue)
     const cleaningDate = new CleaningDateDto();
     cleaningDate.cleaningDate = formValue.cleaning_date.cleaningDate;
     cleaningDate.startingHour = formValue.cleaning_date.hour.interval.startingHour;
@@ -244,7 +242,7 @@ export class CleaningServiceDetailComponent implements OnInit {
     standardCleaningDetailsDto.bedrooms = formValue.cleaning_details.bedrooms.value;
     standardCleaningDetailsDto.bathrooms = formValue.cleaning_details.bathrooms.value;
     standardCleaningDetailsDto.kitchens = formValue.cleaning_details.kitchens.value;
-    standardCleaningDetailsDto.squareMeters = formValue.cleaning_details.squareMeters;
+    standardCleaningDetailsDto.squareMeters = formValue.cleaning_details.squareMeters.label;
     standardCleaningDetailsDto.parking = formValue.cleaning_details.parking.value;
     standardCleaningDetailsDto.homeAccess = formValue.cleaning_details.homeAccess.value;
     return standardCleaningDetailsDto;
@@ -255,7 +253,7 @@ export class CleaningServiceDetailComponent implements OnInit {
     postConstructionCleaningDetailsDto.type = CleaningTypeEnum.PostConstructionCleaning;
     postConstructionCleaningDetailsDto.property = formValue.cleaning_details.property.value;
     postConstructionCleaningDetailsDto.rooms = formValue.cleaning_details.rooms.value;
-    postConstructionCleaningDetailsDto.squareMeters = formValue.cleaning_details.squareMeters;
+    postConstructionCleaningDetailsDto.squareMeters = formValue.cleaning_details.squareMeters.label;
     postConstructionCleaningDetailsDto.parking = formValue.cleaning_details.parking.value;
     postConstructionCleaningDetailsDto.homeAccess = formValue.cleaning_details.homeAccess.value;
     return postConstructionCleaningDetailsDto;
@@ -265,7 +263,7 @@ export class CleaningServiceDetailComponent implements OnInit {
     const disinfectionCleaningDetailsDto = new DisinfectionCleaningDetailsDto();
     disinfectionCleaningDetailsDto.type = CleaningTypeEnum.DisinfectionCleaning;
     disinfectionCleaningDetailsDto.property = formValue.cleaning_details.property.value;
-    disinfectionCleaningDetailsDto.squareMeters = formValue.cleaning_details.squareMeters;
+    disinfectionCleaningDetailsDto.squareMeters = formValue.cleaning_details.squareMeters.label;
     disinfectionCleaningDetailsDto.parking = formValue.cleaning_details.parking.value;
     disinfectionCleaningDetailsDto.homeAccess = formValue.cleaning_details.homeAccess.value;
     return disinfectionCleaningDetailsDto;
@@ -282,18 +280,12 @@ export class CleaningServiceDetailComponent implements OnInit {
     const cleaning_details = this.form.get('cleaning_details') as FormGroup;
     const cleaning_date = this.form.get('cleaning_date') as FormGroup;
     cleaning_details.get('squareMeters')?.valueChanges.subscribe(res => {
-      if(res > 0){
+      if(res){
         cleaning_date.get('cleaningDate')?.enable();
+        this.timeEstimation = res.timeEstimation;
       } else {
+        this.timeEstimation = 0;
         cleaning_date.get('cleaningDate')?.disable();
-      }
-      this.timeEstimation = res * 2;
-      let hours = Math.floor(this.timeEstimation / 60);
-      let minutes = this.timeEstimation % 60;
-      if(minutes > 0){
-        this.timeEstimation = hours + 1; 
-      } else if(minutes === 0){
-        this.timeEstimation = hours;
       }
     })
     this.form.valueChanges.subscribe(res => {

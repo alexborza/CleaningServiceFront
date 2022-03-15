@@ -17,6 +17,7 @@ export class StandardCleaningServiceDetailComponent implements OnInit {
   bedrooms: Room[] = [];
   bathrooms: Room[] = [];
   kitchens: Room[] = [];
+  squareMeters: SquareMeters[] = [];
   parking: Parking[] = [];
   homeAccess: HomeAccess[] = [];
 
@@ -65,8 +66,23 @@ export class StandardCleaningServiceDetailComponent implements OnInit {
       {label: "Pick up keys(additional charges)", value: HomeAccessEnum.PickupKey, price: 15},
       {label: "Give us a call to organize", value: HomeAccessEnum.Call, price: 0}
     ]
+
+    this.squareMeters = [
+      {label: '50 to 80', timeEstimation: 2},
+      {label: '81 to 120', timeEstimation: 3},
+      {label: '121 to 160', timeEstimation: 4},
+      {label: '161 to 200', timeEstimation: 5},
+      {label: '201 to 240', timeEstimation: 6},
+      {label: '241 to 280', timeEstimation: 7},
+      {label: '281 to 320', timeEstimation: 8},
+    ]
   }
 
+}
+
+interface SquareMeters {
+  label: string;
+  timeEstimation: number;
 }
 
 interface Room {

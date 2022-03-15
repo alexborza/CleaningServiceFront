@@ -64,7 +64,13 @@
                         <label class="label-title">Total Square Meters<span class="required-star">*</span></label>
                     </div>
                     <div class="col-6 p-3 controls">
-                        <input type=number pInputText placeholder="Total Square Meters" formControlName=squareMeters>
+                        <p-dropdown 
+                            [options]="squareMeters" 
+                            optionLabel="label"
+                            placeholder="Select total square meters"
+                            [showClear]="true"
+                            formControlName="squareMeters">
+                        </p-dropdown>
                         <span class="required-err-message" 
                         *ngIf="(standardCleaningForm.get('cleaning_details').get('squareMeters')?.touched && 
                                 standardCleaningForm.get('cleaning_details').get('squareMeters')?.errors?.required) ||

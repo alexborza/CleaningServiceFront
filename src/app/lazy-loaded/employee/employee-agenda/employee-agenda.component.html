@@ -1,0 +1,114 @@
+<div class="container">
+    <p-card>
+        <div class="header">
+            <div class="row">
+                <div class="col-12 text-end">
+                    <i style="color: #f09b0b;" class="fa fa-arrow-left" aria-hidden="true" (click)="previousDay()"></i>
+                    <i style="color: #349134;" class="fa fa-arrow-right" aria-hidden="true" (click)="nextDay()"></i>
+                </div>
+                <div class="col-12">
+                    <h2 class="text-center">{{dayOfWeek}}</h2>
+                </div>
+                <div class="col-12">
+                    <h5 class="text-center">{{cleaningDate}}</h5>
+                </div>
+            </div>
+        </div>
+
+        <div class="body">
+            <p-divider></p-divider>
+            <div class="col-12 text-center" *ngIf="cleaningServices.length === 0">
+                <span>You have no scheduled cleaning services for this day</span>
+            </div>
+            <div class="row services" *ngFor="let cleaningService of cleaningServices; let i = index" (click)="onClick(cleaningService)">
+                <div class="col-3 text-center">
+                    <span >{{ cleaningService.cleaningDate.startingHour === 9 ? '09:00 - ' : cleaningService.cleaningDate.startingHour + ':00 - ' }}
+                        {{ cleaningService.cleaningDate.finishingHour + ':00' }}</span>
+                </div>
+                <div class="col-5 text-center">
+                    <span>{{ cleaningService.type }}</span>
+                </div>
+                <div class="col-2 text-center">
+                    <span>{{ cleaningService.cleaningDetails.squareMeters }}</span>
+                </div>
+                <div class="col-2 text-center">
+                    <span>{{ cleaningService.cleaningDetails.parking }}</span>
+                </div>
+            </div>
+        </div>
+    </p-card>
+
+    <div class="displayService" *ngIf="cleaningServiceToDisplay">
+        <div class="section">
+            <h4>Space Details</h4>
+            <div class="row">
+                <div class="col-4" *ngFor="let property of getProperties(); let i = index" [attr.data-index]="i"
+                [ngClass]="{'firstRow': i<3}">
+                    <label>{{getLabelForProperty(property)}}</label>
+                    <b>{{cleaningServiceToDisplay.cleaningDetails[property]}}</b>
+                </div>
+            </div>
+        </div>
+    
+        <div class="section">
+            <h4>Cleaning Date</h4>
+            <div class="row">
+                <div class="col-4">
+                    <label>Cleaning Date</label>
+                    <b>{{ cleaningServiceToDisplay.cleaningDate.cleaningDate }}</b>
+                </div>
+                <div class="col-4">
+                    <label>Cleaning Hour</label>
+                    <b>
+                        {{ cleaningServiceToDisplay.cleaningDate.startingHour === 9 ? '09:00 - ' : cleaningServiceToDisplay.cleaningDate.startingHour + ':00' }}
+                        {{ cleaningServiceToDisplay.cleaningDate.finishingHour + ':00' }}
+                    </b>
+                </div>
+                <div class="col-4" *ngIf="cleaningServiceToDisplay.cleaningFrequency">
+                    <label>Cleaning Frequency</label>
+                    <b>{{ cleaningServiceToDisplay.cleaningFrequency }}</b>
+                </div>
+            </div>
+        </div>
+    
+        <div class="section">
+            <h4>Client Information</h4>
+            <div class="row">
+                <div class="col-4">
+                    <label>First Name</label>
+                    <b>{{ cleaningServiceToDisplay.contactInfo.firstName }}</b>
+                </div>
+                <div class="col-4">
+                    <label>Last Name</label>
+                    <b>{{ cleaningServiceToDisplay.contactInfo.lastName }}</b>
+                </div>
+                <div class="col-4">
+                    <label>Email Address</label>
+                    <b>{{ cleaningServiceToDisplay.contactInfo.email }}</b>
+                </div>
+            </div>
+        
+            <div class="row">
+                <div class="col-4">
+                    <label>Phone Number</label>
+                    <b>{{ cleaningServiceToDisplay.contactInfo.phoneNumber }}</b>
+                </div>
+                <div class="col-4">
+                    <label>County</label>
+                    <b>{{ cleaningServiceToDisplay.location.county }}</b>
+                </div>
+                <div class="col-4">
+                    <label>City</label>
+                    <b>{{ cleaningServiceToDisplay.location.city }}</b>
+                </div>
+            </div>
+    
+            <div class="row">
+                <div class="col-4">
+                    <label>Street Address</label>
+                    <b>{{ cleaningServiceToDisplay.location.address }}</b>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

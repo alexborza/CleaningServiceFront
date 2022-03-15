@@ -19,10 +19,13 @@
                     <label>Cleaning Date</label>
                     <b>{{ cleaningService.cleaningDate.cleaningDate }}</b>
                 </div>
-                <!-- <div class="col-4">
+                <div class="col-4">
                     <label>Cleaning Hour</label>
-                    <b>{{ cleaningService.cleaningDate.cleaningHour }}</b>
-                </div> -->
+                    <b>
+                        {{ cleaningService.cleaningDate.startingHour === 9 ? '09:00 - ' : cleaningService.cleaningDate.startingHour + ':00' }}
+                        {{ cleaningService.cleaningDate.finishingHour + ':00' }}
+                    </b>
+                </div>
                 <div class="col-4" *ngIf="cleaningService.cleaningFrequency">
                     <label>Cleaning Frequency</label>
                     <b>{{ cleaningService.cleaningFrequency }}</b>

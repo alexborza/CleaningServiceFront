@@ -49,7 +49,6 @@ export class AccountSettingsComponent implements OnInit {
   private getUser(){
     this.userApi.getUser(this.id).subscribe(res => {
       this.userDto = res;
-      console.log(this.userDto)
     })
   }
 

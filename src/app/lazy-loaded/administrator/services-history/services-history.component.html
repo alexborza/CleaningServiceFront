@@ -8,22 +8,19 @@
         <tr>
             <th>Cleaning Type</th>
             <th>Total</th>
+            <th>Square Meters</th>
             <th>Date</th>
             <th>Hour</th>
-            <th>Frequency</th>
-            <th>Home Access</th>
-            <th>Square Meters</th>
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-cleaningService>
         <tr [pSelectableRow]="cleaningService" style="cursor: pointer;">
             <td>{{cleaningService.type}}</td>
-            <td>{{cleaningService.total}}</td>
+            <td>{{cleaningService.total}} $</td>
+            <td>{{cleaningService.cleaningDetails.squareMeters}} m²</td>
             <td>{{cleaningService.cleaningDate.cleaningDate}}</td>
-            <td>{{cleaningService.cleaningDate.cleaningHour}}</td>
-            <td>{{cleaningService.cleaningFrequency}}</td>
-            <td>{{cleaningService.cleaningDetails.homeAccess}}</td>
-            <td>{{cleaningService.cleaningDetails.squareMeters}}</td>
+            <td>{{ cleaningService.cleaningDate.startingHour === 9 ? '09:00 - ' : cleaningService.cleaningDate.startingHour + ':00' }}
+                {{ cleaningService.cleaningDate.finishingHour + ':00' }}</td>
         </tr>
     </ng-template>
 </p-table>

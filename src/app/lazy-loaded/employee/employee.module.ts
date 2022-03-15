@@ -4,16 +4,22 @@ import { CommonModule } from '@angular/common';
 import { EmployeeRoutingModule } from './employee-routing.module';
 import { EmployeeProfileComponent } from './employee-profile/employee-profile.component';
 import { SharedModule } from '../shared/shared.module';
+import { CardModule } from 'primeng/card';
+import { DividerModule } from 'primeng/divider';
+import { EmployeeAgendaComponent } from './employee-agenda/employee-agenda.component';
 
 
 @NgModule({
   declarations: [
-    EmployeeProfileComponent
+    EmployeeProfileComponent,
+    EmployeeAgendaComponent
   ],
   imports: [
     CommonModule,
     EmployeeRoutingModule,
-    SharedModule
+    SharedModule,
+    CardModule,
+    DividerModule
   ]
 })
 export class EmployeeModule { }

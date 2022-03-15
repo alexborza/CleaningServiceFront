@@ -7,7 +7,7 @@ export class StandardCleaningDetailsDto {
     bedrooms!: number;
     bathrooms!: number;
     kitchens!: number;
-    squareMeters!: number;
+    squareMeters!: string;
     parking!: ParkingEnum;
     homeAccess!: HomeAccessEnum;
 }

@@ -47,6 +47,10 @@ export class EmployeesComponent implements OnInit, OnDestroy {
     this.router.navigate([id], {relativeTo: this.route});
   }
 
+  addEmployee(){
+    this.router.navigate(['/administrator/employee-contract']);
+  }
+
   ngOnDestroy(): void {
     this.toasterMessageSubscription.unsubscribe();
   }

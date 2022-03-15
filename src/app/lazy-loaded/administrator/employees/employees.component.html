@@ -1,22 +1,30 @@
 
 <div class="container p-4">
-    <p-card>
-        <h3 style="text-align: center;">Employees</h3>
-        <div class="table">
-            <p-table [value]="employees" [paginator]="employees.length > 10 ? true : false" [rows]="10" responsiveLayout="scroll"
-            [rowsPerPageOptions]="[10,25,50]">
-                <ng-template pTemplate="body" let-employee>
-                    <tr>
-                        <td>{{employee.userInformation.fullName}}</td>
-                        <td>{{employee.employeeInformation.jobInformation.workPhone}}</td>
-                        <td>{{employee.employeeInformation.jobInformation.title}}</td>
-                        <td>{{employee.employeeInformation.jobInformation.employmentStatus}}</td>
-                        <td><button pButton type="button" label="Details" (click)="toEmployeesDetails(employee.id)"></button></td>
-                    </tr>
-                </ng-template>
-            </p-table>
+    <h3 style="text-align: center;">Employees</h3>
+    <div class="table">
+        <div class="row">
+            <div class="col-12">
+                <button pButton class="add-employee" type="button" label="Add employee" (click)="addEmployee()"></button>
+            </div>
+
+            <div class="col-12">
+                <p-table [value]="employees" [paginator]="employees.length > 10 ? true : false" [rows]="10" responsiveLayout="scroll"
+                    [rowsPerPageOptions]="[10,25,50]">
+                        <ng-template pTemplate="body" let-employee>
+                            <tr>
+                                <td>{{employee.userInformation.fullName}}</td>
+                                <td>{{employee.employeeInformation.jobInformation.workPhone}}</td>
+                                <td>{{employee.employeeInformation.jobInformation.title}}</td>
+                                <td>{{employee.employeeInformation.jobInformation.employmentStatus}}</td>
+                                <td><button pButton class="details-button" type="button" label="Details" (click)="toEmployeesDetails(employee.id)"></button></td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+            </div>
         </div>
-    </p-card>
+
+        
+    </div>
 </div>
 
 <p-toast></p-toast>

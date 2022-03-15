@@ -1,0 +1,46 @@
+:host ::ng-deep .p-card {
+    margin: 0 130px 0 130px;
+}
+
+:host ::ng-deep .p-divider {
+    margin-bottom: 20px;
+}
+
+.body {
+    padding: 0px 40px 5px 40px;
+}
+
+.services {
+    cursor: pointer;
+    margin: 20px 0px 5px 0px;
+}
+
+i{
+    cursor: pointer;
+    font-size: 50px;
+    margin: 0px 10px 0px 10px;
+}
+
+.firstRow {
+    margin-bottom: 30px;
+}
+
+.col-4 {
+    display: grid;
+}
+
+.section {
+    .row {
+        padding: 15px;
+    }
+    padding: 15px;
+}
+
+
+label {
+    margin-bottom: 4px;
+}
+
+.displayService {
+    margin: 30px 70px 50px 70px;
+}
