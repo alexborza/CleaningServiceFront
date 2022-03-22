@@ -6,13 +6,11 @@ import { EmployeeProfileComponent } from './employee-profile/employee-profile.co
 import { SharedModule } from '../shared/shared.module';
 import { CardModule } from 'primeng/card';
 import { DividerModule } from 'primeng/divider';
-import { EmployeeAgendaComponent } from './employee-agenda/employee-agenda.component';
 
 
 @NgModule({
   declarations: [
     EmployeeProfileComponent,
-    EmployeeAgendaComponent
   ],
   imports: [
     CommonModule,

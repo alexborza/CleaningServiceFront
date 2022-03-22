@@ -1,7 +1,15 @@
+import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { CleaningDateDto } from 'src/app/core/dto/CleaningDateDto';
 import { CleaningServiceDto } from 'src/app/core/dto/CleaningServiceDto';
+import { CleaningStatusEnum } from 'src/app/core/dto/CleaningStatusEnum';
+import { RoleEnum } from 'src/app/core/dto/RoleEnum';
 import { CleaningApiService } from 'src/app/core/services/cleaning-api.service';
+import { SharedDataService } from 'src/app/core/services/shared-data.service';
+import { TokenStorageService } from 'src/app/core/services/token-storage.service';
 
 @Component({
   selector: 'app-cleaning-service',
@@ -12,20 +20,83 @@ export class CleaningServiceComponent implements OnInit {
 
   id: any;
   cleaningService!: CleaningServiceDto;
+  canEditService = false;
+  canFinishService = false;
+  cleaningDate: string = "";
+  datesOfCleaning: CleaningDateDto[] = [];
 
   constructor(
     private route: ActivatedRoute,
+    private confirmationService: ConfirmationService,
+    public config: DynamicDialogConfig,
+    private sharedData: SharedDataService,
+    public ref: DynamicDialogRef,
+    private tokenStorage: TokenStorageService,
     private cleaningApi: CleaningApiService
-    ) { }
+    ) { 
+      this.id = this.config.data?.id;
+      this.cleaningDate = this.config.data?.cleaningDate;
+    }
 
   ngOnInit(): void {
-    this.id = this.route.snapshot.paramMap.get('id');
     this.getCleaningService();
+    
+  }
+
+  private canUserEditService(){
+    const user = this.tokenStorage.getUser();
+    this.canEditService = user.roles.includes(RoleEnum.ROLE_ADMIN) || user.roles.includes(RoleEnum.ROLE_USER) && !this.isDeleted();
+    this.canFinishService = user.roles.includes(RoleEnum.ROLE_EMPLOYEE) && !this.isFinished() && this.isCleaningDateValid();
   }
 
   private getCleaningService(){
     this.cleaningApi.getCleaningService(this.id).subscribe(res => {
       this.cleaningService = res;
+      this.getDatesOfCleaningForCleaningService();
+      console.log(res);
+    })
+  }
+
+  private getDatesOfCleaningForCleaningService(){
+    this.cleaningApi.getDatesOfCleaningForCleaningService(this.id).subscribe(res => {
+      this.datesOfCleaning = res;
+      this.canUserEditService();
+    })
+  }
+
+  private isCleaningDateValid(){
+    const currentDate = formatDate(new Date().toLocaleDateString(), 'yyyy-MM-dd', 'en-US');
+    return currentDate === this.cleaningDate;
+  }
+
+  private isFinished(){
+    if(this.datesOfCleaning.find(dateOfCleaning => dateOfCleaning?.cleaningDate === this.cleaningDate))
+      return true;   
+    return false;
+  }
+
+  private isDeleted(){
+    return this.cleaningService.status === CleaningStatusEnum.Deleted;
+  }
+
+  confirm(){
+    this.confirmationService.confirm({
+      message: 'Are you sure that you want to end this cleaning service?',
+      header: 'Confirmation',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.cleaningApi.endCleaningService(this.id).subscribe(res => {
+          this.sharedData.toasterMessage.next({severity:'info', summary:'Confirmed', detail:'You have ended the cleaning service'});
+          this.ref.close();
+        });
+      }
+    });
+  }
+
+  finishService(){
+    this.cleaningApi.finishCleaningService(this.id, this.cleaningDate).subscribe(res => {
+      this.sharedData.toasterMessage.next({severity:'info', summary:'Confirmed', detail:'You have finished the cleaning service'});
+      this.ref.close();
     })
   }
 

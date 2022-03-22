@@ -23,6 +23,9 @@ import { QuoteRequestComponent } from './quote-request/quote-request.component';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { ModifyEmergencyContactInfoComponent } from './components/modify-emergency-contact-info/modify-emergency-contact-info.component';
 import { JobInfoDetailsComponent } from './components/job-info-details/job-info-details.component';
+import { AgendaComponent } from './agenda/agenda.component';
+import { DividerModule } from 'primeng/divider';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 
 @NgModule({
@@ -35,7 +38,8 @@ import { JobInfoDetailsComponent } from './components/job-info-details/job-info-
     CleaningServiceComponent,
     QuoteRequestComponent,
     ModifyEmergencyContactInfoComponent,
-    JobInfoDetailsComponent
+    JobInfoDetailsComponent,
+    AgendaComponent
   ],
   imports: [
     CommonModule,
@@ -51,13 +55,16 @@ import { JobInfoDetailsComponent } from './components/job-info-details/job-info-
     InputMaskModule,
     CalendarModule,
     DropdownModule,
-    InputTextareaModule
+    InputTextareaModule,
+    DividerModule,
+    ConfirmDialogModule
   ],
   exports: [
     SidebarComponent,
     AccountSettingsComponent,
     CleaningServiceComponent,
-    QuoteRequestComponent
+    QuoteRequestComponent,
+    AgendaComponent
   ],
   entryComponents: [
     ModifyEmailComponent,

@@ -11,7 +11,6 @@ const routes: Routes = [
       { path: '', redirectTo: 'account-settings', pathMatch: 'full'},
       { path: 'account-settings', component: AccountSettingsComponent },
       { path: 'orders', component: ClientOrdersComponent },
-      { path: 'orders/cleaning-service/:id', component: CleaningServiceComponent },
       { path: 'orders/quote-request/:id', component: QuoteRequestComponent }
     ]
   },

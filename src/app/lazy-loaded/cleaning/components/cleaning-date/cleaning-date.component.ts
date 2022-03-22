@@ -34,13 +34,13 @@ export class CleaningDateComponent implements OnInit, OnChanges {
   }
   
   private getAvailableHoursForCleaning(employeesAgenda: EmployeesDayAgenda[], timeEstimation: number){
-    let avHours: AvailableHour[] = []; // export class AvailableCleaningHours
+    let avHours: AvailableHour[] = [];
     if(timeEstimation !== 0){
       employeesAgenda.forEach(agenda => {
         this.getAvailableHoursForAgenda(agenda, timeEstimation, avHours);
       })
     }
-    this.availableHours = avHours;
+    this.availableHours = avHours.sort((a, b) => a.interval.startingHour - b.interval.startingHour);
   }
 
   private getAvailableHoursForAgenda(agenda: EmployeesDayAgenda, timeEstimation: number, avHours: AvailableHour[]){

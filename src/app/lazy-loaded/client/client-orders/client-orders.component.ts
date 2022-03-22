@@ -1,13 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { DialogService } from 'primeng/dynamicdialog';
 import { CleaningServiceDto } from 'src/app/core/dto/CleaningServiceDto';
 import { OfficeCleaningDto } from 'src/app/core/dto/OfficeCleaningDto';
 import { ClientService } from 'src/app/core/services/client.service';
+import { CleaningServiceComponent } from '../../shared/cleaning-service/cleaning-service.component';
 
 @Component({
   selector: 'app-client-orders',
   templateUrl: './client-orders.component.html',
-  styleUrls: ['./client-orders.component.scss']
+  styleUrls: ['./client-orders.component.scss'],
+  providers: [DialogService]
 })
 export class ClientOrdersComponent implements OnInit {
 
@@ -18,6 +21,7 @@ export class ClientOrdersComponent implements OnInit {
   constructor(
     private clientApi: ClientService,
     private router: Router,
+    public dialogService: DialogService,
     private route: ActivatedRoute
   ) { }
 
@@ -42,7 +46,13 @@ export class ClientOrdersComponent implements OnInit {
   }
 
   toCleaningService(id: number) {
-    this.router.navigate(['cleaning-service', id], {relativeTo: this.route});
+    const ref = this.dialogService.open(CleaningServiceComponent, {
+      data: {
+        id: id
+      },
+      header: 'Cleaning Service Details',
+      width: '70%'
+    });
   }
 
   toQuoteRequest(id: number) {

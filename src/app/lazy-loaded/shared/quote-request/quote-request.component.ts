@@ -40,7 +40,7 @@ export class QuoteRequestComponent implements OnInit {
   }
 
   buildForm(){
-    if(this.hasAdminRole && this.officeCleaningDto.status === OfficeCleaningStatusEnum.NotSent){
+    if(this.hasAdminRole){
       this.form = this.fb.group({
         description: new FormControl(null, [Validators.required]),
         price: new FormControl(null, [Validators.required])
@@ -51,7 +51,6 @@ export class QuoteRequestComponent implements OnInit {
   getQuoteRequest(){
     this.officeCleaningApi.getQuoteRequest(+this.id).subscribe(res => {
       this.officeCleaningDto = res;
-      console.log(res);
     })
   }
 

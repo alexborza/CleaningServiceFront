@@ -282,9 +282,11 @@ export class CleaningServiceDetailComponent implements OnInit {
     cleaning_details.get('squareMeters')?.valueChanges.subscribe(res => {
       if(res){
         cleaning_date.get('cleaningDate')?.enable();
+        cleaning_date.get('hour')?.setValue(null);
         this.timeEstimation = res.timeEstimation;
       } else {
         this.timeEstimation = 0;
+        cleaning_date.get('hour')?.setValue(null);
         cleaning_date.get('cleaningDate')?.disable();
       }
     })
@@ -318,8 +320,10 @@ export class CleaningServiceDetailComponent implements OnInit {
     const cleaning_date = this.form.get('cleaning_date') as FormGroup;
     cleaning_date.get('cleaningDate')?.valueChanges.subscribe(cleaningDate => {
       if(cleaningDate != null){
+        cleaning_date.get('hour')?.setValue(null);
         this.employeeApi.getEmployeesAgendaForDate(cleaningDate).subscribe(res => {
           this.employeesDayAgenda = res;
+          console.log(this.employeesDayAgenda)
         })
       }
     });

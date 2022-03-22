@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { EmployeeContractGuard } from 'src/app/core/guard/employee-contract.guard';
 import { AdministratorComponent } from './administrator/administrator.component';
-import { CleaningServiceComponent } from '../../lazy-loaded/shared/cleaning-service/cleaning-service.component';
 import { ConfirmationComponent } from './employee-contract/confirmation/confirmation.component';
 import { EmergencyContactInformationComponent } from './employee-contract/emergency-contact-information/emergency-contact-information.component';
 import { EmployeeAccountComponent } from './employee-contract/employee-account/employee-account.component';
@@ -14,6 +13,7 @@ import { QuoteRequestComponent } from '../../lazy-loaded/shared/quote-request/qu
 import { QuoteRequestsComponent } from './quote-requests/quote-requests.component';
 import { ServicesHistoryComponent } from './services-history/services-history.component';
 import { EmployeeDetailComponent } from './employees/employee-detail/employee-detail.component';
+import { AgendaComponent } from '../shared/agenda/agenda.component';
 
 const routes: Routes = [
   {
@@ -22,8 +22,7 @@ const routes: Routes = [
     children: [
       { path: 'quote-requests', component: QuoteRequestsComponent },
       { path: 'quote-requests/:id', component: QuoteRequestComponent },
-      { path: 'services-history' , component: ServicesHistoryComponent },
-      { path: 'services-history/:id' , component: CleaningServiceComponent },
+      { path: 'services-agenda' , component: AgendaComponent },
       { path: 'employees', component: EmployeesComponent },
       { path: 'employees/:id', component: EmployeeDetailComponent },
       { path: 'employee-contract' , component: EmployeeContractComponent, children: [

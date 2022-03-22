@@ -10,7 +10,7 @@ import { AuthorizationGuard } from './core/guard/authorization.guard';
 import { AuthenticationGuard } from './core/guard/authentication.guard';
 import { ToastModule } from 'primeng/toast';
 import { EmployeeContractGuard } from './core/guard/employee-contract.guard';
-import { MessageService } from 'primeng/api';
+import { MessageService, ConfirmationService } from 'primeng/api';
 
 @NgModule({
   declarations: [
@@ -28,7 +28,8 @@ import { MessageService } from 'primeng/api';
     AuthorizationGuard,
     AuthenticationGuard,
     EmployeeContractGuard,
-    MessageService
+    MessageService,
+    ConfirmationService
   ],
   bootstrap: [AppComponent]
 })

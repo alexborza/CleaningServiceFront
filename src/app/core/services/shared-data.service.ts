@@ -6,7 +6,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class SharedDataService {
 
-  public toasterMessage = new BehaviorSubject<boolean>(false);
+  public toasterMessage = new BehaviorSubject<any>(false);
 
   constructor() { }
 }

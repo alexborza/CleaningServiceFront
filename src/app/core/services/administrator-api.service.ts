@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { EmployeeDto } from '../dto/EmployeeDto';
+import { ServicesAgenda } from '../dto/ServicesAgenda';
 
 @Injectable({
   providedIn: 'root'
@@ -15,5 +16,9 @@ export class AdministratorApiService {
 
   getAllEmployees(): Observable<EmployeeDto[]> {
     return this.http.get<EmployeeDto[]>(this.baseUrl + "employees");
+  }
+
+  getServicesAgenda(date: string): Observable<ServicesAgenda[]> {
+    return this.http.get<ServicesAgenda[]>(this.baseUrl + "services-agenda?date=" + date);
   }
 }

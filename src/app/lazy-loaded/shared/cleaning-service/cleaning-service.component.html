@@ -1,90 +1,102 @@
 <div class="container p-4 mb-5" *ngIf="cleaningService">
-    <p-card>
-        <h3 style="text-align: center; padding: 15px; margin-bottom: 20px;">{{ cleaningService.type }} Service</h3>
-        <div class="section">
-            <h4>Space Details</h4>
-            <div class="row">
-                <div class="col-4" *ngFor="let property of getProperties(); let i = index" [attr.data-index]="i"
-                [ngClass]="{'firstRow': i<3}">
-                    <label>{{getLabelForProperty(property)}}</label>
-                    <b>{{cleaningService.cleaningDetails[property]}}</b>
-                </div>
+    <div class="row" *ngIf="canEditService">
+        <div class="col-12 text-end">
+            <button pButton type="button" label="Reschedule"></button>
+            <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+
+            <button class="end-service p-button-danger" (click)="confirm()" pButton label="End Service"></button>
+        </div>
+    </div>
+
+    <div class="row" *ngIf="canFinishService">
+        <div class="col-12 text-end">
+            <button type="button" (click)="finishService()" pButton label="Finish Service"></button>
+        </div>
+    </div>
+
+    <div class="section">
+        <h4>Space Details</h4>
+        <div class="row">
+            <div class="col-4" *ngFor="let property of getProperties(); let i = index" [attr.data-index]="i"
+            [ngClass]="{'firstRow': i<3}">
+                <label>{{getLabelForProperty(property)}}</label>
+                <b>{{cleaningService.cleaningDetails[property]}}</b>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h4>Cleaning Date</h4>
+        <div class="row">
+            <div class="col-4">
+                <label>Cleaning Date</label>
+                <b>{{ cleaningDate }}</b>
+            </div>
+            <div class="col-4">
+                <label>Cleaning Hour</label>
+                <b>
+                    {{ cleaningService.cleaningDate.startingHour === 9 ? '09:00 - ' : cleaningService.cleaningDate.startingHour + ':00 - ' }}
+                    {{ cleaningService.cleaningDate.finishingHour + ':00' }}
+                </b>
+            </div>
+            <div class="col-4" *ngIf="cleaningService.cleaningFrequency">
+                <label>Cleaning Frequency</label>
+                <b>{{ cleaningService.cleaningFrequency }}</b>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h4>Client Information</h4>
+        <div class="row">
+            <div class="col-4">
+                <label>First Name</label>
+                <b>{{ cleaningService.contactInfo.firstName }}</b>
+            </div>
+            <div class="col-4">
+                <label>Last Name</label>
+                <b>{{ cleaningService.contactInfo.lastName }}</b>
+            </div>
+            <div class="col-4">
+                <label>Email Address</label>
+                <b>{{ cleaningService.contactInfo.email }}</b>
             </div>
         </div>
     
-        <div class="section">
-            <h4>Cleaning Date</h4>
-            <div class="row">
-                <div class="col-4">
-                    <label>Cleaning Date</label>
-                    <b>{{ cleaningService.cleaningDate.cleaningDate }}</b>
-                </div>
-                <div class="col-4">
-                    <label>Cleaning Hour</label>
-                    <b>
-                        {{ cleaningService.cleaningDate.startingHour === 9 ? '09:00 - ' : cleaningService.cleaningDate.startingHour + ':00' }}
-                        {{ cleaningService.cleaningDate.finishingHour + ':00' }}
-                    </b>
-                </div>
-                <div class="col-4" *ngIf="cleaningService.cleaningFrequency">
-                    <label>Cleaning Frequency</label>
-                    <b>{{ cleaningService.cleaningFrequency }}</b>
-                </div>
+        <div class="row">
+            <div class="col-4">
+                <label>Phone Number</label>
+                <b>{{ cleaningService.contactInfo.phoneNumber }}</b>
+            </div>
+            <div class="col-4">
+                <label>County</label>
+                <b>{{ cleaningService.location.county }}</b>
+            </div>
+            <div class="col-4">
+                <label>City</label>
+                <b>{{ cleaningService.location.city }}</b>
             </div>
         </div>
-    
-        <div class="section">
-            <h4>Client Information</h4>
-            <div class="row">
-                <div class="col-4">
-                    <label>First Name</label>
-                    <b>{{ cleaningService.contactInfo.firstName }}</b>
-                </div>
-                <div class="col-4">
-                    <label>Last Name</label>
-                    <b>{{ cleaningService.contactInfo.lastName }}</b>
-                </div>
-                <div class="col-4">
-                    <label>Email Address</label>
-                    <b>{{ cleaningService.contactInfo.email }}</b>
-                </div>
-            </div>
-        
-            <div class="row">
-                <div class="col-4">
-                    <label>Phone Number</label>
-                    <b>{{ cleaningService.contactInfo.phoneNumber }}</b>
-                </div>
-                <div class="col-4">
-                    <label>County</label>
-                    <b>{{ cleaningService.location.county }}</b>
-                </div>
-                <div class="col-4">
-                    <label>City</label>
-                    <b>{{ cleaningService.location.city }}</b>
-                </div>
-            </div>
-    
-            <div class="row">
-                <div class="col-4">
-                    <label>Street Address</label>
-                    <b>{{ cleaningService.location.address }}</b>
-                </div>
+
+        <div class="row">
+            <div class="col-4">
+                <label>Street Address</label>
+                <b>{{ cleaningService.location.address }}</b>
             </div>
         </div>
-    
-        <div class="section">
-            <h4>Payment Details</h4>
-            <div class="row">
-                <div class="col-4">
-                    <label>Total</label>
-                    <b>{{cleaningService.total}} $</b>
-                </div>
-                <div class="col-4">
-                    <label>Payment Method</label>
-                    <b>{{cleaningService.paymentMethod}}</b>
-                </div>
+    </div>
+
+    <div class="section">
+        <h4>Payment Details</h4>
+        <div class="row">
+            <div class="col-4">
+                <label>Total</label>
+                <b>{{cleaningService.total}} $</b>
+            </div>
+            <div class="col-4">
+                <label>Payment Method</label>
+                <b>{{cleaningService.paymentMethod}}</b>
             </div>
         </div>
-    </p-card>
+    </div>
 </div>
