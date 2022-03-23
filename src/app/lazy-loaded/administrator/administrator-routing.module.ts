@@ -11,15 +11,17 @@ import { PersonalInformationComponent } from './employee-contract/personal-infor
 import { EmployeesComponent } from './employees/employees.component';
 import { QuoteRequestComponent } from '../../lazy-loaded/shared/quote-request/quote-request.component';
 import { QuoteRequestsComponent } from './quote-requests/quote-requests.component';
-import { ServicesHistoryComponent } from './services-history/services-history.component';
 import { EmployeeDetailComponent } from './employees/employee-detail/employee-detail.component';
 import { AgendaComponent } from '../shared/agenda/agenda.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routes: Routes = [
   {
     path: '',
     component: AdministratorComponent,
     children: [
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full'},
+      { path: 'dashboard', component: DashboardComponent },
       { path: 'quote-requests', component: QuoteRequestsComponent },
       { path: 'quote-requests/:id', component: QuoteRequestComponent },
       { path: 'services-agenda' , component: AgendaComponent },

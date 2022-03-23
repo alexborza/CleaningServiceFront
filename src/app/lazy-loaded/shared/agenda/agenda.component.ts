@@ -113,7 +113,6 @@ export class AgendaComponent implements OnInit, OnDestroy {
   }
 
   onClick(cleaningService: CleaningServiceDto){
-    console.log(cleaningService)
     const ref = this.dialogService.open(CleaningServiceComponent, {
       data: {
         id: cleaningService.id,

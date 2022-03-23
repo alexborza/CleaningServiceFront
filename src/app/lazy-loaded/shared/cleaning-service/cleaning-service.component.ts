@@ -1,9 +1,9 @@
 import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { CleaningDateDto } from 'src/app/core/dto/CleaningDateDto';
+import { CleaningFrequencyEnum } from 'src/app/core/dto/CleaningFrequencyEnum';
 import { CleaningServiceDto } from 'src/app/core/dto/CleaningServiceDto';
 import { CleaningStatusEnum } from 'src/app/core/dto/CleaningStatusEnum';
 import { RoleEnum } from 'src/app/core/dto/RoleEnum';
@@ -24,9 +24,11 @@ export class CleaningServiceComponent implements OnInit {
   canFinishService = false;
   cleaningDate: string = "";
   datesOfCleaning: CleaningDateDto[] = [];
+  displayCleaningDate = true;
+  displayHistoryOfCleaningDates = false;
+  canDisplayHistory = false;
 
   constructor(
-    private route: ActivatedRoute,
     private confirmationService: ConfirmationService,
     public config: DynamicDialogConfig,
     private sharedData: SharedDataService,
@@ -40,11 +42,12 @@ export class CleaningServiceComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCleaningService();
-    
+    this.getNextCleaningDate();
   }
 
   private canUserEditService(){
     const user = this.tokenStorage.getUser();
+    this.canDisplayHistory = user.roles.includes(RoleEnum.ROLE_USER);
     this.canEditService = user.roles.includes(RoleEnum.ROLE_ADMIN) || user.roles.includes(RoleEnum.ROLE_USER) && !this.isDeleted();
     this.canFinishService = user.roles.includes(RoleEnum.ROLE_EMPLOYEE) && !this.isFinished() && this.isCleaningDateValid();
   }
@@ -53,7 +56,15 @@ export class CleaningServiceComponent implements OnInit {
     this.cleaningApi.getCleaningService(this.id).subscribe(res => {
       this.cleaningService = res;
       this.getDatesOfCleaningForCleaningService();
-      console.log(res);
+    })
+  }
+
+  private getNextCleaningDate(){
+    this.cleaningApi.getNextCleaningDate(this.id).subscribe(res => {
+      if(res == null){
+        this.displayCleaningDate = false;
+      }
+      this.cleaningDate = res?.cleaningDate ? res.cleaningDate : '-';
     })
   }
 
@@ -62,6 +73,10 @@ export class CleaningServiceComponent implements OnInit {
       this.datesOfCleaning = res;
       this.canUserEditService();
     })
+  }
+
+  displayHistory(){
+    this.displayHistoryOfCleaningDates = !this.displayHistoryOfCleaningDates;
   }
 
   private isCleaningDateValid(){

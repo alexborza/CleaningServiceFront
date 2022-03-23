@@ -30,6 +30,7 @@ import { SharedModule } from '../shared/shared.module';
 import { EmployeeDetailComponent } from './employees/employee-detail/employee-detail.component';
 import { ModifyJobInfoComponent } from './employees/employee-detail/modify-job-info/modify-job-info.component';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { DynamicDialogModule } from 'primeng/dynamicdialog';
     ConfirmationComponent,
     EmployeesComponent,
     EmployeeDetailComponent,
-    ModifyJobInfoComponent
+    ModifyJobInfoComponent,
+    DashboardComponent
   ],
   imports: [
     CommonModule,

@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MessageService } from 'primeng/api';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { ModifyPassswordDto } from 'src/app/core/dto/ModifyPasswordDto';
-import { ClientService } from 'src/app/core/services/client.service';
 import { checkRequiredFields } from 'src/app/core/services/error/validate';
 import { UserApiService } from 'src/app/core/services/user-api.service';
 
@@ -45,7 +43,7 @@ export class ModifyPasswordComponent implements OnInit {
         this.ref.close(res.message);
       },
       err => {
-        if(err.error.message === "Incorrect password entered"){
+        if(err.error.message === "Incorrect password entered!"){
           this.form.get('password')?.setErrors({invalid: {message: err.error.message}});
         }
       });

@@ -25,7 +25,7 @@
         </div>
     </div>
 
-    <div class="section">
+    <div class="section" *ngIf="displayCleaningDate">
         <h4>Cleaning Date</h4>
         <div class="row">
             <div class="col-4">
@@ -96,6 +96,29 @@
             <div class="col-4">
                 <label>Payment Method</label>
                 <b>{{cleaningService.paymentMethod}}</b>
+            </div>
+        </div>
+    </div>
+
+    <div class="section" *ngIf="canDisplayHistory">
+        <a (click)="displayHistory()">Display History of Cleaning Dates</a>
+    </div>
+    <div class="section" *ngIf="displayHistoryOfCleaningDates">
+        <h4>History of Cleaning Dates</h4>
+        <span *ngIf="datesOfCleaning.length === 0">
+            No Cleaning Date History
+        </span>
+        <div class="row" *ngFor="let dateOfCleaning of datesOfCleaning; let i = index">
+            <div class="col-4">
+                <label>Cleaning Date</label>
+                <b>{{ dateOfCleaning.cleaningDate }}</b>
+            </div>
+            <div class="col-4">
+                <label>Cleaning Hour</label>
+                <b>
+                    {{ dateOfCleaning.startingHour === 9 ? '09:00 - ' : dateOfCleaning.startingHour + ':00 - ' }}
+                    {{ dateOfCleaning.finishingHour + ':00' }}
+                </b>
             </div>
         </div>
     </div>
