@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { CleaningServiceDescriptionsDto } from '../dto/CleaningServiceDescriptionDto';
 import { EmployeeDto } from '../dto/EmployeeDto';
 import { ServicesAgenda } from '../dto/ServicesAgenda';
 
@@ -20,5 +21,17 @@ export class AdministratorApiService {
 
   getServicesAgenda(date: string): Observable<ServicesAgenda[]> {
     return this.http.get<ServicesAgenda[]>(this.baseUrl + "services-agenda?date=" + date);
+  }
+
+  getDescriptions(): Observable<CleaningServiceDescriptionsDto> {
+    return this.http.get<CleaningServiceDescriptionsDto>(this.baseUrl + "descriptions");
+  }
+
+  createDescriptions(dto: CleaningServiceDescriptionsDto) {
+    return this.http.post(this.baseUrl + "create-descriptions", dto);
+  }
+
+  updateDescriptions(id: number, dto: CleaningServiceDescriptionsDto) {
+    return this.http.put(this.baseUrl + 'update-descriptions/' + id, dto)
   }
 }

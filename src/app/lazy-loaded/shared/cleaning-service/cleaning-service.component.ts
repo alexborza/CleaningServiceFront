@@ -1,9 +1,8 @@
 import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { ConfirmationService, MessageService } from 'primeng/api';
+import { ConfirmationService } from 'primeng/api';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { CleaningDateDto } from 'src/app/core/dto/CleaningDateDto';
-import { CleaningFrequencyEnum } from 'src/app/core/dto/CleaningFrequencyEnum';
 import { CleaningServiceDto } from 'src/app/core/dto/CleaningServiceDto';
 import { CleaningStatusEnum } from 'src/app/core/dto/CleaningStatusEnum';
 import { RoleEnum } from 'src/app/core/dto/RoleEnum';
@@ -48,7 +47,7 @@ export class CleaningServiceComponent implements OnInit {
   private canUserEditService(){
     const user = this.tokenStorage.getUser();
     this.canDisplayHistory = user.roles.includes(RoleEnum.ROLE_USER);
-    this.canEditService = user.roles.includes(RoleEnum.ROLE_ADMIN) || user.roles.includes(RoleEnum.ROLE_USER) && !this.isDeleted();
+    this.canEditService = (user.roles.includes(RoleEnum.ROLE_ADMIN) || user.roles.includes(RoleEnum.ROLE_USER)) && !this.isDeleted();
     this.canFinishService = user.roles.includes(RoleEnum.ROLE_EMPLOYEE) && !this.isFinished() && this.isCleaningDateValid();
   }
 

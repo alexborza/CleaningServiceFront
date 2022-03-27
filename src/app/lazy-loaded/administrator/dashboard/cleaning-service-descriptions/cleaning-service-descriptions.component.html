@@ -1,0 +1,54 @@
+<div class="container" style="margin-bottom: 90px;">
+    <div class="row p-4">
+        <div class="col-12">
+            <div class="row section">
+                <div class="col-9">
+                    <b>Standard Cleaning Description</b>
+                    <label>{{ dto.standardCleaningDescription ? dto.standardCleaningDescription : '-' }}</label>
+                </div>
+                <div class="col-2">
+                    <button class="modify" pButton type="button" label="Modify" (click)="modifyDescription('Standard', dto.standardCleaningDescription)"></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12">
+            <div class="row section">
+                <div class="col-9">
+                    <b>Deep Cleaning Description</b>
+                    <label>{{ dto.deepCleaningDescription ? dto.deepCleaningDescription : '-' }}</label>
+                </div>
+                <div class="col-2">
+                    <button class="modify" pButton type="button" label="Modify" (click)="modifyDescription('Deep', dto.deepCleaningDescription)"></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12">
+            <div class="row section">
+                <div class="col-9">
+                    <b>Post Construction Cleaning Description</b>
+                    <label>{{ dto.postConstructionCleaningDescription ? dto.postConstructionCleaningDescription : '-' }}</label>
+                </div>
+                <div class="col-2">
+                    <button class="modify" pButton type="button" label="Modify" (click)="modifyDescription('Post Construction', dto.postConstructionCleaningDescription)"></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12">
+            <div class="row section">
+                <div class="col-9">
+                    <b>Disinfection Cleaning Description</b>
+                    <label>{{ dto.disinfectionCleaningDescription ? dto.disinfectionCleaningDescription : '-' }}</label>
+                </div>
+                <div class="col-2">
+                    <button class="modify" pButton type="button" label="Modify" (click)="modifyDescription('Disinfection', dto.disinfectionCleaningDescription)"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button class="save-button" pButton type="button" label="Save" (click)="onSave()"></button>
+</div>
+
+<p-toast></p-toast>

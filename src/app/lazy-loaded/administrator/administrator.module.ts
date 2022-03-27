@@ -31,6 +31,12 @@ import { EmployeeDetailComponent } from './employees/employee-detail/employee-de
 import { ModifyJobInfoComponent } from './employees/employee-detail/modify-job-info/modify-job-info.component';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { TabViewModule } from 'primeng/tabview';
+import { SearchServicesComponent } from './dashboard/search-services/search-services.component';
+import { CleaningServicePricesComponent } from './dashboard/cleaning-service-prices/cleaning-service-prices.component';
+import { CleaningServiceDescriptionsComponent } from './dashboard/cleaning-service-descriptions/cleaning-service-descriptions.component';
+import { CleaningDescriptionComponent } from './dashboard/cleaning-service-descriptions/cleaning-description/cleaning-description.component';
+import { CleaningPriceComponent } from './dashboard/cleaning-service-prices/cleaning-price/cleaning-price.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +52,12 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     EmployeesComponent,
     EmployeeDetailComponent,
     ModifyJobInfoComponent,
-    DashboardComponent
+    DashboardComponent,
+    SearchServicesComponent,
+    CleaningServicePricesComponent,
+    CleaningServiceDescriptionsComponent,
+    CleaningDescriptionComponent,
+    CleaningPriceComponent
   ],
   imports: [
     CommonModule,
@@ -67,7 +78,12 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     DropdownModule,
     MenuModule,
     SharedModule,
-    DynamicDialogModule
+    DynamicDialogModule,
+    TabViewModule
+  ],
+  entryComponents: [
+    CleaningDescriptionComponent,
+    CleaningPriceComponent
   ]
 })
 export class AdministratorModule { }
