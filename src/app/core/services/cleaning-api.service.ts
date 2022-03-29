@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CleaningDateDto } from '../dto/CleaningDateDto';
+import { CleaningServiceDisplay } from '../dto/CleaningServiceDisplay';
 import { CleaningServiceDto } from '../dto/CleaningServiceDto';
 
 @Injectable({
@@ -23,8 +24,8 @@ export class CleaningApiService {
     }
   }
 
-  getCleaningServices(): Observable<CleaningServiceDto[]> {
-    return this.http.get<CleaningServiceDto[]>(this.baseUrl);
+  getCleaningServices(): Observable<CleaningServiceDisplay[]> {
+    return this.http.get<CleaningServiceDisplay[]>(this.baseUrl);
   }
 
   getCleaningService(id: number): Observable<CleaningServiceDto> {

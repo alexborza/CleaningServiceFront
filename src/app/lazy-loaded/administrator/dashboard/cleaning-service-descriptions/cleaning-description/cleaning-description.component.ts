@@ -13,6 +13,7 @@ export class CleaningDescriptionComponent implements OnInit {
   serviceDescription: string = '';
   descriptionType: string = '';
   dto: CleaningServiceDescriptionsDto;
+  submitted = false;
 
   constructor(
     public config: DynamicDialogConfig,
@@ -31,6 +32,7 @@ export class CleaningDescriptionComponent implements OnInit {
       this.setDescription(description.value, this.descriptionType);
       this.ref.close();
     }
+    this.submitted = true;
   }
 
   private setDescription(description: string, descriptionType: string){

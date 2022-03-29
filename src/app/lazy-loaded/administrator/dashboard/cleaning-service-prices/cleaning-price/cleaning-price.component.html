@@ -1,1 +1,35 @@
-<p>cleaning-price works!</p>
+<div class="container">
+    <div class="row">
+        <div class="col-12 control">
+            <label for="servicePrice">Service Price</label>
+            <input pInputTextarea #servicePrice="ngModel" name="servicePrice" id="servicePrice" placeholder="Cleaning service price" type="number" required pInputText [(ngModel)]="cleaningServicePrice" [ngClass]="{'ng-dirty': (servicePrice.touched && servicePrice.invalid) || (servicePrice.invalid && submitted) || (servicePrice.dirty && servicePrice.invalid)}">
+            <small class="p-error" *ngIf="(servicePrice.invalid && submitted) || (servicePrice.dirty && servicePrice.invalid) || (servicePrice.touched && servicePrice.invalid)">Cleaning service price is required.</small>
+        </div>
+
+        <div class="col-12 control" *ngIf="cleaningType === 'Standard' || cleaningType === 'Deep'">
+            <label for="bedroom">Bedroom Price</label>
+            <input pInputTextarea #bedroom="ngModel" name="bedroom" id="bedroom" placeholder="Bedroom price" type="number" required pInputText [(ngModel)]="bedroomPrice" [ngClass]="{'ng-dirty': (bedroom.touched && bedroom.invalid) || (bedroom.dirty && bedroom.invalid) || (bedroom.invalid && submitted)}">
+            <small class="p-error" *ngIf="(bedroom.dirty && bedroom.invalid) || (bedroom.invalid && submitted) || (bedroom.touched && bedroom.invalid)">Bedroom price is required.</small>
+        </div>
+
+        <div class="col-12 control" *ngIf="cleaningType === 'Standard' || cleaningType === 'Deep'">
+            <label for="bathroom">Bathroom Price</label>
+            <input pInputTextarea #bathroom="ngModel" name="bathroom" id="bathroom" placeholder="Bathroom price" type="number" required pInputText [(ngModel)]="bathroomPrice" [ngClass]="{'ng-dirty': (bathroom.touched && bathroom.invalid) || (bathroom.dirty && bathroom.invalid) || (bathroom.invalid && submitted)}">
+            <small class="p-error" *ngIf="(bathroom.dirty && bathroom.invalid) || (bathroom.invalid && submitted) || (bathroom.touched && bathroom.invalid)">Bathroom price is required.</small>
+        </div>
+
+        <div class="col-12 control" *ngIf="cleaningType === 'Standard' || cleaningType === 'Deep'">
+            <label for="kitchen">Kitchen Price</label>
+            <input pInputTextarea #kitchen="ngModel" name="kitchen" id="kitchen" placeholder="Kitchen price" type="number" required pInputText [(ngModel)]="kitchenPrice" [ngClass]="{'ng-dirty': (kitchen.touched && kitchen.invalid) || (kitchen.dirty && kitchen.invalid) || (kitchen.invalid && submitted)}">
+            <small class="p-error" *ngIf="(kitchen.dirty && kitchen.invalid) || (kitchen.invalid && submitted) || (kitchen.touched && kitchen.invalid)">Kitchen price is required.</small>
+        </div>
+
+        <div class="col-12 control" *ngIf="cleaningType === 'Post Construction'">
+            <label for="room">Room Price</label>
+            <input pInputTextarea #room="ngModel" name="room" id="room" placeholder="Room price" type="number" required pInputText [(ngModel)]="roomPrice" [ngClass]="{'ng-dirty': (room.touched && room.invalid) || (room.dirty && room.invalid) || (room.invalid && submitted)}">
+            <small class="p-error" *ngIf="(room.dirty && room.invalid) || (room.invalid && submitted) || (room.touched && room.invalid)">Room price is required.</small>
+        </div>
+
+        <p-button label="Save" (onClick)="save()"></p-button>
+    </div>
+</div>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CleaningServiceDisplay } from 'src/app/core/dto/CleaningServiceDisplay';
 import { CleaningServiceDto } from 'src/app/core/dto/CleaningServiceDto';
 import { CleaningApiService } from 'src/app/core/services/cleaning-api.service';
 
@@ -10,7 +11,7 @@ import { CleaningApiService } from 'src/app/core/services/cleaning-api.service';
 })
 export class ServicesHistoryComponent implements OnInit {
 
-  cleaningServices: CleaningServiceDto[] = [];
+  cleaningServices: CleaningServiceDisplay[] = [];
 
   constructor(
     private cleaningServiceApi: CleaningApiService,

@@ -13,7 +13,7 @@ import { CleaningDescriptionComponent } from './cleaning-description/cleaning-de
 })
 export class CleaningServiceDescriptionsComponent implements OnInit {
 
-  dto!: CleaningServiceDescriptionsDto;
+  dto = new CleaningServiceDescriptionsDto();
 
   constructor(
     public dialogService: DialogService,
@@ -23,13 +23,11 @@ export class CleaningServiceDescriptionsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getDescriptions();
-    this.dto = new CleaningServiceDescriptionsDto();
   }
 
   private getDescriptions(){
     this.administratorApi.getDescriptions().subscribe(res => {
       this.dto = res;
-      console.log(this.dto)
     })
   }
 

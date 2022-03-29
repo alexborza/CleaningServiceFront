@@ -1,1 +1,28 @@
-<p>search-services works!</p>
+<div class="container mb-5">
+    <p-table #dt [columns]="cols" [value]="cleaningServices" [paginator]="true" [rows]="10" responsiveLayout="scroll"
+    [rowsPerPageOptions]="[10,25,50]" selectionMode="single" (onRowSelect)="onRowSelect($event)"
+    [globalFilterFields]="['type','phoneNumber', 'email', 'squareMeters', 'status']">
+        <ng-template pTemplate="caption">
+            <div class="flex">
+                <span class="p-input-icon-left ml-auto">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Search keyword" />
+                </span>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+                <th *ngFor="let col of columns">
+                    {{col.header}}
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-cleaningService let-columns="columns">
+            <tr [pSelectableRow]="cleaningService" style="cursor: pointer;">
+                <td *ngFor="let col of columns">
+                        {{ cleaningService[col.field] }}
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>

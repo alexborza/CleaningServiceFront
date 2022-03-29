@@ -1,5 +1,5 @@
 <div class="container" style="margin-bottom: 90px;">
-    <div class="row p-4">
+    <div class="row p-4" *ngIf="dto">
         <div class="col-12">
             <div class="row section">
                 <div class="col-9">
@@ -9,7 +9,7 @@
                             <span>Service Price:</span>
                         </div>
                         <div class="col-8">
-                            <label>-</label>
+                            <label>{{dto.standardCleaningPrices.standardServicePrice}}</label>
                         </div>
                     </div>
                     <div class="row">
@@ -17,7 +17,7 @@
                             <span>Bedroom Price:</span>
                         </div>
                         <div class="col-8">
-                            <label>-</label>
+                            <label>{{dto.standardCleaningPrices.standardServiceBedroom}}</label>
                         </div>
                     </div>
                     <div class="row">
@@ -25,7 +25,7 @@
                             <span>Bathroom Price:</span>
                         </div>
                         <div class="col-8">
-                            <label>-</label>
+                            <label>{{dto.standardCleaningPrices.standardServiceBathroom}}</label>
                         </div>
                     </div>
                     <div class="row">
@@ -33,7 +33,7 @@
                             <span>Kitchen Price:</span>
                         </div>
                         <div class="col-8">
-                            <label>-</label>
+                            <label>{{dto.standardCleaningPrices.standardServiceKitchen}}</label>
                         </div>
                     </div>
                 </div>
@@ -52,7 +52,7 @@
                             <span>Service Price:</span>
                         </div>
                         <div class="col-8">
-                            <label>-</label>
+                            <label>{{dto.deepCleaningPrices.deepServicePrice}}</label>
                         </div>
                     </div>
                     <div class="row">
@@ -60,7 +60,7 @@
                             <span>Bedroom Price:</span>
                         </div>
                         <div class="col-8">
-                            <label>-</label>
+                            <label>{{dto.deepCleaningPrices.deepServiceBedroom}}</label>
                         </div>
                     </div>
                     <div class="row">
@@ -68,7 +68,7 @@
                             <span>Bathroom Price:</span>
                         </div>
                         <div class="col-8">
-                            <label>-</label>
+                            <label>{{dto.deepCleaningPrices.deepServiceBathroom}}</label>
                         </div>
                     </div>
                     <div class="row">
@@ -76,7 +76,7 @@
                             <span>Kitchen Price:</span>
                         </div>
                         <div class="col-8">
-                            <label>-</label>
+                            <label>{{dto.deepCleaningPrices.deepServiceKitchen}}</label>
                         </div>
                     </div>
                 </div>
@@ -95,7 +95,7 @@
                             <span>Service Price:</span>
                         </div>
                         <div class="col-8">
-                            <label>-</label>
+                            <label>{{dto.postConstructionCleaningPrices.postConstructionServicePrice}}</label>
                         </div>
                     </div>
                     <div class="row">
@@ -103,7 +103,7 @@
                             <span>Room Price:</span>
                         </div>
                         <div class="col-8">
-                            <label>-</label>
+                            <label>{{dto.postConstructionCleaningPrices.roomPrice}}</label>
                         </div>
                     </div>
                 </div>
@@ -122,7 +122,7 @@
                             <span>Service Price:</span>
                         </div>
                         <div class="col-8">
-                            <label>-</label>
+                            <label>{{dto.disinfectionCleaningPrices.disinfectionServicePrice}}</label>
                         </div>
                     </div>
                 </div>
@@ -132,5 +132,7 @@
             </div>
         </div>
     </div>
-    <button class="save-button" pButton type="button" label="Save"></button>
+    <button class="save-button" pButton type="button" label="Save" (click)="onSave()"></button>
 </div>
+
+<p-toast></p-toast>
