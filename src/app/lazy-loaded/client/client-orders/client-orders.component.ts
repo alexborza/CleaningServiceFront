@@ -48,7 +48,8 @@ export class ClientOrdersComponent implements OnInit {
   toCleaningService(id: number) {
     const ref = this.dialogService.open(CleaningServiceComponent, {
       data: {
-        id: id
+        id: id,
+        canEditService: true
       },
       header: 'Cleaning Service Details',
       width: '70%'

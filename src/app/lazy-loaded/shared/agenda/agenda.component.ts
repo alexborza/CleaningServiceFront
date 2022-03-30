@@ -74,6 +74,7 @@ export class AgendaComponent implements OnInit, OnDestroy {
   private getEmployeeCleaningServicesForDate(){
     this.employeeApi.getEmployeeCleaningServicesForDate(this.id, this.cleaningDate).subscribe(res => {
       this.cleaningServices = res;
+      console.log(res);
     })
   }
 
@@ -116,7 +117,7 @@ export class AgendaComponent implements OnInit, OnDestroy {
     const ref = this.dialogService.open(CleaningServiceComponent, {
       data: {
         id: cleaningService.id,
-        cleaningDate: this.cleaningDate
+        agendaDate: this.cleaningDate
       },
       header: 'Cleaning Service Details',
       width: '70%'

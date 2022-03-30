@@ -21,7 +21,9 @@ export class CleaningServiceComponent implements OnInit {
   cleaningService!: CleaningServiceDto;
   canEditService = false;
   canFinishService = false;
-  cleaningDate: string = "";
+  canServiceBeEdited = false;
+  agendaDate: string = '';
+  cleaningDate: string = '';
   datesOfCleaning: CleaningDateDto[] = [];
   displayCleaningDate = true;
   displayHistoryOfCleaningDates = false;
@@ -36,7 +38,8 @@ export class CleaningServiceComponent implements OnInit {
     private cleaningApi: CleaningApiService
     ) { 
       this.id = this.config.data?.id;
-      this.cleaningDate = this.config.data?.cleaningDate;
+      this.agendaDate = this.config.data?.agendaDate;
+      this.canEditService = this.config.data?.canEditService;
     }
 
   ngOnInit(): void {
@@ -47,13 +50,14 @@ export class CleaningServiceComponent implements OnInit {
   private canUserEditService(){
     const user = this.tokenStorage.getUser();
     this.canDisplayHistory = user.roles.includes(RoleEnum.ROLE_USER);
-    this.canEditService = (user.roles.includes(RoleEnum.ROLE_ADMIN) || user.roles.includes(RoleEnum.ROLE_USER)) && !this.isDeleted();
+    this.canServiceBeEdited = this.canEditService && this.isInProgress();
     this.canFinishService = user.roles.includes(RoleEnum.ROLE_EMPLOYEE) && !this.isFinished() && this.isCleaningDateValid();
   }
 
   private getCleaningService(){
     this.cleaningApi.getCleaningService(this.id).subscribe(res => {
       this.cleaningService = res;
+      console.log('cleaning Service',this.cleaningService)
       this.getDatesOfCleaningForCleaningService();
     })
   }
@@ -80,17 +84,18 @@ export class CleaningServiceComponent implements OnInit {
 
   private isCleaningDateValid(){
     const currentDate = formatDate(new Date().toLocaleDateString(), 'yyyy-MM-dd', 'en-US');
-    return currentDate === this.cleaningDate;
+    return currentDate === this.agendaDate;
   }
 
   private isFinished(){
-    if(this.datesOfCleaning.find(dateOfCleaning => dateOfCleaning?.cleaningDate === this.cleaningDate))
-      return true;   
+    console.log(this.datesOfCleaning.find(dateOfCleaning => dateOfCleaning?.cleaningDate === this.agendaDate) || this.cleaningService.status === CleaningStatusEnum.Finished)
+    if(this.datesOfCleaning.find(dateOfCleaning => dateOfCleaning?.cleaningDate === this.agendaDate) || this.cleaningService.status === CleaningStatusEnum.Finished)
+      return true;
     return false;
   }
 
-  private isDeleted(){
-    return this.cleaningService.status === CleaningStatusEnum.Deleted;
+  private isInProgress(){
+    return this.cleaningService.status === CleaningStatusEnum.InProgress;
   }
 
   confirm(){

@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+import { DialogService } from 'primeng/dynamicdialog';
 import { CleaningServiceDisplay } from 'src/app/core/dto/CleaningServiceDisplay';
-import { CleaningServiceDto } from 'src/app/core/dto/CleaningServiceDto';
 import { CleaningApiService } from 'src/app/core/services/cleaning-api.service';
+import { CleaningServiceComponent } from 'src/app/lazy-loaded/shared/cleaning-service/cleaning-service.component';
 
 @Component({
   selector: 'app-search-services',
   templateUrl: './search-services.component.html',
-  styleUrls: ['./search-services.component.scss']
+  styleUrls: ['./search-services.component.scss'],
+  providers: [ DialogService ]
 })
 export class SearchServicesComponent implements OnInit {
 
@@ -14,7 +16,8 @@ export class SearchServicesComponent implements OnInit {
   cleaningServices: CleaningServiceDisplay[] = [];
 
   constructor(
-    private cleaningApi: CleaningApiService
+    private cleaningApi: CleaningApiService,
+    public dialogService: DialogService,
   ) { }
 
   ngOnInit(): void {
@@ -39,8 +42,15 @@ export class SearchServicesComponent implements OnInit {
     ];
   }
 
-  onRowSelect(row: CleaningServiceDto){
-    console.log(row);
+  onRowSelect(row: any){
+    const ref = this.dialogService.open(CleaningServiceComponent, {
+      data: {
+        id: row.data.id,
+        canEditService: true
+      },
+      header: 'Cleaning Service Details',
+      width: '70%'
+    });
   }
 
 }
