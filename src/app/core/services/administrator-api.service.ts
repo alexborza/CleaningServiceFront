@@ -24,20 +24,12 @@ export class AdministratorApiService {
     return this.http.get<ServicesAgenda[]>(this.baseUrl + "services-agenda?date=" + date);
   }
 
-  getDescriptions(): Observable<CleaningServiceDescriptionsDto> {
-    return this.http.get<CleaningServiceDescriptionsDto>(this.baseUrl + "descriptions");
-  }
-
   createDescriptions(dto: CleaningServiceDescriptionsDto) {
     return this.http.post(this.baseUrl + "create-descriptions", dto);
   }
 
   updateDescriptions(id: number, dto: CleaningServiceDescriptionsDto) {
     return this.http.put(this.baseUrl + 'update-descriptions/' + id, dto)
-  }
-
-  getCleaningServicePrices(): Observable<CleaningServicePricesDto> {
-    return this.http.get<CleaningServicePricesDto>(this.baseUrl + 'prices');
   }
 
   createCleaningPrices(dto: CleaningServicePricesDto) {

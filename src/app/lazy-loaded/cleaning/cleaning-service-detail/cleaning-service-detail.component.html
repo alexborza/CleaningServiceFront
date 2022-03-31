@@ -9,10 +9,14 @@
                     [bedroomPrices]="bedroomPrices"
                     [bathroomPrices]="bathroomPrices"
                     [kitchenPrices]="kitchenPrices"
+                    [pickUpKeysPrice]="pickUpKeysPrice"
+                    [paidParkingSpotPrice]="paidParkingSpotPrice"
                 ></app-standard-cleaning-service-detail>
                 <app-environmental-cleaning-service-detail *ngIf="!isStandardDetail()"
                     [propertyPrices]="propertyPrices"
                     [roomPrices]="roomPrices"
+                    [pickUpKeysPrice]="pickUpKeysPrice"
+                    [paidParkingSpotPrice]="paidParkingSpotPrice"
                 ></app-environmental-cleaning-service-detail>
                 <app-cleaning-frequency *ngIf="isStandardDetail()"></app-cleaning-frequency>
                 <app-cleaning-date 

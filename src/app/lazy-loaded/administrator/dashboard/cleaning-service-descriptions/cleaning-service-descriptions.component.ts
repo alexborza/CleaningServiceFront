@@ -3,6 +3,7 @@ import { MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { CleaningServiceDescriptionsDto } from 'src/app/core/dto/CleaningServiceDescriptionDto';
 import { AdministratorApiService } from 'src/app/core/services/administrator-api.service';
+import { CleaningApiService } from 'src/app/core/services/cleaning-api.service';
 import { CleaningDescriptionComponent } from './cleaning-description/cleaning-description.component';
 
 @Component({
@@ -18,7 +19,8 @@ export class CleaningServiceDescriptionsComponent implements OnInit {
   constructor(
     public dialogService: DialogService,
     private messageService: MessageService,
-    private administratorApi: AdministratorApiService
+    private administratorApi: AdministratorApiService,
+    private cleaningApi: CleaningApiService
   ) { }
 
   ngOnInit(): void {
@@ -26,7 +28,7 @@ export class CleaningServiceDescriptionsComponent implements OnInit {
   }
 
   private getDescriptions(){
-    this.administratorApi.getDescriptions().subscribe(res => {
+    this.cleaningApi.getDescriptions().subscribe(res => {
       this.dto = res;
     })
   }

@@ -6,6 +6,7 @@ import { AvailableHour } from 'src/app/core/dto/AvailableHour';
 import { CleaningDateDto } from 'src/app/core/dto/CleaningDateDto';
 import { CleaningFrequencyEnum } from 'src/app/core/dto/CleaningFrequencyEnum';
 import { CleaningServiceDto } from 'src/app/core/dto/CleaningServiceDto';
+import { CleaningServicePricesDto } from 'src/app/core/dto/CleaningServicePricesDto';
 import { CleaningTypeEnum } from 'src/app/core/dto/CleaningTypeEnum';
 import { ContactInfoDto } from 'src/app/core/dto/ContactInfoDto';
 import { DisinfectionCleaningDetailsDto } from 'src/app/core/dto/DisinfectionCleaningDetailsDto';
@@ -30,6 +31,9 @@ export class CleaningServiceDetailComponent implements OnInit {
   title: string = '';
   type!: CleaningServiceType;
   cleaningService!: CleaningServiceDto;
+  cleaningServicePricesDto: CleaningServicePricesDto;
+  pickUpKeysPrice: number;
+  paidParkingSpotPrice: number;
   cleaningServicePrice: number = 0;
   cleaningDetailsPrices: number = 0;
   discount: number = 0;
@@ -56,7 +60,7 @@ export class CleaningServiceDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.getRouteData();
-    this.setCleaningPrices();
+    this.getCleaningServicePrices();
     this.buildForm();
     this.setBookingSummary();
     this.getEmployeesAgendaForDate();
@@ -67,28 +71,45 @@ export class CleaningServiceDetailComponent implements OnInit {
     this.type = this.route.snapshot.data?.['type'];
   }
 
+  private getCleaningServicePrices(){
+    this.cleaningApi.getCleaningServicePrices().subscribe(res => {
+      this.cleaningServicePricesDto = res;
+      this.setCleaningPrices();
+    })
+  }
+
   private setCleaningPrices(){
+    this.pickUpKeysPrice = this.cleaningServicePricesDto.pickUpKeysPrice;
+    this.paidParkingSpotPrice = this.cleaningServicePricesDto.paidParkingSpotPrice;
+    
     switch(this.type){
       case CleaningServiceType.StandardCleaning:
-        this.cleaningServicePrice = 50;
-        this.bedroomPrices = [10, 20, 30, 40, 50, 60];
-        this.bathroomPrices = [15, 30, 45, 60, 75, 90];
-        this.kitchenPrices = [15, 30, 45, 60, 75, 90];
+        let sbedroomPrice = this.cleaningServicePricesDto.standardCleaningPrices.standardServiceBedroom;
+        let sbathroomPrice = this.cleaningServicePricesDto.standardCleaningPrices.standardServiceBathroom;
+        let skitchenPrice = this.cleaningServicePricesDto.standardCleaningPrices.standardServiceKitchen;
+        this.cleaningServicePrice = this.cleaningServicePricesDto.standardCleaningPrices.standardServicePrice;
+        this.bedroomPrices = [sbedroomPrice, sbedroomPrice * 2, sbedroomPrice * 3, sbedroomPrice * 4, sbedroomPrice * 5, sbedroomPrice * 6];
+        this.bathroomPrices = [sbathroomPrice, sbathroomPrice * 2, sbathroomPrice * 3, sbathroomPrice * 4, sbathroomPrice * 5, sbathroomPrice * 6];
+        this.kitchenPrices = [skitchenPrice, skitchenPrice * 2, skitchenPrice * 3, skitchenPrice * 4, skitchenPrice * 5, skitchenPrice * 6];
         break;
       case CleaningServiceType.DeepCleaning:
-        this.cleaningServicePrice = 80;
-        this.bedroomPrices = [12, 24, 36, 48, 60, 72];
-        this.bathroomPrices = [18, 36, 54, 72, 90, 106];
-        this.kitchenPrices = [18, 36, 54, 72, 90, 106];
+        let dbedroomPrice = this.cleaningServicePricesDto.deepCleaningPrices.deepServiceBedroom;
+        let dbathroomPrice = this.cleaningServicePricesDto.deepCleaningPrices.deepServiceBathroom;
+        let dkitchenPrice = this.cleaningServicePricesDto.deepCleaningPrices.deepServiceKitchen;
+        this.cleaningServicePrice = this.cleaningServicePricesDto.deepCleaningPrices.deepServicePrice;
+        this.bedroomPrices = [dbedroomPrice, dbedroomPrice * 2, dbedroomPrice * 3, dbedroomPrice * 4, dbedroomPrice * 5, dbedroomPrice * 6];
+        this.bathroomPrices = [dbathroomPrice, dbathroomPrice * 2, dbathroomPrice * 3, dbathroomPrice * 4, dbathroomPrice * 5, dbathroomPrice * 6];
+        this.kitchenPrices = [dkitchenPrice, dkitchenPrice * 2, dkitchenPrice * 3, dkitchenPrice * 4, dkitchenPrice * 5, dkitchenPrice * 6];
         break;
       case CleaningServiceType.PostContructionCleaning:
-        this.cleaningServicePrice = 100;
-        this.propertyPrices = [50, 100, 150];
-        this.roomPrices = [20, 40, 60, 90, 110, 140, 170, 200, 230, 260];
+        let room = this.cleaningServicePricesDto.postConstructionCleaningPrices.roomPrice;
+        this.cleaningServicePrice = this.cleaningServicePricesDto.postConstructionCleaningPrices.postConstructionServicePrice;
+        this.propertyPrices = [50, 100, 150]; // ce facem cu property prices?
+        this.roomPrices = [room, room * 2, room * 3, room * 4, room * 5, room * 6, room * 7, room * 8, room * 9, room * 10];
         break;
       case CleaningServiceType.DisinfectionCleaning:
-        this.cleaningServicePrice = 110;
-        this.propertyPrices = [50, 100, 150];
+        this.cleaningServicePrice = this.cleaningServicePricesDto.disinfectionCleaningPrices.disinfectionServicePrice;
+        this.propertyPrices = [50, 100, 150]; // ce facem cu property prices?
         break;
       default:
         break;

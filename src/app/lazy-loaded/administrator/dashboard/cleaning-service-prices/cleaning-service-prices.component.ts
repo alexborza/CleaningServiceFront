@@ -3,7 +3,9 @@ import { MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { CleaningServicePricesDto } from 'src/app/core/dto/CleaningServicePricesDto';
 import { AdministratorApiService } from 'src/app/core/services/administrator-api.service';
+import { CleaningApiService } from 'src/app/core/services/cleaning-api.service';
 import { CleaningPriceComponent } from './cleaning-price/cleaning-price.component';
+import { ExtraServicesPriceComponent } from './extra-services-price/extra-services-price.component';
 
 @Component({
   selector: 'app-cleaning-service-prices',
@@ -18,7 +20,8 @@ export class CleaningServicePricesComponent implements OnInit {
   constructor(
     public dialogService: DialogService,
     private messageService: MessageService,
-    private administratorApi: AdministratorApiService
+    private administratorApi: AdministratorApiService,
+    private cleaningApi: CleaningApiService
   ) { }
 
   ngOnInit(): void {
@@ -26,7 +29,7 @@ export class CleaningServicePricesComponent implements OnInit {
   }
 
   private getCleaningServicePrices(){
-    this.administratorApi.getCleaningServicePrices().subscribe(res => {
+    this.cleaningApi.getCleaningServicePrices().subscribe(res => {
       this.dto = res;
     })
   }
@@ -38,6 +41,16 @@ export class CleaningServicePricesComponent implements OnInit {
         dto: this.dto
       },
       header: 'Modify Prices',
+      width: '50%'
+    });
+  }
+
+  modifyExtraServicesPrice(){
+    const ref = this.dialogService.open(ExtraServicesPriceComponent, {
+      data: {
+        dto: this.dto
+      },
+      header: 'Modify Extra Services Price',
       width: '50%'
     });
   }

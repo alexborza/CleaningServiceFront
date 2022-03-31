@@ -37,6 +37,7 @@ import { CleaningServicePricesComponent } from './dashboard/cleaning-service-pri
 import { CleaningServiceDescriptionsComponent } from './dashboard/cleaning-service-descriptions/cleaning-service-descriptions.component';
 import { CleaningDescriptionComponent } from './dashboard/cleaning-service-descriptions/cleaning-description/cleaning-description.component';
 import { CleaningPriceComponent } from './dashboard/cleaning-service-prices/cleaning-price/cleaning-price.component';
+import { ExtraServicesPriceComponent } from './dashboard/cleaning-service-prices/extra-services-price/extra-services-price.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { CleaningPriceComponent } from './dashboard/cleaning-service-prices/clea
     CleaningServicePricesComponent,
     CleaningServiceDescriptionsComponent,
     CleaningDescriptionComponent,
-    CleaningPriceComponent
+    CleaningPriceComponent,
+    ExtraServicesPriceComponent
   ],
   imports: [
     CommonModule,

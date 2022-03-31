@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { ControlContainer } from '@angular/forms';
 import { HomeAccessEnum } from 'src/app/core/dto/HomeAccessEnum';
 import { ParkingEnum } from 'src/app/core/dto/ParkingEnum';
@@ -8,12 +8,14 @@ import { ParkingEnum } from 'src/app/core/dto/ParkingEnum';
   templateUrl: './standard-cleaning-service-detail.component.html',
   styleUrls: ['./standard-cleaning-service-detail.component.scss']
 })
-export class StandardCleaningServiceDetailComponent implements OnInit {
+export class StandardCleaningServiceDetailComponent implements OnInit, OnChanges {
 
   standardCleaningForm: any;
   @Input() bedroomPrices: number[] = [];
   @Input() bathroomPrices: number[] = [];
   @Input() kitchenPrices: number[] = [];
+  @Input() paidParkingSpotPrice: number;
+  @Input() pickUpKeysPrice: number;
   bedrooms: Room[] = [];
   bathrooms: Room[] = [];
   kitchens: Room[] = [];
@@ -22,9 +24,8 @@ export class StandardCleaningServiceDetailComponent implements OnInit {
   homeAccess: HomeAccess[] = [];
 
   constructor(public controlContainer: ControlContainer) { }
-
-  ngOnInit(): void {
-    this.standardCleaningForm = this.controlContainer.control;
+  
+  ngOnChanges(): void {
     this.bedrooms = [
       {label: "0 Bedroom", value: 0, price: 0},
       {label: "1 Bedroom", value: 1, price: this.bedroomPrices[0]},
@@ -57,16 +58,19 @@ export class StandardCleaningServiceDetailComponent implements OnInit {
 
     this.parking = [
       {label: "Free parking spot", value: ParkingEnum.Free, price: 0},
-      {label: "Paid parking spot", value: ParkingEnum.Paid, price: 15}
+      {label: "Paid parking spot", value: ParkingEnum.Paid, price: this.paidParkingSpotPrice}
     ]
 
     this.homeAccess = [
       {label: "Meet at the location", value: HomeAccessEnum.Meet, price: 0},
       {label: "Key placed in the mailbox", value: HomeAccessEnum.KeyMailbox, price: 0},
-      {label: "Pick up keys(additional charges)", value: HomeAccessEnum.PickupKey, price: 15},
+      {label: "Pick up keys(additional charges)", value: HomeAccessEnum.PickupKey, price: this.pickUpKeysPrice},
       {label: "Give us a call to organize", value: HomeAccessEnum.Call, price: 0}
     ]
+  }
 
+  ngOnInit(): void {
+    this.standardCleaningForm = this.controlContainer.control;
     this.squareMeters = [
       {label: '50 to 80', timeEstimation: 2},
       {label: '81 to 120', timeEstimation: 3},
@@ -77,7 +81,6 @@ export class StandardCleaningServiceDetailComponent implements OnInit {
       {label: '281 to 320', timeEstimation: 8},
     ]
   }
-
 }
 
 interface SquareMeters {

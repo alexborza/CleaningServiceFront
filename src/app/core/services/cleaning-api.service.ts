@@ -2,8 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CleaningDateDto } from '../dto/CleaningDateDto';
+import { CleaningServiceDescriptionsDto } from '../dto/CleaningServiceDescriptionDto';
 import { CleaningServiceDisplay } from '../dto/CleaningServiceDisplay';
 import { CleaningServiceDto } from '../dto/CleaningServiceDto';
+import { CleaningServicePricesDto } from '../dto/CleaningServicePricesDto';
 
 @Injectable({
   providedIn: 'root'
@@ -46,5 +48,13 @@ export class CleaningApiService {
 
   getNextCleaningDate(id: number): Observable<CleaningDateDto> {
     return this.http.get<CleaningDateDto>(this.baseUrl + "/next-cleaning-date/" + id);
+  }
+
+  getDescriptions(): Observable<CleaningServiceDescriptionsDto> {
+    return this.http.get<CleaningServiceDescriptionsDto>(this.baseUrl + "/descriptions");
+  }
+
+  getCleaningServicePrices(): Observable<CleaningServicePricesDto> {
+    return this.http.get<CleaningServicePricesDto>(this.baseUrl + '/prices');
   }
 }

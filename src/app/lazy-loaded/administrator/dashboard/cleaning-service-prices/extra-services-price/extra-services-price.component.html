@@ -1,0 +1,17 @@
+<div class="container">
+    <div class="row">
+        <div class="col-12 control">
+            <label for="paidParkingSpotPrice">Paid Parking Spot Price</label>
+            <input pInputTextarea #paidParkingSpotPrice="ngModel" name="paidParkingSpotPrice" id="paidParkingSpotPrice" placeholder="Paid parking spot price" type="number" required pInputText [(ngModel)]="parkingSpot" [ngClass]="{'ng-dirty': (paidParkingSpotPrice.touched && paidParkingSpotPrice.invalid) || (paidParkingSpotPrice.invalid && submitted) || (paidParkingSpotPrice.dirty && paidParkingSpotPrice.invalid)}">
+            <small class="p-error" *ngIf="(paidParkingSpotPrice.invalid && submitted) || (paidParkingSpotPrice.dirty && paidParkingSpotPrice.invalid) || (paidParkingSpotPrice.touched && paidParkingSpotPrice.invalid)">Paid parking spot price is required.</small>
+        </div>
+
+        <div class="col-12 control">
+            <label for="pickUpKeysPrice">Pick Up Keys Price</label>
+            <input pInputTextarea #pickUpKeysPrice="ngModel" name="pickUpKeysPrice" id="pickUpKeysPrice" placeholder="Pick up keys price" type="number" required pInputText [(ngModel)]="pickUpKeys" [ngClass]="{'ng-dirty': (pickUpKeysPrice.touched && pickUpKeysPrice.invalid) || (pickUpKeysPrice.dirty && pickUpKeysPrice.invalid) || (pickUpKeysPrice.invalid && submitted)}">
+            <small class="p-error" *ngIf="(pickUpKeysPrice.dirty && pickUpKeysPrice.invalid) || (pickUpKeysPrice.invalid && submitted) || (pickUpKeysPrice.touched && pickUpKeysPrice.invalid)">Pick up keys price is required.</small>
+        </div>
+
+        <p-button label="Save" (onClick)="save(paidParkingSpotPrice.control, pickUpKeysPrice.control)"></p-button>
+    </div>
+</div>

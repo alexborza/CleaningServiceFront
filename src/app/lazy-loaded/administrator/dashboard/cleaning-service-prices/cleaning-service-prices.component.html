@@ -131,6 +131,33 @@
                 </div>
             </div>
         </div>
+
+        <div class="col-12">
+            <div class="row section">
+                <div class="col-9">
+                    <b>Extra Services Price</b>
+                    <div class="row">
+                        <div class="col-4">
+                            <span>Paid Parking Spot Price:</span>
+                        </div>
+                        <div class="col-8">
+                            <label>{{dto.paidParkingSpotPrice}}</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <span>Pick Up Keys Price:</span>
+                        </div>
+                        <div class="col-8">
+                            <label>{{dto.pickUpKeysPrice}}</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-2">
+                    <button class="modify" pButton type="button" label="Modify" (click)="modifyExtraServicesPrice()"></button>
+                </div>
+            </div>
+        </div>
     </div>
     <button class="save-button" pButton type="button" label="Save" (click)="onSave()"></button>
 </div>

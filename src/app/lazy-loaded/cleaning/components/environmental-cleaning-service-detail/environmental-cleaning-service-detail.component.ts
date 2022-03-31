@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ControlContainer } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HomeAccessEnum } from 'src/app/core/dto/HomeAccessEnum';
@@ -10,11 +10,13 @@ import { PropertyEnum } from 'src/app/core/dto/PropertyEnum';
   templateUrl: './environmental-cleaning-service-detail.component.html',
   styleUrls: ['./environmental-cleaning-service-detail.component.scss']
 })
-export class EnvironmentalCleaningServiceDetailComponent implements OnInit {
+export class EnvironmentalCleaningServiceDetailComponent implements OnInit, OnChanges {
 
   environmentCleaningForm: any;
   @Input() roomPrices: number[] = [];
   @Input() propertyPrices: number[] = [];
+  @Input() paidParkingSpotPrice: number;
+  @Input() pickUpKeysPrice: number;
   properties: Property[] = [];
   rooms: Room[] = [];
   parking: Parking[] = [];
@@ -27,16 +29,7 @@ export class EnvironmentalCleaningServiceDetailComponent implements OnInit {
     private router: Router
     ) { }
 
-  ngOnInit(): void {
-    this.environmentCleaningForm = this.controlContainer.control;
-    this.isPostConstruction();
-
-    this.properties = [
-      {label: "Apartment", value: PropertyEnum.Apartment, price: this.propertyPrices[0]},
-      {label: "Family home", value: PropertyEnum.FamilyHome, price: this.propertyPrices[1]},
-      {label: "Office space", value: PropertyEnum.OfficeSpace, price: this.propertyPrices[2]},
-    ];
-
+  ngOnChanges(changes: SimpleChanges): void {
     this.rooms = [
       {label: "1 room", value: 1, price: this.roomPrices[0]},
       {label: "2 rooms", value: 2, price: this.roomPrices[1]},
@@ -52,15 +45,26 @@ export class EnvironmentalCleaningServiceDetailComponent implements OnInit {
 
     this.parking = [
       {label: "Free parking spot", value: ParkingEnum.Free, price: 0},
-      {label: "Paid parking spot", value: ParkingEnum.Paid, price: 15}
+      {label: "Paid parking spot", value: ParkingEnum.Paid, price: this.paidParkingSpotPrice}
     ]
 
     this.homeAccess = [
       {label: "Meet at the location", value: HomeAccessEnum.Meet, price: 0},
       {label: "Key placed in the mailbox", value: HomeAccessEnum.KeyMailbox, price: 0},
-      {label: "Pick up keys(additional charges)", value: HomeAccessEnum.PickupKey, price: 15},
+      {label: "Pick up keys(additional charges)", value: HomeAccessEnum.PickupKey, price: this.pickUpKeysPrice},
       {label: "Give us a call to organize", value: HomeAccessEnum.Call, price: 0}
     ]
+  }
+
+  ngOnInit(): void {
+    this.environmentCleaningForm = this.controlContainer.control;
+    this.isPostConstruction();
+
+    this.properties = [
+      {label: "Apartment", value: PropertyEnum.Apartment, price: this.propertyPrices[0]},
+      {label: "Family home", value: PropertyEnum.FamilyHome, price: this.propertyPrices[1]},
+      {label: "Office space", value: PropertyEnum.OfficeSpace, price: this.propertyPrices[2]},
+    ];
 
     this.squareMeters = [
       {label: '50 to 80', timeEstimation: 2},
