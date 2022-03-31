@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { CleaningServiceDto } from '../dto/CleaningServiceDto';
 import { MessageResponseDto } from '../dto/MessageResponseDto';
 import { ModifyPassswordDto } from '../dto/ModifyPasswordDto';
-import { OfficeCleaningDto } from '../dto/OfficeCleaningDto';
 import { UserDto } from '../dto/UserDto';
 import { UserInformationDto } from '../dto/UserInformationDto';
 
@@ -21,9 +20,5 @@ export class ClientService {
 
   getClientsCleaningServices(userId: number): Observable<CleaningServiceDto[]> {
     return this.http.get<CleaningServiceDto[]>(this.baseUrl + "cleaning-services/" + userId);
-  }
-
-  getClientsOfficeCleanings(userId: number): Observable<OfficeCleaningDto[]> {
-    return this.http.get<OfficeCleaningDto[]>(this.baseUrl + "office-cleanings/" + userId);
   }
 }

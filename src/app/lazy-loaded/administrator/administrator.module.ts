@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { AdministratorRoutingModule } from './administrator-routing.module';
 import { AdministratorComponent } from './administrator/administrator.component';
 import { DividerModule } from 'primeng/divider';
-import { QuoteRequestsComponent } from './quote-requests/quote-requests.component';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -42,7 +41,6 @@ import { ExtraServicesPriceComponent } from './dashboard/cleaning-service-prices
 @NgModule({
   declarations: [
     AdministratorComponent,
-    QuoteRequestsComponent,
     ServicesHistoryComponent,
     EmployeeContractComponent,
     EmployeeAccountComponent,

@@ -17,21 +17,6 @@
                 </ng-template>
             </p-table>
         </div>
-        <div class="table">
-            <h5 style="margin-bottom: 10px;">Office Cleaning Services History</h5>
-            <p-table [value]="officeCleanings" [paginator]="officeCleanings.length > 10 ? true : false" [rows]="10" responsiveLayout="scroll"
-            [rowsPerPageOptions]="[10,25,50]">
-                <ng-template pTemplate="body" let-request>
-                    <tr>
-                        <td>{{request.spaceDetails.primaryUseOfSpace}}</td>
-                        <td>{{request.spaceDetails.totalSquareMeters}} m²</td>
-                        <td>{{request.spaceDetails.frequencyOfCleaning}}</td>
-                        <td>{{request.spaceDetails.numberOfPersons}} persons</td>
-                        <td><button pButton type="button" label="Details" (click)="toQuoteRequest(request.id)"></button></td>
-                    </tr>
-                </ng-template>
-            </p-table>
-        </div>
     </p-card>
 </div>
 

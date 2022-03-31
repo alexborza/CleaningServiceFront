@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CleaningServiceDetailComponent } from './cleaning-service-detail/cleaning-service-detail.component';
-import { OfficeCleaningComponent } from './office-cleaning/office-cleaning.component';
 
 const routes: Routes = [
   {
@@ -18,14 +17,6 @@ const routes: Routes = [
     data: {
       title: 'Disinfection and Environmental Cleaning',
       type: 'Disinfection Cleaning'
-    }
-  },
-  {
-    path: 'office-cleaning',
-    component: OfficeCleaningComponent,
-    data: {
-      title: 'Request a Quote for Office Cleaning',
-      type: 'Office Cleaning'
     }
   },
   {

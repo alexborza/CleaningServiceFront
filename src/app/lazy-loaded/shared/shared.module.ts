@@ -19,7 +19,6 @@ import { InputMaskModule } from 'primeng/inputmask';
 import { CalendarModule } from 'primeng/calendar'
 import { DropdownModule } from 'primeng/dropdown';
 import { CleaningServiceComponent } from './cleaning-service/cleaning-service.component';
-import { QuoteRequestComponent } from './quote-request/quote-request.component';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { ModifyEmergencyContactInfoComponent } from './components/modify-emergency-contact-info/modify-emergency-contact-info.component';
 import { JobInfoDetailsComponent } from './components/job-info-details/job-info-details.component';
@@ -36,7 +35,6 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
     ModifyPasswordComponent,
     ModifyPersonalInfoComponent,
     CleaningServiceComponent,
-    QuoteRequestComponent,
     ModifyEmergencyContactInfoComponent,
     JobInfoDetailsComponent,
     AgendaComponent
@@ -63,7 +61,6 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
     SidebarComponent,
     AccountSettingsComponent,
     CleaningServiceComponent,
-    QuoteRequestComponent,
     AgendaComponent
   ],
   entryComponents: [

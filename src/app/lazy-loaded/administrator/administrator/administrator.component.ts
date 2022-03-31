@@ -27,7 +27,6 @@ export class AdministratorComponent implements OnInit {
       {label: 'Employees', routerLink: 'employees', routerLinkActiveOptions: {exact: false}},
       {label: 'New contract', routerLink: 'employee-contract', routerLinkActiveOptions: {exact: false} },
       {label: 'Services Agenda', routerLink: 'services-agenda', routerLinkActiveOptions: {exact: false}},
-      {label: 'Quote Requests', routerLink: 'quote-requests', routerLinkActiveOptions: {exact: false}},
     ]
   }
 

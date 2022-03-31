@@ -3,5 +3,4 @@ export enum CleaningServiceType {
     DeepCleaning = "Deep Cleaning",
     DisinfectionCleaning = "Disinfection Cleaning",
     PostContructionCleaning = "Post Construction Cleaning",
-    OfficeCleaning = "Office Cleaning"
 }

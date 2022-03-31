@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { DialogService } from 'primeng/dynamicdialog';
 import { CleaningServiceDto } from 'src/app/core/dto/CleaningServiceDto';
-import { OfficeCleaningDto } from 'src/app/core/dto/OfficeCleaningDto';
 import { ClientService } from 'src/app/core/services/client.service';
 import { CleaningServiceComponent } from '../../shared/cleaning-service/cleaning-service.component';
 
@@ -16,11 +15,9 @@ export class ClientOrdersComponent implements OnInit {
 
   id!: number;
   cleaningServices: CleaningServiceDto[] = [];
-  officeCleanings: OfficeCleaningDto[] = [];
 
   constructor(
     private clientApi: ClientService,
-    private router: Router,
     public dialogService: DialogService,
     private route: ActivatedRoute
   ) { }
@@ -30,18 +27,11 @@ export class ClientOrdersComponent implements OnInit {
       this.id = Number.parseInt(params['userId']);
     });
     this.getClientsCleaningServices();
-    this.getClientsOfficeCleanings();
   }
 
   private getClientsCleaningServices(){
     this.clientApi.getClientsCleaningServices(this.id).subscribe(res => {
       this.cleaningServices = res;
-    })
-  }
-
-  private getClientsOfficeCleanings(){
-    this.clientApi.getClientsOfficeCleanings(this.id).subscribe(res => {
-      this.officeCleanings = res;
     })
   }
 
@@ -54,10 +44,6 @@ export class ClientOrdersComponent implements OnInit {
       header: 'Cleaning Service Details',
       width: '70%'
     });
-  }
-
-  toQuoteRequest(id: number) {
-    this.router.navigate(['quote-request', id], {relativeTo: this.route});
   }
 
 }
