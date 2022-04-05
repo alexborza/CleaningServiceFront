@@ -8,6 +8,7 @@ import { ClientOrdersComponent } from './client-orders/client-orders.component';
 import { TableModule } from 'primeng/table';
 import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
+import { ToastModule } from 'primeng/toast';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { ButtonModule } from 'primeng/button';
     SharedModule,
     TableModule,
     CardModule,
-    ButtonModule
+    ButtonModule,
+    ToastModule
   ]
 })
 export class ClientModule { }

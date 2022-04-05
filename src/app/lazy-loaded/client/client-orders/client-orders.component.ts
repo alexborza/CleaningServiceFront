@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
+import { Subscription } from 'rxjs';
 import { CleaningServiceDto } from 'src/app/core/dto/CleaningServiceDto';
 import { ClientService } from 'src/app/core/services/client.service';
+import { SharedDataService } from 'src/app/core/services/shared-data.service';
 import { CleaningServiceComponent } from '../../shared/cleaning-service/cleaning-service.component';
 
 @Component({
@@ -15,11 +18,14 @@ export class ClientOrdersComponent implements OnInit {
 
   id!: number;
   cleaningServices: CleaningServiceDto[] = [];
+  toasterMessageSubscription: Subscription;
 
   constructor(
     private clientApi: ClientService,
     public dialogService: DialogService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private sharedData: SharedDataService,
+    private messageService: MessageService,
   ) { }
 
   ngOnInit(): void {
@@ -27,6 +33,18 @@ export class ClientOrdersComponent implements OnInit {
       this.id = Number.parseInt(params['userId']);
     });
     this.getClientsCleaningServices();
+    this.getToasterMessage();
+  }
+
+  private getToasterMessage(){
+    this.toasterMessageSubscription = this.sharedData.toasterMessage.subscribe((res: any) => {
+      if(res){
+        setTimeout(() => {
+          this.messageService.add(res);
+          this.sharedData.toasterMessage.next(false);
+        }, 100)
+      }
+    });
   }
 
   private getClientsCleaningServices(){

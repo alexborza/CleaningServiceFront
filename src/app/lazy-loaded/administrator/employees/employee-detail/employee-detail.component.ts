@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { EmployeeDto } from 'src/app/core/dto/EmployeeDto';
@@ -19,6 +19,7 @@ export class EmployeeDetailComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private employeeApi: EmployeeApiService,
     public dialogService: DialogService,
     private messageService: MessageService
@@ -53,6 +54,10 @@ export class EmployeeDetailComponent implements OnInit {
         this.messageService.add({severity:'success', summary: 'Success', detail: 'Successfully modified job information!'});
       }
     });
+  }
+
+  back(){
+    this.router.navigate(['/administrator/employees']);
   }
 
 }

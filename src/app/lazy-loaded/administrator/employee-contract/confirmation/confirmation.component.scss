@@ -29,16 +29,3 @@ label {
 .row {
     padding: 15px;
 }
-
-:host ::ng-deep .p-toast-top-right {
-    top: 75px !important;
-    width: 30%;
-}
-
-:host ::ng-deep .p-toast-message.p-toast-message-error {
-    border-radius: 20px;
-}
-
-:host ::ng-deep .p-toast-message.p-toast-message-success {
-    border-radius: 20px;
-}

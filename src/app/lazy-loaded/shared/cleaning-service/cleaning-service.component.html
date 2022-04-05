@@ -1,7 +1,7 @@
 <div class="container p-4 mb-5" *ngIf="cleaningService">
     <div class="row" *ngIf="canServiceBeEdited">
         <div class="col-12 text-end">
-            <button pButton type="button" label="Reschedule"></button>
+            <!-- <button pButton type="button" label="Reschedule"></button> -->
             <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
 
             <button class="end-service p-button-danger" (click)="confirm()" pButton label="End Service"></button>

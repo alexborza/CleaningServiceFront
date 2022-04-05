@@ -35,19 +35,6 @@ span {
     color: #a5a5a5;
 }
 
-:host ::ng-deep .p-toast-top-right {
-    top: 75px !important;
-    width: 30%;
-}
-
-:host ::ng-deep .p-toast-message.p-toast-message-error {
-    border-radius: 20px;
-}
-
-:host ::ng-deep .p-toast-message.p-toast-message-success {
-    border-radius: 20px;
-}
-
 :host ::ng-deep .p-button {
     padding: 0.2rem 1.25rem;
 }

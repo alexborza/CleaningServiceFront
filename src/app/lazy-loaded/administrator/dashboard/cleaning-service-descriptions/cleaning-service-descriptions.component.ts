@@ -61,7 +61,7 @@ export class CleaningServiceDescriptionsComponent implements OnInit {
 
   private createDescriptions(){
     this.administratorApi.createDescriptions(this.dto).subscribe(res => {
-      this.messageService.add({severity:'success', summary:'Success', detail: 'Descriptions updated successfully!'});
+      this.messageService.add({severity:'success', summary:'Success', detail: 'Descriptions updated successfully!', life: 50000});
     });
   }
 

@@ -57,7 +57,6 @@ export class CleaningServiceComponent implements OnInit {
   private getCleaningService(){
     this.cleaningApi.getCleaningService(this.id).subscribe(res => {
       this.cleaningService = res;
-      console.log('cleaning Service',this.cleaningService)
       this.getDatesOfCleaningForCleaningService();
     })
   }
@@ -88,7 +87,6 @@ export class CleaningServiceComponent implements OnInit {
   }
 
   private isFinished(){
-    console.log(this.datesOfCleaning.find(dateOfCleaning => dateOfCleaning?.cleaningDate === this.agendaDate) || this.cleaningService.status === CleaningStatusEnum.Finished)
     if(this.datesOfCleaning.find(dateOfCleaning => dateOfCleaning?.cleaningDate === this.agendaDate) || this.cleaningService.status === CleaningStatusEnum.Finished)
       return true;
     return false;

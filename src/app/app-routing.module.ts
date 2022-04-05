@@ -5,6 +5,11 @@ import { AuthorizationGuard } from './core/guard/authorization.guard';
 
 const routes: Routes = [
   {
+    path: '',
+    redirectTo: '/home',
+    pathMatch: 'full'
+  },
+  {
     path: 'home',
     loadChildren:() => import('./lazy-loaded/home/home.module').then(m=>m.HomeModule)
   },
@@ -59,11 +64,6 @@ const routes: Routes = [
     loadChildren:() => import('./lazy-loaded/login/login.module').then(m=>m.LoginModule),
     canActivate: [AuthenticationGuard],
   },
-  {
-    path: '',
-    redirectTo: '/home',
-    pathMatch: 'full'
-  }
 ];
 
 @NgModule({
