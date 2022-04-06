@@ -25,7 +25,6 @@ import { JobInfoDetailsComponent } from './components/job-info-details/job-info-
 import { AgendaComponent } from './agenda/agenda.component';
 import { DividerModule } from 'primeng/divider';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { MessengerComponent } from './messenger/messenger.component';
 import { TableModule } from 'primeng/table';
 
 
@@ -39,8 +38,7 @@ import { TableModule } from 'primeng/table';
     CleaningServiceComponent,
     ModifyEmergencyContactInfoComponent,
     JobInfoDetailsComponent,
-    AgendaComponent,
-    MessengerComponent
+    AgendaComponent
   ],
   imports: [
     CommonModule,
@@ -65,8 +63,7 @@ import { TableModule } from 'primeng/table';
     SidebarComponent,
     AccountSettingsComponent,
     CleaningServiceComponent,
-    AgendaComponent,
-    MessengerComponent
+    AgendaComponent
   ],
   entryComponents: [
     ModifyEmailComponent,

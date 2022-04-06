@@ -29,8 +29,7 @@ export class ClientProfileComponent implements OnInit {
   private menuInit(){
     this.items = [
       {label: 'Account Settings', routerLink: 'account-settings', routerLinkActiveOptions: {exact: true}},
-      {label: 'My Orders', routerLink: 'orders', routerLinkActiveOptions: {exact: false}},
-      {label: 'Messages', routerLink: 'messenger', routerLinkActiveOptions: {exact: true}}
+      {label: 'My Orders', routerLink: 'orders', routerLinkActiveOptions: {exact: false}}
     ]
   }
 
