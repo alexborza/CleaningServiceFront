@@ -1,12 +1,15 @@
 import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ConfirmationService } from 'primeng/api';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { CleaningDateDto } from 'src/app/core/dto/CleaningDateDto';
 import { CleaningServiceDto } from 'src/app/core/dto/CleaningServiceDto';
 import { CleaningStatusEnum } from 'src/app/core/dto/CleaningStatusEnum';
+import { MessageDto } from 'src/app/core/dto/MessageDto';
 import { RoleEnum } from 'src/app/core/dto/RoleEnum';
 import { CleaningApiService } from 'src/app/core/services/cleaning-api.service';
+import { checkRequiredFields } from 'src/app/core/services/error/validate';
 import { SharedDataService } from 'src/app/core/services/shared-data.service';
 import { TokenStorageService } from 'src/app/core/services/token-storage.service';
 
@@ -18,6 +21,7 @@ import { TokenStorageService } from 'src/app/core/services/token-storage.service
 export class CleaningServiceComponent implements OnInit {
 
   id: any;
+  form: FormGroup;
   cleaningService!: CleaningServiceDto;
   canEditService = false;
   canFinishService = false;
@@ -25,12 +29,15 @@ export class CleaningServiceComponent implements OnInit {
   agendaDate: string = '';
   cleaningDate: string = '';
   datesOfCleaning: CleaningDateDto[] = [];
+  messages: MessageDto;
   displayCleaningDate = true;
   displayHistoryOfCleaningDates = false;
   canDisplayHistory = false;
+  user: any;
 
   constructor(
     private confirmationService: ConfirmationService,
+    private fb: FormBuilder,
     public config: DynamicDialogConfig,
     private sharedData: SharedDataService,
     public ref: DynamicDialogRef,
@@ -43,21 +50,29 @@ export class CleaningServiceComponent implements OnInit {
     }
 
   ngOnInit(): void {
+    this.buildForm();
     this.getCleaningService();
     this.getNextCleaningDate();
   }
 
+  private buildForm(){
+    this.form = this.fb.group({
+      message: new FormControl(null, [Validators.required]),
+    });
+  }
+
   private canUserEditService(){
-    const user = this.tokenStorage.getUser();
-    this.canDisplayHistory = user.roles.includes(RoleEnum.ROLE_USER);
+    this.user = this.tokenStorage.getUser();
+    this.canDisplayHistory = this.user.roles.includes(RoleEnum.ROLE_USER);
     this.canServiceBeEdited = this.canEditService && this.isInProgress();
-    this.canFinishService = user.roles.includes(RoleEnum.ROLE_EMPLOYEE) && !this.isFinished() && this.isCleaningDateValid();
+    this.canFinishService = this.user.roles.includes(RoleEnum.ROLE_EMPLOYEE) && !this.isFinished() && this.isCleaningDateValid();
   }
 
   private getCleaningService(){
     this.cleaningApi.getCleaningService(this.id).subscribe(res => {
       this.cleaningService = res;
       this.getDatesOfCleaningForCleaningService();
+      this.getMessagesForCleaningService();
     })
   }
 
@@ -74,6 +89,12 @@ export class CleaningServiceComponent implements OnInit {
     this.cleaningApi.getDatesOfCleaningForCleaningService(this.id).subscribe(res => {
       this.datesOfCleaning = res;
       this.canUserEditService();
+    })
+  }
+
+  private getMessagesForCleaningService(){
+    this.cleaningApi.getMessagesForCleaningService(this.id).subscribe(res => {
+      this.messages = res;
     })
   }
 
@@ -114,6 +135,27 @@ export class CleaningServiceComponent implements OnInit {
     this.cleaningApi.finishCleaningService(this.id, this.cleaningDate).subscribe(res => {
       this.sharedData.toasterMessage.next({severity:'info', summary:'Confirmed', detail:'You have finished the cleaning service'});
       this.ref.close();
+    })
+  }
+
+  onSubmit(formValue){
+    this.checkRequiredFields();
+    if(this.form.valid){
+      this.submitForm(formValue); 
+    }
+  }
+
+  private checkRequiredFields(){
+    checkRequiredFields(this.form.controls);
+  }
+
+  private submitForm(formValue){
+    const date = formatDate(new Date(), 'yyyy-MM-dd h:mm a', 'en-US');
+    const sender = this.user.username;
+    let dto = new MessageDto(date, sender, formValue.message);
+    this.cleaningApi.addMessageToCleaningService(this.id, dto).subscribe(res => {
+      this.getMessagesForCleaningService();
+      this.form.reset();
     })
   }
 

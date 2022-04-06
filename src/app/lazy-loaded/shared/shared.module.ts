@@ -25,6 +25,8 @@ import { JobInfoDetailsComponent } from './components/job-info-details/job-info-
 import { AgendaComponent } from './agenda/agenda.component';
 import { DividerModule } from 'primeng/divider';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { MessengerComponent } from './messenger/messenger.component';
+import { TableModule } from 'primeng/table';
 
 
 @NgModule({
@@ -37,7 +39,8 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
     CleaningServiceComponent,
     ModifyEmergencyContactInfoComponent,
     JobInfoDetailsComponent,
-    AgendaComponent
+    AgendaComponent,
+    MessengerComponent
   ],
   imports: [
     CommonModule,
@@ -55,13 +58,15 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
     DropdownModule,
     InputTextareaModule,
     DividerModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    TableModule
   ],
   exports: [
     SidebarComponent,
     AccountSettingsComponent,
     CleaningServiceComponent,
-    AgendaComponent
+    AgendaComponent,
+    MessengerComponent
   ],
   entryComponents: [
     ModifyEmailComponent,

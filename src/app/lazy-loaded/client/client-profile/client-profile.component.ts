@@ -30,7 +30,7 @@ export class ClientProfileComponent implements OnInit {
     this.items = [
       {label: 'Account Settings', routerLink: 'account-settings', routerLinkActiveOptions: {exact: true}},
       {label: 'My Orders', routerLink: 'orders', routerLinkActiveOptions: {exact: false}},
-      {label: 'Messages', routerLink: '/client/' + this.id, routerLinkActiveOptions: {exact: true}}
+      {label: 'Messages', routerLink: 'messenger', routerLinkActiveOptions: {exact: true}}
     ]
   }
 
