@@ -34,38 +34,3 @@ a{
     text-decoration: underline !important;
     color: #3b8bb3 !important;
 }
-
-:host ::ng-deep .p-datatable .p-datatable-thead > tr > th {
-    white-space: nowrap;
-    text-align: center;
-}
-
-:host ::ng-deep .p-datatable .p-datatable-tbody > tr > td {
-    text-align: center;
-    font-size: 14px;
-    vertical-align: top;
-    padding-top: 20px;
-}
-
-:host ::ng-deep .p-datatable .p-datatable-thead > tr > th {
-    background: none;
-    border-width: 0 0 2px 0;
-}
-
-:host ::ng-deep .p-inputtextarea {
-    float: right;
-}
-
-.required-star {
-    color:red;
-}
-
-.required-err-message {
-    color: red;
-    contain: size;
-    text-align: right;
-}
-
-.table {
-    padding: 15px;
-}

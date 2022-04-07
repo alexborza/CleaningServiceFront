@@ -122,47 +122,9 @@
             </div>
         </div>
     </div>
-    <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
-        <div class="section row">
-            <h4>Messages History</h4>
-            <div class="col-12 mb-2">
-                <p-table [value]="messages">
-                    <ng-template pTemplate="header">
-                        <tr>
-                            <th>Date</th>
-                            <th>From</th>
-                            <th>Messages</th>
-                        </tr>
-                    </ng-template>
-                    <ng-template pTemplate="body" let-message>
-                        <tr>
-                            <td style="width: 160px;">{{message.messageDate}}</td>
-                            <td style="width: 250px; overflow-wrap: anywhere;">{{message.sender}}</td>
-                            <td>{{message.content}}</td>
-                        </tr>
-                    </ng-template>
-                    <ng-template pTemplate="emptymessage">
-                        <tr>
-                            <td colspan="3">No messages found.</td>
-                        </tr>
-                    </ng-template>
-                </p-table>
-            </div>
-            <div class="col-3">
-                <label>Send a message: </label>
-            </div>
-            <div class="col-9" style="display: grid;">
-                <textarea rows="5" cols="50" pInputTextarea autoResize="autoResize" formControlName="message"></textarea>
-                <small class="required-err-message" 
-                *ngIf="(form.get('message')?.touched && 
-                        form.get('message')?.errors?.['required']) ||
-                        form.get('message')?.hasError('missing')"
-                >The field is required</small>
-            </div>
-            <div class="col-12 text-center">
-                <p-divider></p-divider>
-                <button pButton pRipple type="submit" label="Send Message"></button>
-            </div>
-        </div>
-    </form>
+    <div class="section">
+        <app-messages-history
+            [id]="id"
+        ></app-messages-history>
+    </div>
 </div>

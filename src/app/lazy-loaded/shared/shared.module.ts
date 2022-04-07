@@ -26,6 +26,7 @@ import { AgendaComponent } from './agenda/agenda.component';
 import { DividerModule } from 'primeng/divider';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { TableModule } from 'primeng/table';
+import { MessagesHistoryComponent } from './cleaning-service/messages-history/messages-history.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { TableModule } from 'primeng/table';
     CleaningServiceComponent,
     ModifyEmergencyContactInfoComponent,
     JobInfoDetailsComponent,
-    AgendaComponent
+    AgendaComponent,
+    MessagesHistoryComponent
   ],
   imports: [
     CommonModule,

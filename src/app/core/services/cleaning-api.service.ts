@@ -59,8 +59,8 @@ export class CleaningApiService {
     return this.http.get<CleaningServicePricesDto>(this.baseUrl + '/prices');
   }
 
-  getMessagesForCleaningService(id: number): Observable<MessageDto> {
-    return this.http.get<MessageDto>(this.baseUrl + '/messages/' + id);
+  getMessagesForCleaningService(id: number): Observable<MessageDto[]> {
+    return this.http.get<MessageDto[]>(this.baseUrl + '/messages/' + id);
   }
 
   addMessageToCleaningService(id: number, dto: MessageDto) {
