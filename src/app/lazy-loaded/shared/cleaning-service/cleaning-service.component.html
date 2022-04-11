@@ -1,17 +1,19 @@
 <div class="container p-4 mb-5" *ngIf="cleaningService">
-    <div class="row" *ngIf="canServiceBeEdited">
-        <div class="col-12 text-end">
-            <!-- <button pButton type="button" label="Reschedule"></button> -->
-            <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
-
+    <div class="mb-5 row">
+        <div class="col-6">
+            <button pButton pRipple type="button" (click)="back()" class="p-button-outlined p-button-rounded back-button" icon="pi pi-arrow-left"></button>
+        </div>
+        
+        <div class="text-end col-6" *ngIf="canServiceBeEdited">
+            <button pButton type="button" label="Reschedule" (click)="reschedule()"></button>
             <button class="end-service p-button-danger" (click)="confirm()" pButton label="End Service"></button>
         </div>
-    </div>
 
-    <div class="row" *ngIf="canFinishService">
-        <div class="col-12 text-end">
+        <div class="text-end col-6" *ngIf="canFinishService">
             <button type="button" (click)="finishService()" pButton label="Finish Service"></button>
         </div>
+
+        <h3 class="text-center mt-3">Cleaning Service Details</h3>
     </div>
 
     <div class="section">
@@ -128,3 +130,5 @@
         ></app-messages-history>
     </div>
 </div>
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+<p-toast></p-toast>

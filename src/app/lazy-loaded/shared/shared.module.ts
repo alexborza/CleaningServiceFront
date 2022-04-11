@@ -27,6 +27,9 @@ import { DividerModule } from 'primeng/divider';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { TableModule } from 'primeng/table';
 import { MessagesHistoryComponent } from './cleaning-service/messages-history/messages-history.component';
+import { RescheduleCleaningServiceComponent } from './components/reschedule-cleaning-service/reschedule-cleaning-service.component';
+import { CleaningModule } from '../cleaning/cleaning.module';
+import { SelectButtonModule } from 'primeng/selectbutton';
 
 
 @NgModule({
@@ -40,7 +43,8 @@ import { MessagesHistoryComponent } from './cleaning-service/messages-history/me
     ModifyEmergencyContactInfoComponent,
     JobInfoDetailsComponent,
     AgendaComponent,
-    MessagesHistoryComponent
+    MessagesHistoryComponent,
+    RescheduleCleaningServiceComponent
   ],
   imports: [
     CommonModule,
@@ -59,7 +63,9 @@ import { MessagesHistoryComponent } from './cleaning-service/messages-history/me
     InputTextareaModule,
     DividerModule,
     ConfirmDialogModule,
-    TableModule
+    TableModule,
+    CleaningModule,
+    SelectButtonModule
   ],
   exports: [
     SidebarComponent,
@@ -70,7 +76,8 @@ import { MessagesHistoryComponent } from './cleaning-service/messages-history/me
   entryComponents: [
     ModifyEmailComponent,
     ModifyPasswordComponent,
-    ModifyPersonalInfoComponent
+    ModifyPersonalInfoComponent,
+    RescheduleCleaningServiceComponent
   ]
 })
 export class SharedModule { }

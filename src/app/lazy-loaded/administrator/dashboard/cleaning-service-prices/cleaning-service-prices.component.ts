@@ -64,7 +64,6 @@ export class CleaningServicePricesComponent implements OnInit {
   }
 
   private updateCleaningPrices(){
-    console.log(this.dto)
     this.administratorApi.updateCleaningPrices(this.dto.id, this.dto).subscribe(res => {
       this.messageService.add({severity:'success', summary:'Success', detail: 'Prices updated successfully!'});
     });

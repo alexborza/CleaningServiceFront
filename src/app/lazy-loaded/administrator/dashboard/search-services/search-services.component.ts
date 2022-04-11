@@ -1,17 +1,15 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
-import { DialogService } from 'primeng/dynamicdialog';
 import { Subscription } from 'rxjs';
 import { CleaningServiceDisplay } from 'src/app/core/dto/CleaningServiceDisplay';
 import { CleaningApiService } from 'src/app/core/services/cleaning-api.service';
 import { SharedDataService } from 'src/app/core/services/shared-data.service';
-import { CleaningServiceComponent } from 'src/app/lazy-loaded/shared/cleaning-service/cleaning-service.component';
 
 @Component({
   selector: 'app-search-services',
   templateUrl: './search-services.component.html',
   styleUrls: ['./search-services.component.scss'],
-  providers: [ DialogService ]
 })
 export class SearchServicesComponent implements OnInit, OnDestroy {
 
@@ -21,7 +19,7 @@ export class SearchServicesComponent implements OnInit, OnDestroy {
 
   constructor(
     private cleaningApi: CleaningApiService,
-    public dialogService: DialogService,
+    private router: Router,
     private sharedData: SharedDataService,
     private messageService: MessageService,
   ) { }
@@ -61,14 +59,7 @@ export class SearchServicesComponent implements OnInit, OnDestroy {
   }
 
   onRowSelect(row: any){
-    const ref = this.dialogService.open(CleaningServiceComponent, {
-      data: {
-        id: row.data.id,
-        canEditService: true
-      },
-      header: 'Cleaning Service Details',
-      width: '70%'
-    });
+    this.router.navigate(["/administrator/cleaning-details", row.data.id]);
   }
 
   ngOnDestroy(): void {

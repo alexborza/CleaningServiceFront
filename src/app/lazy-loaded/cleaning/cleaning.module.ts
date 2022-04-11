@@ -53,6 +53,9 @@ import { NgxTrimDirectiveModule } from 'ngx-trim-directive';
     ButtonModule,
     ToastModule,
     NgxTrimDirectiveModule
+  ],
+  exports: [
+    CleaningDateComponent
   ]
 })
 export class CleaningModule { }

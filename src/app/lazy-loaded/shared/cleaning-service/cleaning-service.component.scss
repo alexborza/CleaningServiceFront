@@ -34,3 +34,8 @@ a{
     text-decoration: underline !important;
     color: #3b8bb3 !important;
 }
+
+
+:host ::ng-deep .back-button {
+    color: #124c69 !important;
+}

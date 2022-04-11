@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
 import { TokenStorageService } from '../services/token-storage.service';
 
@@ -8,7 +8,10 @@ import { TokenStorageService } from '../services/token-storage.service';
 })
 export class AuthenticationGuard implements CanActivate {
 
-  constructor(private tokenStorageService: TokenStorageService){}
+  constructor(
+    private tokenStorageService: TokenStorageService, 
+    private router: Router
+  ){}
 
   canActivate(
     route: ActivatedRouteSnapshot,
@@ -18,6 +21,7 @@ export class AuthenticationGuard implements CanActivate {
         if(authenticatedUser == null){
           return resolve(true);
         }
+        this.router.navigate(['/home']);
         return resolve(false);
       })
   }

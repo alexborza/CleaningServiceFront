@@ -1,0 +1,26 @@
+<div class="container mt-3 mb-4">
+    <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+        <div class="row">
+            <div class="col-12">
+                <h2>Choose date to reschedule</h2>
+                <div class="datesToReschedule">
+                    <p-selectButton [options]="datesToReschedule" formControlName="dateToReschedule"></p-selectButton>
+                    <small class="required-err-message" 
+                    *ngIf="(form.get('dateToReschedule')?.touched && 
+                            form.get('dateToReschedule')?.errors?.['required']) ||
+                            form.get('dateToReschedule')?.hasError('missing')"
+                    >The field is required</small>
+                </div>
+            </div>
+            <div class="col-12">
+                <app-cleaning-date 
+                    [employeesDayAgenda]="employeesDayAgenda"
+                    [timeEstimation]="timeEstimation"
+                ></app-cleaning-date>
+            </div>
+        </div>
+        <div class="text-center">
+            <button pButton pRipple type="submit" label="Reschedule"></button>
+        </div>
+    </form>
+</div>

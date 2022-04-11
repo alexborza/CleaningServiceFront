@@ -1,0 +1,18 @@
+.datesToReschedule {
+    margin: 25px 0px 25px 20px;
+}
+
+h2 {
+    font-size: 24px;
+    color: #65686a;
+}
+
+:host ::ng-deep .p-calendar .p-datepicker {
+    top: -220px !important;
+}
+
+.required-err-message {
+    color: red;
+    contain: size;
+    text-align: left;
+}

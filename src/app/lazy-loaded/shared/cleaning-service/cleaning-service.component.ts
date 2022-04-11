@@ -1,23 +1,25 @@
 import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
-import { ConfirmationService } from 'primeng/api';
-import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { DialogService } from 'primeng/dynamicdialog';
 import { CleaningDateDto } from 'src/app/core/dto/CleaningDateDto';
 import { CleaningServiceDto } from 'src/app/core/dto/CleaningServiceDto';
 import { CleaningStatusEnum } from 'src/app/core/dto/CleaningStatusEnum';
 import { RoleEnum } from 'src/app/core/dto/RoleEnum';
 import { CleaningApiService } from 'src/app/core/services/cleaning-api.service';
-import { SharedDataService } from 'src/app/core/services/shared-data.service';
 import { TokenStorageService } from 'src/app/core/services/token-storage.service';
+import { RescheduleCleaningServiceComponent } from '../components/reschedule-cleaning-service/reschedule-cleaning-service.component';
 
 @Component({
   selector: 'app-cleaning-service',
   templateUrl: './cleaning-service.component.html',
-  styleUrls: ['./cleaning-service.component.scss']
+  styleUrls: ['./cleaning-service.component.scss'],
+  providers: [ DialogService ]
 })
 export class CleaningServiceComponent implements OnInit {
 
+  userId: any;
   id: any;
   cleaningService!: CleaningServiceDto;
   canEditService = false;
@@ -32,22 +34,35 @@ export class CleaningServiceComponent implements OnInit {
   user: any;
 
   constructor(
+    private route: ActivatedRoute,
+    private router: Router,
     private confirmationService: ConfirmationService,
-    private fb: FormBuilder,
-    public config: DynamicDialogConfig,
-    private sharedData: SharedDataService,
-    public ref: DynamicDialogRef,
+    private messageService: MessageService,
+    public dialogService: DialogService,
     private tokenStorage: TokenStorageService,
     private cleaningApi: CleaningApiService
     ) { 
-      this.id = this.config.data?.id;
-      this.agendaDate = this.config.data?.agendaDate;
-      this.canEditService = this.config.data?.canEditService;
+      this.getRouteData();
     }
 
   ngOnInit(): void {
+    this.getRouteParams();
     this.getCleaningService();
     this.getNextCleaningDate();
+  }
+
+  private getRouteParams(){
+    this.route.parent.params.subscribe(params => {
+      this.userId = Number.parseInt(params['userId']);
+    });
+    this.route.params.subscribe(params => {
+      this.id = Number.parseInt(params['id']);
+    });
+    this.agendaDate = this.route.snapshot.paramMap.get('agendaDate');
+  }
+
+  private getRouteData(){
+    this.canEditService = this.route.snapshot.data?.['canEditService'];
   }
 
   private canUserEditService(){
@@ -106,8 +121,8 @@ export class CleaningServiceComponent implements OnInit {
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
         this.cleaningApi.endCleaningService(this.id).subscribe(res => {
-          this.sharedData.toasterMessage.next({severity:'info', summary:'Confirmed', detail:'You have ended the cleaning service'});
-          this.ref.close();
+          this.getCleaningService();
+          this.messageService.add({severity:'info', summary:'Confirmed', detail:'You have ended the cleaning service'});
         });
       }
     });
@@ -115,9 +130,40 @@ export class CleaningServiceComponent implements OnInit {
 
   finishService(){
     this.cleaningApi.finishCleaningService(this.id, this.cleaningDate).subscribe(res => {
-      this.sharedData.toasterMessage.next({severity:'info', summary:'Confirmed', detail:'You have finished the cleaning service'});
-      this.ref.close();
+      this.getCleaningService();
+      this.messageService.add({severity:'info', summary:'Confirmed', detail:'You have finished the cleaning service'});
     })
+  }
+
+  reschedule(){
+    const ref = this.dialogService.open(RescheduleCleaningServiceComponent, {
+      data: {
+        id: this.id,
+        timeEstimation: this.cleaningService.timeEstimation
+      },
+      header: 'Reschedule cleaning service',
+      width: '60%'
+    });
+
+    ref.onClose.subscribe((res) => {
+      if (res) {
+        this.messageService.add({severity:'success', summary: 'Success', detail: 'Successfully reschedule cleaning service!'});
+      }
+    });
+  }
+
+  back(){
+    if(this.router.url.startsWith("/administrator")){
+      if(this.agendaDate){
+        this.router.navigate(['/administrator/services-agenda', {agendaDate: this.agendaDate}]);
+      } else {
+        this.router.navigate(['/administrator/dashboard']);
+      }
+    } else if(this.router.url.startsWith("/employee")){
+      this.router.navigate(['employee', this.userId, 'agenda', {agendaDate: this.agendaDate}]);
+    } else {
+      this.router.navigate(['client', this.userId, 'orders']);
+    }
   }
 
   getProperties(){

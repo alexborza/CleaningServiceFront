@@ -1,18 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
-import { DialogService } from 'primeng/dynamicdialog';
 import { Subscription } from 'rxjs';
 import { CleaningServiceDto } from 'src/app/core/dto/CleaningServiceDto';
 import { ClientService } from 'src/app/core/services/client.service';
 import { SharedDataService } from 'src/app/core/services/shared-data.service';
-import { CleaningServiceComponent } from '../../shared/cleaning-service/cleaning-service.component';
 
 @Component({
   selector: 'app-client-orders',
   templateUrl: './client-orders.component.html',
-  styleUrls: ['./client-orders.component.scss'],
-  providers: [DialogService]
+  styleUrls: ['./client-orders.component.scss']
 })
 export class ClientOrdersComponent implements OnInit {
 
@@ -21,8 +18,8 @@ export class ClientOrdersComponent implements OnInit {
   toasterMessageSubscription: Subscription;
 
   constructor(
+    private router: Router,
     private clientApi: ClientService,
-    public dialogService: DialogService,
     private route: ActivatedRoute,
     private sharedData: SharedDataService,
     private messageService: MessageService,
@@ -54,14 +51,7 @@ export class ClientOrdersComponent implements OnInit {
   }
 
   toCleaningService(id: number) {
-    const ref = this.dialogService.open(CleaningServiceComponent, {
-      data: {
-        id: id,
-        canEditService: true
-      },
-      header: 'Cleaning Service Details',
-      width: '70%'
-    });
+    this.router.navigate([id], {relativeTo: this.route});
   }
 
 }

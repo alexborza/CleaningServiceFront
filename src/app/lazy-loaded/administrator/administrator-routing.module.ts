@@ -12,6 +12,7 @@ import { EmployeesComponent } from './employees/employees.component';
 import { EmployeeDetailComponent } from './employees/employee-detail/employee-detail.component';
 import { AgendaComponent } from '../shared/agenda/agenda.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { CleaningServiceComponent } from '../shared/cleaning-service/cleaning-service.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,10 @@ const routes: Routes = [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full'},
       { path: 'dashboard', component: DashboardComponent },
       { path: 'services-agenda' , component: AgendaComponent },
+      { path: 'cleaning-details/:id' , component: CleaningServiceComponent, data: {
+          canEditService: true
+        } 
+      },
       { path: 'employees', component: EmployeesComponent },
       { path: 'employees/:id', component: EmployeeDetailComponent },
       { path: 'employee-contract' , component: EmployeeContractComponent, children: [

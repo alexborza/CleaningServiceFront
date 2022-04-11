@@ -19,7 +19,6 @@ export class JobInfoDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.jobInfoDto)
   }
 
   onClose(){

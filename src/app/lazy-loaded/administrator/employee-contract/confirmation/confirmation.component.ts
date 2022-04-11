@@ -23,7 +23,6 @@ export class ConfirmationComponent implements OnInit {
   }
 
   nextPage() {
-    console.log(this.employeeDto);
     this.employeeDto.type = "employee";
     this.employeeService.createEmployeeContract(this.employeeDto).subscribe(res => {
       this.sharedData.toasterMessage.next(true);

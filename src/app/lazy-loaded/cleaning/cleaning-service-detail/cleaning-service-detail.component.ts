@@ -187,10 +187,10 @@ export class CleaningServiceDetailComponent implements OnInit {
     if(this.form.valid){
       this.cleaningService = this.getCleaningServiceDto(formValue);
       const employeeId = formValue.cleaning_date.hour.employeeId;
-      console.log(this.cleaningService)
       const user = this.tokenStorage.getUser();
       this.cleaningApi.createCleaningService(employeeId, user?.id === undefined ? null : user.id, this.cleaningService).subscribe(res => {
         this.messageService.add({severity:'success', summary:'Success', detail:'Successfully booked a ' + this.type + ' Service'});
+        this.form.reset();
       });
     } else {
       this.messageService.add({severity:'error', summary:'Error', detail:'The field is required'});
@@ -344,7 +344,6 @@ export class CleaningServiceDetailComponent implements OnInit {
         cleaning_date.get('hour')?.setValue(null);
         this.employeeApi.getEmployeesAgendaForDate(cleaningDate).subscribe(res => {
           this.employeesDayAgenda = res;
-          console.log(this.employeesDayAgenda)
         })
       }
     });

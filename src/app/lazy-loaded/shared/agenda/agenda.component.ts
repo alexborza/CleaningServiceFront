@@ -3,10 +3,8 @@ import { CleaningServiceDto } from 'src/app/core/dto/CleaningServiceDto';
 import { formatDate } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EmployeeApiService } from 'src/app/core/services/employee-api.service';
-import { DialogService } from 'primeng/dynamicdialog';
 import { AdministratorApiService } from 'src/app/core/services/administrator-api.service';
 import { ServicesAgenda } from 'src/app/core/dto/ServicesAgenda';
-import { CleaningServiceComponent } from '../cleaning-service/cleaning-service.component';
 import { Subscription } from 'rxjs';
 import { SharedDataService } from 'src/app/core/services/shared-data.service';
 import { MessageService } from 'primeng/api';
@@ -15,7 +13,6 @@ import { MessageService } from 'primeng/api';
   selector: 'app-agenda',
   templateUrl: './agenda.component.html',
   styleUrls: ['./agenda.component.scss'],
-  providers: [ DialogService ]
 })
 export class AgendaComponent implements OnInit, OnDestroy {
 
@@ -31,7 +28,6 @@ export class AgendaComponent implements OnInit, OnDestroy {
     private router: Router,
     private sharedData: SharedDataService,
     private messageService: MessageService,
-    public dialogService: DialogService,
     private employeeApi: EmployeeApiService,
     private administratorApi: AdministratorApiService
   ) { }
@@ -40,8 +36,9 @@ export class AgendaComponent implements OnInit, OnDestroy {
     this.route.parent?.params.subscribe(params => {
       this.id = Number.parseInt(params['userId']);
     });
+    const agendaDate = this.route.snapshot.paramMap.get('agendaDate')
     this.getToasterMessage();
-    this.formatDate(new Date());
+    this.formatDate(agendaDate ? new Date(agendaDate) : new Date());
     this.getAgenda();
   }
 
@@ -74,7 +71,6 @@ export class AgendaComponent implements OnInit, OnDestroy {
   private getEmployeeCleaningServicesForDate(){
     this.employeeApi.getEmployeeCleaningServicesForDate(this.id, this.cleaningDate).subscribe(res => {
       this.cleaningServices = res;
-      console.log(res);
     })
   }
 
@@ -114,14 +110,11 @@ export class AgendaComponent implements OnInit, OnDestroy {
   }
 
   onClick(cleaningService: CleaningServiceDto){
-    const ref = this.dialogService.open(CleaningServiceComponent, {
-      data: {
-        id: cleaningService.id,
-        agendaDate: this.cleaningDate
-      },
-      header: 'Cleaning Service Details',
-      width: '70%'
-    });
+    if(this.router.url.startsWith("/administrator")){
+      this.router.navigate(["/administrator/cleaning-details", cleaningService.id, {agendaDate: this.cleaningDate}]);
+    } else {
+      this.router.navigate([cleaningService.id, {agendaDate: this.cleaningDate}], {relativeTo: this.route});
+    }
   }
 
   ngOnDestroy(): void {

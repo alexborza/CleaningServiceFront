@@ -66,4 +66,8 @@ export class CleaningApiService {
   addMessageToCleaningService(id: number, dto: MessageDto) {
     return this.http.post(this.baseUrl + '/message/' + id, dto);
   }
+
+  getDatesToReschedule(id: number): Observable<string[]> {
+    return this.http.get<string[]>(this.baseUrl + "/dates-to-reschedule/" + id);
+  }
 }

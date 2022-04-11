@@ -29,7 +29,7 @@ export class EmployeeProfileComponent implements OnInit {
   private menuInit(){
     this.items = [
       {label: 'Account Settings', routerLink: 'account-settings', routerLinkActiveOptions: {exact: true}},
-      {label: 'Agenda', routerLink: 'agenda', routerLinkActiveOptions: {exact: true}}
+      {label: 'Agenda', routerLink: 'agenda', routerLinkActiveOptions: {exact: false}}
     ]
   }
 
