@@ -30,6 +30,7 @@ import { MessagesHistoryComponent } from './cleaning-service/messages-history/me
 import { RescheduleCleaningServiceComponent } from './components/reschedule-cleaning-service/reschedule-cleaning-service.component';
 import { CleaningModule } from '../cleaning/cleaning.module';
 import { SelectButtonModule } from 'primeng/selectbutton';
+import { TooltipModule } from 'primeng/tooltip';
 
 
 @NgModule({
@@ -65,7 +66,8 @@ import { SelectButtonModule } from 'primeng/selectbutton';
     ConfirmDialogModule,
     TableModule,
     CleaningModule,
-    SelectButtonModule
+    SelectButtonModule,
+    TooltipModule
   ],
   exports: [
     SidebarComponent,

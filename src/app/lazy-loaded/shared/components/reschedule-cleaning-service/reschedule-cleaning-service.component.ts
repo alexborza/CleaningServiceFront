@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { DatesToRescheduleDto } from 'src/app/core/dto/DatesToRescheduleDto';
 import { EmployeesDayAgenda } from 'src/app/core/dto/EmployeesDayAgenda';
 import { RescheduleDateDto } from 'src/app/core/dto/RescheduleDateDto';
 import { CleaningApiService } from 'src/app/core/services/cleaning-api.service';
@@ -17,8 +18,11 @@ export class RescheduleCleaningServiceComponent implements OnInit {
   id: number;
   form: FormGroup;
   timeEstimation: number;
-  datesToReschedule: string[] = [];
+  datesToReschedule: DatesToRescheduleDto[] = [];
+  datesToRescheduleInitialArray: DatesToRescheduleDto[] = [];
   employeesDayAgenda: EmployeesDayAgenda[] = []
+  minDate: Date;
+  maxDate: Date;
 
   constructor(
     public config: DynamicDialogConfig,
@@ -35,12 +39,30 @@ export class RescheduleCleaningServiceComponent implements OnInit {
     this.buildForm();
     this.getDatesToReschedule();
     this.getEmployeesAgendaForDate();
+    this.form.get('dateToReschedule').valueChanges.subscribe((value) => {
+      if(value){
+        const cleaning_date = this.form.get('cleaning_date') as FormGroup;
+        cleaning_date.get('cleaningDate').enable();
+        if(value.date == this.datesToReschedule[0].date){
+          if(this.datesToReschedule.length == 1){
+            this.minDate = new Date();
+          } else {
+            this.minDate = new Date();
+            this.maxDate = new Date(this.datesToRescheduleInitialArray[1].date);
+          }
+        } else {
+          let indexOfValue = this.datesToReschedule.findIndex(dateToReschedule => dateToReschedule.date === value.date)
+          this.minDate = new Date(this.datesToRescheduleInitialArray[indexOfValue].date);
+          this.maxDate = new Date(this.datesToRescheduleInitialArray[indexOfValue + 1].date);
+        }
+      }
+    })
   }
 
   private buildForm(){
     this.form = this.fb.group({
       cleaning_date: this.fb.group({
-        cleaningDate: new FormControl(null, [Validators.required]),
+        cleaningDate: new FormControl({value: null, disabled: true}, [Validators.required]),
         hour: new FormControl(null, [Validators.required])
       }),
       dateToReschedule: new FormControl(null, [Validators.required])
@@ -49,6 +71,10 @@ export class RescheduleCleaningServiceComponent implements OnInit {
 
   private getDatesToReschedule(){
     this.cleaningApi.getDatesToReschedule(this.id).subscribe(res => {
+      this.datesToRescheduleInitialArray = JSON.parse(JSON.stringify(res));
+      if(res.length > 1) {
+        res.pop();
+      }
       this.datesToReschedule = res;
     })
   }
@@ -68,16 +94,19 @@ export class RescheduleCleaningServiceComponent implements OnInit {
   public onSubmit(formValue: any){
     this.checkRequiredFields();
     if(this.form.valid){
-      console.log('valid form');
       let dto = new RescheduleDateDto(
-        formValue.dateToReschedule,
+        formValue.dateToReschedule.date,
         formValue.cleaning_date.cleaningDate,
         formValue.cleaning_date.hour.interval.startingHour,
         formValue.cleaning_date.hour.interval.endingHour);
-        console.log(dto);
-    } else {
-      console.log('invalid form');
+        this.rescheduleCleaningService(dto);
     }
+  }
+
+  private rescheduleCleaningService(dto: RescheduleDateDto){
+    this.cleaningApi.rescheduleCleaningService(this.id, dto).subscribe(res => {
+      this.ref.close(dto);
+    })
   }
 
   private checkRequiredFields(){

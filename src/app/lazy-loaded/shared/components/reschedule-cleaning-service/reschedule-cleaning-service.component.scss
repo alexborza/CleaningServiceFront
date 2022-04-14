@@ -16,3 +16,7 @@ h2 {
     contain: size;
     text-align: left;
 }
+
+label {
+    pointer-events: all !important;
+}

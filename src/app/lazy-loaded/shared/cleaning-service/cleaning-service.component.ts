@@ -81,10 +81,10 @@ export class CleaningServiceComponent implements OnInit {
 
   private getNextCleaningDate(){
     this.cleaningApi.getNextCleaningDate(this.id).subscribe(res => {
-      if(res == null){
+      if(res?.value == null){
         this.displayCleaningDate = false;
       }
-      this.cleaningDate = res?.cleaningDate ? res.cleaningDate : '-';
+      this.cleaningDate = res?.value ? res.value : '-';
     })
   }
 
@@ -147,7 +147,7 @@ export class CleaningServiceComponent implements OnInit {
 
     ref.onClose.subscribe((res) => {
       if (res) {
-        this.messageService.add({severity:'success', summary: 'Success', detail: 'Successfully reschedule cleaning service!'});
+        this.messageService.add({severity:'success', summary: 'Success', detail: 'Successfully rescheduled cleaning service!'});
       }
     });
   }

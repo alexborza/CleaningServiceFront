@@ -6,7 +6,9 @@ import { CleaningServiceDescriptionsDto } from '../dto/CleaningServiceDescriptio
 import { CleaningServiceDisplay } from '../dto/CleaningServiceDisplay';
 import { CleaningServiceDto } from '../dto/CleaningServiceDto';
 import { CleaningServicePricesDto } from '../dto/CleaningServicePricesDto';
+import { DatesToRescheduleDto } from '../dto/DatesToRescheduleDto';
 import { MessageDto } from '../dto/MessageDto';
+import { RescheduleDateDto } from '../dto/RescheduleDateDto';
 
 @Injectable({
   providedIn: 'root'
@@ -47,8 +49,8 @@ export class CleaningApiService {
     return this.http.get<CleaningDateDto[]>(this.baseUrl + "/dates-of-cleaning/" + id);
   }
 
-  getNextCleaningDate(id: number): Observable<CleaningDateDto> {
-    return this.http.get<CleaningDateDto>(this.baseUrl + "/next-cleaning-date/" + id);
+  getNextCleaningDate(id: number): Observable<any> {
+    return this.http.get<any>(this.baseUrl + "/next-cleaning-date/" + id);
   }
 
   getDescriptions(): Observable<CleaningServiceDescriptionsDto> {
@@ -67,7 +69,11 @@ export class CleaningApiService {
     return this.http.post(this.baseUrl + '/message/' + id, dto);
   }
 
-  getDatesToReschedule(id: number): Observable<string[]> {
-    return this.http.get<string[]>(this.baseUrl + "/dates-to-reschedule/" + id);
+  getDatesToReschedule(id: number): Observable<DatesToRescheduleDto[]> {
+    return this.http.get<DatesToRescheduleDto[]>(this.baseUrl + "/dates-to-reschedule/" + id);
+  }
+
+  rescheduleCleaningService(id: number, dto: RescheduleDateDto) {
+    return this.http.post(this.baseUrl + "/reschedule/" + id, dto);
   }
 }

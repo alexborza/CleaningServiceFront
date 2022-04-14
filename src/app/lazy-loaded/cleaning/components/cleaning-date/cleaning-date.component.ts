@@ -15,6 +15,8 @@ export class CleaningDateComponent implements OnInit, OnChanges {
   totalEmployees!: number;
   @Input() employeesDayAgenda: EmployeesDayAgenda[] = [];
   @Input() timeEstimation!: number;
+  @Input() minDate: Date;
+  @Input() maxDate: Date;
   availableHours: AvailableHour[] = [];
   minimumDate: Date = new Date();
 
