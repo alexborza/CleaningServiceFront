@@ -43,16 +43,16 @@ export class RescheduleCleaningServiceComponent implements OnInit {
       if(value){
         const cleaning_date = this.form.get('cleaning_date') as FormGroup;
         cleaning_date.get('cleaningDate').enable();
-        if(value.date == this.datesToReschedule[0].date){
-          if(this.datesToReschedule.length == 1){
+        if(value.date == this.datesToRescheduleInitialArray[0].date){
+          if(this.datesToRescheduleInitialArray.length == 1){
             this.minDate = new Date();
           } else {
             this.minDate = new Date();
             this.maxDate = new Date(this.datesToRescheduleInitialArray[1].date);
           }
         } else {
-          let indexOfValue = this.datesToReschedule.findIndex(dateToReschedule => dateToReschedule.date === value.date)
-          this.minDate = new Date(this.datesToRescheduleInitialArray[indexOfValue].date);
+          let indexOfValue = this.datesToRescheduleInitialArray.findIndex(dateToReschedule => dateToReschedule.date === value.date)
+          this.minDate = new Date(this.datesToRescheduleInitialArray[indexOfValue - 1].date);
           this.maxDate = new Date(this.datesToRescheduleInitialArray[indexOfValue + 1].date);
         }
       }
