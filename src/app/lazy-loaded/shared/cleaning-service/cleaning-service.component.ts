@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { CleaningDateDto } from 'src/app/core/dto/CleaningDateDto';
+import { CleaningFrequencyEnum } from 'src/app/core/dto/CleaningFrequencyEnum';
 import { CleaningServiceDto } from 'src/app/core/dto/CleaningServiceDto';
 import { CleaningStatusEnum } from 'src/app/core/dto/CleaningStatusEnum';
 import { RoleEnum } from 'src/app/core/dto/RoleEnum';
@@ -25,6 +26,7 @@ export class CleaningServiceComponent implements OnInit {
   canEditService = false;
   canFinishService = false;
   canServiceBeEdited = false;
+  canEndCleaningService = false;
   agendaDate: string = '';
   cleaningDate: string = '';
   datesOfCleaning: CleaningDateDto[] = [];
@@ -91,8 +93,17 @@ export class CleaningServiceComponent implements OnInit {
   private getDatesOfCleaningForCleaningService(){
     this.cleaningApi.getDatesOfCleaningForCleaningService(this.id).subscribe(res => {
       this.datesOfCleaning = res;
+      this.canEndService();
       this.canUserEditService();
     })
+  }
+
+  private canEndService(){
+    if(this.cleaningService.cleaningFrequency == null || this.cleaningService.cleaningFrequency === CleaningFrequencyEnum.OneTime){
+      this.canEndCleaningService = true;
+    } else {
+      this.canEndCleaningService = this.datesOfCleaning.length > 5;
+    }
   }
 
   displayHistory(){
@@ -139,7 +150,8 @@ export class CleaningServiceComponent implements OnInit {
     const ref = this.dialogService.open(RescheduleCleaningServiceComponent, {
       data: {
         id: this.id,
-        timeEstimation: this.cleaningService.timeEstimation
+        timeEstimation: this.cleaningService.timeEstimation,
+        canCancelCleaningService: this.canCancelCleaningService()
       },
       header: 'Reschedule cleaning service',
       width: '60%'
@@ -150,6 +162,12 @@ export class CleaningServiceComponent implements OnInit {
         this.messageService.add({severity:'success', summary: 'Success', detail: 'Successfully rescheduled cleaning service!'});
       }
     });
+  }
+
+  private canCancelCleaningService(){
+    return this.cleaningService.cleaningFrequency === CleaningFrequencyEnum.Weekly || 
+           this.cleaningService.cleaningFrequency === CleaningFrequencyEnum.BiWeekly || 
+           this.cleaningService.cleaningFrequency === CleaningFrequencyEnum.Monthly
   }
 
   back(){

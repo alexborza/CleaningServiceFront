@@ -39,3 +39,8 @@ a{
 :host ::ng-deep .back-button {
     color: #124c69 !important;
 }
+
+:host ::ng-deep .p-button:disabled{
+    cursor: not-allowed;
+    pointer-events: all !important;
+}

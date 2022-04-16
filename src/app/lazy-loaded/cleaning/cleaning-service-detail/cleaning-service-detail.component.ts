@@ -36,6 +36,7 @@ export class CleaningServiceDetailComponent implements OnInit {
   paidParkingSpotPrice: number;
   cleaningServicePrice: number = 0;
   cleaningDetailsPrices: number = 0;
+  cleaningFrequency: CleaningFrequencyEnum;
   discount: number = 0;
   frequency: string = '';
   cleaningDate: any;
@@ -332,6 +333,7 @@ export class CleaningServiceDetailComponent implements OnInit {
 
   private getFrequencyForBookingSummary(){
     if(this.form.get('frequency')?.value?.discount != undefined){
+      this.cleaningFrequency = this.form.get('frequency')?.value?.value;
       this.discount = this.form.get('frequency')?.value?.discount;
       this.frequency = this.form.get('frequency')?.value?.label;
     }
@@ -344,6 +346,7 @@ export class CleaningServiceDetailComponent implements OnInit {
         cleaning_date.get('hour')?.setValue(null);
         this.employeeApi.getEmployeesAgendaForDate(cleaningDate).subscribe(res => {
           this.employeesDayAgenda = res;
+          console.log(this.employeesDayAgenda);
         })
       }
     });

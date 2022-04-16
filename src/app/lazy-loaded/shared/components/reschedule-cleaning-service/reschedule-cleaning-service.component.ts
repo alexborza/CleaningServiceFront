@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterContentChecked, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { DatesToRescheduleDto } from 'src/app/core/dto/DatesToRescheduleDto';
@@ -13,11 +13,12 @@ import { checkRequiredFields } from 'src/app/core/services/error/validate';
   templateUrl: './reschedule-cleaning-service.component.html',
   styleUrls: ['./reschedule-cleaning-service.component.scss']
 })
-export class RescheduleCleaningServiceComponent implements OnInit {
+export class RescheduleCleaningServiceComponent implements OnInit, AfterContentChecked {
 
   id: number;
   form: FormGroup;
   timeEstimation: number;
+  canCancelCleaningService: boolean;
   datesToReschedule: DatesToRescheduleDto[] = [];
   datesToRescheduleInitialArray: DatesToRescheduleDto[] = [];
   employeesDayAgenda: EmployeesDayAgenda[] = []
@@ -29,10 +30,16 @@ export class RescheduleCleaningServiceComponent implements OnInit {
     public ref: DynamicDialogRef,
     private employeeApi: EmployeeApiService,
     private cleaningApi: CleaningApiService,
+    private cdref: ChangeDetectorRef,
     private fb: FormBuilder,
   ) { 
     this.id = this.config.data?.id;
     this.timeEstimation = this.config.data?.timeEstimation;
+    this.canCancelCleaningService = this.config.data?.canCancelCleaningService;
+  }
+
+  ngAfterContentChecked(): void {
+    this.cdref.detectChanges();
   }
 
   ngOnInit(): void {
@@ -99,8 +106,14 @@ export class RescheduleCleaningServiceComponent implements OnInit {
         formValue.cleaning_date.cleaningDate,
         formValue.cleaning_date.hour.interval.startingHour,
         formValue.cleaning_date.hour.interval.endingHour);
-        this.rescheduleCleaningService(dto);
+      this.rescheduleCleaningService(dto);
     }
+  }
+
+  onCancel(){
+    const formValue = this.form.getRawValue();
+    let dto = new RescheduleDateDto(formValue.dateToReschedule.date, null, 0, 0);
+    this.rescheduleCleaningService(dto);
   }
 
   private rescheduleCleaningService(dto: RescheduleDateDto){

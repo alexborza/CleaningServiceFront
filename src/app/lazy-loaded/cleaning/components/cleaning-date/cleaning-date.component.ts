@@ -2,6 +2,7 @@ import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/cor
 import { ControlContainer } from '@angular/forms';
 import { AvailableHour } from 'src/app/core/dto/AvailableHour';
 import { AvailableInterval } from 'src/app/core/dto/AvailableInterval';
+import { CleaningFrequencyEnum } from 'src/app/core/dto/CleaningFrequencyEnum';
 import { EmployeesDayAgenda } from 'src/app/core/dto/EmployeesDayAgenda';
 
 @Component({
@@ -15,6 +16,7 @@ export class CleaningDateComponent implements OnInit, OnChanges {
   totalEmployees!: number;
   @Input() employeesDayAgenda: EmployeesDayAgenda[] = [];
   @Input() timeEstimation!: number;
+  @Input() cleaningFrequency: CleaningFrequencyEnum;
   @Input() minDate: Date;
   @Input() maxDate: Date;
   availableHours: AvailableHour[] = [];
@@ -39,14 +41,24 @@ export class CleaningDateComponent implements OnInit, OnChanges {
     let avHours: AvailableHour[] = [];
     if(timeEstimation !== 0){
       employeesAgenda.forEach(agenda => {
-        this.getAvailableHoursForAgenda(agenda, timeEstimation, avHours);
+        if(this.isCleaningServiceDoneFrequently() && agenda.availableIntervalsForOverlapping != null){
+          this.getAvailableHoursForAgenda(agenda, agenda.availableIntervalsForOverlapping, timeEstimation, avHours);
+        } else {
+            this.getAvailableHoursForAgenda(agenda, agenda.availableIntervals, timeEstimation, avHours);
+        }
       })
     }
     this.availableHours = avHours.sort((a, b) => a.interval.startingHour - b.interval.startingHour);
   }
 
-  private getAvailableHoursForAgenda(agenda: EmployeesDayAgenda, timeEstimation: number, avHours: AvailableHour[]){
-    agenda.availableIntervals.forEach(interval => {
+  private isCleaningServiceDoneFrequently(){
+    return this.cleaningFrequency === CleaningFrequencyEnum.Weekly || 
+           this.cleaningFrequency === CleaningFrequencyEnum.BiWeekly || 
+           this.cleaningFrequency === CleaningFrequencyEnum.Monthly;
+  }
+
+  private getAvailableHoursForAgenda(agenda: EmployeesDayAgenda, availableIntervals: AvailableInterval[], timeEstimation: number, avHours: AvailableHour[]){
+    availableIntervals.forEach(interval => {
       if(interval.endingHour - interval.startingHour >= timeEstimation){
         this.getAvailableHoursForInterval(agenda, interval, timeEstimation, avHours);
       }

@@ -6,7 +6,23 @@
         
         <div class="text-end col-6" *ngIf="canServiceBeEdited">
             <button pButton type="button" label="Reschedule" (click)="reschedule()"></button>
-            <button class="end-service p-button-danger" (click)="confirm()" pButton label="End Service"></button>
+            <div *ngIf="!canEndCleaningService; else enabledButton" style="display: inline-block" pTooltip="Service can be ended if it has been cleaned for minimum of 5 times" tooltipPosition="top">
+                <button    
+                    [disabled]="!canEndCleaningService"
+                    class="end-service p-button-danger"
+                    (click)="confirm()"
+                    label="End service"
+                    pButton>
+                </button>
+            </div>
+            <ng-template #enabledButton>
+                <button    
+                    class="end-service p-button-danger"
+                    (click)="confirm()"
+                    label="End service"
+                    pButton>
+                </button>
+            </ng-template>
         </div>
 
         <div class="text-end col-6" *ngIf="canFinishService">
