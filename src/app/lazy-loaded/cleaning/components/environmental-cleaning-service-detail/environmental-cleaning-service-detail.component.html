@@ -17,11 +17,11 @@
                             [showClear]="true"
                             formControlName="property">
                         </p-dropdown>
-                        <span class="required-err-message" 
+                        <small class="p-error" 
                         *ngIf="(environmentCleaningForm.get('cleaning_details').get('property')?.touched && 
                                 environmentCleaningForm.get('cleaning_details').get('property')?.errors?.required) ||
                                 environmentCleaningForm.get('cleaning_details').get('property').hasError('missing')"
-                        >The field is required</span>
+                        >The field is required</small>
                     </div>
 
                     <ng-container *ngIf="isPostConstructionCleaning">
@@ -36,11 +36,11 @@
                                 [showClear]="true"
                                 formControlName="rooms">
                             </p-dropdown>
-                            <span class="required-err-message" 
+                            <small class="p-error" 
                                 *ngIf="(environmentCleaningForm.get('cleaning_details').get('rooms')?.touched && 
                                         environmentCleaningForm.get('cleaning_details').get('rooms')?.errors?.required) ||
                                         environmentCleaningForm.get('cleaning_details').get('rooms').hasError('missing')"
-                                >The field is required</span>
+                                >The field is required</small>
                         </div>
                     </ng-container>
       
@@ -55,11 +55,11 @@
                             [showClear]="true"
                             formControlName="squareMeters">
                         </p-dropdown>
-                        <span class="required-err-message" 
+                        <small class="p-error" 
                         *ngIf="(environmentCleaningForm.get('cleaning_details').get('squareMeters')?.touched && 
                                 environmentCleaningForm.get('cleaning_details').get('squareMeters')?.errors?.required) ||
                                 environmentCleaningForm.get('cleaning_details').get('squareMeters').hasError('missing')"
-                        >The field is required</span>
+                        >The field is required</small>
                     </div>
     
                     <div class="col-6 p-3 controls">
@@ -70,11 +70,11 @@
                         [options]="parking" 
                         optionLabel="label" 
                         formControlName="parking"></p-selectButton>
-                        <span class="required-err-message" 
+                        <small class="p-error" 
                         *ngIf="(environmentCleaningForm.get('cleaning_details').get('parking')?.touched && 
                                 environmentCleaningForm.get('cleaning_details').get('parking')?.errors?.required) ||
                                 environmentCleaningForm.get('cleaning_details').get('parking').hasError('missing')"
-                        >The field is required</span>
+                        >The field is required</small>
                     </div>
     
                     <div class="col-6 p-3 controls">
@@ -88,11 +88,11 @@
                             [showClear]="true"
                             formControlName="homeAccess">
                         </p-dropdown>
-                        <span class="required-err-message" 
+                        <small class="p-error" 
                         *ngIf="(environmentCleaningForm.get('cleaning_details').get('homeAccess')?.touched && 
                                 environmentCleaningForm.get('cleaning_details').get('homeAccess')?.errors?.required) ||
                                 environmentCleaningForm.get('cleaning_details').get('homeAccess').hasError('missing')"
-                        >The field is required</span>
+                        >The field is required</small>
                     </div>
     
                     <div class="col-12 p-3">

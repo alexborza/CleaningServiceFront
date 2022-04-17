@@ -22,11 +22,11 @@
                             dateFormat="yy-mm-dd"
                             dataType="string">
                         </p-calendar>
-                        <span class="required-err-message" 
+                        <small class="p-error"
                             *ngIf="(cleaningDateForm.get('cleaning_date').get('cleaningDate')?.touched && 
                                     cleaningDateForm.get('cleaning_date').get('cleaningDate')?.errors?.required) ||
                                     cleaningDateForm.get('cleaning_date').get('cleaningDate').hasError('missing')"
-                            >The field is required</span>
+                            >The field is required</small>
                     </div>
 
                     <div class="col-6 p-3 controls">
@@ -37,11 +37,11 @@
                             [showClear]="true"
                             formControlName="hour">
                         </p-dropdown>
-                        <span class="required-err-message" 
+                        <small class="p-error" 
                         *ngIf="(cleaningDateForm.get('cleaning_date').get('hour')?.touched && 
                                 cleaningDateForm.get('cleaning_date').get('hour')?.errors?.required) ||
                                 cleaningDateForm.get('cleaning_date').get('hour').hasError('missing')"
-                        >The field is required</span>
+                        >The field is required</small>
                     </div>
 
                     <div class="col-12 p-3">

@@ -27,7 +27,6 @@ export class StandardCleaningServiceDetailComponent implements OnInit, OnChanges
   
   ngOnChanges(): void {
     this.bedrooms = [
-      {label: "0 Bedroom", value: 0, price: 0},
       {label: "1 Bedroom", value: 1, price: this.bedroomPrices[0]},
       {label: "2 Bedrooms", value: 2, price: this.bedroomPrices[1]},
       {label: "3 Bedrooms", value: 3, price: this.bedroomPrices[2]},
@@ -37,7 +36,6 @@ export class StandardCleaningServiceDetailComponent implements OnInit, OnChanges
     ]
 
     this.bathrooms = [
-      {label: "0 Bathroom", value: 0, price: 0},
       {label: "1 Bathroom", value: 1, price: this.bathroomPrices[0]},
       {label: "2 Bathrooms", value: 2, price: this.bathroomPrices[1]},
       {label: "3 Bathrooms", value: 3, price: this.bathroomPrices[2]},
@@ -47,7 +45,6 @@ export class StandardCleaningServiceDetailComponent implements OnInit, OnChanges
     ]
 
     this.kitchens = [
-      {label: "0 Kitchen", value: 0, price: 0},
       {label: "1 Kitchen", value: 1, price: this.kitchenPrices[0]},
       {label: "2 Kitchens", value: 2, price: this.kitchenPrices[1]},
       {label: "3 Kitchens", value: 3, price: this.kitchenPrices[2]},

@@ -9,21 +9,21 @@
                     <div class="col-6 p-3 controls">
                         <label>First Name<span class="required-star">*</span></label>
                         <input type=text pInputText placeholder="First Name" formControlName=firstName trim="blur">
-                        <span class="required-err-message" 
+                        <small class="p-error" 
                         *ngIf="(contactInfoForm.get('contact_info').get('firstName')?.touched && 
                                 contactInfoForm.get('contact_info').get('firstName')?.errors?.required) ||
                                 contactInfoForm.get('contact_info').get('firstName').hasError('missing')"
-                        >The field is required</span>
+                        >The field is required</small>
                     </div>
                     
                     <div class="col-6 p-3 controls">
                         <label>Last Name<span class="required-star">*</span></label>
                         <input type=text pInputText placeholder="Last Name" formControlName=lastName trim="blur">
-                        <span class="required-err-message" 
+                        <small class="p-error" 
                         *ngIf="(contactInfoForm.get('contact_info').get('lastName')?.touched && 
                                 contactInfoForm.get('contact_info').get('lastName')?.errors?.required) ||
                                 contactInfoForm.get('contact_info').get('lastName').hasError('missing')"
-                        >The field is required</span>
+                        >The field is required</small>
                     </div>
                 </div>
                 
@@ -31,21 +31,21 @@
                     <div class="col-6 p-3 controls">
                         <label>Email Address<span class="required-star">*</span></label>
                         <input type=text pInputText placeholder="Email" formControlName=email trim="blur">
-                        <span class="required-err-message" 
+                        <small class="p-error" 
                         *ngIf="(contactInfoForm.get('contact_info').get('email')?.touched && 
                                 contactInfoForm.get('contact_info').get('email')?.errors?.required) ||
                                 contactInfoForm.get('contact_info').get('email').hasError('missing')"
-                        >The field is required</span>
+                        >The field is required</small>
                     </div>
         
                     <div class="col-6 p-3 controls">
                         <label>Phone Number<span class="required-star">*</span></label>
                         <p-inputMask placeholder="Phone Number" mask="9999 999 999" formControlName=phoneNumber></p-inputMask>
-                        <span class="required-err-message" 
+                        <small class="p-error" 
                         *ngIf="(contactInfoForm.get('contact_info').get('phoneNumber')?.touched && 
                                 contactInfoForm.get('contact_info').get('phoneNumber')?.errors?.required) ||
                                 contactInfoForm.get('contact_info').get('phoneNumber').hasError('missing')"
-                        >The field is required</span>
+                        >The field is required</small>
                     </div>
                     
                     <div class="col-12 p-3">

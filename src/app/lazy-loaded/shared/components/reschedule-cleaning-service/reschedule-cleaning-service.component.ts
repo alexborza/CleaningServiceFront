@@ -46,24 +46,7 @@ export class RescheduleCleaningServiceComponent implements OnInit, AfterContentC
     this.buildForm();
     this.getDatesToReschedule();
     this.getEmployeesAgendaForDate();
-    this.form.get('dateToReschedule').valueChanges.subscribe((value) => {
-      if(value){
-        const cleaning_date = this.form.get('cleaning_date') as FormGroup;
-        cleaning_date.get('cleaningDate').enable();
-        if(value.date == this.datesToRescheduleInitialArray[0].date){
-          if(this.datesToRescheduleInitialArray.length == 1){
-            this.minDate = new Date();
-          } else {
-            this.minDate = new Date();
-            this.maxDate = new Date(this.datesToRescheduleInitialArray[1].date);
-          }
-        } else {
-          let indexOfValue = this.datesToRescheduleInitialArray.findIndex(dateToReschedule => dateToReschedule.date === value.date)
-          this.minDate = new Date(this.datesToRescheduleInitialArray[indexOfValue - 1].date);
-          this.maxDate = new Date(this.datesToRescheduleInitialArray[indexOfValue + 1].date);
-        }
-      }
-    })
+    this.getDateToReschedule();
   }
 
   private buildForm(){
@@ -96,6 +79,32 @@ export class RescheduleCleaningServiceComponent implements OnInit, AfterContentC
         })
       }
     });
+  }
+
+  private getDateToReschedule(){
+    this.form.get('dateToReschedule').valueChanges.subscribe((dateToRescheduleValue) => {
+      if(dateToRescheduleValue){
+        const cleaning_date = this.form.get('cleaning_date') as FormGroup;
+        cleaning_date.get('cleaningDate').enable();
+        cleaning_date.get('cleaningDate').setValue(null);
+        this.setCalendarOptions(dateToRescheduleValue);
+      }
+    })
+  }
+
+  private setCalendarOptions(dateToRescheduleValue){
+    if(dateToRescheduleValue.date == this.datesToRescheduleInitialArray[0].date){
+      if(this.datesToRescheduleInitialArray.length == 1){
+        this.minDate = new Date();
+      } else {
+        this.minDate = new Date();
+        this.maxDate = new Date(this.datesToRescheduleInitialArray[1].date);
+      }
+    } else {
+      let indexOfValue = this.datesToRescheduleInitialArray.findIndex(dateToReschedule => dateToReschedule.date === dateToRescheduleValue.date)
+      this.minDate = new Date(this.datesToRescheduleInitialArray[indexOfValue - 1].date);
+      this.maxDate = new Date(this.datesToRescheduleInitialArray[indexOfValue + 1].date);
+    }
   }
 
   public onSubmit(formValue: any){

@@ -8,10 +8,7 @@ import { TokenStorageService } from './core/services/token-storage.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  private roles: string[] = [];
-  user: any;
   isLoggedIn = false;
-  username?: string;
   isClient = false;
   isAdmin = false;
   isEmployee = false;
@@ -21,17 +18,10 @@ export class AppComponent {
   ngOnInit(): void {
     this.isLoggedIn = !!this.tokenStorageService.getToken();
     if (this.isLoggedIn) {
-      this.user = this.tokenStorageService.getUser();
-      this.roles = this.user.roles;
-      this.isClient = this.roles.includes(RoleEnum.ROLE_USER);
-      this.isAdmin = this.roles.includes(RoleEnum.ROLE_ADMIN);
-      this.isEmployee = this.roles.includes(RoleEnum.ROLE_EMPLOYEE);
-      this.username = this.user.username;
+      const roles = this.tokenStorageService.getUser().roles;
+      this.isClient = roles.includes(RoleEnum.ROLE_USER);
+      this.isAdmin = roles.includes(RoleEnum.ROLE_ADMIN);
+      this.isEmployee = roles.includes(RoleEnum.ROLE_EMPLOYEE);
     }
-  }
-
-  logout(): void {
-    this.tokenStorageService.signOut();
-    window.location.reload();
   }
 }

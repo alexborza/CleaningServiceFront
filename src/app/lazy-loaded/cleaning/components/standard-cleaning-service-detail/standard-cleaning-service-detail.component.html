@@ -17,11 +17,11 @@
                             [showClear]="true"
                             formControlName="bedrooms">
                         </p-dropdown>
-                        <span class="required-err-message" 
+                        <small class="p-error" 
                         *ngIf="(standardCleaningForm.get('cleaning_details').get('bedrooms')?.touched && 
                                 standardCleaningForm.get('cleaning_details').get('bedrooms')?.errors?.required) ||
                                 standardCleaningForm.get('cleaning_details').get('bedrooms').hasError('missing')"
-                        >The field is required</span>
+                        >The field is required</small>
                     </div>
     
                     <div class="col-6 p-3 controls">
@@ -35,11 +35,11 @@
                             [showClear]="true"
                             formControlName="bathrooms">
                         </p-dropdown>
-                        <span class="required-err-message" 
+                        <small class="p-error" 
                         *ngIf="(standardCleaningForm.get('cleaning_details').get('bathrooms')?.touched && 
                                 standardCleaningForm.get('cleaning_details').get('bathrooms')?.errors?.required) ||
                                 standardCleaningForm.get('cleaning_details').get('bathrooms').hasError('missing')"
-                        >The field is required</span>
+                        >The field is required</small>
                     </div>
     
                     <div class="col-6 p-3 controls">
@@ -53,11 +53,11 @@
                             [showClear]="true"
                             formControlName="kitchens">
                         </p-dropdown>
-                        <span class="required-err-message" 
+                        <small class="p-error" 
                         *ngIf="(standardCleaningForm.get('cleaning_details').get('kitchens')?.touched && 
                                 standardCleaningForm.get('cleaning_details').get('kitchens')?.errors?.required) ||
                                 standardCleaningForm.get('cleaning_details').get('kitchens').hasError('missing')"
-                        >The field is required</span>
+                        >The field is required</small>
                     </div>
     
                     <div class="col-6 p-3 controls">
@@ -71,11 +71,11 @@
                             [showClear]="true"
                             formControlName="squareMeters">
                         </p-dropdown>
-                        <span class="required-err-message" 
+                        <small class="p-error" 
                         *ngIf="(standardCleaningForm.get('cleaning_details').get('squareMeters')?.touched && 
                                 standardCleaningForm.get('cleaning_details').get('squareMeters')?.errors?.required) ||
                                 standardCleaningForm.get('cleaning_details').get('squareMeters').hasError('missing')"
-                        >The field is required</span>
+                        >The field is required</small>
                     </div>
     
                     <div class="col-6 p-3 controls">
@@ -86,11 +86,11 @@
                         [options]="parking" 
                         optionLabel="label" 
                         formControlName="parking"></p-selectButton>
-                        <span class="required-err-message" 
+                        <small class="p-error" 
                         *ngIf="(standardCleaningForm.get('cleaning_details').get('parking')?.touched && 
                                 standardCleaningForm.get('cleaning_details').get('parking')?.errors?.required) ||
                                 standardCleaningForm.get('cleaning_details').get('parking').hasError('missing')"
-                        >The field is required</span>
+                        >The field is required</small>
                     </div>
     
                     <div class="col-6 p-3 controls">
@@ -104,11 +104,11 @@
                             [showClear]="true"
                             formControlName="homeAccess">
                         </p-dropdown>
-                        <span class="required-err-message" 
+                        <small class="p-error" 
                         *ngIf="(standardCleaningForm.get('cleaning_details').get('homeAccess')?.touched && 
                                 standardCleaningForm.get('cleaning_details').get('homeAccess')?.errors?.required) ||
                                 standardCleaningForm.get('cleaning_details').get('homeAccess').hasError('missing')"
-                        >The field is required</span>
+                        >The field is required</small>
                     </div>
     
                     <div class="col-12 p-3">

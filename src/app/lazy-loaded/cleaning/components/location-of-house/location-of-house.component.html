@@ -16,21 +16,21 @@
                             [showClear]="true"
                             formControlName="county">
                         </p-dropdown>
-                        <span class="required-err-message" 
+                        <small class="p-error" 
                         *ngIf="(locationForm.get('location').get('county')?.touched && 
                                 locationForm.get('location').get('county')?.errors?.required) ||
                                 locationForm.get('location').get('county').hasError('missing')"
-                        >The field is required</span>
+                        >The field is required</small>
                     </div>
                     
                     <div class="col-6 p-3 controls">
                         <label>City<span class="required-star">*</span></label>
                         <input type=text pInputText placeholder="City" formControlName=city trim="blur">
-                        <span class="required-err-message" 
+                        <small class="p-error" 
                         *ngIf="(locationForm.get('location').get('city')?.touched && 
                                 locationForm.get('location').get('city')?.errors?.required) ||
                                 locationForm.get('location').get('city').hasError('missing')"
-                        >The field is required</span>
+                        >The field is required</small>
                     </div>
                 </div>
                 
@@ -38,11 +38,11 @@
                     <div class="col-12 p-3 controls">
                         <label>Street Address<span class="required-star">*</span></label>
                         <input type=text pInputText placeholder="Address(Str, Nr, Bl, Sc)" formControlName=address trim="blur">
-                        <span class="required-err-message" 
+                        <small class="p-error" 
                         *ngIf="(locationForm.get('location').get('address')?.touched && 
                                 locationForm.get('location').get('address')?.errors?.required) ||
                                 locationForm.get('location').get('address').hasError('missing')"
-                        >The field is required</span>
+                        >The field is required</small>
                     </div>
 
                     <div class="col-12 p-3">

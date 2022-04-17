@@ -18,15 +18,6 @@ const routes: Routes = [
     loadChildren:() => import('./lazy-loaded/services/services.module').then(m=>m.ServicesModule)
   },
   {
-    path: 'contact',
-    loadChildren:() => import('./lazy-loaded/contact-us/contact-us.module').then(m=>m.ContactUsModule),
-    canActivate: [AuthorizationGuard],
-    data: {
-      role: "ROLE_USER",
-      canActivateWithoutAuthentication: true
-    }
-  },
-  {
     path: 'book-a-cleaning',
     loadChildren:() => import('./lazy-loaded/cleaning/cleaning.module').then(m=>m.CleaningModule),
     canActivate: [AuthorizationGuard],

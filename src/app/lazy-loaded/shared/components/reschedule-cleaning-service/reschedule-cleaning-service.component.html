@@ -1,4 +1,4 @@
-<div class="container mt-3 mb-3">
+<div class="container">
     <div style="text-align: right;">
         <button *ngIf="selectButton.value && canCancelCleaningService"
             class="p-button-danger"
@@ -26,7 +26,7 @@
                             </ng-template>
                         </ng-template>
                     </p-selectButton>
-                    <small class="required-err-message" 
+                    <small class="p-error" 
                     *ngIf="(form.get('dateToReschedule')?.touched && 
                             form.get('dateToReschedule')?.errors?.['required']) ||
                             form.get('dateToReschedule')?.hasError('missing')"

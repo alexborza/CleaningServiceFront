@@ -6,7 +6,7 @@
             <div class="control">
                 <label class="label">Username<span class="required-star">*</span></label>
                 <input type=text pInputText placeholder="Username" formControlName=username trim="blur">
-                <small class="required-err-message" 
+                <small class="p-error" 
                 *ngIf="(form.get('username')?.touched && 
                         form.get('username')?.errors?.['required']) ||
                         form.get('username')?.hasError('missing')"
@@ -15,7 +15,7 @@
             <div class="control">
                 <label class="label">Password<span class="required-star">*</span></label>
                 <p-password class="pass" placeholder="Password" formControlName="password" [toggleMask]="showEye" [feedback]="false" (onFocus)="onFocus()"></p-password>
-                <small class="required-err-message" 
+                <small class="p-error" 
                 *ngIf="(form.get('password')?.touched && 
                         form.get('password')?.errors?.['required']) ||
                         form.get('password')?.hasError('missing')"
@@ -24,7 +24,7 @@
             <div class="control" *ngIf="action === 'signup'">
                 <label class="label">Email<span class="required-star">*</span></label>
                 <input type=text pInputText placeholder="Email" formControlName=email trim="blur">
-                <small class="required-err-message" 
+                <small class="p-error" 
                 *ngIf="(form.get('email')?.touched && 
                         form.get('email')?.errors?.['required']) ||
                         form.get('email')?.hasError('missing')"

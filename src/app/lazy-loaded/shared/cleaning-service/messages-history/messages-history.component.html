@@ -29,7 +29,7 @@
         </div>
         <div class="col-9" style="display: grid;">
             <textarea rows="5" cols="50" pInputTextarea autoResize="autoResize" formControlName="message"></textarea>
-            <small class="required-err-message" 
+            <small class="p-error" 
             *ngIf="(form.get('message')?.touched && 
                     form.get('message')?.errors?.['required']) ||
                     form.get('message')?.hasError('missing')"

@@ -31,6 +31,7 @@ import { RescheduleCleaningServiceComponent } from './components/reschedule-clea
 import { CleaningModule } from '../cleaning/cleaning.module';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { TooltipModule } from 'primeng/tooltip';
+import { NavigationComponent } from './navigation/navigation.component';
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import { TooltipModule } from 'primeng/tooltip';
     JobInfoDetailsComponent,
     AgendaComponent,
     MessagesHistoryComponent,
-    RescheduleCleaningServiceComponent
+    RescheduleCleaningServiceComponent,
+    NavigationComponent
   ],
   imports: [
     CommonModule,
@@ -70,6 +72,7 @@ import { TooltipModule } from 'primeng/tooltip';
     TooltipModule
   ],
   exports: [
+    NavigationComponent,
     SidebarComponent,
     AccountSettingsComponent,
     CleaningServiceComponent,

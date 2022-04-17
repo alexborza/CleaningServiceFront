@@ -3,3 +3,12 @@
 * {
     font-family: sans-serif;
 }
+
+small {
+    contain: size;
+    text-align: left;
+}
+
+.required-star {
+    color:red;
+}

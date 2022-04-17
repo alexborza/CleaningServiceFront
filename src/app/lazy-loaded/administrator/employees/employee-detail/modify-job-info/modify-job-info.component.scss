@@ -11,15 +11,6 @@
     margin: 15px 60px 0 60px;
 }
 
-.required-star {
-    color:red;
-}
-
-.required-err-message {
-    color: red;
-    contain: size;
-}
-
 :host ::ng-deep .rightButton {
     float: right;
 }

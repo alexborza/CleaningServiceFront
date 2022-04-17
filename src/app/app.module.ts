@@ -11,6 +11,7 @@ import { AuthenticationGuard } from './core/guard/authentication.guard';
 import { ToastModule } from 'primeng/toast';
 import { EmployeeContractGuard } from './core/guard/employee-contract.guard';
 import { MessageService, ConfirmationService } from 'primeng/api';
+import { SharedModule } from './lazy-loaded/shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { MessageService, ConfirmationService } from 'primeng/api';
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
-    ToastModule
+    ToastModule,
+    SharedModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
