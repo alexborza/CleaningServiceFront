@@ -1,0 +1,9 @@
+:host ::ng-deep .spinner .p-dialog {
+    border: none;
+    box-shadow: none;
+
+    .p-dialog-content {
+        background: none;
+        color: transparent;
+    }
+}

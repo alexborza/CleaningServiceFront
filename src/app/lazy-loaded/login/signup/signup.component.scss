@@ -1,11 +1,14 @@
 .control {
-    padding: 13px;
+    margin: 5px 20px 0px 20px;
     display: grid;
 }
 
 .label {
     text-align: left;
-    padding: 5px;
+}
+
+small {
+    margin-bottom: 18px;
 }
 
 :host ::ng-deep .p-password{

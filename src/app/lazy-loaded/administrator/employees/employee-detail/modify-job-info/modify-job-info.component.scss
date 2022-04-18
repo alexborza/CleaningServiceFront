@@ -27,10 +27,6 @@
     text-align: initial;
 }
 
-label {
-    margin-bottom: 5px;
-}
-
 .day{
     padding-left: 0px;
     padding-right: 10px;
@@ -44,4 +40,8 @@ label {
 .year {
     padding-right: 0px;
     padding-left: 10px;
+}
+
+small{
+    margin-bottom: 10px;
 }

@@ -1,3 +1,13 @@
 <app-navigation></app-navigation>
 
 <router-outlet></router-outlet>
+
+<p-dialog
+    class="spinner"
+    [(visible)]="showSpinner"
+    [showHeader]="false"
+    [resizable]="false"
+    [modal]="true"
+>
+    <p-progressSpinner></p-progressSpinner>
+</p-dialog>
