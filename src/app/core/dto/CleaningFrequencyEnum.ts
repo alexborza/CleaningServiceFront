@@ -1,5 +1,5 @@
 export enum CleaningFrequencyEnum {
-    OneTime = "One Time",
+    OneTime = "OneTime",
     Weekly = "Weekly",
     BiWeekly = "BiWeekly",
     Monthly = "Monthly"

@@ -152,10 +152,9 @@ export class CleaningServiceDetailComponent implements OnInit {
         holderName: null
       })
     })
-
+    
     const cleaning_details = this.form.get('cleaning_details') as FormGroup;
     this.completeFormGroup(cleaning_details);
-    
   }
 
   private completeFormGroup(cleaning_details: FormGroup){
@@ -299,6 +298,35 @@ export class CleaningServiceDetailComponent implements OnInit {
   }
 
   private setBookingSummary(){
+    this.getFrequencyForBookingSummary();
+    this.getCleaningDateForBookingSummary();
+    this.getTimeEstimation();
+    this.getCleaningDetailsForBookingSummary(); 
+  }
+
+  private getFrequencyForBookingSummary(){
+    const cleaning_date = this.form.get('cleaning_date') as FormGroup;
+    this.form.get('frequency')?.valueChanges.subscribe(res => {
+      if(res){
+        cleaning_date.get('cleaningDate')?.setValue(null)
+        this.cleaningFrequency = res?.value;
+        this.discount = res?.discount;
+        this.frequency = res?.label;
+      }
+    })
+  }
+
+  private getCleaningDateForBookingSummary(){
+    const cleaning_date = this.form.get('cleaning_date') as FormGroup;
+    cleaning_date.valueChanges.subscribe(res => {
+      if(res?.cleaningDate){
+        this.cleaningDate = res.cleaningDate != null ? new Date(res.cleaningDate) : null ;
+        this.hour = res.hour;
+      }
+    })
+  }
+
+  private getTimeEstimation() {
     const cleaning_details = this.form.get('cleaning_details') as FormGroup;
     const cleaning_date = this.form.get('cleaning_date') as FormGroup;
     cleaning_details.get('squareMeters')?.valueChanges.subscribe(res => {
@@ -312,12 +340,13 @@ export class CleaningServiceDetailComponent implements OnInit {
         cleaning_date.get('cleaningDate')?.disable();
       }
     })
-    this.form.valueChanges.subscribe(res => {
+  }
+
+  private getCleaningDetailsForBookingSummary() {
+    const cleaning_details = this.form.get('cleaning_details') as FormGroup;
+    cleaning_details.valueChanges.subscribe(() => {
       this.cleaningDetailsPrices = this.getCleaningDetailsPrice(cleaning_details);
       this.property = cleaning_details.get('property')?.value;
-      this.getFrequencyForBookingSummary();
-      this.cleaningDate = cleaning_date.get('cleaningDate')?.value != null ? new Date(cleaning_date.get('cleaningDate')?.value) : null ;
-      this.hour = cleaning_date.get('hour')?.value;
     })
   }
 
@@ -331,20 +360,13 @@ export class CleaningServiceDetailComponent implements OnInit {
     return cleaningPrice;
   }
 
-  private getFrequencyForBookingSummary(){
-    if(this.form.get('frequency')?.value?.discount != undefined){
-      this.cleaningFrequency = this.form.get('frequency')?.value?.value;
-      this.discount = this.form.get('frequency')?.value?.discount;
-      this.frequency = this.form.get('frequency')?.value?.label;
-    }
-  }
-
   private getEmployeesAgendaForDate(){
     const cleaning_date = this.form.get('cleaning_date') as FormGroup;
     cleaning_date.get('cleaningDate')?.valueChanges.subscribe(cleaningDate => {
       if(cleaningDate != null){
         cleaning_date.get('hour')?.setValue(null);
-        this.employeeApi.getEmployeesAgendaForDate(cleaningDate).subscribe(res => {
+        this.cleaningFrequency = this.form.get('frequency')?.value.value ? this.form.get('frequency')?.value.value : null;
+        this.employeeApi.getEmployeesAgendaForDate(cleaningDate, this.cleaningFrequency).subscribe(res => {
           this.employeesDayAgenda = res;
           console.log(this.employeesDayAgenda);
         })

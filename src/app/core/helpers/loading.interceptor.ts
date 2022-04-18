@@ -13,9 +13,10 @@ export class LoadingInterceptor implements HttpInterceptor {
     this.sharedData.isLoadingData.next(true);
     return next.handle(baseReq).pipe(
         finalize(() => {
-          setTimeout(() => {
-            this.sharedData.isLoadingData.next(false)
-          }, 250);
+          this.sharedData.isLoadingData.next(false)
+          // setTimeout(() => {
+          //   this.sharedData.isLoadingData.next(false)
+          // }, 250);
         }),
         catchError((error: HttpErrorResponse) => {
             return throwError(error);

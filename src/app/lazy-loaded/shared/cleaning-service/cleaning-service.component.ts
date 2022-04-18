@@ -159,6 +159,7 @@ export class CleaningServiceComponent implements OnInit {
 
     ref.onClose.subscribe((res) => {
       if (res) {
+        this.getNextCleaningDate();
         this.messageService.add({severity:'success', summary: 'Success', detail: 'Successfully rescheduled cleaning service!'});
       }
     });

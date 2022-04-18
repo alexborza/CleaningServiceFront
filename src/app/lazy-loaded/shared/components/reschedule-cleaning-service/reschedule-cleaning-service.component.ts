@@ -74,7 +74,7 @@ export class RescheduleCleaningServiceComponent implements OnInit, AfterContentC
     cleaning_date.get('cleaningDate')?.valueChanges.subscribe(cleaningDate => {
       if(cleaningDate != null){
         cleaning_date.get('hour')?.setValue(null);
-        this.employeeApi.getEmployeesAgendaForDate(cleaningDate).subscribe(res => {
+        this.employeeApi.getEmployeesAgendaForDate(cleaningDate, null).subscribe(res => {
           this.employeesDayAgenda = res;
         })
       }
