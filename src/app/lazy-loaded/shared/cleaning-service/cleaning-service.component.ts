@@ -69,9 +69,9 @@ export class CleaningServiceComponent implements OnInit {
 
   private canUserEditService(){
     this.user = this.tokenStorage.getUser();
-    this.canDisplayHistory = this.user.roles.includes(RoleEnum.ROLE_USER);
+    this.canDisplayHistory = this.user.role === RoleEnum.ROLE_USER;
     this.canServiceBeEdited = this.canEditService && this.isInProgress();
-    this.canFinishService = this.user.roles.includes(RoleEnum.ROLE_EMPLOYEE) && !this.isFinished() && this.isCleaningDateValid();
+    this.canFinishService = this.user.role === RoleEnum.ROLE_EMPLOYEE && !this.isFinished() && this.isCleaningDateValid();
   }
 
   private getCleaningService(){

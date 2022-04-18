@@ -43,7 +43,7 @@ export class AccountSettingsComponent implements OnInit {
 
   private hasEmployeeRole(){
     const user = this.tokenStorage.getUser();
-    this.isEmployee = user.roles.includes(RoleEnum.ROLE_EMPLOYEE);
+    this.isEmployee = user.role === RoleEnum.ROLE_EMPLOYEE;
   }
 
   private getUser(){

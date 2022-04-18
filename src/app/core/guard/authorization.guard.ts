@@ -33,10 +33,7 @@ export class AuthorizationGuard implements CanActivate {
   }
 
   private isAuthorized(role: string): boolean{
-    if(this.authenticatedUser.roles.includes(role)){
-      return true;
-    }
-    return false;
+    return this.authenticatedUser.role === role;
   }
   
 }

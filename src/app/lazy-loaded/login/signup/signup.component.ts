@@ -16,7 +16,6 @@ export class SignupComponent implements OnInit {
   showEye: boolean = false;
   action: string = '';
   buttonLabel: string = '';
-  roles: string[] = [];
   
   constructor(
     private fb: FormBuilder,
@@ -70,7 +69,6 @@ export class SignupComponent implements OnInit {
     this.authService.login(formValue.username, formValue.password).subscribe(data => {
       this.tokenStorage.saveToken(data.token);
       this.tokenStorage.saveUser(data);
-      this.roles = this.tokenStorage.getUser().roles;
       this.reloadPage();
       this.messageService.add({severity:'success', summary:'Success', detail:'Successfully logged in'});
     },
