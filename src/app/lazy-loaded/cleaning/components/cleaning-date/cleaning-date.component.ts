@@ -28,7 +28,6 @@ export class CleaningDateComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.cleaningDateForm = this.controlContainer.control;
-    console.log('mai trebuie sa te ocupi de date',+new Date().toTimeString().split(" ")[0].split(":")[0]);
   }
 
   ngOnChanges(changes: SimpleChanges): void {

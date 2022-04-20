@@ -1,1 +1,18 @@
-<p>services works!</p>
+<div class="container mb-4">
+    <div class="title text-center p-4">
+        <h1>{{ title }}</h1>
+    </div>
+    
+    <div class="description">
+        <p>{{ description }}</p>
+    </div>
+        
+    <div *ngFor="let image of images">
+        <p-image [src]="image.src" alt="Image" height="500"></p-image>
+    </div>
+
+    <div class="text-center mt-5">
+        <button pButton type="button" label="Book now" (click)="bookNow()"></button>
+    </div>
+    
+</div>

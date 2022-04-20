@@ -3,6 +3,9 @@ import { CommonModule } from '@angular/common';
 
 import { ServicesRoutingModule } from './services-routing.module';
 import { ServicesComponent } from './services/services.component';
+import { GalleriaModule } from 'primeng/galleria';
+import { ImageModule } from 'primeng/image';
+import { ButtonModule } from 'primeng/button';
 
 
 @NgModule({
@@ -11,7 +14,10 @@ import { ServicesComponent } from './services/services.component';
   ],
   imports: [
     CommonModule,
-    ServicesRoutingModule
+    ServicesRoutingModule,
+    GalleriaModule,
+    ImageModule,
+    ButtonModule
   ]
 })
 export class ServicesModule { }

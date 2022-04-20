@@ -191,6 +191,10 @@ export class CleaningServiceDetailComponent implements OnInit {
       this.cleaningApi.createCleaningService(employeeId, user?.id === undefined ? null : user.id, this.cleaningService).subscribe(res => {
         this.messageService.add({severity:'success', summary:'Success', detail:'Successfully booked a ' + this.type + ' Service'});
         this.form.reset();
+        const frequencyControl = this.form.get('frequency');
+        if(frequencyControl){
+          frequencyControl.setValue({label: "One Time", value: CleaningFrequencyEnum.OneTime, discount: 0});
+        }
       });
     } else {
       this.messageService.add({severity:'error', summary:'Error', detail:'The field is required'});
@@ -368,7 +372,6 @@ export class CleaningServiceDetailComponent implements OnInit {
         this.cleaningFrequency = this.form.get('frequency')?.value.value ? this.form.get('frequency')?.value.value : null;
         this.employeeApi.getEmployeesAgendaForDate(cleaningDate, this.cleaningFrequency).subscribe(res => {
           this.employeesDayAgenda = res;
-          console.log(this.employeesDayAgenda);
         })
       }
     });
