@@ -11,7 +11,7 @@
         <p-image [src]="image.src" alt="Image" height="500"></p-image>
     </div>
 
-    <div class="text-center mt-5">
+    <div *ngIf="canBookNow" class="text-center mt-5">
         <button pButton type="button" label="Book now" (click)="bookNow()"></button>
     </div>
     

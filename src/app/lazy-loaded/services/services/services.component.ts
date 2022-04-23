@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CleaningServiceDescriptionsDto } from 'src/app/core/dto/CleaningServiceDescriptionDto';
+import { RoleEnum } from 'src/app/core/dto/RoleEnum';
 import { CleaningApiService } from 'src/app/core/services/cleaning-api.service';
+import { TokenStorageService } from 'src/app/core/services/token-storage.service';
 import { CleaningServiceType } from '../../cleaning/models/cleaning-service-type';
 
 @Component({
@@ -15,11 +17,13 @@ export class ServicesComponent implements OnInit {
   title: string;
   type: string;
   description: string;
+  canBookNow: boolean;
   images = [];
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
+    private tokenStorage: TokenStorageService,
     private cleaningApi: CleaningApiService
   ) { }
 
@@ -27,6 +31,12 @@ export class ServicesComponent implements OnInit {
     this.getRouteData();
     this.getDescription();
     this.getImages();
+    this.canBook();
+  }
+
+  private canBook(){
+    const role = this.tokenStorage.getUser()?.role;
+    this.canBookNow = role === RoleEnum.ROLE_USER || role === undefined;
   }
 
   private getRouteData(){
