@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { AdministratorRoutingModule } from './administrator-routing.module';
-import { AdministratorComponent } from './administrator/administrator.component';
 import { DividerModule } from 'primeng/divider';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
@@ -40,7 +39,6 @@ import { ExtraServicesPriceComponent } from './dashboard/cleaning-service-prices
 
 @NgModule({
   declarations: [
-    AdministratorComponent,
     ServicesHistoryComponent,
     EmployeeContractComponent,
     EmployeeAccountComponent,

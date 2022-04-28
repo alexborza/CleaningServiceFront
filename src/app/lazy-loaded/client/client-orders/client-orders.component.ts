@@ -30,19 +30,20 @@ export class ClientOrdersComponent implements OnInit {
       this.id = Number.parseInt(params['userId']);
     });
     this.getClientsCleaningServices();
-    this.getToasterMessage();
+    // this.getToasterMessage();
   }
 
-  private getToasterMessage(){
-    this.toasterMessageSubscription = this.sharedData.toasterMessage.subscribe((res: any) => {
-      if(res){
-        setTimeout(() => {
-          this.messageService.add(res);
-          this.sharedData.toasterMessage.next(false);
-        }, 100)
-      }
-    });
-  }
+  //asta probabil nu are ce cauta aici
+  // private getToasterMessage(){
+  //   this.toasterMessageSubscription = this.sharedData.toasterMessage.subscribe((res: any) => {
+  //     if(res){
+  //       setTimeout(() => {
+  //         this.messageService.add(res);
+  //         this.sharedData.toasterMessage.next(false);
+  //       }, 100)
+  //     }
+  //   });
+  // }
 
   private getClientsCleaningServices(){
     this.clientApi.getClientsCleaningServices(this.id).subscribe(res => {

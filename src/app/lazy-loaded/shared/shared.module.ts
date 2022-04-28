@@ -32,6 +32,7 @@ import { CleaningModule } from '../cleaning/cleaning.module';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { TooltipModule } from 'primeng/tooltip';
 import { NavigationComponent } from './navigation/navigation.component';
+import { ProfileComponent } from './profile/profile.component';
 
 
 @NgModule({
@@ -47,7 +48,8 @@ import { NavigationComponent } from './navigation/navigation.component';
     AgendaComponent,
     MessagesHistoryComponent,
     RescheduleCleaningServiceComponent,
-    NavigationComponent
+    NavigationComponent,
+    ProfileComponent
   ],
   imports: [
     CommonModule,
@@ -76,7 +78,8 @@ import { NavigationComponent } from './navigation/navigation.component';
     SidebarComponent,
     AccountSettingsComponent,
     CleaningServiceComponent,
-    AgendaComponent
+    AgendaComponent,
+    ProfileComponent
   ],
   entryComponents: [
     ModifyEmailComponent,

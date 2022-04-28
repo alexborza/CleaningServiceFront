@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { EmployeeContractGuard } from 'src/app/core/guard/employee-contract.guard';
-import { AdministratorComponent } from './administrator/administrator.component';
 import { ConfirmationComponent } from './employee-contract/confirmation/confirmation.component';
 import { EmergencyContactInformationComponent } from './employee-contract/emergency-contact-information/emergency-contact-information.component';
 import { EmployeeAccountComponent } from './employee-contract/employee-account/employee-account.component';
@@ -13,11 +12,12 @@ import { EmployeeDetailComponent } from './employees/employee-detail/employee-de
 import { AgendaComponent } from '../shared/agenda/agenda.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { CleaningServiceComponent } from '../shared/cleaning-service/cleaning-service.component';
+import { ProfileComponent } from '../shared/profile/profile.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: AdministratorComponent,
+    component: ProfileComponent,
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full'},
       { path: 'dashboard', component: DashboardComponent },

@@ -3,10 +3,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { AccountSettingsComponent } from '../shared/account-settings/account-settings.component';
 import { AgendaComponent } from '../shared/agenda/agenda.component';
 import { CleaningServiceComponent } from '../shared/cleaning-service/cleaning-service.component';
-import { EmployeeProfileComponent } from './employee-profile/employee-profile.component';
+import { ProfileComponent } from '../shared/profile/profile.component';
 
 const routes: Routes = [
-  { path: '', component: EmployeeProfileComponent, children: [
+  { path: '', component: ProfileComponent, children: [
     { path: '', redirectTo: 'account-settings', pathMatch: 'full'},
     { path: 'account-settings', component: AccountSettingsComponent },
     { path: 'agenda', component: AgendaComponent },
