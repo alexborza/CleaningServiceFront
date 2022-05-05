@@ -2,15 +2,17 @@
     <h3 style="text-align: center;">My Orders</h3>
     <div class="table mt-4">
         <h5>Cleaning Services History</h5>
-        <p-table [value]="cleaningServices" [paginator]="cleaningServices.length > 10 ? true : false" [rows]="10" responsiveLayout="scroll"
-        [rowsPerPageOptions]="[10,25,50]">
+        <p-table [value]="cleaningServices" [paginator]="cleaningServices.length > 5 ? true : false" [rows]="5" responsiveLayout="scroll"
+        [rowsPerPageOptions]="[5,20,35]">
             <ng-template pTemplate="body" let-cleaningService>
                 <tr>
                     <td>{{cleaningService.type}}</td>
                     <td>{{cleaningService.total}} $</td>
                     <td>{{cleaningService.cleaningDate.cleaningDate}}</td>
                     <td>{{cleaningService.cleaningDate.cleaningHour}}</td>
-                    <td><button pButton type="button" label="Details" (click)="toCleaningService(cleaningService.id)"></button></td>
+                    <td>
+                        <button pButton type="button" label="Details" (click)="toCleaningService(cleaningService.id)"></button>
+                    </td>
                 </tr>
             </ng-template>
             <ng-template pTemplate="emptymessage">
@@ -21,5 +23,3 @@
         </p-table>
     </div>
 </div>
-
-<p-toast></p-toast>

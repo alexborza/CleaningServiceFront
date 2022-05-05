@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RoleEnum } from 'src/app/core/dto/RoleEnum';
 import { TokenStorageService } from 'src/app/core/services/token-storage.service';
 
@@ -15,6 +15,9 @@ export class NavigationComponent implements OnInit {
   isAdmin: boolean;
   isEmployee: boolean;
 
+  activeBookCleaning: boolean;
+  activeServices: boolean;
+
   constructor(private tokenStorageService: TokenStorageService) {}
 
   ngOnInit(): void {
@@ -28,7 +31,27 @@ export class NavigationComponent implements OnInit {
     }
   }
 
-  
+  onRouterLinkActive(event, type: string){
+    switch(type){
+      case "book-cleaning":
+        if(event){
+          setTimeout(() => {this.activeBookCleaning = event}, 100);
+        } else {
+          this.activeBookCleaning = event;
+        }
+        break
+      case "services":
+        if(event){
+          setTimeout(() => {this.activeServices = event}, 100);
+        } else {
+          this.activeServices = event;
+        }
+        break;
+      default:
+        break;
+    }
+  }
+
   logout(): void {
     this.tokenStorageService.signOut();
     window.location.reload();

@@ -53,6 +53,10 @@ export class CleaningServiceComponent implements OnInit {
     this.getNextCleaningDate();
   }
 
+  private getRouteData(){
+    this.canEditService = this.route.snapshot.data?.['canEditService'];
+  }
+
   private getRouteParams(){
     this.route.parent.params.subscribe(params => {
       this.userId = Number.parseInt(params['userId']);
@@ -61,17 +65,6 @@ export class CleaningServiceComponent implements OnInit {
       this.id = Number.parseInt(params['id']);
     });
     this.agendaDate = this.route.snapshot.paramMap.get('agendaDate');
-  }
-
-  private getRouteData(){
-    this.canEditService = this.route.snapshot.data?.['canEditService'];
-  }
-
-  private canUserEditService(){
-    this.user = this.tokenStorage.getUser();
-    this.canDisplayHistory = this.user.role === RoleEnum.ROLE_USER;
-    this.canServiceBeEdited = this.canEditService && this.isInProgress();
-    this.canFinishService = this.user.role === RoleEnum.ROLE_EMPLOYEE && !this.isFinished() && this.isCleaningDateValid();
   }
 
   private getCleaningService(){
@@ -106,13 +99,15 @@ export class CleaningServiceComponent implements OnInit {
     }
   }
 
-  displayHistory(){
-    this.displayHistoryOfCleaningDates = !this.displayHistoryOfCleaningDates;
+  private canUserEditService(){
+    this.user = this.tokenStorage.getUser();
+    this.canDisplayHistory = this.user.role === RoleEnum.ROLE_USER;
+    this.canServiceBeEdited = this.canEditService && this.isInProgress();
+    this.canFinishService = this.user.role === RoleEnum.ROLE_EMPLOYEE && !this.isFinished() && this.isCleaningDateValid();
   }
 
-  private isCleaningDateValid(){
-    const currentDate = formatDate(new Date().toLocaleDateString(), 'yyyy-MM-dd', 'en-US');
-    return currentDate === this.agendaDate;
+  private isInProgress(){
+    return this.cleaningService.status === CleaningStatusEnum.InProgress;
   }
 
   private isFinished(){
@@ -121,8 +116,9 @@ export class CleaningServiceComponent implements OnInit {
     return false;
   }
 
-  private isInProgress(){
-    return this.cleaningService.status === CleaningStatusEnum.InProgress;
+  private isCleaningDateValid(){
+    const currentDate = formatDate(new Date().toLocaleDateString(), 'yyyy-MM-dd', 'en-US');
+    return currentDate === this.agendaDate;
   }
 
   confirm(){
@@ -169,6 +165,10 @@ export class CleaningServiceComponent implements OnInit {
     return this.cleaningService.cleaningFrequency === CleaningFrequencyEnum.Weekly || 
            this.cleaningService.cleaningFrequency === CleaningFrequencyEnum.BiWeekly || 
            this.cleaningService.cleaningFrequency === CleaningFrequencyEnum.Monthly
+  }
+
+  displayHistory(){
+    this.displayHistoryOfCleaningDates = !this.displayHistoryOfCleaningDates;
   }
 
   back(){

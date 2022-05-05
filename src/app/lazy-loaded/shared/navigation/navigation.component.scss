@@ -5,6 +5,12 @@
   text-decoration: none;
 }
 
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 1004;
+}
+
 nav .logo{
   color: white;
   font-size: 33px;
@@ -37,6 +43,11 @@ nav ul li a:hover,
 nav ul li a.active{
   color: #23dbdb;
 }
+
+.active {
+  color: #23dbdb;
+}
+
 nav ul ul{
   position: absolute;
   top: 85px;

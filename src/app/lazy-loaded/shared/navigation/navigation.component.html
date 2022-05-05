@@ -1,30 +1,30 @@
-<nav style="position: sticky; top: 0; z-index: 1004;">
+<nav>
     <label class="logo">BMACleaning</label>
     <ul>
-       <li><a routerLink="/home">Home</a></li>
+       <li><a routerLinkActive="active" routerLink="/home">Home</a></li>
        <li>
-          <a *ngIf="!isAdmin && !isEmployee" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Book Online</a>
+          <a [ngClass]="activeBookCleaning ? 'active': ''" *ngIf="!isAdmin && !isEmployee" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Book Online</a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a routerLink="book-a-cleaning/standard-cleaning">Standard Cleaning</a></li>
-            <li><a routerLink="book-a-cleaning/disinfection-cleaning">Environmental Cleaning and Disinfection</a></li>
-            <li><a routerLink="book-a-cleaning/post-construction-cleaning">Post Construction Cleaning</a></li>
-            <li><a routerLink="book-a-cleaning/deep-cleaning">Deep Cleaning</a></li>
+            <li><a routerLinkActive="active" routerLink="book-a-cleaning/standard-cleaning" (isActiveChange)="onRouterLinkActive($event, 'book-cleaning')">Standard Cleaning</a></li>
+            <li><a routerLinkActive="active" routerLink="book-a-cleaning/disinfection-cleaning" (isActiveChange)="onRouterLinkActive($event, 'book-cleaning')">Environmental Cleaning and Disinfection</a></li>
+            <li><a routerLinkActive="active" routerLink="book-a-cleaning/post-construction-cleaning" (isActiveChange)="onRouterLinkActive($event, 'book-cleaning')">Post Construction Cleaning</a></li>
+            <li><a routerLinkActive="active" routerLink="book-a-cleaning/deep-cleaning" (isActiveChange)="onRouterLinkActive($event, 'book-cleaning')">Deep Cleaning</a></li>
           </ul>
        </li>
        <li>
-         <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Services</a>
+         <a [ngClass]="activeServices ? 'active': ''" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Services</a>
          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-           <li><a routerLink="services/standard-cleaning">Standard Cleaning</a></li>
-           <li><a routerLink="services/disinfection-cleaning">Environmental Cleaning and Disinfection</a></li>
-           <li><a routerLink="services/post-construction-cleaning">Post Construction Cleaning</a></li>
-           <li><a routerLink="services/deep-cleaning">Deep Cleaning</a></li>
+           <li><a routerLinkActive="active" routerLink="services/standard-cleaning" (isActiveChange)="onRouterLinkActive($event, 'services')">Standard Cleaning</a></li>
+           <li><a routerLinkActive="active" routerLink="services/disinfection-cleaning" (isActiveChange)="onRouterLinkActive($event, 'services')">Environmental Cleaning and Disinfection</a></li>
+           <li><a routerLinkActive="active" routerLink="services/post-construction-cleaning" (isActiveChange)="onRouterLinkActive($event, 'services')">Post Construction Cleaning</a></li>
+           <li><a routerLinkActive="active" routerLink="services/deep-cleaning" (isActiveChange)="onRouterLinkActive($event, 'services')">Deep Cleaning</a></li>
          </ul>
        </li>
-       <li *ngIf="isAdmin"><a class="nav-link" routerLink="/administrator">Administrator</a></li>
-       <li *ngIf="isClient"><a class="nav-link" [routerLink]="['/client', user.id]">Profile</a></li>
-       <li *ngIf="isEmployee"><a class="nav-link" [routerLink]="['/employee', user.id]">Employee</a></li>
-       <li *ngIf="!isLoggedIn"><a class="nav-link" routerLink="/login/signin">Sign In</a></li>
-       <li *ngIf="!isLoggedIn"><a class="nav-link" routerLink="/login/signup">Sign Up</a></li>
+       <li *ngIf="isAdmin"><a class="nav-link" routerLinkActive="active" routerLink="/administrator">Administrator</a></li>
+       <li *ngIf="isClient"><a class="nav-link" routerLinkActive="active" [routerLink]="['/client', user.id]">Profile</a></li>
+       <li *ngIf="isEmployee"><a class="nav-link" routerLinkActive="active" [routerLink]="['/employee', user.id]">Employee</a></li>
+       <li *ngIf="!isLoggedIn"><a class="nav-link" routerLinkActive="active" routerLink="/login/signin">Sign In</a></li>
+       <li *ngIf="!isLoggedIn"><a class="nav-link" routerLinkActive="active" routerLink="/login/signup">Sign Up</a></li>
        <li *ngIf="isLoggedIn"><a class="nav-link" (click)="logout()" style="cursor: pointer;">Logout</a></li>
     </ul>
   </nav>
