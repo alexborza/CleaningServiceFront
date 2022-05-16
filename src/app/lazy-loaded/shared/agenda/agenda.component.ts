@@ -1,33 +1,27 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CleaningServiceDto } from 'src/app/core/dto/CleaningServiceDto';
 import { formatDate } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EmployeeApiService } from 'src/app/core/services/employee-api.service';
 import { AdministratorApiService } from 'src/app/core/services/administrator-api.service';
 import { ServicesAgenda } from 'src/app/core/dto/ServicesAgenda';
-import { Subscription } from 'rxjs';
-import { SharedDataService } from 'src/app/core/services/shared-data.service';
-import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-agenda',
   templateUrl: './agenda.component.html',
   styleUrls: ['./agenda.component.scss'],
 })
-export class AgendaComponent implements OnInit, OnDestroy {
+export class AgendaComponent implements OnInit {
 
   id!: number;
   cleaningDate: string = '';
   dayOfWeek: string = '';
   cleaningServices: CleaningServiceDto[] = [];
   servicesAgenda: ServicesAgenda[] = [];
-  toasterMessageSubscription!: Subscription;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private sharedData: SharedDataService,
-    private messageService: MessageService,
     private employeeApi: EmployeeApiService,
     private administratorApi: AdministratorApiService
   ) { }
@@ -37,21 +31,8 @@ export class AgendaComponent implements OnInit, OnDestroy {
       this.id = Number.parseInt(params['userId']);
     });
     const agendaDate = this.route.snapshot.paramMap.get('agendaDate')
-    this.getToasterMessage();
     this.formatDate(agendaDate ? new Date(agendaDate) : new Date());
     this.getAgenda();
-  }
-
-  private getToasterMessage(){
-    this.toasterMessageSubscription = this.sharedData.toasterMessage.subscribe((res: any) => {
-      if(res){
-        setTimeout(() => {
-          this.messageService.add(res);
-          this.getAgenda();
-          this.sharedData.toasterMessage.next(false);
-        }, 100)
-      }
-    });
   }
 
   private getAgenda(){
@@ -116,9 +97,4 @@ export class AgendaComponent implements OnInit, OnDestroy {
       this.router.navigate([cleaningService.id, {agendaDate: this.cleaningDate}], {relativeTo: this.route});
     }
   }
-
-  ngOnDestroy(): void {
-    this.toasterMessageSubscription.unsubscribe();
-  }
-
 }

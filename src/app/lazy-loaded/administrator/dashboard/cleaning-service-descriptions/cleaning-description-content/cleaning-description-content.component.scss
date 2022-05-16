@@ -1,0 +1,30 @@
+b{
+    margin-bottom: 5px;
+}
+
+label {
+    font-size: 13px;
+    line-height: 1.62;
+    letter-spacing: .4px;
+    text-align: justify;
+}
+
+.section {
+    padding: 30px 10px;
+    background-color: #fafafa;
+    margin: 0 30px 20px 30px;
+}
+
+.col-9{
+    display: grid;
+    margin-left: 35px;
+}
+
+.col-2{
+    align-self: center;
+    margin-left: 30px;
+}
+
+:host ::ng-deep .modify {
+    padding: 0.2rem 1.25rem;
+}

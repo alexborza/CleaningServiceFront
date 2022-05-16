@@ -1,0 +1,11 @@
+<div class="col-12" *ngFor="let cleaningDescriptionContent of cleaningDescriptionsContent">
+    <div class="row section">
+        <div class="col-9">
+            <b>{{ cleaningDescriptionContent.title }}</b>
+            <label>{{ getDescription(cleaningDescriptionContent.descriptionType) }}</label>
+        </div>
+        <div class="col-2">
+            <button class="modify" pButton type="button" label="Modify" (click)="modifyDescription(cleaningDescriptionContent.descriptionType)"></button>
+        </div>
+    </div>
+</div>

@@ -1,16 +1,14 @@
 <div class="container">
-    <div class="header">
-        <div class="row">
-            <div class="col-12 text-end">
-                <i style="color: #f09b0b;" class="fa fa-arrow-left" aria-hidden="true" (click)="previousDay()"></i>
-                <i style="color: #349134;" class="fa fa-arrow-right" aria-hidden="true" (click)="nextDay()"></i>
-            </div>
-            <div class="col-12">
-                <h2 class="text-center">{{dayOfWeek}}</h2>
-            </div>
-            <div class="col-12">
-                <h5 class="text-center">{{cleaningDate}}</h5>
-            </div>
+    <div class="row">
+        <div class="col-12 text-end">
+            <i style="color: #f09b0b;" class="fa fa-arrow-left" aria-hidden="true" (click)="previousDay()"></i>
+            <i style="color: #349134;" class="fa fa-arrow-right" aria-hidden="true" (click)="nextDay()"></i>
+        </div>
+        <div class="col-12">
+            <h2 class="text-center">{{dayOfWeek}}</h2>
+        </div>
+        <div class="col-12">
+            <h5 class="text-center">{{cleaningDate}}</h5>
         </div>
     </div>
 
@@ -58,5 +56,3 @@
         <p-divider></p-divider>
     </div>
 </div>
-
-<p-toast></p-toast>
