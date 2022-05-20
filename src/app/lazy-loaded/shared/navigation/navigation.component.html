@@ -14,10 +14,10 @@
        <li>
          <a [ngClass]="activeServices ? 'active': ''" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Services</a>
          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-           <li><a routerLinkActive="active" routerLink="services/standard-cleaning" (isActiveChange)="onRouterLinkActive($event, 'services')">Standard Cleaning</a></li>
-           <li><a routerLinkActive="active" routerLink="services/disinfection-cleaning" (isActiveChange)="onRouterLinkActive($event, 'services')">Environmental Cleaning and Disinfection</a></li>
-           <li><a routerLinkActive="active" routerLink="services/post-construction-cleaning" (isActiveChange)="onRouterLinkActive($event, 'services')">Post Construction Cleaning</a></li>
-           <li><a routerLinkActive="active" routerLink="services/deep-cleaning" (isActiveChange)="onRouterLinkActive($event, 'services')">Deep Cleaning</a></li>
+           <li><a routerLinkActive="active" routerLink="services" [queryParams]="{type: 'standard-cleaning'}" (isActiveChange)="onRouterLinkActive($event, 'services')">Standard Cleaning</a></li>
+           <li><a routerLinkActive="active" routerLink="services" [queryParams]="{type: 'disinfection-cleaning'}" (isActiveChange)="onRouterLinkActive($event, 'services')">Environmental Cleaning and Disinfection</a></li>
+           <li><a routerLinkActive="active" routerLink="services" [queryParams]="{type: 'post-construction-cleaning'}" (isActiveChange)="onRouterLinkActive($event, 'services')">Post Construction Cleaning</a></li>
+           <li><a routerLinkActive="active" routerLink="services" [queryParams]="{type: 'deep-cleaning'}" (isActiveChange)="onRouterLinkActive($event, 'services')">Deep Cleaning</a></li>
          </ul>
        </li>
        <li *ngIf="isAdmin"><a class="nav-link" routerLinkActive="active" routerLink="/administrator">Administrator</a></li>

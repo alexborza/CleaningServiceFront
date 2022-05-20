@@ -25,7 +25,7 @@ export class SearchServicesComponent implements OnInit {
 
   private getCleaningServices(){
     this.cleaningApi.getCleaningServices().subscribe(res => {
-      this.cleaningServices = [];
+      this.cleaningServices = res;
     })
   }
 

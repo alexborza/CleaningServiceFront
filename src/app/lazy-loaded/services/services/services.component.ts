@@ -4,7 +4,6 @@ import { CleaningServiceDescriptionsDto } from 'src/app/core/dto/CleaningService
 import { RoleEnum } from 'src/app/core/dto/RoleEnum';
 import { CleaningApiService } from 'src/app/core/services/cleaning-api.service';
 import { TokenStorageService } from 'src/app/core/services/token-storage.service';
-import { CleaningServiceType } from '../../cleaning/models/cleaning-service-type';
 
 @Component({
   selector: 'app-services',
@@ -13,7 +12,6 @@ import { CleaningServiceType } from '../../cleaning/models/cleaning-service-type
 })
 export class ServicesComponent implements OnInit {
 
-  path: string;
   title: string;
   type: string;
   description: string;
@@ -28,21 +26,23 @@ export class ServicesComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getRouteData();
-    this.getDescription();
-    this.getImages();
+    this.route.queryParams
+      .subscribe(params => {
+        this.type = params['type'];
+        this.initializeContent();
+      }
+    );
     this.canBook();
+  }
+
+  private initializeContent(){
+    this.getDescription();
+    this.getImagesAndTitle();
   }
 
   private canBook(){
     const role = this.tokenStorage.getUser()?.role;
     this.canBookNow = role === RoleEnum.ROLE_USER || role === undefined;
-  }
-
-  private getRouteData(){
-    this.path = this.router.url.split('/')[2];
-    this.title = this.route.snapshot.data?.['title'];
-    this.type = this.route.snapshot.data?.['type'];
   }
 
   private getDescription(){
@@ -51,31 +51,35 @@ export class ServicesComponent implements OnInit {
     })
   }
 
-  private getImages(){
+  private getImagesAndTitle(){
     switch(this.type){
-      case CleaningServiceType.StandardCleaning:
+      case 'standard-cleaning':
         this.images = [
           {src: 'assets/images/standard/standard1.jpg'},
           {src: 'assets/images/standard/standard3.jpeg'}
         ]
+        this.title = 'Standard Cleaning';
         break;
-      case CleaningServiceType.DeepCleaning:
+      case 'deep-cleaning':
         this.images = [
           {src: 'assets/images/deep/deep1.png'},
           {src: 'assets/images/deep/deep2.jpg'}
         ]
+        this.title = 'Deep Cleaning';
         break;
-      case CleaningServiceType.PostContructionCleaning:
+      case 'post-construction-cleaning':
         this.images = [
           {src: 'assets/images/post-construction/post2.jpg'},
           {src: 'assets/images/post-construction/post1.jpg'}
         ]
+        this.title = 'Post Construction Cleaning';
         break;
-      case CleaningServiceType.DisinfectionCleaning:
+      case 'disinfection-cleaning':
         this.images = [
           {src: 'assets/images/disinfection/disinfection1.jpg'},
           {src: 'assets/images/disinfection/disinfection2.jpg'}
         ]
+        this.title = 'Disinfection Cleaning';
         break;
       default:
         break
@@ -84,16 +88,16 @@ export class ServicesComponent implements OnInit {
 
   private getDescriptionByType(res: CleaningServiceDescriptionsDto){
     switch(this.type){
-      case CleaningServiceType.StandardCleaning:
+      case 'standard-cleaning':
         this.description = res.standardCleaningDescription;
         break;
-      case CleaningServiceType.DeepCleaning:
+      case 'deep-cleaning':
         this.description = res.deepCleaningDescription;
         break;
-      case CleaningServiceType.PostContructionCleaning:
+      case 'post-construction-cleaning':
         this.description = res.postConstructionCleaningDescription;
         break;
-      case CleaningServiceType.DisinfectionCleaning:
+      case 'disinfection-cleaning':
         this.description = res.disinfectionCleaningDescription;
         break;
       default:
@@ -102,6 +106,6 @@ export class ServicesComponent implements OnInit {
   }
 
   bookNow(){
-    this.router.navigate(["/book-a-cleaning", this.path]);
+    this.router.navigate(["/book-a-cleaning", this.type]);
   }
 }

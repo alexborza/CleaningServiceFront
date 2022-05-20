@@ -1,6 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
-import { Subscription } from 'rxjs';
 import { EmployeeService } from 'src/app/core/services/employee.service';
 
 @Component({
@@ -8,11 +7,9 @@ import { EmployeeService } from 'src/app/core/services/employee.service';
   templateUrl: './employee-contract.component.html',
   styleUrls: ['./employee-contract.component.scss']
 })
-export class EmployeeContractComponent implements OnInit, OnDestroy {
+export class EmployeeContractComponent implements OnInit {
 
   items!: MenuItem[];
-    
-  subscription!: Subscription;
 
   constructor(public employeeService: EmployeeService) {}
 
@@ -38,15 +35,5 @@ export class EmployeeContractComponent implements OnInit, OnDestroy {
             routerLink: 'confirmation'
           } 
       ];
-
-      // this.subscription = this.employeeService.paymentComplete$.subscribe((personalInformation: any) =>{
-      //     this.messageService.add({severity:'success', summary:'Order submitted', detail: 'Dear, ' + personalInformation.firstname + ' ' + personalInformation.lastname + ' your order completed.'});
-      // });
-  }
-
-  ngOnDestroy() {
-      if (this.subscription) {
-          this.subscription.unsubscribe();
-      }
   }
 }
