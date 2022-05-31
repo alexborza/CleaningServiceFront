@@ -11,6 +11,8 @@
                             formControlName="cleaningDate"
                             [showIcon]="true"
                             [minDate]="minimumDate"
+                            [disabledDays]="[0,6]" 
+                            [readonlyInput]="true"
                             dateFormat="yy-mm-dd"
                             dataType="string">
                         </p-calendar>
@@ -19,6 +21,8 @@
                             [showIcon]="true"
                             [minDate]="minDate"
                             [maxDate]="maxDate"
+                            [disabledDays]="[0,6]" 
+                            [readonlyInput]="true"
                             dateFormat="yy-mm-dd"
                             dataType="string">
                         </p-calendar>

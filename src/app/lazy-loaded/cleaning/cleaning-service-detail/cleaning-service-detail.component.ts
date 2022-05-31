@@ -186,6 +186,7 @@ export class CleaningServiceDetailComponent implements OnInit {
     this.checkRequiredFields();
     if(this.form.valid){
       this.cleaningService = this.getCleaningServiceDto(formValue);
+      console.log(this.cleaningService);
       const employeeId = formValue.cleaning_date.hour.employeeId;
       const user = this.tokenStorage.getUser();
       this.cleaningApi.createCleaningService(employeeId, user?.id === undefined ? null : user.id, this.cleaningService).subscribe(res => {
