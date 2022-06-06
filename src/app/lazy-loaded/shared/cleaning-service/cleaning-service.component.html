@@ -43,18 +43,18 @@
         </div>
     </div>
 
-    <div class="section" *ngIf="displayCleaningDate">
+    <div class="section" *ngIf="displayCleaningDate && cleaningDateDto">
         <h4>Cleaning Date</h4>
         <div class="row">
             <div class="col-4">
                 <label>Cleaning Date</label>
-                <b>{{ cleaningDate }}</b>
+                <b>{{ cleaningDateDto?.cleaningDate }}</b>
             </div>
             <div class="col-4">
                 <label>Cleaning Hour</label>
                 <b>
-                    {{ cleaningService.cleaningDate.startingHour === 9 ? '09:00 - ' : cleaningService.cleaningDate.startingHour + ':00 - ' }}
-                    {{ cleaningService.cleaningDate.finishingHour + ':00' }}
+                    {{ cleaningDateDto.startingHour === 9 ? '09:00 - ' : cleaningDateDto.startingHour + ':00 - ' }}
+                    {{ cleaningDateDto.finishingHour + ':00' }}
                 </b>
             </div>
             <div class="col-4" *ngIf="cleaningService.cleaningFrequency">

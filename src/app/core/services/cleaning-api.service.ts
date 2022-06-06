@@ -49,8 +49,8 @@ export class CleaningApiService {
     return this.http.get<CleaningDateDto[]>(this.baseUrl + "/dates-of-cleaning/" + id);
   }
 
-  getNextCleaningDate(id: number): Observable<any> {
-    return this.http.get<any>(this.baseUrl + "/next-cleaning-date/" + id);
+  getNextCleaningDate(id: number): Observable<CleaningDateDto> {
+    return this.http.get<CleaningDateDto>(this.baseUrl + "/next-cleaning-date/" + id);
   }
 
   getDescriptions(): Observable<CleaningServiceDescriptionsDto> {

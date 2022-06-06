@@ -29,6 +29,7 @@ export class CleaningServiceComponent implements OnInit {
   canEndCleaningService = false;
   agendaDate: string = '';
   cleaningDate: string = '';
+  cleaningDateDto: CleaningDateDto;
   datesOfCleaning: CleaningDateDto[] = [];
   displayCleaningDate = true;
   displayHistoryOfCleaningDates = false;
@@ -76,10 +77,11 @@ export class CleaningServiceComponent implements OnInit {
 
   private getNextCleaningDate(){
     this.cleaningApi.getNextCleaningDate(this.id).subscribe(res => {
-      if(res?.value == null){
+      if(res == null){
         this.displayCleaningDate = false;
       }
-      this.cleaningDate = res?.value ? res.value : '-';
+      console.log(this.cleaningDateDto)
+      this.cleaningDateDto = res;
     })
   }
 
@@ -136,7 +138,7 @@ export class CleaningServiceComponent implements OnInit {
   }
 
   finishService(){
-    this.cleaningApi.finishCleaningService(this.id, this.cleaningDate).subscribe(res => {
+    this.cleaningApi.finishCleaningService(this.id, this.cleaningDateDto.cleaningDate).subscribe(res => {
       this.getCleaningService();
       this.messageService.add({severity:'info', summary:'Confirmed', detail:'You have finished the cleaning service'});
     })
