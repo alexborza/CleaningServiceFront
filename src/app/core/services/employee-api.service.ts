@@ -1,12 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { CleaningFrequencyEnum } from '../dto/CleaningFrequencyEnum';
-import { CleaningServiceDto } from '../dto/CleaningServiceDto';
-import { EmergencyContactInformationDto } from '../dto/EmergencyContactInformationDto';
-import { EmployeeDto } from '../dto/EmployeeDto';
-import { EmployeesDayAgenda } from '../dto/EmployeesDayAgenda';
-import { JobInformationDto } from '../dto/JobInformationDto';
+import { Frequency } from '../model/representation/cleaning_service/Frequency';
+import { CleaningService } from '../model/representation/cleaning_service/CleaningService';
+import { EmergencyContactInformationDto } from '../model/EmergencyContactInformationDto';
+import { EmployeeDto } from '../model/EmployeeDto';
+import { EmployeesDayAgenda } from '../model/EmployeesDayAgenda';
+import { JobInformation } from '../model/users/JobInformation';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +23,7 @@ export class EmployeeApiService {
     return this.http.post(this.baseUrl + "emergency-contact-info/" + userId, dto);
   }
 
-  modifyJobInfo(userId: number, dto: JobInformationDto) {
+  modifyJobInfo(userId: number, dto: JobInformation) {
     return this.http.post(this.baseUrl + "job-info/" + userId, dto);
   }
 
@@ -35,7 +35,7 @@ export class EmployeeApiService {
     return this.http.get<EmployeesDayAgenda[]>(this.baseUrl + "employees-day-agenda?date=" + date + "&frequency=" + cleaningFrequency);
   }
 
-  getEmployeeCleaningServicesForDate(id: number, date: string): Observable<CleaningServiceDto[]> {
-    return this.http.get<CleaningServiceDto[]>(this.baseUrl + 'employee-agenda/' + id + "?date=" + date);
+  getEmployeeCleaningServicesForDate(id: number, date: string): Observable<CleaningService[]> {
+    return this.http.get<CleaningService[]>(this.baseUrl + 'employee-agenda/' + id + "?date=" + date);
   }
 }

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { EmploymentStatusEnum } from 'src/app/core/dto/EmploymentStatusEnum';
-import { JobInformationDto } from 'src/app/core/dto/JobInformationDto';
+import { EmploymentStatusEnum } from 'src/app/core/model/EmploymentStatusEnum';
+import { JobInformation } from 'src/app/core/model/users/JobInformation';
 import { EmployeeApiService } from 'src/app/core/services/employee-api.service';
 import { checkRequiredFields } from 'src/app/core/services/error/validate';
 
@@ -19,7 +19,7 @@ export class ModifyJobInfoComponent implements OnInit {
   days: string[] = [];
   months: string[] = [];
   employmentOptions!: {label: string, value: EmploymentStatusEnum}[];
-  jobInfoDto!: JobInformationDto;
+  jobInfoDto!: JobInformation;
 
   constructor(
     public config: DynamicDialogConfig,
@@ -72,14 +72,14 @@ export class ModifyJobInfoComponent implements OnInit {
     }
   }
 
-  private modifyJobInfo(dto: JobInformationDto){
+  private modifyJobInfo(dto: JobInformation){
     this.employeeApi.modifyJobInfo(this.id, dto).subscribe(res => {
       this.ref.close(dto);
     })
   }
 
   private createJobInfoDto(formValue: any){
-    let dto = new JobInformationDto();
+    let dto = new JobInformation();
     dto.title = formValue.title;
     dto.supervisor = formValue.supervisor;
     dto.workPhone = formValue.workPhone;

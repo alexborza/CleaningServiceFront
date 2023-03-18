@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { CleaningServicePricesDto } from 'src/app/core/dto/CleaningServicePricesDto';
+import { CleaningPrices } from 'src/app/core/model/cleaning_service/prices/CleaningPrices';
 
 @Component({
   selector: 'app-extra-services-price',
@@ -10,7 +10,7 @@ import { CleaningServicePricesDto } from 'src/app/core/dto/CleaningServicePrices
 })
 export class ExtraServicesPriceComponent implements OnInit {
 
-  dto: CleaningServicePricesDto;
+  dto: CleaningPrices;
   parkingSpot: number;
   pickUpKeys: number;
   submitted = false;

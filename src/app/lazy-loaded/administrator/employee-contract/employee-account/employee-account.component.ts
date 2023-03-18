@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
-import { EmployeeDto } from 'src/app/core/dto/EmployeeDto';
-import { UserCredentialDto } from 'src/app/core/dto/UserCredentialDto';
+import { EmployeeDto } from 'src/app/core/model/EmployeeDto';
+import { UserCredentialDto } from 'src/app/core/model/UserCredentialDto';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { EmployeeService } from 'src/app/core/services/employee.service';
 

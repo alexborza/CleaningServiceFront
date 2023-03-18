@@ -2,23 +2,23 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { MessageService } from 'primeng/api';
-import { AvailableHour } from 'src/app/core/dto/AvailableHour';
-import { CleaningDateDto } from 'src/app/core/dto/CleaningDateDto';
-import { CleaningFrequencyEnum } from 'src/app/core/dto/CleaningFrequencyEnum';
-import { CleaningServiceDto } from 'src/app/core/dto/CleaningServiceDto';
-import { CleaningServicePricesDto } from 'src/app/core/dto/CleaningServicePricesDto';
-import { CleaningTypeEnum } from 'src/app/core/dto/CleaningTypeEnum';
-import { ContactInfoDto } from 'src/app/core/dto/ContactInfoDto';
-import { DisinfectionCleaningDetailsDto } from 'src/app/core/dto/DisinfectionCleaningDetailsDto';
-import { EmployeesDayAgenda } from 'src/app/core/dto/EmployeesDayAgenda';
-import { LocationDto } from 'src/app/core/dto/LocationDto';
-import { PostConstructionCleaningDetailsDto } from 'src/app/core/dto/PostConstructionCleaningDetailsDto';
-import { StandardCleaningDetailsDto } from 'src/app/core/dto/StandardCleaningDetailsDto';
+import { AvailableHour } from 'src/app/core/model/AvailableHour';
+import { CleaningDateDto } from 'src/app/core/model/CleaningDateDto';
+import { Frequency } from 'src/app/core/model/representation/cleaning_service/Frequency';
+import { CleaningService } from 'src/app/core/model/representation/cleaning_service/CleaningService';
+import { CleaningPrices } from 'src/app/core/model/cleaning_service/prices/CleaningPrices';
+import { CleaningTypeEnum } from 'src/app/core/model/representation/cleaning_service/details/CleaningTypeEnum';
+import { ContactInfo } from 'src/app/core/model/representation/cleaning_service/ContactInfo';
+import { DisinfectionCleaningDetailsDto } from 'src/app/core/model/DisinfectionCleaningDetailsDto';
+import { EmployeesDayAgenda } from 'src/app/core/model/EmployeesDayAgenda';
+import { Location } from 'src/app/core/model/representation/cleaning_service/Location';
+import { PostConstructionCleaningDetailsDto } from 'src/app/core/model/PostConstructionCleaningDetailsDto';
+import { StandardCleaningDetailsDto } from 'src/app/core/model/StandardCleaningDetailsDto';
 import { CleaningApiService } from 'src/app/core/services/cleaning-api.service';
 import { EmployeeApiService } from 'src/app/core/services/employee-api.service';
 import { checkRequiredFields } from 'src/app/core/services/error/validate';
 import { TokenStorageService } from 'src/app/core/services/token-storage.service';
-import { CleaningServiceType } from '../models/cleaning-service-type';
+import { CleaningType } from '../../../core/model/representation/cleaning_service/CleaningType';
 
 @Component({
   selector: 'app-cleaning-service-detail',
@@ -29,14 +29,14 @@ export class CleaningServiceDetailComponent implements OnInit {
 
   form!: FormGroup;
   title: string = '';
-  type!: CleaningServiceType;
-  cleaningService!: CleaningServiceDto;
-  cleaningServicePricesDto: CleaningServicePricesDto;
+  type!: CleaningType;
+  cleaningService!: CleaningService;
+  cleaningServicePricesDto: CleaningPrices;
   pickUpKeysPrice: number;
   paidParkingSpotPrice: number;
   cleaningServicePrice: number = 0;
   cleaningDetailsPrices: number = 0;
-  cleaningFrequency: CleaningFrequencyEnum;
+  cleaningFrequency: Frequency;
   discount: number = 0;
   frequency: string = '';
   cleaningDate: any;
@@ -84,7 +84,7 @@ export class CleaningServiceDetailComponent implements OnInit {
     this.paidParkingSpotPrice = this.cleaningServicePricesDto.paidParkingSpotPrice;
     
     switch(this.type){
-      case CleaningServiceType.StandardCleaning:
+      case CleaningType.STANDARD:
         let sbedroomPrice = this.cleaningServicePricesDto.standardCleaningPrices.standardServiceBedroom;
         let sbathroomPrice = this.cleaningServicePricesDto.standardCleaningPrices.standardServiceBathroom;
         let skitchenPrice = this.cleaningServicePricesDto.standardCleaningPrices.standardServiceKitchen;
@@ -93,7 +93,7 @@ export class CleaningServiceDetailComponent implements OnInit {
         this.bathroomPrices = [sbathroomPrice, sbathroomPrice * 2, sbathroomPrice * 3, sbathroomPrice * 4, sbathroomPrice * 5, sbathroomPrice * 6];
         this.kitchenPrices = [skitchenPrice, skitchenPrice * 2, skitchenPrice * 3, skitchenPrice * 4, skitchenPrice * 5, skitchenPrice * 6];
         break;
-      case CleaningServiceType.DeepCleaning:
+      case CleaningType.DEEP:
         let dbedroomPrice = this.cleaningServicePricesDto.deepCleaningPrices.deepServiceBedroom;
         let dbathroomPrice = this.cleaningServicePricesDto.deepCleaningPrices.deepServiceBathroom;
         let dkitchenPrice = this.cleaningServicePricesDto.deepCleaningPrices.deepServiceKitchen;
@@ -102,13 +102,13 @@ export class CleaningServiceDetailComponent implements OnInit {
         this.bathroomPrices = [dbathroomPrice, dbathroomPrice * 2, dbathroomPrice * 3, dbathroomPrice * 4, dbathroomPrice * 5, dbathroomPrice * 6];
         this.kitchenPrices = [dkitchenPrice, dkitchenPrice * 2, dkitchenPrice * 3, dkitchenPrice * 4, dkitchenPrice * 5, dkitchenPrice * 6];
         break;
-      case CleaningServiceType.PostContructionCleaning:
+      case CleaningType.POST_CONSTRUCTION:
         let room = this.cleaningServicePricesDto.postConstructionCleaningPrices.roomPrice;
         this.cleaningServicePrice = this.cleaningServicePricesDto.postConstructionCleaningPrices.postConstructionServicePrice;
         this.propertyPrices = [50, 100, 150]; // ce facem cu property prices?
         this.roomPrices = [room, room * 2, room * 3, room * 4, room * 5, room * 6, room * 7, room * 8, room * 9, room * 10];
         break;
-      case CleaningServiceType.DisinfectionCleaning:
+      case CleaningType.DISINFECTION:
         this.cleaningServicePrice = this.cleaningServicePricesDto.disinfectionCleaningPrices.disinfectionServicePrice;
         this.propertyPrices = [50, 100, 150]; // ce facem cu property prices?
         break;
@@ -118,8 +118,8 @@ export class CleaningServiceDetailComponent implements OnInit {
   }
 
   public isStandardDetail(){
-    return this.type === CleaningServiceType.StandardCleaning || 
-           this.type === CleaningServiceType.DeepCleaning;
+    return this.type === CleaningType.STANDARD || 
+           this.type === CleaningType.DEEP;
   }
 
   private buildForm(){
@@ -159,16 +159,16 @@ export class CleaningServiceDetailComponent implements OnInit {
 
   private completeFormGroup(cleaning_details: FormGroup){
     switch(this.type){
-      case CleaningServiceType.StandardCleaning:
-      case CleaningServiceType.DeepCleaning:
+      case CleaningType.STANDARD:
+      case CleaningType.DEEP:
         this.frequency = "One Time";
-        this.form.addControl('frequency', new FormControl({label: "One Time", value: CleaningFrequencyEnum.OneTime, discount: 0}));
+        this.form.addControl('frequency', new FormControl({label: "One Time", value: Frequency.OneTime, discount: 0}));
         this.addCleaningDetailsControls(cleaning_details, ['bedrooms', 'bathrooms', 'kitchens']);
         break;
-      case CleaningServiceType.PostContructionCleaning:
+      case CleaningType.POST_CONSTRUCTION:
         this.addCleaningDetailsControls(cleaning_details, ['property', 'rooms']);
         break;
-      case CleaningServiceType.DisinfectionCleaning:
+      case CleaningType.DISINFECTION:
         this.addCleaningDetailsControls(cleaning_details, ['property']);
         break;
       default:
@@ -194,7 +194,7 @@ export class CleaningServiceDetailComponent implements OnInit {
         this.form.reset();
         const frequencyControl = this.form.get('frequency');
         if(frequencyControl){
-          frequencyControl.setValue({label: "One Time", value: CleaningFrequencyEnum.OneTime, discount: 0});
+          frequencyControl.setValue({label: "One Time", value: Frequency.OneTime, discount: 0});
         }
       });
     } else {
@@ -208,11 +208,11 @@ export class CleaningServiceDetailComponent implements OnInit {
     const cleaningDate = this.createCleaningDateDto(formValue);
     const cleaningDetails = this.createCleaningDetailsDto(formValue);
     
-    let cleaningServiceDto = new CleaningServiceDto();
+    let cleaningServiceDto = new CleaningService();
     cleaningServiceDto.contactInfo = contactInfo;
     cleaningServiceDto.location = location;
     cleaningServiceDto.cleaningDetails = cleaningDetails;
-    if(this.type === CleaningServiceType.StandardCleaning || this.type === CleaningServiceType.DeepCleaning){
+    if(this.type === CleaningType.STANDARD || this.type === CleaningType.DEEP){
       cleaningServiceDto.cleaningFrequency = formValue.frequency.value;
     }
     cleaningServiceDto.cleaningDate = cleaningDate;
@@ -232,7 +232,7 @@ export class CleaningServiceDetailComponent implements OnInit {
   }
 
   private createLocationDto(formValue: any){
-    const location = new LocationDto();
+    const location = new Location();
     location.county = formValue.location.county;
     location.city = formValue.location.city;
     location.address = formValue.location.address;
@@ -240,7 +240,7 @@ export class CleaningServiceDetailComponent implements OnInit {
   }
 
   private createContactInfoDto(formValue: any) {
-    const contactInfo = new ContactInfoDto();
+    const contactInfo = new ContactInfo();
     contactInfo.firstName = formValue.contact_info.firstName;
     contactInfo.lastName = formValue.contact_info.lastName;
     contactInfo.email = formValue.contact_info.email;
@@ -250,12 +250,12 @@ export class CleaningServiceDetailComponent implements OnInit {
 
   private createCleaningDetailsDto(formValue: any) {
     switch(this.type){
-      case CleaningServiceType.StandardCleaning:
-      case CleaningServiceType.DeepCleaning:
+      case CleaningType.STANDARD:
+      case CleaningType.DEEP:
         return this.createStandardCleaningDetailsDto(formValue);
-      case CleaningServiceType.PostContructionCleaning:
+      case CleaningType.POST_CONSTRUCTION:
         return this.createPostConstructionCleaningDetailsDto(formValue);
-      case CleaningServiceType.DisinfectionCleaning:
+      case CleaningType.DISINFECTION:
         return this.createDisinfectionCleaningDetailsDto(formValue);
       default:
         return null;

@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { MessageResponseDto } from '../dto/MessageResponseDto';
-import { ModifyPassswordDto } from '../dto/ModifyPasswordDto';
-import { UserDto } from '../dto/UserDto';
-import { UserInformationDto } from '../dto/UserInformationDto';
+import { MessageResponseDto } from '../model/MessageResponseDto';
+import { ModifyPasssword } from '../model/creation/users/ModifyPassword';
+import { UserDto } from '../model/UserDto';
+import { UserInformation } from '../model/users/UserInformation';
 
 @Injectable({
   providedIn: 'root'
@@ -25,11 +25,11 @@ export class UserApiService {
     return this.http.post(this.baseUrl + "email/" + userId, email);
   }
 
-  modifyPassword(userId: number, dto: ModifyPassswordDto): Observable<MessageResponseDto> {
+  modifyPassword(userId: number, dto: ModifyPasssword): Observable<MessageResponseDto> {
     return this.http.post<MessageResponseDto>(this.baseUrl + "password/" + userId, dto);
   }
 
-  modifyPersonalInfo(userId: number, dto: UserInformationDto) {
+  modifyPersonalInfo(userId: number, dto: UserInformation) {
     return this.http.post(this.baseUrl + "personal-info/" + userId, dto);
   }
 }

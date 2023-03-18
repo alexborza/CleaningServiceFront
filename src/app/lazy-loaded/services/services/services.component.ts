@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CleaningServiceDescriptionsDto } from 'src/app/core/dto/CleaningServiceDescriptionDto';
-import { RoleEnum } from 'src/app/core/dto/RoleEnum';
+import { CleaningServiceDescriptionsDto } from 'src/app/core/model/CleaningServiceDescriptionDto';
+import { Role } from 'src/app/core/model/representation/users/Role';
 import { CleaningApiService } from 'src/app/core/services/cleaning-api.service';
 import { TokenStorageService } from 'src/app/core/services/token-storage.service';
 
@@ -42,7 +42,7 @@ export class ServicesComponent implements OnInit {
 
   private canBook(){
     const role = this.tokenStorage.getUser()?.role;
-    this.canBookNow = role === RoleEnum.ROLE_USER || role === undefined;
+    this.canBookNow = role === Role.USER || role === undefined;
   }
 
   private getDescription(){

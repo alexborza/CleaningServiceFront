@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { CleaningServicePricesDto } from 'src/app/core/dto/CleaningServicePricesDto';
+import { CleaningPrices } from 'src/app/core/model/cleaning_service/prices/CleaningPrices';
 
 @Component({
   selector: 'app-cleaning-price',
@@ -15,7 +15,7 @@ export class CleaningPriceComponent implements OnInit {
   @ViewChild('kitchen') kitchen: any;
   @ViewChild('room') room: any;
 
-  dto!: CleaningServicePricesDto;
+  dto!: CleaningPrices;
   cleaningType!: string;
   cleaningServicePrice!: number;
   bedroomPrice!: number;

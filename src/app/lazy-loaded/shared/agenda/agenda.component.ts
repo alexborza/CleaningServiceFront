@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { CleaningServiceDto } from 'src/app/core/dto/CleaningServiceDto';
+import { CleaningService } from 'src/app/core/model/representation/cleaning_service/CleaningService';
 import { formatDate } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EmployeeApiService } from 'src/app/core/services/employee-api.service';
 import { AdministratorApiService } from 'src/app/core/services/administrator-api.service';
-import { ServicesAgenda } from 'src/app/core/dto/ServicesAgenda';
+import { ServicesAgenda } from 'src/app/core/model/ServicesAgenda';
 
 @Component({
   selector: 'app-agenda',
@@ -16,7 +16,7 @@ export class AgendaComponent implements OnInit {
   id!: number;
   cleaningDate: string = '';
   dayOfWeek: string = '';
-  cleaningServices: CleaningServiceDto[] = [];
+  cleaningServices: CleaningService[] = [];
   servicesAgenda: ServicesAgenda[] = [];
 
   constructor(
@@ -90,7 +90,7 @@ export class AgendaComponent implements OnInit {
     this.formatDate(date);
   }
 
-  onClick(cleaningService: CleaningServiceDto){
+  onClick(cleaningService: CleaningService){
     if(this.router.url.startsWith("/administrator")){
       this.router.navigate(["/administrator/cleaning-details", cleaningService.id, {agendaDate: this.cleaningDate}]);
     } else {

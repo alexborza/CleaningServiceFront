@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { CleaningServiceDto } from 'src/app/core/dto/CleaningServiceDto';
+import { CleaningService } from 'src/app/core/model/representation/cleaning_service/CleaningService';
 import { ClientService } from 'src/app/core/services/client.service';
 
 @Component({
@@ -12,7 +12,7 @@ import { ClientService } from 'src/app/core/services/client.service';
 export class ClientOrdersComponent implements OnInit {
 
   id!: number;
-  cleaningServices: CleaningServiceDto[] = [];
+  cleaningServices: CleaningService[] = [];
   toasterMessageSubscription: Subscription;
 
   constructor(

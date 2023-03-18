@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { EmergencyContactInformationDto } from 'src/app/core/dto/EmergencyContactInformationDto';
+import { EmergencyContactInformationDto } from 'src/app/core/model/EmergencyContactInformationDto';
 import { EmployeeApiService } from 'src/app/core/services/employee-api.service';
 import { checkRequiredFields } from 'src/app/core/services/error/validate';
 

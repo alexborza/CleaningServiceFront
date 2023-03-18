@@ -1,7 +1,7 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { ControlContainer } from '@angular/forms';
-import { HomeAccessEnum } from 'src/app/core/dto/HomeAccessEnum';
-import { ParkingEnum } from 'src/app/core/dto/ParkingEnum';
+import { HomeAccess } from 'src/app/core/model/HomeAccess';
+import { Parking } from 'src/app/core/model/Parking';
 
 @Component({
   selector: 'app-standard-cleaning-service-detail',
@@ -54,15 +54,15 @@ export class StandardCleaningServiceDetailComponent implements OnInit, OnChanges
     ]
 
     this.parking = [
-      {label: "Free parking spot", value: ParkingEnum.Free, price: 0},
-      {label: "Paid parking spot", value: ParkingEnum.Paid, price: this.paidParkingSpotPrice}
+      {label: "Free parking spot", value: Parking.Free, price: 0},
+      {label: "Paid parking spot", value: Parking.Paid, price: this.paidParkingSpotPrice}
     ]
 
     this.homeAccess = [
-      {label: "Meet at the location", value: HomeAccessEnum.Meet, price: 0},
-      {label: "Key placed in the mailbox", value: HomeAccessEnum.KeyMailbox, price: 0},
-      {label: "Pick up keys(additional charges)", value: HomeAccessEnum.PickupKey, price: this.pickUpKeysPrice},
-      {label: "Give us a call to organize", value: HomeAccessEnum.Call, price: 0}
+      {label: "Meet at the location", value: HomeAccess.Meet, price: 0},
+      {label: "Key placed in the mailbox", value: HomeAccess.KeyMailbox, price: 0},
+      {label: "Pick up keys(additional charges)", value: HomeAccess.PickupKey, price: this.pickUpKeysPrice},
+      {label: "Give us a call to organize", value: HomeAccess.Call, price: 0}
     ]
   }
 
@@ -93,12 +93,12 @@ interface Room {
 
 interface Parking {
   label: string;
-  value: ParkingEnum;
+  value: Parking;
   price: number;
 }
 
 interface HomeAccess {
   label: string;
-  value: HomeAccessEnum;
+  value: HomeAccess;
   price: number;
 }

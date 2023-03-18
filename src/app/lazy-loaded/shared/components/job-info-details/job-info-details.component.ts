@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { JobInformationDto } from 'src/app/core/dto/JobInformationDto';
+import { JobInformation } from 'src/app/core/model/users/JobInformation';
 
 @Component({
   selector: 'app-job-info-details',
@@ -9,7 +9,7 @@ import { JobInformationDto } from 'src/app/core/dto/JobInformationDto';
 })
 export class JobInfoDetailsComponent implements OnInit {
 
-  jobInfoDto!: JobInformationDto;
+  jobInfoDto!: JobInformation;
 
   constructor(
     public config: DynamicDialogConfig,

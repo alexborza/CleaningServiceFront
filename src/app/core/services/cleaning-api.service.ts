@@ -1,14 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { CleaningDateDto } from '../dto/CleaningDateDto';
-import { CleaningServiceDescriptionsDto } from '../dto/CleaningServiceDescriptionDto';
-import { CleaningServiceDisplay } from '../dto/CleaningServiceDisplay';
-import { CleaningServiceDto } from '../dto/CleaningServiceDto';
-import { CleaningServicePricesDto } from '../dto/CleaningServicePricesDto';
-import { DatesToRescheduleDto } from '../dto/DatesToRescheduleDto';
-import { MessageDto } from '../dto/MessageDto';
-import { RescheduleDateDto } from '../dto/RescheduleDateDto';
+import { CleaningDateDto } from '../model/CleaningDateDto';
+import { CleaningServiceDescriptionsDto } from '../model/CleaningServiceDescriptionDto';
+import { CleaningServiceDisplay } from '../model/CleaningServiceDisplay';
+import { CleaningService } from '../model/representation/cleaning_service/CleaningService';
+import { CleaningPrices } from '../model/representation/cleaning_service/prices/CleaningPrices';
+import { DatesToRescheduleDto } from '../model/DatesToRescheduleDto';
+import { Message } from '../model/representation/cleaning_service/Message';
+import { RescheduleDateDto } from '../model/RescheduleDateDto';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +21,7 @@ export class CleaningApiService {
     this.baseUrl = "http://localhost:8080/api/booking/cleaning-service";
   }
 
-  createCleaningService(employeeId: number, userId: number, cleaningServiceDto: CleaningServiceDto) {
+  createCleaningService(employeeId: number, userId: number, cleaningServiceDto: CleaningService) {
     if(userId === null){
       return this.http.post(this.baseUrl + "?employeeId=" + employeeId, cleaningServiceDto);
     } else {
@@ -33,8 +33,8 @@ export class CleaningApiService {
     return this.http.get<CleaningServiceDisplay[]>(this.baseUrl);
   }
 
-  getCleaningService(id: number): Observable<CleaningServiceDto> {
-    return this.http.get<CleaningServiceDto>(this.baseUrl + "/" + id);
+  getCleaningService(id: number): Observable<CleaningService> {
+    return this.http.get<CleaningService>(this.baseUrl + "/" + id);
   }
   
   endCleaningService(id: number) {
@@ -57,15 +57,15 @@ export class CleaningApiService {
     return this.http.get<CleaningServiceDescriptionsDto>(this.baseUrl + "/descriptions");
   }
 
-  getCleaningServicePrices(): Observable<CleaningServicePricesDto> {
-    return this.http.get<CleaningServicePricesDto>(this.baseUrl + '/prices');
+  getCleaningServicePrices(): Observable<CleaningPrices> {
+    return this.http.get<CleaningPrices>(this.baseUrl + '/prices');
   }
 
-  getMessagesForCleaningService(id: number): Observable<MessageDto[]> {
-    return this.http.get<MessageDto[]>(this.baseUrl + '/messages/' + id);
+  getMessagesForCleaningService(id: number): Observable<Message[]> {
+    return this.http.get<Message[]>(this.baseUrl + '/messages/' + id);
   }
 
-  addMessageToCleaningService(id: number, dto: MessageDto) {
+  addMessageToCleaningService(id: number, dto: Message) {
     return this.http.post(this.baseUrl + '/message/' + id, dto);
   }
 

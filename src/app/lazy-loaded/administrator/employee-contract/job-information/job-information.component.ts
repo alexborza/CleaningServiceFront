@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { EmployeeDto } from 'src/app/core/dto/EmployeeDto';
-import { EmploymentStatusEnum } from 'src/app/core/dto/EmploymentStatusEnum';
+import { EmployeeDto } from 'src/app/core/model/EmployeeDto';
+import { EmploymentStatusEnum } from 'src/app/core/model/EmploymentStatusEnum';
 import { EmployeeService } from 'src/app/core/services/employee.service';
 
 @Component({

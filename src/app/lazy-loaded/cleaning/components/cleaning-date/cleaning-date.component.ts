@@ -1,9 +1,9 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ControlContainer } from '@angular/forms';
-import { AvailableHour } from 'src/app/core/dto/AvailableHour';
-import { AvailableInterval } from 'src/app/core/dto/AvailableInterval';
-import { CleaningFrequencyEnum } from 'src/app/core/dto/CleaningFrequencyEnum';
-import { EmployeesDayAgenda } from 'src/app/core/dto/EmployeesDayAgenda';
+import { AvailableHour } from 'src/app/core/model/AvailableHour';
+import { AvailableInterval } from 'src/app/core/model/AvailableInterval';
+import { Frequency } from 'src/app/core/model/representation/cleaning_service/Frequency';
+import { EmployeesDayAgenda } from 'src/app/core/model/EmployeesDayAgenda';
 
 @Component({
   selector: 'app-cleaning-date',
@@ -16,7 +16,7 @@ export class CleaningDateComponent implements OnInit, OnChanges {
   totalEmployees!: number;
   @Input() employeesDayAgenda: EmployeesDayAgenda[] = [];
   @Input() timeEstimation!: number;
-  @Input() cleaningFrequency: CleaningFrequencyEnum;
+  @Input() cleaningFrequency: Frequency;
   @Input() minDate: Date;
   @Input() maxDate: Date;
   availableHours: AvailableHour[] = [];
@@ -51,9 +51,9 @@ export class CleaningDateComponent implements OnInit, OnChanges {
   }
 
   private isCleaningServiceDoneFrequently(){
-    return this.cleaningFrequency === CleaningFrequencyEnum.Weekly || 
-           this.cleaningFrequency === CleaningFrequencyEnum.BiWeekly || 
-           this.cleaningFrequency === CleaningFrequencyEnum.Monthly;
+    return this.cleaningFrequency === Frequency.Weekly || 
+           this.cleaningFrequency === Frequency.BiWeekly || 
+           this.cleaningFrequency === Frequency.Monthly;
   }
 
   private getAvailableHoursForAgenda(agenda: EmployeesDayAgenda, availableIntervals: AvailableInterval[], timeEstimation: number, avHours: AvailableHour[]){

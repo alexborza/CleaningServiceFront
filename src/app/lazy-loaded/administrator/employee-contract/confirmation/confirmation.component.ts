@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { EmployeeDto } from 'src/app/core/dto/EmployeeDto';
+import { EmployeeDto } from 'src/app/core/model/EmployeeDto';
 import { EmployeeService } from 'src/app/core/services/employee.service';
 import { SharedDataService } from 'src/app/core/services/shared-data.service';
 

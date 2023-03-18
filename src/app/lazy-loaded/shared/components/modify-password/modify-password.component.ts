@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { ModifyPassswordDto } from 'src/app/core/dto/ModifyPasswordDto';
+import { ModifyPasssword } from 'src/app/core/model/creation/users/ModifyPassword';
 import { checkRequiredFields } from 'src/app/core/services/error/validate';
 import { UserApiService } from 'src/app/core/services/user-api.service';
 
@@ -38,7 +38,7 @@ export class ModifyPasswordComponent implements OnInit {
   onSubmit(formValue: any){
     this.checkRequiredFields();
     if(this.form.valid){
-      let modifyPasswordDto = new ModifyPassswordDto(formValue.password, formValue.newPassword)
+      let modifyPasswordDto = new ModifyPasssword(formValue.password, formValue.newPassword)
       this.userApi.modifyPassword(this.id, modifyPasswordDto).subscribe(res => {
         this.ref.close(res.message);
       },

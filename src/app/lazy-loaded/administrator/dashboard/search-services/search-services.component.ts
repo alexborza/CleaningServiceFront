@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { CleaningServiceDisplay } from 'src/app/core/dto/CleaningServiceDisplay';
+import { CleaningServiceDisplay } from 'src/app/core/model/CleaningServiceDisplay';
 import { CleaningApiService } from 'src/app/core/services/cleaning-api.service';
 
 @Component({

@@ -3,11 +3,11 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
-import { CleaningDateDto } from 'src/app/core/dto/CleaningDateDto';
-import { CleaningFrequencyEnum } from 'src/app/core/dto/CleaningFrequencyEnum';
-import { CleaningServiceDto } from 'src/app/core/dto/CleaningServiceDto';
-import { CleaningStatusEnum } from 'src/app/core/dto/CleaningStatusEnum';
-import { RoleEnum } from 'src/app/core/dto/RoleEnum';
+import { CleaningDateDto } from 'src/app/core/model/CleaningDateDto';
+import { Frequency } from 'src/app/core/model/representation/cleaning_service/Frequency';
+import { CleaningService } from 'src/app/core/model/representation/cleaning_service/CleaningService';
+import { CleaningStatusEnum } from 'src/app/core/model/CleaningStatusEnum';
+import { Role } from 'src/app/core/model/representation/users/Role';
 import { CleaningApiService } from 'src/app/core/services/cleaning-api.service';
 import { TokenStorageService } from 'src/app/core/services/token-storage.service';
 import { RescheduleCleaningServiceComponent } from '../components/reschedule-cleaning-service/reschedule-cleaning-service.component';
@@ -22,7 +22,7 @@ export class CleaningServiceComponent implements OnInit {
 
   userId: any;
   id: any;
-  cleaningService!: CleaningServiceDto;
+  cleaningService!: CleaningService;
   canEditService = false;
   canFinishService = false;
   canServiceBeEdited = false;
@@ -94,7 +94,7 @@ export class CleaningServiceComponent implements OnInit {
   }
 
   private canEndService(){
-    if(this.cleaningService.cleaningFrequency == null || this.cleaningService.cleaningFrequency === CleaningFrequencyEnum.OneTime){
+    if(this.cleaningService.cleaningFrequency == null || this.cleaningService.cleaningFrequency === Frequency.OneTime){
       this.canEndCleaningService = true;
     } else {
       this.canEndCleaningService = this.datesOfCleaning.length > 5;
@@ -103,9 +103,9 @@ export class CleaningServiceComponent implements OnInit {
 
   private canUserEditService(){
     this.user = this.tokenStorage.getUser();
-    this.canDisplayHistory = this.user.role === RoleEnum.ROLE_USER;
+    this.canDisplayHistory = this.user.role === Role.USER;
     this.canServiceBeEdited = this.canEditService && this.isInProgress();
-    this.canFinishService = this.user.role === RoleEnum.ROLE_EMPLOYEE && !this.isFinished() && this.isCleaningDateValid();
+    this.canFinishService = this.user.role === Role.EMPLOYEE && !this.isFinished() && this.isCleaningDateValid();
   }
 
   private isInProgress(){
@@ -164,9 +164,9 @@ export class CleaningServiceComponent implements OnInit {
   }
 
   private canCancelCleaningService(){
-    return this.cleaningService.cleaningFrequency === CleaningFrequencyEnum.Weekly || 
-           this.cleaningService.cleaningFrequency === CleaningFrequencyEnum.BiWeekly || 
-           this.cleaningService.cleaningFrequency === CleaningFrequencyEnum.Monthly
+    return this.cleaningService.cleaningFrequency === Frequency.Weekly || 
+           this.cleaningService.cleaningFrequency === Frequency.BiWeekly || 
+           this.cleaningService.cleaningFrequency === Frequency.Monthly
   }
 
   displayHistory(){

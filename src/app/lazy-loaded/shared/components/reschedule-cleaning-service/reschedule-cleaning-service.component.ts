@@ -1,9 +1,9 @@
 import { AfterContentChecked, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { DatesToRescheduleDto } from 'src/app/core/dto/DatesToRescheduleDto';
-import { EmployeesDayAgenda } from 'src/app/core/dto/EmployeesDayAgenda';
-import { RescheduleDateDto } from 'src/app/core/dto/RescheduleDateDto';
+import { DatesToRescheduleDto } from 'src/app/core/model/DatesToRescheduleDto';
+import { EmployeesDayAgenda } from 'src/app/core/model/EmployeesDayAgenda';
+import { RescheduleDateDto } from 'src/app/core/model/RescheduleDateDto';
 import { CleaningApiService } from 'src/app/core/services/cleaning-api.service';
 import { EmployeeApiService } from 'src/app/core/services/employee-api.service';
 import { checkRequiredFields } from 'src/app/core/services/error/validate';

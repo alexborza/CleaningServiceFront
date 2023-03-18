@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { DialogService } from 'primeng/dynamicdialog';
-import { CleaningServiceDescriptionsDto } from 'src/app/core/dto/CleaningServiceDescriptionDto';
+import { CleaningServiceDescriptionsDto } from 'src/app/core/model/CleaningServiceDescriptionDto';
 import { CleaningDescriptionComponent } from '../cleaning-description/cleaning-description.component';
 import { CleaningDescriptionContent } from '../CleaningDescriptionContent';
 

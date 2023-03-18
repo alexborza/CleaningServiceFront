@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
-import { CleaningServicePricesDto } from 'src/app/core/dto/CleaningServicePricesDto';
+import { CleaningPrices } from 'src/app/core/model/cleaning_service/prices/CleaningPrices';
 import { AdministratorApiService } from 'src/app/core/services/administrator-api.service';
 import { CleaningApiService } from 'src/app/core/services/cleaning-api.service';
 import { CleaningPriceComponent } from './cleaning-price/cleaning-price.component';
@@ -15,7 +15,7 @@ import { ExtraServicesPriceComponent } from './extra-services-price/extra-servic
 })
 export class CleaningServicePricesComponent implements OnInit {
 
-  dto!: CleaningServicePricesDto;
+  dto!: CleaningPrices;
 
   constructor(
     public dialogService: DialogService,

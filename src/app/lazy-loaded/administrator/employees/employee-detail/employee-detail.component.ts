@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
-import { EmployeeDto } from 'src/app/core/dto/EmployeeDto';
+import { EmployeeDto } from 'src/app/core/model/EmployeeDto';
 import { EmployeeApiService } from 'src/app/core/services/employee-api.service';
 import { ModifyJobInfoComponent } from './modify-job-info/modify-job-info.component';
 

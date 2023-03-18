@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
-import { CleaningServiceDescriptionsDto } from 'src/app/core/dto/CleaningServiceDescriptionDto';
+import { CleaningServiceDescriptionsDto } from 'src/app/core/model/CleaningServiceDescriptionDto';
 import { AdministratorApiService } from 'src/app/core/services/administrator-api.service';
 import { CleaningApiService } from 'src/app/core/services/cleaning-api.service';
 import { CleaningDescriptionContent } from './CleaningDescriptionContent';

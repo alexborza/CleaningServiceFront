@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ControlContainer } from '@angular/forms';
-import { PaymentMethodEnum } from 'src/app/core/dto/PaymentMethodEnum';
+import { Payment } from 'src/app/core/model/representation/cleaning_service/Payment';
 
 @Component({
   selector: 'app-payment-details',
@@ -9,18 +9,18 @@ import { PaymentMethodEnum } from 'src/app/core/dto/PaymentMethodEnum';
 })
 export class PaymentDetailsComponent implements OnInit {
 
-  paymentMethods: {label: string, method: PaymentMethodEnum}[] = [];
+  paymentMethods: {label: string, method: Payment}[] = [];
   showCreditCardDetails: boolean = false;
 
   constructor(public controlContainer: ControlContainer) { }
 
   ngOnInit(): void {
     this.paymentMethods = [
-      {label: "By Cash", method: PaymentMethodEnum.CASH}, 
-      {label: "By Credit Card", method: PaymentMethodEnum.CARD}
+      {label: "By Cash", method: Payment.CASH}, 
+      {label: "By Credit Card", method: Payment.CARD}
     ]
     this.controlContainer.control?.get('payment')?.valueChanges.subscribe(res => {
-      if(res.paymentMethod === PaymentMethodEnum.CARD){
+      if(res.paymentMethod === Payment.CARD){
         this.showCreditCardDetails = true;
       } else {
         this.showCreditCardDetails = false;

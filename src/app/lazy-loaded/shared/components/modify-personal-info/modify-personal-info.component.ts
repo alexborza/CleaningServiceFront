@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { UserInformationDto } from 'src/app/core/dto/UserInformationDto';
+import { UserInformation } from 'src/app/core/model/users/UserInformation';
 import { checkRequiredFields } from 'src/app/core/services/error/validate';
 import { UserApiService } from 'src/app/core/services/user-api.service';
 
@@ -17,7 +17,7 @@ export class ModifyPersonalInfoComponent implements OnInit {
   years: string[] = [];
   days: string[] = [];
   months: string[] = [];
-  userInfoDto!: UserInformationDto;
+  userInfoDto!: UserInformation;
 
   constructor(
     public config: DynamicDialogConfig,
@@ -71,14 +71,14 @@ export class ModifyPersonalInfoComponent implements OnInit {
     }
   }
 
-  private modifyPersonalInfo (userInfoDto: UserInformationDto){
+  private modifyPersonalInfo (userInfoDto: UserInformation){
     this.userApi.modifyPersonalInfo(this.id, userInfoDto).subscribe(res => {
       this.ref.close(userInfoDto);
     });
   }
 
   private createUserInformationDto(formValue: any){
-    let dto = new UserInformationDto();
+    let dto = new UserInformation();
     dto.fullName = formValue.fullName;
     dto.address = formValue.address;
     dto.phoneNumber = formValue.phoneNumber;

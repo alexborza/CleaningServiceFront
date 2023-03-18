@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
-import { EmergencyContactInformationDto } from 'src/app/core/dto/EmergencyContactInformationDto';
-import { RoleEnum } from 'src/app/core/dto/RoleEnum';
-import { UserInformationDto } from 'src/app/core/dto/UserInformationDto';
+import { EmergencyContactInformationDto } from 'src/app/core/model/EmergencyContactInformationDto';
+import { Role } from 'src/app/core/model/representation/users/Role';
+import { UserInformation } from 'src/app/core/model/users/UserInformation';
 import { TokenStorageService } from 'src/app/core/services/token-storage.service';
 import { UserApiService } from 'src/app/core/services/user-api.service';
 import { JobInfoDetailsComponent } from '../components/job-info-details/job-info-details.component';
@@ -43,7 +43,7 @@ export class AccountSettingsComponent implements OnInit {
 
   private hasEmployeeRole(){
     const user = this.tokenStorage.getUser();
-    this.isEmployee = user.role === RoleEnum.ROLE_EMPLOYEE;
+    this.isEmployee = user.role === Role.EMPLOYEE;
   }
 
   private getUser(){
@@ -97,7 +97,7 @@ export class AccountSettingsComponent implements OnInit {
       width: '50%'
     });
 
-    ref.onClose.subscribe((dto: UserInformationDto) => {
+    ref.onClose.subscribe((dto: UserInformation) => {
       if (dto) {
         this.getUser();
         this.messageService.add({severity:'success', summary: 'Success', detail: 'Successfully modified personal information!'});

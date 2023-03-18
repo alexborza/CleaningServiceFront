@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { CleaningServiceDescriptionsDto } from '../dto/CleaningServiceDescriptionDto';
-import { CleaningServicePricesDto } from '../dto/CleaningServicePricesDto';
-import { EmployeeDto } from '../dto/EmployeeDto';
-import { ServicesAgenda } from '../dto/ServicesAgenda';
+import { CleaningServiceDescriptionsDto } from '../model/CleaningServiceDescriptionDto';
+import { CleaningPrices } from '../model/representation/cleaning_service/prices/CleaningPrices';
+import { EmployeeDto } from '../model/EmployeeDto';
+import { ServicesAgenda } from '../model/ServicesAgenda';
 
 @Injectable({
   providedIn: 'root'
@@ -32,11 +32,11 @@ export class AdministratorApiService {
     return this.http.put(this.baseUrl + 'update-descriptions/' + id, dto)
   }
 
-  createCleaningPrices(dto: CleaningServicePricesDto) {
+  createCleaningPrices(dto: CleaningPrices) {
     return this.http.post(this.baseUrl + "create-prices", dto);
   }
 
-  updateCleaningPrices(id: number, dto: CleaningServicePricesDto) {
+  updateCleaningPrices(id: number, dto: CleaningPrices) {
     return this.http.put(this.baseUrl + 'update-prices/' + id, dto)
   }
 }

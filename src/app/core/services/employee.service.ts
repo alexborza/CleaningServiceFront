@@ -1,12 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { EmergencyContactInformationDto } from '../dto/EmergencyContactInformationDto';
-import { EmployeeDto } from '../dto/EmployeeDto';
-import { EmployeeInformationDto } from '../dto/EmployeeInformationDto';
-import { JobInformationDto } from '../dto/JobInformationDto';
-import { MessageResponseDto } from '../dto/MessageResponseDto';
-import { UserInformationDto } from '../dto/UserInformationDto';
+import { EmergencyContactInformationDto } from '../model/EmergencyContactInformationDto';
+import { EmployeeDto } from '../model/EmployeeDto';
+import { EmployeeInformationDto } from '../model/EmployeeInformationDto';
+import { JobInformation } from '../model/users/JobInformation';
+import { MessageResponseDto } from '../model/MessageResponseDto';
+import { UserInformation } from '../model/users/UserInformation';
 
 @Injectable({
   providedIn: 'root'
@@ -27,9 +27,9 @@ export class EmployeeService {
 
   createNewEmployee(){
     this.employeeDto = new EmployeeDto();
-    this.employeeDto.userInformation = new UserInformationDto()
+    this.employeeDto.userInformation = new UserInformation()
     this.employeeDto.employeeInformation = new EmployeeInformationDto()
-    this.employeeDto.employeeInformation.jobInformation = new JobInformationDto()
+    this.employeeDto.employeeInformation.jobInformation = new JobInformation()
     this.employeeDto.employeeInformation.emergencyContactInformation = new EmergencyContactInformationDto()
     this.canAccessUserInfo = false;
     this.canAccessJobInfo = false;

@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { Subscription } from 'rxjs';
-import { EmployeeDto } from 'src/app/core/dto/EmployeeDto';
+import { EmployeeDto } from 'src/app/core/model/EmployeeDto';
 import { AdministratorApiService } from 'src/app/core/services/administrator-api.service';
 import { SharedDataService } from 'src/app/core/services/shared-data.service';
 

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RoleEnum } from 'src/app/core/dto/RoleEnum';
+import { Role } from 'src/app/core/model/representation/users/Role';
 import { TokenStorageService } from 'src/app/core/services/token-storage.service';
 
 @Component({
@@ -25,9 +25,9 @@ export class NavigationComponent implements OnInit {
     if (this.isLoggedIn) {
       this.user = this.tokenStorageService.getUser();
       const role = this.user.role;
-      this.isClient = role === RoleEnum.ROLE_USER;
-      this.isAdmin = role === RoleEnum.ROLE_ADMIN;
-      this.isEmployee = role === RoleEnum.ROLE_EMPLOYEE;
+      this.isClient = role === Role.USER;
+      this.isAdmin = role === Role.ADMIN;
+      this.isEmployee = role === Role.EMPLOYEE;
     }
   }
 
