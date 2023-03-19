@@ -40,7 +40,7 @@ export class EmergencyContactInformationComponent implements OnInit {
       {label: "Stepmother"},
       {label: "Friend"},
     ]
-    this.employeeDto = this.employeeService.employeeDto
+    this.employeeDto = this.employeeService.employeeContractCreation
   }
 
   nextPage() {

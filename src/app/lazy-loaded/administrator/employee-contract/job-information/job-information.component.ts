@@ -22,7 +22,7 @@ export class JobInformationComponent implements OnInit {
       { label: "Part Time", value: EmploymentStatusEnum.PartTime},
       { label: "Full Time", value: EmploymentStatusEnum.FullTime}
     ]
-    this.employeeDto = this.employeeService.employeeDto;
+    this.employeeDto = this.employeeService.employeeContractCreation;
   }
 
   nextPage() {

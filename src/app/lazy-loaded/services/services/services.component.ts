@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CleaningServiceDescriptionsDto } from 'src/app/core/model/CleaningServiceDescriptionDto';
+import { CleaningDescription } from 'src/app/core/model/representation/cleaning_service/description/CleaningDescription';
 import { Role } from 'src/app/core/model/representation/users/Role';
 import { CleaningApiService } from 'src/app/core/services/cleaning-api.service';
 import { TokenStorageService } from 'src/app/core/services/token-storage.service';
@@ -86,7 +86,7 @@ export class ServicesComponent implements OnInit {
     }
   }
 
-  private getDescriptionByType(res: CleaningServiceDescriptionsDto){
+  private getDescriptionByType(res: CleaningDescription){
     switch(this.type){
       case 'standard-cleaning':
         this.description = res.standardCleaningDescription;

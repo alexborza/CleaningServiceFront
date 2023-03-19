@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { UserInformation } from 'src/app/core/model/users/UserInformation';
+import { UserInformation } from 'src/app/core/model/representation/users/UserInformation';
 import { checkRequiredFields } from 'src/app/core/services/error/validate';
 import { UserApiService } from 'src/app/core/services/user-api.service';
 

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CleaningServiceDisplay } from 'src/app/core/model/CleaningServiceDisplay';
-import { CleaningService } from 'src/app/core/model/representation/cleaning_service/CleaningService';
+import { CleaningServiceMinimal } from 'src/app/core/model/representation/cleaning_service/CleaningServiceMinimal';
 import { CleaningApiService } from 'src/app/core/services/cleaning-api.service';
 
 @Component({
@@ -11,7 +10,7 @@ import { CleaningApiService } from 'src/app/core/services/cleaning-api.service';
 })
 export class ServicesHistoryComponent implements OnInit {
 
-  cleaningServices: CleaningServiceDisplay[] = [];
+  cleaningServices: CleaningServiceMinimal[] = [];
 
   constructor(
     private cleaningServiceApi: CleaningApiService,
@@ -24,9 +23,9 @@ export class ServicesHistoryComponent implements OnInit {
   }
 
   private getCleaningServices(){
-    this.cleaningServiceApi.getCleaningServices().subscribe(res => {
-      this.cleaningServices = res;
-    })
+    // this.cleaningServiceApi.getCleaningServices().subscribe(res => {
+    //   this.cleaningServices = res;
+    // })
   }
 
   onRowSelect(event: any){

@@ -17,11 +17,11 @@ export class EnvironmentalCleaningServiceDetailComponent implements OnInit, OnCh
   @Input() propertyPrices: number[] = [];
   @Input() paidParkingSpotPrice: number;
   @Input() pickUpKeysPrice: number;
-  properties: Property[] = [];
-  rooms: Room[] = [];
-  parking: Parking[] = [];
-  homeAccess: HomeAccess[] = [];
-  squareMeters: SquareMeters[] = [];
+  properties: PropertyValueObject[] = [];
+  rooms: RoomValueObject[] = [];
+  parking: ParkingValueObject[] = [];
+  homeAccess: HomeAccessValueObject[] = [];
+  squareMeters: SquareMetersValueObject[] = [];
   isPostConstructionCleaning = false;
 
   constructor(
@@ -84,30 +84,30 @@ export class EnvironmentalCleaningServiceDetailComponent implements OnInit, OnCh
   }
 }
 
-interface SquareMeters {
+interface SquareMetersValueObject {
   label: string;
   timeEstimation: number;
 }
 
-interface Room {
+interface RoomValueObject {
   label: string;
   value: number;
   price: number;
 }
 
-interface Property {
+interface PropertyValueObject {
   label: string;
   value: Property;
   price: number;
 }
 
-interface Parking {
+interface ParkingValueObject {
   label: string;
   value: Parking;
   price: number;
 }
 
-interface HomeAccess {
+interface HomeAccessValueObject {
   label: string;
   value: HomeAccess;
   price: number;

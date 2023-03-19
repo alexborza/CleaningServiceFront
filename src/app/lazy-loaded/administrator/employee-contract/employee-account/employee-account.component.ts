@@ -24,7 +24,7 @@ export class EmployeeAccountComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
-    this.employeeDto = this.employeeService.employeeDto;
+    this.employeeDto = this.employeeService.employeeContractCreation;
     this.authApi.getExistingUserCredentials().subscribe(res => {
       this.existingCredentials = res;
     })

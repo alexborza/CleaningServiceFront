@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
-import { EmployeeDto } from 'src/app/core/model/EmployeeDto';
+import { Employee } from 'src/app/core/model/representation/users/Employee';
 import { EmployeeApiService } from 'src/app/core/services/employee-api.service';
 import { ModifyJobInfoComponent } from './modify-job-info/modify-job-info.component';
 
@@ -15,7 +15,7 @@ import { ModifyJobInfoComponent } from './modify-job-info/modify-job-info.compon
 export class EmployeeDetailComponent implements OnInit {
   
   id!: number;
-  employee!: EmployeeDto;
+  employee!: Employee;
 
   constructor(
     private route: ActivatedRoute,
@@ -42,7 +42,7 @@ export class EmployeeDetailComponent implements OnInit {
     const ref = this.dialogService.open(ModifyJobInfoComponent, {
       data: {
         id: this.id,
-        dto: this.employee.employeeInformation.jobInformation
+        dto: this.employee.jobInformationRepresentation
       },
       header: 'Modify Job Information',
       width: '50%'

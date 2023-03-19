@@ -4,7 +4,7 @@ import { formatDate } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EmployeeApiService } from 'src/app/core/services/employee-api.service';
 import { AdministratorApiService } from 'src/app/core/services/administrator-api.service';
-import { ServicesAgenda } from 'src/app/core/model/ServicesAgenda';
+// import { ServicesAgenda } from 'src/app/core/model/ServicesAgenda';
 
 @Component({
   selector: 'app-agenda',
@@ -17,7 +17,7 @@ export class AgendaComponent implements OnInit {
   cleaningDate: string = '';
   dayOfWeek: string = '';
   cleaningServices: CleaningService[] = [];
-  servicesAgenda: ServicesAgenda[] = [];
+  servicesAgenda: [] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -44,9 +44,9 @@ export class AgendaComponent implements OnInit {
   }
 
   private getServicesAgenda(){
-    this.administratorApi.getServicesAgenda(this.cleaningDate).subscribe(res => {
-      this.servicesAgenda = res;
-    });
+    // this.administratorApi.getServicesAgenda(this.cleaningDate).subscribe(res => {
+    //   this.servicesAgenda = res;
+    // });
   }
 
   private getEmployeeCleaningServicesForDate(){

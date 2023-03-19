@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { EmploymentStatusEnum } from 'src/app/core/model/EmploymentStatusEnum';
-import { JobInformation } from 'src/app/core/model/users/JobInformation';
+import { JobInformation } from 'src/app/core/model/representation/users/JobInformation';
 import { EmployeeApiService } from 'src/app/core/services/employee-api.service';
 import { checkRequiredFields } from 'src/app/core/services/error/validate';
 
@@ -18,7 +17,6 @@ export class ModifyJobInfoComponent implements OnInit {
   years: string[] = [];
   days: string[] = [];
   months: string[] = [];
-  employmentOptions!: {label: string, value: EmploymentStatusEnum}[];
   jobInfoDto!: JobInformation;
 
   constructor(
@@ -31,7 +29,6 @@ export class ModifyJobInfoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.intializeRelationshipOptions();
     this.buildForm();
     this.initializeDropdownsForBirthdate();
   }
@@ -39,10 +36,7 @@ export class ModifyJobInfoComponent implements OnInit {
   private buildForm(){
     const birthDate = this.jobInfoDto?.hiringDate.split('-');
     this.form = new FormGroup({
-      title: new FormControl(this.jobInfoDto?.title != undefined ? this.jobInfoDto.title : '', [Validators.required]),
-      supervisor: new FormControl(this.jobInfoDto?.supervisor != undefined ? this.jobInfoDto.supervisor : '', [Validators.required]),
       workPhone: new FormControl(this.jobInfoDto?.workPhone != undefined ? this.jobInfoDto.workPhone : '', [Validators.required]),
-      employmentStatus: new FormControl(this.jobInfoDto?.employmentStatus != undefined ? this.jobInfoDto.employmentStatus : '', [Validators.required]),
       day: new FormControl(birthDate != undefined ? birthDate[2] : null, [Validators.required]),
       month: new FormControl(birthDate != undefined ? birthDate[1] : null, [Validators.required]),
       year: new FormControl(birthDate != undefined ? birthDate[0] : null,[Validators.required]),
@@ -80,10 +74,7 @@ export class ModifyJobInfoComponent implements OnInit {
 
   private createJobInfoDto(formValue: any){
     let dto = new JobInformation();
-    dto.title = formValue.title;
-    dto.supervisor = formValue.supervisor;
     dto.workPhone = formValue.workPhone;
-    dto.employmentStatus = formValue.employmentStatus;
     dto.hiringDate = formValue.year + "-" + formValue.month + "-" + formValue.day;
     dto.salary = formValue.salary;
     return dto;
@@ -95,13 +86,6 @@ export class ModifyJobInfoComponent implements OnInit {
 
   private checkRequiredFields(){
     checkRequiredFields(this.form.controls);
-  }
-
-  private intializeRelationshipOptions(){
-    this.employmentOptions = [
-      { label: "Part Time", value: EmploymentStatusEnum.PartTime},
-      { label: "Full Time", value: EmploymentStatusEnum.FullTime}
-    ]
   }
 
   private checkDateValidty(date: string){

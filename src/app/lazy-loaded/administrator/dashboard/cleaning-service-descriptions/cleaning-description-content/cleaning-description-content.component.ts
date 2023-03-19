@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { DialogService } from 'primeng/dynamicdialog';
-import { CleaningServiceDescriptionsDto } from 'src/app/core/model/CleaningServiceDescriptionDto';
+import { CleaningDescriptionCreation } from 'src/app/core/model/creation/cleaning_service/description/CleaningDescriptionCreation';
 import { CleaningDescriptionComponent } from '../cleaning-description/cleaning-description.component';
 import { CleaningDescriptionContent } from '../CleaningDescriptionContent';
 
@@ -13,7 +13,7 @@ import { CleaningDescriptionContent } from '../CleaningDescriptionContent';
 export class CleaningDescriptionContentComponent implements OnInit {
 
   @Input() cleaningDescriptionsContent: CleaningDescriptionContent;
-  @Input() dto: CleaningServiceDescriptionsDto;
+  @Input() cleaningDescriptionCreation: CleaningDescriptionCreation;
 
   constructor(
     public dialogService: DialogService,
@@ -27,7 +27,7 @@ export class CleaningDescriptionContentComponent implements OnInit {
       data: {
         description: this.getDescription(descriptionType),
         descriptionType: descriptionType,
-        dto: this.dto
+        dto: this.cleaningDescriptionCreation
       },
       header: 'Modify description',
       width: '50%'
@@ -37,13 +37,13 @@ export class CleaningDescriptionContentComponent implements OnInit {
   private getDescription(descriptionType: string){
     switch(descriptionType){
       case 'Standard':
-        return this.dto.standardCleaningDescription;
+        return this.cleaningDescriptionCreation.standardCleaningDescription;
       case 'Deep': 
-        return this.dto.deepCleaningDescription;
+        return this.cleaningDescriptionCreation.deepCleaningDescription;
       case 'Post Construction':
-        return this.dto.postConstructionCleaningDescription;
+        return this.cleaningDescriptionCreation.postConstructionCleaningDescription;
       case 'Disinfection':
-        return this.dto.disinfectionCleaningDescription;
+        return this.cleaningDescriptionCreation.disinfectionCleaningDescription;
       default:
         return "";
     }

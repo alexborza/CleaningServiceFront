@@ -5,25 +5,20 @@
             <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
                 <app-contact-info></app-contact-info>
                 <app-location-of-house></app-location-of-house>
-                <app-standard-cleaning-service-detail *ngIf="isStandardDetail()"
+                <app-standard-cleaning-service-detail *ngIf="isStandardOrDeepDetail()"
                     [bedroomPrices]="bedroomPrices"
                     [bathroomPrices]="bathroomPrices"
                     [kitchenPrices]="kitchenPrices"
                     [pickUpKeysPrice]="pickUpKeysPrice"
                     [paidParkingSpotPrice]="paidParkingSpotPrice"
                 ></app-standard-cleaning-service-detail>
-                <app-environmental-cleaning-service-detail *ngIf="!isStandardDetail()"
+                <app-environmental-cleaning-service-detail *ngIf="!isStandardOrDeepDetail()"
                     [propertyPrices]="propertyPrices"
                     [roomPrices]="roomPrices"
                     [pickUpKeysPrice]="pickUpKeysPrice"
                     [paidParkingSpotPrice]="paidParkingSpotPrice"
                 ></app-environmental-cleaning-service-detail>
-                <app-cleaning-frequency *ngIf="isStandardDetail()"></app-cleaning-frequency>
-                <app-cleaning-date 
-                    [employeesDayAgenda]="employeesDayAgenda"
-                    [timeEstimation]="timeEstimation"
-                    [cleaningFrequency]="cleaningFrequency"
-                ></app-cleaning-date>
+                <app-cleaning-frequency *ngIf="isStandardOrDeepDetail()"></app-cleaning-frequency>
                 <app-payment-details></app-payment-details>
 
                 <div class="row">
@@ -39,8 +34,6 @@
                 [cleaningDetailsPrices]="cleaningDetailsPrices"
                 [discount]="discount"
                 [frequency]="frequency"
-                [cleaningDate]="cleaningDate"
-                [hour]="hour"
                 [type]="type"
                 [property]="property"
                 [timeEstimation]="timeEstimation"

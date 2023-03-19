@@ -1,38 +1,39 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CleaningServiceDetailComponent } from './cleaning-service-detail/cleaning-service-detail.component';
+import { CleaningType } from 'src/app/core/model/representation/cleaning_service/CleaningType';
+import { CleaningServiceCreationComponent } from './cleaning-service-creation/cleaning-service-creation.component';
 
 const routes: Routes = [
   {
     path: 'standard-cleaning',
-    component: CleaningServiceDetailComponent,
+    component: CleaningServiceCreationComponent,
     data: {
       title: 'Standard Cleaning',
-      type: 'Standard Cleaning'
+      type: CleaningType.STANDARD
     }
   },
   {
     path: 'disinfection-cleaning',
-    component: CleaningServiceDetailComponent,
+    component: CleaningServiceCreationComponent,
     data: {
       title: 'Disinfection and Environmental Cleaning',
-      type: 'Disinfection Cleaning'
+      type: CleaningType.DISINFECTION
     }
   },
   {
     path: 'post-construction-cleaning',
-    component: CleaningServiceDetailComponent,
+    component: CleaningServiceCreationComponent,
     data: {
       title: 'Post Construction Cleaning',
-      type: 'Post Construction Cleaning'
+      type: CleaningType.POST_CONSTRUCTION
     }
   },
   {
     path: 'deep-cleaning',
-    component: CleaningServiceDetailComponent,
+    component: CleaningServiceCreationComponent,
     data: {
       title: 'Deep Cleaning',
-      type: 'Deep Cleaning'
+      type: CleaningType.DEEP
     }
   },
 ];

@@ -20,14 +20,12 @@ import { CalendarModule } from 'primeng/calendar'
 import { DropdownModule } from 'primeng/dropdown';
 import { CleaningServiceComponent } from './cleaning-service/cleaning-service.component';
 import { InputTextareaModule } from 'primeng/inputtextarea';
-import { ModifyEmergencyContactInfoComponent } from './components/modify-emergency-contact-info/modify-emergency-contact-info.component';
 import { JobInfoDetailsComponent } from './components/job-info-details/job-info-details.component';
 import { AgendaComponent } from './agenda/agenda.component';
 import { DividerModule } from 'primeng/divider';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { TableModule } from 'primeng/table';
 import { MessagesHistoryComponent } from './cleaning-service/messages-history/messages-history.component';
-import { RescheduleCleaningServiceComponent } from './components/reschedule-cleaning-service/reschedule-cleaning-service.component';
 import { CleaningModule } from '../cleaning/cleaning.module';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { TooltipModule } from 'primeng/tooltip';
@@ -43,11 +41,9 @@ import { ProfileComponent } from './profile/profile.component';
     ModifyPasswordComponent,
     ModifyPersonalInfoComponent,
     CleaningServiceComponent,
-    ModifyEmergencyContactInfoComponent,
     JobInfoDetailsComponent,
     AgendaComponent,
     MessagesHistoryComponent,
-    RescheduleCleaningServiceComponent,
     NavigationComponent,
     ProfileComponent
   ],
@@ -84,8 +80,7 @@ import { ProfileComponent } from './profile/profile.component';
   entryComponents: [
     ModifyEmailComponent,
     ModifyPasswordComponent,
-    ModifyPersonalInfoComponent,
-    RescheduleCleaningServiceComponent
+    ModifyPersonalInfoComponent
   ]
 })
 export class SharedModule { }

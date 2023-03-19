@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { Subscription } from 'rxjs';
-import { EmployeeDto } from 'src/app/core/model/EmployeeDto';
+import { Employee } from 'src/app/core/model/representation/users/Employee';
 import { AdministratorApiService } from 'src/app/core/services/administrator-api.service';
 import { SharedDataService } from 'src/app/core/services/shared-data.service';
 
@@ -14,7 +14,7 @@ import { SharedDataService } from 'src/app/core/services/shared-data.service';
 export class EmployeesComponent implements OnInit, OnDestroy {
 
   toasterMessageSubscription!: Subscription;
-  employees: EmployeeDto[] = [];
+  employees: Employee[] = [];
 
   constructor(
     private sharedData: SharedDataService,
@@ -38,9 +38,9 @@ export class EmployeesComponent implements OnInit, OnDestroy {
   }
 
   private getAllEmployees(){
-    this.administratorApi.getAllEmployees().subscribe(res => {
-      this.employees = res;
-    })
+    // this.administratorApi.getAllEmployees().subscribe(res => {
+    //   this.employees = res;
+    // })
   }
 
   toEmployeesDetails(id: number){

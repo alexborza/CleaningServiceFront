@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { CleaningServiceDescriptionsDto } from 'src/app/core/model/CleaningServiceDescriptionDto';
+import { CleaningDescription } from 'src/app/core/model/representation/cleaning_service/description/CleaningDescription';
 
 @Component({
   selector: 'app-cleaning-description',
@@ -12,7 +12,7 @@ export class CleaningDescriptionComponent implements OnInit {
 
   serviceDescription: string = '';
   descriptionType: string = '';
-  dto: CleaningServiceDescriptionsDto;
+  dto: CleaningDescription;
   submitted = false;
 
   constructor(

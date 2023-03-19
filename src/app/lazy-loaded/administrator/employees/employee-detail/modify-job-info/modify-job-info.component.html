@@ -29,22 +29,6 @@
                 >The field is required</small>
             </div>
             <div class="col-12">
-                <label>Employment Status<span class="required-star">*</span></label>
-                <p-dropdown 
-                    [options]="employmentOptions" 
-                    placeholder="Select employment status"
-                    optionLabel="label"
-                    optionValue="label"
-                    [showClear]="true"
-                    formControlName="employmentStatus">
-                </p-dropdown>
-                <small class="p-error" 
-                *ngIf="(form.get('employmentStatus')?.touched && 
-                        form.get('employmentStatus')?.errors?.['required']) ||
-                        form.get('employmentStatus')?.hasError('missing')"
-                >The field is required</small>
-            </div>
-            <div class="col-12">
                 <label class="label">Salary<span class="required-star">*</span></label>
                 <input type=number pInputText placeholder="Enter salary" formControlName=salary>
                 <small class="p-error" 

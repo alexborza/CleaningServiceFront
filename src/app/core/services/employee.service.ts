@@ -1,12 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { EmergencyContactInformationDto } from '../model/EmergencyContactInformationDto';
-import { EmployeeDto } from '../model/EmployeeDto';
-import { EmployeeInformationDto } from '../model/EmployeeInformationDto';
-import { JobInformation } from '../model/users/JobInformation';
-import { MessageResponseDto } from '../model/MessageResponseDto';
-import { UserInformation } from '../model/users/UserInformation';
+import { EmployeeContractCreation } from '../model/creation/users/EmployeeContractCreation';
+import { JobInformationCreation } from '../model/creation/users/JobInformationCreation';
+import { UserInformationCreation } from '../model/creation/users/UserInformationCreation';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +11,7 @@ import { UserInformation } from '../model/users/UserInformation';
 export class EmployeeService {
 
   baseUrl: string = "";
-  employeeDto: EmployeeDto = new EmployeeDto();
+  employeeContractCreation: EmployeeContractCreation = new EmployeeContractCreation();
   canAccessUserInfo: boolean = false;
   canAccessJobInfo: boolean = false;
   canAccessEmergencyInfo: boolean = false;
@@ -26,19 +23,17 @@ export class EmployeeService {
   }
 
   createNewEmployee(){
-    this.employeeDto = new EmployeeDto();
-    this.employeeDto.userInformation = new UserInformation()
-    this.employeeDto.employeeInformation = new EmployeeInformationDto()
-    this.employeeDto.employeeInformation.jobInformation = new JobInformation()
-    this.employeeDto.employeeInformation.emergencyContactInformation = new EmergencyContactInformationDto()
+    this.employeeContractCreation = new EmployeeContractCreation();
+    this.employeeContractCreation.userInformationCreation = new UserInformationCreation()
+    this.employeeContractCreation.jobInformationCreation = new JobInformationCreation()
     this.canAccessUserInfo = false;
     this.canAccessJobInfo = false;
     this.canAccessEmergencyInfo = false;
     this.canAccessConfirmation = false;
   }
 
-  createEmployeeContract(dto: EmployeeDto): Observable<MessageResponseDto> {
-    return this.http.post<MessageResponseDto>(this.baseUrl + "/employee-contract", dto);
+  createEmployeeContract(dto: EmployeeContractCreation): Observable<void> {
+    return this.http.post<void>(this.baseUrl + "/employee-contract", dto);
   }
 
 }

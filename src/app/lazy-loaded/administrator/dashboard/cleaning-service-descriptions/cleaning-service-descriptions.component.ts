@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
-import { CleaningServiceDescriptionsDto } from 'src/app/core/model/CleaningServiceDescriptionDto';
+import { CleaningDescriptionCreation } from 'src/app/core/model/creation/cleaning_service/description/CleaningDescriptionCreation';
 import { AdministratorApiService } from 'src/app/core/services/administrator-api.service';
 import { CleaningApiService } from 'src/app/core/services/cleaning-api.service';
 import { CleaningDescriptionContent } from './CleaningDescriptionContent';
@@ -12,7 +12,7 @@ import { CleaningDescriptionContent } from './CleaningDescriptionContent';
 })
 export class CleaningServiceDescriptionsComponent implements OnInit {
 
-  dto = new CleaningServiceDescriptionsDto();
+  cleaningDescriptionCreation = new CleaningDescriptionCreation();
   cleaningDescriptionsContent: CleaningDescriptionContent[] = [];
 
   constructor(
@@ -27,7 +27,7 @@ export class CleaningServiceDescriptionsComponent implements OnInit {
 
   private getDescriptions(){
     this.cleaningApi.getDescriptions().subscribe(res => {
-      this.dto = res;
+      this.cleaningDescriptionCreation = res;
       this.initializeCleaningDescriptionContent();
     })
   }
@@ -42,21 +42,11 @@ export class CleaningServiceDescriptionsComponent implements OnInit {
   }
 
   onSave(){
-    if(this.dto.id){
-      this.updateDescriptions();
-    } else {
-      this.createDescriptions();
-    }
-  }
-
-  private updateDescriptions(){
-    this.administratorApi.updateDescriptions(this.dto.id, this.dto).subscribe(res => {
-      this.messageService.add({severity:'success', summary:'Success', detail: 'Descriptions updated successfully!'});
-    });
+    this.createDescriptions();
   }
 
   private createDescriptions(){
-    this.administratorApi.createDescriptions(this.dto).subscribe(res => {
+    this.administratorApi.createDescriptions(this.cleaningDescriptionCreation).subscribe(res => {
       this.messageService.add({severity:'success', summary:'Success', detail: 'Descriptions updated successfully!'});
     });
   }

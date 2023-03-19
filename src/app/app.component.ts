@@ -11,6 +11,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewChecked {
   
   loadingSubscription: Subscription;
   showSpinner = true;
+  title = "CleaningServiceFront";
 
   constructor(
     private sharedData: SharedDataService,

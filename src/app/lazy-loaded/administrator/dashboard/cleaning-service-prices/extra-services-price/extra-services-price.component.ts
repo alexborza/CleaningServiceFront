@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { CleaningPrices } from 'src/app/core/model/cleaning_service/prices/CleaningPrices';
+import { CleaningPrices } from 'src/app/core/model/representation/cleaning_service/prices/CleaningPrices';
 
 @Component({
   selector: 'app-extra-services-price',

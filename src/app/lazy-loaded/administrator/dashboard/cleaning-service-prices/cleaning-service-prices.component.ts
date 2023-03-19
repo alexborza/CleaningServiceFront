@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
-import { CleaningPrices } from 'src/app/core/model/cleaning_service/prices/CleaningPrices';
+import { CleaningPrices } from 'src/app/core/model/representation/cleaning_service/prices/CleaningPrices';
 import { AdministratorApiService } from 'src/app/core/services/administrator-api.service';
 import { CleaningApiService } from 'src/app/core/services/cleaning-api.service';
 import { CleaningPriceComponent } from './cleaning-price/cleaning-price.component';

@@ -1,5 +1,4 @@
-import { AfterViewInit, Component, ElementRef, HostListener, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { AvailableHour } from 'src/app/core/model/AvailableHour';
+import { AfterViewInit, Component, HostListener, Input, OnDestroy, OnInit} from '@angular/core';
 import { CleaningType } from '../../../../core/model/representation/cleaning_service/CleaningType';
 
 @Component({
@@ -14,7 +13,6 @@ export class BookingSummaryComponent implements OnInit, AfterViewInit, OnDestroy
   @Input() discount: number = 0;
   @Input() frequency: string = '';
   @Input() cleaningDate: any;
-  @Input() hour!: AvailableHour;
   @Input() type!: CleaningType;
   @Input() property: any;
   @Input() timeEstimation: number = 0;

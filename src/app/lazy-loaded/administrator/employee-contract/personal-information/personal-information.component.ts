@@ -15,7 +15,7 @@ export class PersonalInformationComponent implements OnInit {
   constructor(public employeeService: EmployeeService, private router: Router) { }
 
   ngOnInit() { 
-      this.employeeDto = this.employeeService.employeeDto
+      this.employeeDto = this.employeeService.employeeContractCreation
   }
 
   nextPage() {

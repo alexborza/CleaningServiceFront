@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { CleaningServiceDisplay } from 'src/app/core/model/CleaningServiceDisplay';
+import { CleaningServiceMinimal } from 'src/app/core/model/representation/cleaning_service/CleaningServiceMinimal';
 import { CleaningApiService } from 'src/app/core/services/cleaning-api.service';
 
 @Component({
@@ -11,7 +11,7 @@ import { CleaningApiService } from 'src/app/core/services/cleaning-api.service';
 export class SearchServicesComponent implements OnInit {
 
   cols: any[] = [];
-  cleaningServices: CleaningServiceDisplay[] = [];
+  cleaningServices: CleaningServiceMinimal[] = [];
 
   constructor(
     private cleaningApi: CleaningApiService,
@@ -24,9 +24,9 @@ export class SearchServicesComponent implements OnInit {
   }
 
   private getCleaningServices(){
-    this.cleaningApi.getCleaningServices().subscribe(res => {
-      this.cleaningServices = res;
-    })
+    // this.cleaningApi.getCleaningServices().subscribe(res => {
+    //   this.cleaningServices = res;
+    // })
   }
 
   private initCols(){

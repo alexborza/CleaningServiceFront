@@ -20,7 +20,7 @@ import { StandardCleaningServiceDetailComponent } from './components/standard-cl
 import { EnvironmentalCleaningServiceDetailComponent } from './components/environmental-cleaning-service-detail/environmental-cleaning-service-detail.component';
 import { InputMaskModule } from 'primeng/inputmask';
 import { InputNumberModule } from 'primeng/inputnumber';
-import { CleaningServiceDetailComponent } from './cleaning-service-detail/cleaning-service-detail.component';
+import { CleaningServiceCreationComponent } from './cleaning-service-creation/cleaning-service-creation.component';
 import { ButtonModule } from 'primeng/button';
 import { ToastModule } from 'primeng/toast';
 import { NgxTrimDirectiveModule } from 'ngx-trim-directive';
@@ -35,7 +35,7 @@ import { NgxTrimDirectiveModule } from 'ngx-trim-directive';
     BookingSummaryComponent,
     StandardCleaningServiceDetailComponent,
     EnvironmentalCleaningServiceDetailComponent,
-    CleaningServiceDetailComponent,
+    CleaningServiceCreationComponent,
   ],
   imports: [
     CommonModule,

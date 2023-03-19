@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { JobInformation } from 'src/app/core/model/users/JobInformation';
+import { JobInformation } from 'src/app/core/model/representation/users/JobInformation';
 
 @Component({
   selector: 'app-job-info-details',

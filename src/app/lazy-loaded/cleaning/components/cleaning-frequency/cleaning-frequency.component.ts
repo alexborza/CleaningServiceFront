@@ -9,22 +9,22 @@ import { Frequency } from 'src/app/core/model/representation/cleaning_service/Fr
 })
 export class CleaningFrequencyComponent implements OnInit {
 
-  frequencies: Frequency[] = [];
+  frequencies: CleaningFrequency[] = [];
 
   constructor(public controlContainer: ControlContainer) { }
 
   ngOnInit(): void {
     this.frequencies = [
       {label: "One Time", value: Frequency.OneTime, discount: 0},
-      {label: "Weekly -15%",  value: Frequency.Weekly, discount: 15},
-      {label: "BiWeekly -10%",  value: Frequency.BiWeekly, discount: 10},
-      {label: "Monthly -5%",  value: Frequency.Monthly, discount: 5}
+      {label: "Two Time -5%",  value: Frequency.TwoTime, discount: 5},
+      {label: "Four Time -10%",  value: Frequency.FourTime, discount: 10},
+      {label: "Six Time -15%",  value: Frequency.SixTime, discount: 15}
     ];
   }
 
 }
 
-interface Frequency {
+interface CleaningFrequency {
   label: string;
   value: Frequency;
   discount: number;

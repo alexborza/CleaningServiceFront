@@ -1,6 +1,6 @@
 export enum Frequency {
     OneTime = "One Time",
-    Weekly = "Weekly",
-    BiWeekly = "BiWeekly",
-    Monthly = "Monthly"
+    TwoTime = "Two Time",
+    FourTime = "Four Time",
+    SixTime = "Six Time"
 }

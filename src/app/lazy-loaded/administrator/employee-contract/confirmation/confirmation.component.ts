@@ -19,7 +19,7 @@ export class ConfirmationComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit(): void {
-    this.employeeDto = this.employeeService.employeeDto;
+    this.employeeDto = this.employeeService.employeeContractCreation;
   }
 
   nextPage() {

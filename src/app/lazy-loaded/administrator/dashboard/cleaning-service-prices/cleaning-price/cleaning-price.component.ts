@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { CleaningPrices } from 'src/app/core/model/cleaning_service/prices/CleaningPrices';
+import { CleaningPrices } from 'src/app/core/model/representation/cleaning_service/prices/CleaningPrices';
 
 @Component({
   selector: 'app-cleaning-price',

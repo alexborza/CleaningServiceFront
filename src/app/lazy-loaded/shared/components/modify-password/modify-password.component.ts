@@ -40,7 +40,7 @@ export class ModifyPasswordComponent implements OnInit {
     if(this.form.valid){
       let modifyPasswordDto = new ModifyPasssword(formValue.password, formValue.newPassword)
       this.userApi.modifyPassword(this.id, modifyPasswordDto).subscribe(res => {
-        this.ref.close(res.message);
+        this.ref.close();
       },
       err => {
         if(err.error.message === "Incorrect password entered!"){

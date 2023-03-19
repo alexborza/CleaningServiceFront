@@ -1,7 +1,7 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { ControlContainer } from '@angular/forms';
-import { HomeAccess } from 'src/app/core/model/HomeAccess';
-import { Parking } from 'src/app/core/model/Parking';
+import { HomeAccess } from 'src/app/core/model/representation/cleaning_service/details/HomeAccess';
+import { Parking } from 'src/app/core/model/representation/cleaning_service/details/Parking';
 
 @Component({
   selector: 'app-standard-cleaning-service-detail',
@@ -20,8 +20,8 @@ export class StandardCleaningServiceDetailComponent implements OnInit, OnChanges
   bathrooms: Room[] = [];
   kitchens: Room[] = [];
   squareMeters: SquareMeters[] = [];
-  parking: Parking[] = [];
-  homeAccess: HomeAccess[] = [];
+  parking: ParkingValueObject[] = [];
+  homeAccess: HomeAccessValueObject[] = [];
 
   constructor(public controlContainer: ControlContainer) { }
   
@@ -91,13 +91,13 @@ interface Room {
   price: number;
 }
 
-interface Parking {
+interface ParkingValueObject {
   label: string;
   value: Parking;
   price: number;
 }
 
-interface HomeAccess {
+interface HomeAccessValueObject {
   label: string;
   value: HomeAccess;
   price: number;

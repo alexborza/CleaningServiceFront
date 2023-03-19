@@ -2,14 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
-import { EmergencyContactInformationDto } from 'src/app/core/model/EmergencyContactInformationDto';
 import { Role } from 'src/app/core/model/representation/users/Role';
-import { UserInformation } from 'src/app/core/model/users/UserInformation';
+import { UserInformation } from 'src/app/core/model/representation/users/UserInformation';
 import { TokenStorageService } from 'src/app/core/services/token-storage.service';
 import { UserApiService } from 'src/app/core/services/user-api.service';
 import { JobInfoDetailsComponent } from '../components/job-info-details/job-info-details.component';
 import { ModifyEmailComponent } from '../components/modify-email/modify-email.component';
-import { ModifyEmergencyContactInfoComponent } from '../components/modify-emergency-contact-info/modify-emergency-contact-info.component';
 import { ModifyPasswordComponent } from '../components/modify-password/modify-password.component';
 import { ModifyPersonalInfoComponent } from '../components/modify-personal-info/modify-personal-info.component';
 
@@ -101,24 +99,6 @@ export class AccountSettingsComponent implements OnInit {
       if (dto) {
         this.getUser();
         this.messageService.add({severity:'success', summary: 'Success', detail: 'Successfully modified personal information!'});
-      }
-    });
-  }
-
-  modifyEmergencyContactInfo(){
-    const ref = this.dialogService.open(ModifyEmergencyContactInfoComponent, {
-      data: {
-        id: this.id,
-        dto: this.userDto.employeeInformation.emergencyContactInformation
-      },
-      header: 'Modify emergency contact information',
-      width: '50%'
-    });
-
-    ref.onClose.subscribe((dto: EmergencyContactInformationDto) => {
-      if (dto) {
-        this.getUser();
-        this.messageService.add({severity:'success', summary: 'Success', detail: 'Successfully modified emergency contact info!'});
       }
     });
   }

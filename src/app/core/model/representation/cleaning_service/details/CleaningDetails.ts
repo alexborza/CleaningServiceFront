@@ -1,4 +1,3 @@
-import { CleaningTypeEnum } from "./CleaningTypeEnum";
 import { HomeAccess } from "./HomeAccess";
 import { Parking } from "./Parking";
 
@@ -7,5 +6,4 @@ export class CleaningDetails {
     squareMeters: number;
     parking: Parking;
     homeAccess: HomeAccess;
-    type: CleaningTypeEnum;
 }
