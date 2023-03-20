@@ -1,8 +1,6 @@
 import { CleaningType } from "src/app/core/model/representation/cleaning_service/CleaningType";
 import { Appointment } from "../appointment/Appointment";
-import { CleaningDateDto } from "../../CleaningDateDto";
 import { Frequency } from "./Frequency";
-import { CleaningStatusEnum } from "../../CleaningStatusEnum";
 import { ContactInfo } from "./ContactInfo";
 import { CleaningDetails } from "./details/CleaningDetails";
 import { Location } from "./Location";

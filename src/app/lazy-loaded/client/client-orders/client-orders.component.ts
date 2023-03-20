@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { CleaningService } from 'src/app/core/model/representation/cleaning_service/CleaningService';
-import { ClientService } from 'src/app/core/services/client.service';
 
 @Component({
   selector: 'app-client-orders',
@@ -17,7 +16,6 @@ export class ClientOrdersComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private clientApi: ClientService,
     private route: ActivatedRoute,
   ) { }
 
@@ -29,9 +27,9 @@ export class ClientOrdersComponent implements OnInit {
   }
 
   private getClientsCleaningServices(){
-    this.clientApi.getClientsCleaningServices(this.id).subscribe(res => {
-      this.cleaningServices = res;
-    })
+    // this.clientApi.getClientsCleaningServices(this.id).subscribe(res => {
+    //   this.cleaningServices = res;
+    // })
   }
 
   toCleaningService(id: number) {

@@ -62,7 +62,7 @@ export class CleaningServiceCreationComponent implements OnInit {
   }
 
   private getCleaningServicePrices(){
-    this.cleaningApi.getCleaningServicePrices().subscribe(res => {
+    this.cleaningApi.getCleaningPrices().subscribe(res => {
       this.cleaningPrices = res;
       this.setCleaningPrices();
     })

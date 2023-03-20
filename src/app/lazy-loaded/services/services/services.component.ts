@@ -46,7 +46,7 @@ export class ServicesComponent implements OnInit {
   }
 
   private getDescription(){
-    this.cleaningApi.getDescriptions().subscribe(res => {
+    this.cleaningApi.getCleaningDescriptions().subscribe(res => {
       this.getDescriptionByType(res);
     })
   }

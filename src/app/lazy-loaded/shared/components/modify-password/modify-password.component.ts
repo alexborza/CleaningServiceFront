@@ -39,7 +39,7 @@ export class ModifyPasswordComponent implements OnInit {
     this.checkRequiredFields();
     if(this.form.valid){
       let modifyPasswordDto = new ModifyPasssword(formValue.password, formValue.newPassword)
-      this.userApi.modifyPassword(this.id, modifyPasswordDto).subscribe(res => {
+      this.userApi.updatePassword(this.id, modifyPasswordDto).subscribe(res => {
         this.ref.close();
       },
       err => {

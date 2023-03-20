@@ -26,7 +26,7 @@ export class CleaningServiceDescriptionsComponent implements OnInit {
   }
 
   private getDescriptions(){
-    this.cleaningApi.getDescriptions().subscribe(res => {
+    this.cleaningApi.getCleaningDescriptions().subscribe(res => {
       this.cleaningDescriptionCreation = res;
       this.initializeCleaningDescriptionContent();
     })

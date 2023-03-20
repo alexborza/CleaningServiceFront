@@ -72,7 +72,7 @@ export class ModifyPersonalInfoComponent implements OnInit {
   }
 
   private modifyPersonalInfo (userInfoDto: UserInformation){
-    this.userApi.modifyPersonalInfo(this.id, userInfoDto).subscribe(res => {
+    this.userApi.updateUserInformation(this.id, userInfoDto).subscribe(res => {
       this.ref.close(userInfoDto);
     });
   }

@@ -29,7 +29,7 @@ export class CleaningServicePricesComponent implements OnInit {
   }
 
   private getCleaningServicePrices(){
-    this.cleaningApi.getCleaningServicePrices().subscribe(res => {
+    this.cleaningApi.getCleaningPrices().subscribe(res => {
       this.dto = res;
     })
   }

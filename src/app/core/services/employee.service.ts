@@ -31,9 +31,4 @@ export class EmployeeService {
     this.canAccessEmergencyInfo = false;
     this.canAccessConfirmation = false;
   }
-
-  createEmployeeContract(dto: EmployeeContractCreation): Observable<void> {
-    return this.http.post<void>(this.baseUrl + "/employee-contract", dto);
-  }
-
 }

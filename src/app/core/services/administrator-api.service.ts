@@ -2,8 +2,11 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CleaningDescriptionCreation } from '../model/creation/cleaning_service/description/CleaningDescriptionCreation';
-import { CleaningPrices } from '../model/representation/cleaning_service/prices/CleaningPrices';
-import { User } from '../model/representation/users/User';
+import { CleaningPriceCreation } from '../model/creation/cleaning_service/prices/CleaningPriceCreation';
+import { EmployeeContractCreation } from '../model/creation/users/EmployeeContractCreation';
+import { EmployeeAppointment } from '../model/representation/appointment/EmployeeAppointment';
+import { CleaningServiceMinimal } from '../model/representation/cleaning_service/CleaningServiceMinimal';
+import { MinimalUser } from '../model/representation/users/MinimalUser';
 
 @Injectable({
   providedIn: 'root'
@@ -12,30 +15,30 @@ export class AdministratorApiService {
   baseUrl: string = "";
 
   constructor(private http: HttpClient) {
-    this.baseUrl = "http://localhost:8080/api/administrator/";
+    this.baseUrl = "http://localhost:8080/api/administrator";
   }
 
-  getAllEmployees(): Observable<User[]> {
-    return this.http.get<User[]>(this.baseUrl + "employees");
+  createEmployeeContract(employeeContractCreation: EmployeeContractCreation) {
+    return this.http.post(this.baseUrl + "/employee-contract", employeeContractCreation);
   }
 
-  // getServicesAgenda(date: string): Observable<ServicesAgenda[]> {
-  //   return this.http.get<ServicesAgenda[]>(this.baseUrl + "services-agenda?date=" + date);
-  // }
-
-  createDescriptions(dto: CleaningDescriptionCreation) {
-    return this.http.post(this.baseUrl + "create-descriptions", dto);
+  getAllEmployees(): Observable<MinimalUser[]> {
+    return this.http.get<MinimalUser[]>(this.baseUrl + "/employees");
   }
 
-  updateDescriptions(id: number, dto: CleaningDescriptionCreation) {
-    return this.http.put(this.baseUrl + 'update-descriptions/' + id, dto)
+  getAllEmployeesAppointmentsByDate(date: string): Observable<EmployeeAppointment[]> {
+    return this.http.get<EmployeeAppointment[]>(this.baseUrl + "/employees-appointments/" + date);
+  } 
+
+  createDescriptions(cleaningDescriptionCreation: CleaningDescriptionCreation) {
+    return this.http.post(this.baseUrl + "/create-descriptions", cleaningDescriptionCreation);
   }
 
-  createCleaningPrices(dto: CleaningPrices) {
-    return this.http.post(this.baseUrl + "create-prices", dto);
+  createCleaningPrices(cleaningPriceCreation: CleaningPriceCreation) {
+    return this.http.post(this.baseUrl + "/create-prices", cleaningPriceCreation);
   }
 
-  updateCleaningPrices(id: number, dto: CleaningPrices) {
-    return this.http.put(this.baseUrl + 'update-prices/' + id, dto)
+  getAllCleaningServices(): Observable<CleaningServiceMinimal[]> {
+    return this.http.get<CleaningServiceMinimal[]>(this.baseUrl + "/all-cleaning-services");
   }
 }

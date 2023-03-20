@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { MessageService } from 'primeng/api';
+import { LoginRequest } from 'src/app/core/model/creation/users/LoginRequest';
+import { SignupRequest } from 'src/app/core/model/creation/users/SignupRequest';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { checkRequiredFields } from 'src/app/core/services/error/validate';
 import { TokenStorageService } from 'src/app/core/services/token-storage.service';
@@ -66,7 +68,8 @@ export class SignupComponent implements OnInit {
   }
 
   private login(formValue: any){
-    this.authService.login(formValue.username, formValue.password).subscribe(data => {
+    const loginRequest = new LoginRequest(formValue.username, formValue.password);
+    this.authService.login(loginRequest).subscribe(data => {
       this.tokenStorage.saveToken(data.token);
       this.tokenStorage.saveUser(data);
       this.reloadPage();
@@ -78,7 +81,8 @@ export class SignupComponent implements OnInit {
   }
 
   private register(formValue: any){
-    this.authService.register(formValue.username, formValue.email, formValue.password).subscribe(
+    const signupRequest = new SignupRequest(formValue.username, formValue.email, formValue.password);
+    this.authService.register(signupRequest).subscribe(
       res => {
         this.messageService.add({severity:'success', summary:'Success', detail:'Successfully registered your account'});
         this.form.reset();

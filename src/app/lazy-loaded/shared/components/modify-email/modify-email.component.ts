@@ -38,7 +38,7 @@ export class ModifyEmailComponent implements OnInit {
   onSubmit(formValue: any){
     this.checkRequiredFields();
     if(this.form.valid){
-      this.userApi.modifyEmail(this.id, formValue.newEmail).subscribe(res => {
+      this.userApi.updateEmail(this.id, formValue.newEmail).subscribe(res => {
         this.ref.close(formValue.newEmail);
       });
     }

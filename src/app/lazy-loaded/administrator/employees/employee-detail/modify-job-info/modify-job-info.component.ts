@@ -67,7 +67,7 @@ export class ModifyJobInfoComponent implements OnInit {
   }
 
   private modifyJobInfo(dto: JobInformation){
-    this.employeeApi.modifyJobInfo(this.id, dto).subscribe(res => {
+    this.employeeApi.updateJobInformation(this.id, dto).subscribe(res => {
       this.ref.close(dto);
     })
   }
