@@ -10,22 +10,22 @@
             <div class="row">
                 <div class="col-12 control">
                     <label for="firstname">Full name</label>
-                    <input #fullName="ngModel" placeholder="Full name" id="fullName" type="text" required pInputText [(ngModel)]="employeeDto.userInformation.fullName" [ngClass]="{'ng-dirty': (fullName.touched && fullName.invalid) || (fullName.invalid && submitted) || (fullName.dirty && fullName.invalid)}"> 
+                    <input #fullName="ngModel" placeholder="Full name" id="fullName" type="text" required pInputText [(ngModel)]="employeeContractCreation.userInformationCreation.fullName" [ngClass]="{'ng-dirty': (fullName.touched && fullName.invalid) || (fullName.invalid && submitted) || (fullName.dirty && fullName.invalid)}"> 
                     <small class="p-error" *ngIf="(fullName.invalid && submitted) || (fullName.dirty && fullName.invalid) || (fullName.touched && fullName.invalid)">Full name is required.</small>
                 </div>
                 <div class="col-12 control">
                     <label for="address">Address</label>
-                    <input #address="ngModel" placeholder="Address" id="address" type="text" required pInputText [(ngModel)]="employeeDto.userInformation.address" [ngClass]="{'ng-dirty': (address.touched && address.invalid) || (address.invalid && submitted) || (address.dirty && address.invalid)}"> 
+                    <input #address="ngModel" placeholder="Address" id="address" type="text" required pInputText [(ngModel)]="employeeContractCreation.userInformationCreation.address" [ngClass]="{'ng-dirty': (address.touched && address.invalid) || (address.invalid && submitted) || (address.dirty && address.invalid)}"> 
                     <small class="p-error" *ngIf="(address.invalid && submitted) || (address.dirty && address.invalid) || (address.touched && address.invalid)">Address is required.</small>
                 </div>
                 <div class="col-6">
                     <label for="phoneNumber">Phone number</label>
-                    <p-inputMask placeholder="Phone Number" mask="9999 999 999" [required]="true" #phoneNumber="ngModel" [(ngModel)]="employeeDto.userInformation.phoneNumber" [ngClass]="{'ng-dirty': (phoneNumber.touched && phoneNumber.invalid) || (phoneNumber.invalid && submitted) || (phoneNumber.dirty && phoneNumber.invalid)}"></p-inputMask>
+                    <p-inputMask placeholder="Phone Number" mask="9999 999 999" [required]="true" #phoneNumber="ngModel" [(ngModel)]="employeeContractCreation.userInformationCreation.phoneNumber" [ngClass]="{'ng-dirty': (phoneNumber.touched && phoneNumber.invalid) || (phoneNumber.invalid && submitted) || (phoneNumber.dirty && phoneNumber.invalid)}"></p-inputMask>
                     <small class="p-error" *ngIf="(phoneNumber.invalid && submitted) || (phoneNumber.dirty && phoneNumber.invalid) || (phoneNumber.touched && phoneNumber.invalid)">Phone number is required.</small>
                 </div>
                 <div class="col-6">
                     <label for="phoneNumber">Birth Date</label>
-                    <p-calendar [required]="true" [showTransitionOptions]="'0ms'" [hideTransitionOptions]="'0ms'" #birthDate="ngModel" [(ngModel)]="employeeDto.userInformation.birthDate" dateFormat="yy-mm-dd" dataType="string" [ngClass]="{'ng-dirty': (birthDate.touched && birthDate.invalid) || (birthDate.invalid && submitted) || (birthDate.dirty && birthDate.invalid)}"></p-calendar>
+                    <p-calendar [required]="true" [showTransitionOptions]="'0ms'" [hideTransitionOptions]="'0ms'" #birthDate="ngModel" [(ngModel)]="employeeContractCreation.userInformationCreation.birthDate" dateFormat="yy-mm-dd" dataType="string" [ngClass]="{'ng-dirty': (birthDate.touched && birthDate.invalid) || (birthDate.invalid && submitted) || (birthDate.dirty && birthDate.invalid)}"></p-calendar>
                     <small class="p-error" *ngIf="(birthDate.invalid && submitted) || (birthDate.dirty && birthDate.invalid) || (birthDate.touched && birthDate.invalid)">Birth Date is required.</small>
                 </div>
             </div>

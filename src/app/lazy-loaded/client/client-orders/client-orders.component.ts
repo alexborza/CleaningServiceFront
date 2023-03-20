@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { CleaningService } from 'src/app/core/model/representation/cleaning_service/CleaningService';
+import { CleaningServiceMinimal } from 'src/app/core/model/representation/cleaning_service/CleaningServiceMinimal';
+import { CleaningApiService } from 'src/app/core/services/cleaning-api.service';
 
 @Component({
   selector: 'app-client-orders',
@@ -11,11 +12,12 @@ import { CleaningService } from 'src/app/core/model/representation/cleaning_serv
 export class ClientOrdersComponent implements OnInit {
 
   id!: number;
-  cleaningServices: CleaningService[] = [];
+  cleaningServices: CleaningServiceMinimal[] = [];
   toasterMessageSubscription: Subscription;
 
   constructor(
     private router: Router,
+    private cleaningApiService: CleaningApiService,
     private route: ActivatedRoute,
   ) { }
 
@@ -27,9 +29,9 @@ export class ClientOrdersComponent implements OnInit {
   }
 
   private getClientsCleaningServices(){
-    // this.clientApi.getClientsCleaningServices(this.id).subscribe(res => {
-    //   this.cleaningServices = res;
-    // })
+    this.cleaningApiService.findClientsCleaningServices(this.id).subscribe(res => {
+      this.cleaningServices = res;
+    })
   }
 
   toCleaningService(id: number) {

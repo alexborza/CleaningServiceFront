@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { EmployeeContractGuard } from 'src/app/core/guard/employee-contract.guard';
 import { ConfirmationComponent } from './employee-contract/confirmation/confirmation.component';
-import { EmergencyContactInformationComponent } from './employee-contract/emergency-contact-information/emergency-contact-information.component';
 import { EmployeeAccountComponent } from './employee-contract/employee-account/employee-account.component';
 import { EmployeeContractComponent } from './employee-contract/employee-contract.component';
 import { JobInformationComponent } from './employee-contract/job-information/job-information.component';
@@ -33,7 +32,6 @@ const routes: Routes = [
         { path: 'account', component: EmployeeAccountComponent },
         { path: 'personal-info', component: PersonalInformationComponent, canActivate: [EmployeeContractGuard] },
         { path: 'job-info', component: JobInformationComponent, canActivate: [EmployeeContractGuard] },
-        { path: 'emergency-contact-info', component: EmergencyContactInformationComponent, canActivate: [EmployeeContractGuard] },
         { path: 'confirmation', component: ConfirmationComponent, canActivate: [EmployeeContractGuard] }
       ] },
     ]

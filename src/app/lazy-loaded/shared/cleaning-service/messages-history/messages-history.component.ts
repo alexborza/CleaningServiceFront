@@ -25,19 +25,12 @@ export class MessagesHistoryComponent implements OnInit {
 
   ngOnInit(): void {
     this.buildForm();
-    this.getMessagesForCleaningService();
   }
 
   private buildForm(){
     this.form = this.fb.group({
       message: new FormControl(null, [Validators.required]),
     });
-  }
-
-  private getMessagesForCleaningService(){
-    this.cleaningApi.getMessagesForCleaningService(this.id).subscribe(res => {
-      this.messages = res;
-    })
   }
 
   onSubmit(formValue){
@@ -56,7 +49,7 @@ export class MessagesHistoryComponent implements OnInit {
     const sender = this.tokenStorage.getUser().username;
     let dto = new Message(date, sender, formValue.message);
     this.cleaningApi.addMessageToCleaningService(this.id, dto).subscribe(res => {
-      this.getMessagesForCleaningService();
+      // this.getMessagesForCleaningService();
       this.form.reset();
     })
   }

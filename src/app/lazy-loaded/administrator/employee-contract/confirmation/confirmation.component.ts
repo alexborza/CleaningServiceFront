@@ -12,7 +12,7 @@ import { SharedDataService } from 'src/app/core/services/shared-data.service';
 })
 export class ConfirmationComponent implements OnInit {
 
-  employeeDto!: EmployeeContractCreation;
+  employeeContractCreation: EmployeeContractCreation;
 
   constructor(
     private employeeService: EmployeeService,
@@ -21,11 +21,11 @@ export class ConfirmationComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit(): void {
-    this.employeeDto = this.employeeService.employeeContractCreation;
+    this.employeeContractCreation = this.employeeService.employeeContractCreation;
   }
 
   nextPage() {
-    this.administratorApi.createEmployeeContract(this.employeeDto).subscribe(res => {
+    this.administratorApi.createEmployeeContract(this.employeeContractCreation).subscribe(res => {
       this.sharedData.toasterMessage.next(true);
       this.router.navigate(['administrator/employees']);
       this.employeeService.createNewEmployee();

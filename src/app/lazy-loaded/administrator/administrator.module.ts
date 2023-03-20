@@ -15,7 +15,6 @@ import { StepsModule } from 'primeng/steps';
 import { EmployeeAccountComponent } from './employee-contract/employee-account/employee-account.component';
 import { PersonalInformationComponent } from './employee-contract/personal-information/personal-information.component';
 import { JobInformationComponent } from './employee-contract/job-information/job-information.component';
-import { EmergencyContactInformationComponent } from './employee-contract/emergency-contact-information/emergency-contact-information.component';
 import { CardModule } from 'primeng/card';
 import { ConfirmationComponent } from './employee-contract/confirmation/confirmation.component';
 import { PasswordModule } from 'primeng/password';
@@ -45,7 +44,6 @@ import { CleaningDescriptionContentComponent } from './dashboard/cleaning-servic
     EmployeeAccountComponent,
     PersonalInformationComponent,
     JobInformationComponent,
-    EmergencyContactInformationComponent,
     ConfirmationComponent,
     EmployeesComponent,
     EmployeeDetailComponent,

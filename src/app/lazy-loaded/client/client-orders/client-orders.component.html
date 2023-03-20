@@ -6,10 +6,12 @@
         [rowsPerPageOptions]="[5,20,35]">
             <ng-template pTemplate="body" let-cleaningService>
                 <tr>
-                    <td>{{cleaningService.type}}</td>
+                    <td>{{cleaningService.cleaningType}}</td>
                     <td>{{cleaningService.total}} $</td>
-                    <td>{{cleaningService.cleaningDate.cleaningDate}}</td>
-                    <td>{{cleaningService.cleaningDate.cleaningHour}}</td>
+                    <td>{{cleaningService.timeEstimation}}</td>
+                    <td>{{cleaningService.nextCleaningDate}}</td>
+                    <td>{{cleaningService.timeSlotRepresentation.startingHour}}</td>
+                    <td>{{cleaningService.timeSlotRepresentation.finishingHour}}</td>
                     <td>
                         <button pButton type="button" label="Details" (click)="toCleaningService(cleaningService.id)"></button>
                     </td>

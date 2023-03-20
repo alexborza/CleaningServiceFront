@@ -19,8 +19,8 @@ export class CleaningApiService {
     this.baseUrl = "http://localhost:8080/api/cleaning-service";
   }
 
-  findClientsCleaningServices(userId: number): Observable<CleaningServiceMinimal> {
-    return this.http.get<CleaningServiceMinimal>(this.baseUrl + "/client/" + userId);
+  findClientsCleaningServices(userId: number): Observable<CleaningServiceMinimal[]> {
+    return this.http.get<CleaningServiceMinimal[]>(this.baseUrl + "/client/" + userId);
   }
 
   getCleaningService(id: number): Observable<CleaningService> {

@@ -1,9 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
-import { EmployeeDto } from 'src/app/core/model/EmployeeDto';
-import { UserCredentialDto } from 'src/app/core/model/UserCredentialDto';
-import { AuthService } from 'src/app/core/services/auth.service';
+import { EmployeeContractCreation } from 'src/app/core/model/creation/users/EmployeeContractCreation';
 import { EmployeeService } from 'src/app/core/services/employee.service';
 
 @Component({
@@ -14,28 +12,15 @@ import { EmployeeService } from 'src/app/core/services/employee.service';
 export class EmployeeAccountComponent implements OnInit {
 
   showEye: boolean = false;
-  employeeDto!: EmployeeDto;
-  existingCredentials!: UserCredentialDto[];
+  employeeContractCreation: EmployeeContractCreation;
   submitted: boolean = false;
 
   constructor(
     public employeeService: EmployeeService,
-    private authApi: AuthService,
     private router: Router) { }
 
   ngOnInit() {
-    this.employeeDto = this.employeeService.employeeContractCreation;
-    this.authApi.getExistingUserCredentials().subscribe(res => {
-      this.existingCredentials = res;
-    })
-  }
-
-  existingControl(model: any){
-    const name: string = model.name;
-    const control = model.control;
-    if(this.existingCredentials.findIndex(userCredential => userCredential[name as keyof UserCredentialDto] === control.value) !== -1){
-      control.setErrors({duplicate: {message: 'Already existing ' + name}});
-    }
+    this.employeeContractCreation = this.employeeService.employeeContractCreation;
   }
 
   nextPage(username: FormControl, email: FormControl, password: FormControl) {

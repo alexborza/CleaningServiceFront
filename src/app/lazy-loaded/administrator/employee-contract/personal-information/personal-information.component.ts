@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { EmployeeDto } from 'src/app/core/model/EmployeeDto';
+import { EmployeeContractCreation } from 'src/app/core/model/creation/users/EmployeeContractCreation';
 import { EmployeeService } from 'src/app/core/services/employee.service';
 
 @Component({
@@ -9,13 +9,13 @@ import { EmployeeService } from 'src/app/core/services/employee.service';
   styleUrls: ['./personal-information.component.scss']
 })
 export class PersonalInformationComponent implements OnInit {
-  employeeDto!: EmployeeDto;
+  employeeContractCreation!: EmployeeContractCreation;
   submitted: boolean = false;
 
   constructor(public employeeService: EmployeeService, private router: Router) { }
 
   ngOnInit() { 
-      this.employeeDto = this.employeeService.employeeContractCreation
+      this.employeeContractCreation = this.employeeService.employeeContractCreation
   }
 
   nextPage() {
@@ -28,10 +28,10 @@ export class PersonalInformationComponent implements OnInit {
   }
 
   isUserInformationValid(){
-    return this.employeeDto.userInformation.fullName && 
-           this.employeeDto.userInformation.address && 
-           this.employeeDto.userInformation.phoneNumber && 
-           this.employeeDto.userInformation.birthDate
+    return this.employeeContractCreation.userInformationCreation.fullName && 
+           this.employeeContractCreation.userInformationCreation.address && 
+           this.employeeContractCreation.userInformationCreation.phoneNumber && 
+           this.employeeContractCreation.userInformationCreation.birthDate
   }
 
   prevPage() {

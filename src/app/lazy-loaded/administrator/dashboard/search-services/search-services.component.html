@@ -1,7 +1,7 @@
 <div class="container mb-5">
     <p-table #dt [columns]="cols" [value]="cleaningServices" [paginator]="true" [rows]="10" responsiveLayout="scroll"
     [rowsPerPageOptions]="[10,25,50]" selectionMode="single" (onRowSelect)="onRowSelect($event)"
-    [globalFilterFields]="['type','phoneNumber', 'email', 'squareMeters', 'status']">
+    [globalFilterFields]="['cleaningType','total', 'timeEstimation', 'nextCleaningDate']">
         <ng-template pTemplate="caption">
             <div class="flex">
                 <span class="p-input-icon-left ml-auto">

@@ -8,45 +8,20 @@
         </ng-template>
         <ng-template pTemplate="content">
             <div class="row">
-                <div class="col-12 control">
-                    <label for="title">Title</label>
-                    <input #title="ngModel" placeholder="Title" id="title" type="text" required pInputText [(ngModel)]="employeeDto.employeeInformation.jobInformation.title" [ngClass]="{'ng-dirty': (title.touched && title.invalid) || (title.invalid && submitted) || (title.dirty && title.invalid)}"> 
-                    <small class="p-error" *ngIf="(title.invalid && submitted) || (title.dirty && title.invalid) || (title.touched && title.invalid)">Title is required.</small>
-                </div>
-                <div class="col-12 control">
-                    <label for="supervisor">Supervisor</label>
-                    <input #supervisor="ngModel" placeholder="Supervisor" id="title" type="text" required pInputText [(ngModel)]="employeeDto.employeeInformation.jobInformation.supervisor" [ngClass]="{'ng-dirty': (supervisor.touched && supervisor.invalid) || (supervisor.invalid && submitted) || (supervisor.dirty && supervisor.invalid)}"> 
-                    <small class="p-error" *ngIf="(supervisor.invalid && submitted) || (supervisor.dirty && supervisor.invalid) || (supervisor.touched && supervisor.invalid)">Supervisor is required.</small>
-                </div>
-                <div class="col-6" style="margin-bottom: 10px;">
+                <div class="col-4">
                     <label for="phoneNumber">Work phone</label>
-                    <p-inputMask placeholder="Work phone" mask="9999 999 999" [required]="true" #workPhone="ngModel" [(ngModel)]="employeeDto.employeeInformation.jobInformation.workPhone" [ngClass]="{'ng-dirty': (workPhone.touched && workPhone.invalid) || (workPhone.invalid && submitted) || (workPhone.dirty && workPhone.invalid)}"></p-inputMask>
+                    <p-inputMask placeholder="Work phone" mask="9999 999 999" [required]="true" #workPhone="ngModel" [(ngModel)]="employeeContractCreation.jobInformationCreation.workPhone" [ngClass]="{'ng-dirty': (workPhone.touched && workPhone.invalid) || (workPhone.invalid && submitted) || (workPhone.dirty && workPhone.invalid)}"></p-inputMask>
                     <small class="p-error" *ngIf="(workPhone.invalid && submitted) || (workPhone.dirty && workPhone.invalid) || (workPhone.touched && workPhone.invalid)">Phone number is required.</small>
                 </div>
-                <div class="col-6" style="margin-bottom: 10px;">
-                    <label for="employmentStatus">Employment Status</label>
-                    <p-dropdown 
-                            [ngClass]="{'ng-dirty': (employmentStatus.touched && employmentStatus.invalid) || (employmentStatus.invalid && submitted) || (employmentStatus.dirty && employmentStatus.invalid)}"
-                            [options]="employmentOptions" 
-                            optionLabel="label"
-                            optionValue="value"
-                            [required]="true"
-                            #employmentStatus="ngModel"
-                            placeholder="Select employment status"
-                            [showClear]="true"
-                            [(ngModel)]="employeeDto.employeeInformation.jobInformation.employmentStatus">
-                        </p-dropdown>
-                    <small class="p-error" *ngIf="(employmentStatus.invalid && submitted) || (employmentStatus.dirty && employmentStatus.invalid) || (employmentStatus.touched && employmentStatus.invalid)">Employment status is required.</small>
-                </div>
-            
-                <div class="col-6">
+        
+                <div class="col-4">
                     <label for="hiringDate">Hiring Date</label>
-                    <p-calendar [required]="true" #hiringDate="ngModel" [(ngModel)]="employeeDto.employeeInformation.jobInformation.hiringDate" dateFormat="yy-mm-dd" dataType="string" [ngClass]="{'ng-dirty': (hiringDate.touched && hiringDate.invalid) || (hiringDate.invalid && submitted) || (hiringDate.dirty && hiringDate.invalid)}"></p-calendar>
+                    <p-calendar [required]="true" #hiringDate="ngModel" [(ngModel)]="employeeContractCreation.jobInformationCreation.hiringDate" dateFormat="yy-mm-dd" dataType="string" [ngClass]="{'ng-dirty': (hiringDate.touched && hiringDate.invalid) || (hiringDate.invalid && submitted) || (hiringDate.dirty && hiringDate.invalid)}"></p-calendar>
                     <small class="p-error" *ngIf="(hiringDate.invalid && submitted) || (hiringDate.dirty && hiringDate.invalid) || (hiringDate.touched && hiringDate.invalid)">Hiring date is required.</small>
                 </div>
-                <div class="col-6">
+                <div class="col-4">
                     <label for="salary">Salary</label>
-                    <input #salary="ngModel" placeholder="Salary" id="salary" type="number" required pInputText [(ngModel)]="employeeDto.employeeInformation.jobInformation.salary" [ngClass]="{'ng-dirty': (salary.touched && salary.invalid) || (salary.invalid && submitted) || (salary.dirty && salary.invalid)}"> 
+                    <input #salary="ngModel" placeholder="Salary" id="salary" type="number" required pInputText [(ngModel)]="employeeContractCreation.jobInformationCreation.salary" [ngClass]="{'ng-dirty': (salary.touched && salary.invalid) || (salary.invalid && submitted) || (salary.dirty && salary.invalid)}"> 
                     <small class="p-error" *ngIf="(salary.invalid && submitted) || (salary.dirty && salary.invalid) || (salary.touched && salary.invalid)">Salary is required.</small>
                 </div>
             </div>

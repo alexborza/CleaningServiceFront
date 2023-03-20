@@ -27,10 +27,6 @@ export class EmployeeContractComponent implements OnInit {
               routerLink: 'job-info'
           },
           {
-              label: 'Emergency Contact Information',
-              routerLink: 'emergency-contact-info'
-          },
-          {
             label: 'Confirmation',
             routerLink: 'confirmation'
           } 

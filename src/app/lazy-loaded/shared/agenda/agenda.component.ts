@@ -50,9 +50,9 @@ export class AgendaComponent implements OnInit {
   }
 
   private getEmployeeCleaningServicesForDate(){
-    this.employeeApi.getEmployeeCleaningServicesForDate(this.id, this.cleaningDate).subscribe(res => {
-      this.cleaningServices = res;
-    })
+    // this.employeeApi.getEmployeeCleaningServicesForDate(this.id, this.cleaningDate).subscribe(res => {
+    //   this.cleaningServices = res;
+    // })
   }
 
   nextDay(){

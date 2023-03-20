@@ -15,7 +15,7 @@ import { ExtraServicesPriceComponent } from './extra-services-price/extra-servic
 })
 export class CleaningServicePricesComponent implements OnInit {
 
-  dto!: CleaningPrices;
+  cleaningPrices!: CleaningPrices;
 
   constructor(
     public dialogService: DialogService,
@@ -30,7 +30,7 @@ export class CleaningServicePricesComponent implements OnInit {
 
   private getCleaningServicePrices(){
     this.cleaningApi.getCleaningPrices().subscribe(res => {
-      this.dto = res;
+      this.cleaningPrices = res;
     })
   }
 
@@ -38,7 +38,7 @@ export class CleaningServicePricesComponent implements OnInit {
     const ref = this.dialogService.open(CleaningPriceComponent, {
       data: {
         cleaningType: cleaningType,
-        dto: this.dto
+        dto: this.cleaningPrices
       },
       header: 'Modify Prices',
       width: '50%'
@@ -48,7 +48,7 @@ export class CleaningServicePricesComponent implements OnInit {
   modifyExtraServicesPrice(){
     const ref = this.dialogService.open(ExtraServicesPriceComponent, {
       data: {
-        dto: this.dto
+        dto: this.cleaningPrices
       },
       header: 'Modify Extra Services Price',
       width: '50%'
@@ -56,22 +56,12 @@ export class CleaningServicePricesComponent implements OnInit {
   }
 
   onSave(){
-    if(this.dto.id){
-      this.updateCleaningPrices();
-    } else {
-      this.createCleaningPrices();
-    }
-  }
-
-  private updateCleaningPrices(){
-    this.administratorApi.updateCleaningPrices(this.dto.id, this.dto).subscribe(res => {
-      this.messageService.add({severity:'success', summary:'Success', detail: 'Prices updated successfully!'});
-    });
+    this.createCleaningPrices();
   }
 
   private createCleaningPrices(){
     if(this.arePricesValid()){
-      this.administratorApi.createCleaningPrices(this.dto).subscribe(res => {
+      this.administratorApi.createCleaningPrices(this.cleaningPrices).subscribe(res => {
         this.messageService.add({severity:'success', summary:'Success', detail: 'Prices updated successfully!'});
       });
     } else {
@@ -80,7 +70,7 @@ export class CleaningServicePricesComponent implements OnInit {
   }
 
   private arePricesValid(){
-    return this.dto.standardCleaningPrices && this.dto.deepCleaningPrices && this.dto.disinfectionCleaningPrices && this.dto.postConstructionCleaningPrices;
+    return this.cleaningPrices.standardCleaningPrices && this.cleaningPrices.deepCleaningPrices && this.cleaningPrices.disinfectionCleaningPrices && this.cleaningPrices.postConstructionCleaningPrices;
   }
 
 }

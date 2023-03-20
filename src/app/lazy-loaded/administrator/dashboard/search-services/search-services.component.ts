@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CleaningServiceMinimal } from 'src/app/core/model/representation/cleaning_service/CleaningServiceMinimal';
-import { CleaningApiService } from 'src/app/core/services/cleaning-api.service';
+import { AdministratorApiService } from 'src/app/core/services/administrator-api.service';
 
 @Component({
   selector: 'app-search-services',
@@ -14,7 +14,7 @@ export class SearchServicesComponent implements OnInit {
   cleaningServices: CleaningServiceMinimal[] = [];
 
   constructor(
-    private cleaningApi: CleaningApiService,
+    private administratorApi: AdministratorApiService,
     private router: Router
   ) { }
 
@@ -24,18 +24,19 @@ export class SearchServicesComponent implements OnInit {
   }
 
   private getCleaningServices(){
-    // this.cleaningApi.getCleaningServices().subscribe(res => {
-    //   this.cleaningServices = res;
-    // })
+    this.administratorApi.getAllCleaningServices().subscribe(res => {
+      this.cleaningServices = res;
+    })
   }
 
   private initCols(){
     this.cols = [
-      { field: 'type', header: 'Cleaning type'},
-      { field: 'phoneNumber', header: 'Client Phone Number'},
-      { field: 'email', header: 'Client Email'},
-      { field: 'squareMeters', header: 'Square Meters'},
-      { field: 'status', header: 'Status'},
+      { field: 'cleaningType', header: 'Cleaning type'},
+      { field: 'total', header: 'Total'},
+      { field: 'timeEstimation', header: 'Time estimation'},
+      { field: 'nextCleaningDate', header: 'Next cleaning date'},
+      { field: 'timeSlot.startingHour', header: 'Starting hour'},
+      { field: 'timeSlot.startingHour', header: 'Ending hour'},
     ];
   }
 

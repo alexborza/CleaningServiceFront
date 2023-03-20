@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { EmployeeDto } from 'src/app/core/model/EmployeeDto';
-import { EmploymentStatusEnum } from 'src/app/core/model/EmploymentStatusEnum';
+import { EmployeeContractCreation } from 'src/app/core/model/creation/users/EmployeeContractCreation';
 import { EmployeeService } from 'src/app/core/services/employee.service';
 
 @Component({
@@ -11,18 +10,13 @@ import { EmployeeService } from 'src/app/core/services/employee.service';
 })
 export class JobInformationComponent implements OnInit {
 
-  employeeDto!: EmployeeDto;
+  employeeContractCreation!: EmployeeContractCreation;
   submitted: boolean = false;
-  employmentOptions!: {label: string, value: EmploymentStatusEnum}[];
 
   constructor(public employeeService: EmployeeService, private router: Router) { }
 
   ngOnInit() { 
-    this.employmentOptions = [
-      { label: "Part Time", value: EmploymentStatusEnum.PartTime},
-      { label: "Full Time", value: EmploymentStatusEnum.FullTime}
-    ]
-    this.employeeDto = this.employeeService.employeeContractCreation;
+    this.employeeContractCreation = this.employeeService.employeeContractCreation;
   }
 
   nextPage() {
@@ -35,12 +29,9 @@ export class JobInformationComponent implements OnInit {
   }
 
   isJobInformationValid(){
-    return this.employeeDto.employeeInformation.jobInformation.title && 
-           this.employeeDto.employeeInformation.jobInformation.supervisor && 
-           this.employeeDto.employeeInformation.jobInformation.workPhone && 
-           this.employeeDto.employeeInformation.jobInformation.employmentStatus &&
-           this.employeeDto.employeeInformation.jobInformation.hiringDate &&
-           this.employeeDto.employeeInformation.jobInformation.salary
+    return this.employeeContractCreation.jobInformationCreation.workPhone && 
+           this.employeeContractCreation.jobInformationCreation.hiringDate &&
+           this.employeeContractCreation.jobInformationCreation.salary
   }
 
   prevPage() {

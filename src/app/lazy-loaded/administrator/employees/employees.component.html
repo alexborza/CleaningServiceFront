@@ -11,10 +11,7 @@
                     [rowsPerPageOptions]="[10,25,50]">
                     <ng-template pTemplate="body" let-employee>
                         <tr>
-                            <td style="max-width: 210px; width: 210px;">{{employee.userInformation.fullName}}</td>
-                            <td style="max-width: 200px; width: 200px;" >{{employee.employeeInformation.jobInformation.workPhone}}</td>
-                            <td style="max-width: 210px; width: 210px;">{{employee.employeeInformation.jobInformation.title}}</td>
-                            <td style="max-width: 115px; width: 115px;">{{employee.employeeInformation.jobInformation.employmentStatus}}</td>
+                            <td style="max-width: 210px; width: 210px;">{{employee.fullName}}</td>
                             <td><button pButton class="details-button" type="button" label="Details" (click)="toEmployeesDetails(employee.id)"></button></td>
                         </tr>
                     </ng-template>

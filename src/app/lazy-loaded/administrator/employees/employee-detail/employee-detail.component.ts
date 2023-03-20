@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { Employee } from 'src/app/core/model/representation/users/Employee';
-import { EmployeeApiService } from 'src/app/core/services/employee-api.service';
+import { UserApiService } from 'src/app/core/services/user-api.service';
 import { ModifyJobInfoComponent } from './modify-job-info/modify-job-info.component';
 
 @Component({
@@ -20,7 +20,7 @@ export class EmployeeDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private employeeApi: EmployeeApiService,
+    private userApi: UserApiService,
     public dialogService: DialogService,
     private messageService: MessageService
   ) { }
@@ -33,8 +33,8 @@ export class EmployeeDetailComponent implements OnInit {
   }
 
   private getEmployee(){
-    this.employeeApi.getEmployee(this.id).subscribe(res => {
-      this.employee = res;
+    this.userApi.getUser(this.id).subscribe(res => {
+      this.employee = <Employee> res;
     })
   }
 
