@@ -41,7 +41,7 @@ export class EmployeeDetailComponent implements OnInit {
   onEditJobInfo(){
     const ref = this.dialogService.open(ModifyJobInfoComponent, {
       data: {
-        id: this.id,
+        id: this.employee.jobInformationRepresentation.id,
         dto: this.employee.jobInformationRepresentation
       },
       header: 'Modify Job Information',

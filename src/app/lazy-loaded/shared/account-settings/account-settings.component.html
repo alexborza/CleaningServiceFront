@@ -30,7 +30,7 @@
                     <span>Name:</span>
                 </div>
                 <div class="col-8">
-                    <label>{{getFullName()}}</label>
+                    <label>{{ userDto.userInformation ? userDto.userInformation.fullName : 'Not specified' }}</label>
                 </div>
             </div>
             <div class="row">
@@ -38,37 +38,30 @@
                     <span>Date of birth:</span>
                 </div>
                 <div class="col-8">
-                    <label>{{getBirthDate()}}</label>
+                    <label>{{ userDto.userInformation ? userDto.userInformation.birthDate : 'Not specified' }}</label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-4">
+                    <span>Address:</span>
+                </div>
+                <div class="col-8">
+                    <label>{{ userDto.userInformation ? userDto.userInformation.address : 'Not specified' }}</label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-4">
+                    <span>Phone number:</span>
+                </div>
+                <div class="col-8">
+                    <label>{{ userDto.userInformation ? userDto.userInformation.phoneNumber : 'Not specified' }}</label>
                 </div>
             </div>
         </div>
         <div class="col-2">
             <button pButton type="button" label="Modify" (click)="modifyPersonalInfo()"></button>
-        </div>
-    </div>
-
-    <div class="row section" *ngIf="isEmployee">
-        <div class="col-9">
-            <b>EMERGENCY CONTACT INFORMATION</b>
-            <div class="row mb-1">
-                <div class="col-4">
-                    <span>Name:</span>
-                </div>
-                <div class="col-8">
-                    <label>{{userDto.employeeInformation.emergencyContactInformation.fullName}}</label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-4">
-                    <span>Relationship:</span>
-                </div>
-                <div class="col-8">
-                    <label>{{userDto.employeeInformation.emergencyContactInformation.relationship}}</label>
-                </div>
-            </div>
-        </div>
-        <div class="col-2">
-            <button pButton type="button" label="Modify" (click)="modifyEmergencyContactInfo()"></button>
         </div>
     </div>
 
@@ -80,7 +73,7 @@
                     <span>Hiring date:</span>
                 </div>
                 <div class="col-8">
-                    <label>{{userDto.employeeInformation.jobInformation.hiringDate}}</label>
+                    <label>{{userDto.jobInformationRepresentation.hiringDate}}</label>
                 </div>
             </div>
             <div class="row">
@@ -88,7 +81,7 @@
                     <span>Salary:</span>
                 </div>
                 <div class="col-8">
-                    <label>{{userDto.employeeInformation.jobInformation.salary}} $</label>
+                    <label>{{userDto.jobInformationRepresentation.salary}} $</label>
                 </div>
             </div>
         </div>

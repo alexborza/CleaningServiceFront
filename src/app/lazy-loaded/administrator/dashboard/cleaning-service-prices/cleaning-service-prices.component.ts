@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
+import { CleaningPriceCreation } from 'src/app/core/model/creation/cleaning_service/prices/CleaningPriceCreation';
+import { DeepCleaningPricesCreation } from 'src/app/core/model/creation/cleaning_service/prices/DeepCleaningPricesCreation';
+import { DisinfectionCleaningPricesCreation } from 'src/app/core/model/creation/cleaning_service/prices/DisinfectionCleaningPricesCreation';
+import { PostConstructionCleaningPricesCreation } from 'src/app/core/model/creation/cleaning_service/prices/PostConstructionCleaningPricesCreation';
+import { StandardCleaningPricesCreation } from 'src/app/core/model/creation/cleaning_service/prices/StandardCleaningPricesCreation';
 import { CleaningPrices } from 'src/app/core/model/representation/cleaning_service/prices/CleaningPrices';
 import { AdministratorApiService } from 'src/app/core/services/administrator-api.service';
 import { CleaningApiService } from 'src/app/core/services/cleaning-api.service';
@@ -56,12 +61,9 @@ export class CleaningServicePricesComponent implements OnInit {
   }
 
   onSave(){
-    this.createCleaningPrices();
-  }
-
-  private createCleaningPrices(){
     if(this.arePricesValid()){
-      this.administratorApi.createCleaningPrices(this.cleaningPrices).subscribe(res => {
+      const cleaningPriceCreation = this.createCleaningPrices(this.cleaningPrices);
+      this.administratorApi.createCleaningPrices(cleaningPriceCreation).subscribe(res => {
         this.messageService.add({severity:'success', summary:'Success', detail: 'Prices updated successfully!'});
       });
     } else {
@@ -73,4 +75,37 @@ export class CleaningServicePricesComponent implements OnInit {
     return this.cleaningPrices.standardCleaningPrices && this.cleaningPrices.deepCleaningPrices && this.cleaningPrices.disinfectionCleaningPrices && this.cleaningPrices.postConstructionCleaningPrices;
   }
 
+  private createCleaningPrices(cleaningPrices: CleaningPrices): CleaningPriceCreation {
+    const standardCleaningPricesCreation = new StandardCleaningPricesCreation(
+      cleaningPrices.standardCleaningPrices.standardServicePrice,
+      cleaningPrices.standardCleaningPrices.standardServiceBedroom,
+      cleaningPrices.standardCleaningPrices.standardServiceBathroom,
+      cleaningPrices.standardCleaningPrices.standardServiceKitchen,
+    );
+
+    const deepCleaningPricesCreation = new DeepCleaningPricesCreation(
+      cleaningPrices.deepCleaningPrices.deepServicePrice,
+      cleaningPrices.deepCleaningPrices.deepServiceBedroom,
+      cleaningPrices.deepCleaningPrices.deepServiceBathroom,
+      cleaningPrices.deepCleaningPrices.deepServiceKitchen,
+    );
+
+    const postConstructionCleaningPricesCreation = new PostConstructionCleaningPricesCreation(
+      cleaningPrices.postConstructionCleaningPrices.postConstructionServicePrice,
+      cleaningPrices.postConstructionCleaningPrices.roomPrice,
+    );
+
+    const disinfectionCleaningPricesCreation = new DisinfectionCleaningPricesCreation(
+      cleaningPrices.disinfectionCleaningPrices.disinfectionServicePrice
+    );
+
+    return new CleaningPriceCreation(
+      standardCleaningPricesCreation,
+      deepCleaningPricesCreation,
+      postConstructionCleaningPricesCreation,
+      disinfectionCleaningPricesCreation,
+      cleaningPrices.paidParkingSpotPrice,
+      cleaningPrices.pickUpKeysPrice
+    );
+  }
 }

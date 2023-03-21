@@ -25,7 +25,7 @@ export class NavigationComponent implements OnInit {
     if (this.isLoggedIn) {
       this.user = this.tokenStorageService.getUser();
       const role = this.user.role;
-      this.isClient = role === Role.USER;
+      this.isClient = role === Role.CLIENT;
       this.isAdmin = role === Role.ADMIN;
       this.isEmployee = role === Role.EMPLOYEE;
     }

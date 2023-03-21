@@ -42,7 +42,7 @@ export class ServicesComponent implements OnInit {
 
   private canBook(){
     const role = this.tokenStorage.getUser()?.role;
-    this.canBookNow = role === Role.USER || role === undefined;
+    this.canBookNow = role === Role.CLIENT || role === undefined;
   }
 
   private getDescription(){

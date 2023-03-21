@@ -9,13 +9,13 @@ import { JobInformation } from 'src/app/core/model/representation/users/JobInfor
 })
 export class JobInfoDetailsComponent implements OnInit {
 
-  jobInfoDto!: JobInformation;
+  jobInformationRepresentation!: JobInformation;
 
   constructor(
     public config: DynamicDialogConfig,
     public ref: DynamicDialogRef,
   ) { 
-    this.jobInfoDto = this.config.data?.dto;
+    this.jobInformationRepresentation = this.config.data?.dto;
   }
 
   ngOnInit(): void {

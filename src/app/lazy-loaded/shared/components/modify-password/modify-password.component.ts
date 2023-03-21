@@ -43,9 +43,7 @@ export class ModifyPasswordComponent implements OnInit {
         this.ref.close();
       },
       err => {
-        if(err.error.message === "Incorrect password entered!"){
-          this.form.get('password')?.setErrors({invalid: {message: err.error.message}});
-        }
+        this.form.get('password')?.setErrors({invalid: {message: err.error.message}});
       });
     }
   }

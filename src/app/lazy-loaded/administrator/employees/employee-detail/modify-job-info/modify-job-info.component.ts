@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { JobInformationCreation } from 'src/app/core/model/creation/users/JobInformationCreation';
 import { JobInformation } from 'src/app/core/model/representation/users/JobInformation';
 import { EmployeeApiService } from 'src/app/core/services/employee-api.service';
 import { checkRequiredFields } from 'src/app/core/services/error/validate';
@@ -17,7 +18,7 @@ export class ModifyJobInfoComponent implements OnInit {
   years: string[] = [];
   days: string[] = [];
   months: string[] = [];
-  jobInfoDto!: JobInformation;
+  jobInfoCreation!: JobInformationCreation;
 
   constructor(
     public config: DynamicDialogConfig,
@@ -25,7 +26,7 @@ export class ModifyJobInfoComponent implements OnInit {
     private employeeApi: EmployeeApiService
   ) {
     this.id = this.config.data?.id;
-    this.jobInfoDto = this.config.data?.dto;
+    this.jobInfoCreation = this.config.data?.dto;
   }
 
   ngOnInit(): void {
@@ -34,18 +35,18 @@ export class ModifyJobInfoComponent implements OnInit {
   }
   
   private buildForm(){
-    const birthDate = this.jobInfoDto?.hiringDate.split('-');
+    const birthDate = this.jobInfoCreation?.hiringDate.split('-');
     this.form = new FormGroup({
-      workPhone: new FormControl(this.jobInfoDto?.workPhone != undefined ? this.jobInfoDto.workPhone : '', [Validators.required]),
+      workPhone: new FormControl(this.jobInfoCreation?.workPhone != undefined ? this.jobInfoCreation.workPhone : '', [Validators.required]),
       day: new FormControl(birthDate != undefined ? birthDate[2] : null, [Validators.required]),
       month: new FormControl(birthDate != undefined ? birthDate[1] : null, [Validators.required]),
       year: new FormControl(birthDate != undefined ? birthDate[0] : null,[Validators.required]),
-      salary: new FormControl(this.jobInfoDto?.salary != undefined ? this.jobInfoDto.salary : '', [Validators.required])
+      salary: new FormControl(this.jobInfoCreation?.salary != undefined ? this.jobInfoCreation.salary : '', [Validators.required])
     })
   }
 
   private initializeDropdownsForBirthdate(){
-    for(let i = 1900; i < 2023; i++){
+    for(let i = 1900; i < 2024; i++){
       this.years.push(i.toString());
     }
 

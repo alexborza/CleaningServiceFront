@@ -21,8 +21,8 @@ export class JobInformationComponent implements OnInit {
 
   nextPage() {
     if(this.isJobInformationValid()){
-      this.router.navigate(['administrator/employee-contract/emergency-contact-info']);
-      this.employeeService.canAccessEmergencyInfo = true;
+      this.router.navigate(['administrator/employee-contract/confirmation']);
+      this.employeeService.canAccessConfirmation = true;
       return;
     }
     this.submitted = true;

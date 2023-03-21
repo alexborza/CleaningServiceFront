@@ -1,7 +1,9 @@
+import { IfStmt } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
+import { Employee } from 'src/app/core/model/representation/users/Employee';
 import { Role } from 'src/app/core/model/representation/users/Role';
 import { UserInformation } from 'src/app/core/model/representation/users/UserInformation';
 import { TokenStorageService } from 'src/app/core/services/token-storage.service';
@@ -35,18 +37,19 @@ export class AccountSettingsComponent implements OnInit {
     this.route.parent?.params.subscribe(params => {
       this.id = Number.parseInt(params['userId']);
     });
-    this.hasEmployeeRole();
     this.getUser();
   }
 
-  private hasEmployeeRole(){
-    const user = this.tokenStorage.getUser();
-    this.isEmployee = user.role === Role.EMPLOYEE;
-  }
-
   private getUser(){
+    const user = this.tokenStorage.getUser();
     this.userApi.getUser(this.id).subscribe(res => {
-      this.userDto = res;
+      if(user.role === Role.EMPLOYEE) {
+        this.userDto = <Employee> res;
+        this.isEmployee = true;
+      } else {
+        this.userDto = res;
+        this.isEmployee = false;
+      }
     })
   }
 
@@ -106,19 +109,10 @@ export class AccountSettingsComponent implements OnInit {
   onJobInfoDetails() {
     this.dialogService.open(JobInfoDetailsComponent, {
       data: {
-        dto: this.userDto.employeeInformation.jobInformation
+        dto: this.userDto.jobInformationRepresentation
       },
       header: 'Job Information Details',
       width: '50%'
     });
   }
-
-  getFullName(){
-    return this.userDto.userInformation?.fullName === undefined ? 'Not specified' : this.userDto.userInformation?.fullName;
-  }
-
-  getBirthDate(){
-    return this.userDto.userInformation?.birthDate === undefined ? 'Not specified' : this.userDto.userInformation?.birthDate;
-  }
-
 }

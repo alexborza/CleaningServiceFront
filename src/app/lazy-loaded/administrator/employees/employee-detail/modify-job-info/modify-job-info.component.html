@@ -2,24 +2,6 @@
     <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
         <div class="row">
             <div class="col-12">
-                <label>Title<span class="required-star">*</span></label>
-                <input type=text pInputText placeholder="Enter title" formControlName=title>
-                <small class="p-error" 
-                *ngIf="(form.get('title')?.touched && 
-                        form.get('title')?.errors?.['required']) ||
-                        form.get('title')?.hasError('missing')"
-                >The field is required</small>
-            </div>
-            <div class="col-12">
-                <label class="label">Supervisor<span class="required-star">*</span></label>
-                <input type=text pInputText placeholder="Enter supervisor" formControlName=supervisor>
-                <small class="p-error" 
-                *ngIf="(form.get('supervisor')?.touched && 
-                        form.get('supervisor')?.errors?.['required']) ||
-                        form.get('supervisor')?.hasError('missing')"
-                >The field is required</small>
-            </div>
-            <div class="col-12">
                 <label>Work phone<span class="required-star">*</span></label>
                 <p-inputMask placeholder="Work phone" mask="9999 999 999" formControlName=workPhone></p-inputMask>
                 <small class="p-error" 

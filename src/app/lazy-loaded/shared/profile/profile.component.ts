@@ -29,19 +29,19 @@ export class ProfileComponent implements OnInit {
 
   private menuInit(){
     switch(this.role){
-      case "ROLE_EMPLOYEE":
+      case "EMPLOYEE":
         this.items = [
           {label: 'Account Settings', routerLink: 'account-settings', routerLinkActiveOptions: {exact: true}},
           {label: 'Agenda', routerLink: 'agenda', routerLinkActiveOptions: {exact: false}}
         ]
         break;
-      case "ROLE_USER":
+      case "CLIENT":
         this.items = [
           {label: 'Account Settings', routerLink: 'account-settings', routerLinkActiveOptions: {exact: true}},
           {label: 'My Orders', routerLink: 'orders', routerLinkActiveOptions: {exact: false}}
         ]
         break;
-      case "ROLE_ADMIN":
+      case "ADMIN":
         this.items = [
           {label: 'Dashboard', routerLink: 'dashboard', routerLinkActiveOptions: {exact: true}},
           {label: 'Employees', routerLink: 'employees', routerLinkActiveOptions: {exact: false}},

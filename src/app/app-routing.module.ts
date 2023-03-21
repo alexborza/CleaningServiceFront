@@ -22,7 +22,7 @@ const routes: Routes = [
     loadChildren:() => import('./lazy-loaded/cleaning/cleaning.module').then(m=>m.CleaningModule),
     canActivate: [AuthorizationGuard],
     data: {
-      role: "ROLE_USER",
+      role: "CLIENT",
       canActivateWithoutAuthentication: true
     }
   },
@@ -31,7 +31,7 @@ const routes: Routes = [
     loadChildren:() => import('./lazy-loaded/administrator/administrator.module').then(m=>m.AdministratorModule),
     canActivate: [AuthorizationGuard],
     data: {
-      role: "ROLE_ADMIN",
+      role: "ADMIN",
     }
   },
   {
@@ -39,7 +39,7 @@ const routes: Routes = [
     loadChildren:() => import('./lazy-loaded/client/client.module').then(m=>m.ClientModule),
     canActivate: [AuthorizationGuard],
     data: {
-      role: "ROLE_USER",
+      role: "CLIENT",
     }
   },
   {
@@ -47,7 +47,7 @@ const routes: Routes = [
     loadChildren:() => import('./lazy-loaded/employee/employee.module').then(m=>m.EmployeeModule),
     canActivate: [AuthorizationGuard],
     data: {
-      role: "ROLE_EMPLOYEE",
+      role: "EMPLOYEE",
     }
   },
   {

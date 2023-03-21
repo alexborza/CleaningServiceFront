@@ -32,7 +32,7 @@ export class ConfirmationComponent implements OnInit {
     });
   }
   prevPage() {
-    this.router.navigate(['administrator/employee-contract/emergency-contact-info']);
+    this.router.navigate(['administrator/employee-contract/job-info']);
   }
 
 }
