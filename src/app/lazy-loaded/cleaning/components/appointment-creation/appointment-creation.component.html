@@ -1,0 +1,48 @@
+<p-panel [toggleable]="false" class="no-borders">
+    <ng-template pTemplate="header">
+        <h2>Appointments</h2>
+    </ng-template>
+    <ng-template pTemplate="content">
+        <ng-container [formGroup]="appointmentForm">
+            <div formGroupName="appointment">
+                <div class="row mt-2">
+                    <div class="col-6 p-3 controls">
+                        <p-calendar
+                            formControlName="cleaningDate"
+                            [showIcon]="true"
+                            [minDate]="minimumDate"
+                            [disabledDays]="[0,6]" 
+                            [readonlyInput]="true"
+                            dateFormat="yy-mm-dd"
+                            dataType="string">
+                        </p-calendar>
+                        <small class="p-error"
+                            *ngIf="(appointmentForm.get('appointment').get('cleaningDate')?.touched && 
+                                    appointmentForm.get('appointment').get('cleaningDate')?.errors?.required) ||
+                                    appointmentForm.get('appointment').get('cleaningDate').hasError('missing')"
+                            >The field is required</small>
+                    </div>
+
+                    <div class="col-6 p-3 controls">
+                        <p-dropdown 
+                            [options]="employeeAvailableIntervals" 
+                            optionLabel="interval"
+                            placeholder="Select an available hour"
+                            [showClear]="true"
+                            formControlName="interval">
+                        </p-dropdown>
+                        <small class="p-error" 
+                        *ngIf="(appointmentForm.get('appointment').get('interval')?.touched && 
+                                appointmentForm.get('appointment').get('interval')?.errors?.required) ||
+                                appointmentForm.get('appointment').get('interval').hasError('missing')"
+                        >The field is required</small>
+                    </div>
+
+                    <div class="col-12 p-3">
+                        <p-divider></p-divider>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+    </ng-template>
+</p-panel>

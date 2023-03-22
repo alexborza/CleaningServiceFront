@@ -4,4 +4,5 @@ export class EmployeeAvailableInterval {
     employeeId: number;
     availableInterval: TimeSlot;
     includedLunchBreak: boolean;
+    interval: string;
 }

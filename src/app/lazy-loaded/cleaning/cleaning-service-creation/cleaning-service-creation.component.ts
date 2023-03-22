@@ -14,6 +14,8 @@ import { StandardCleaningDetailsCreation } from 'src/app/core/model/creation/cle
 import { PostConstructionCleaningDetailsCreation } from 'src/app/core/model/creation/cleaning_service/details/PostConstructionCleaningDetailsCreation';
 import { DisinfectionCleaningDetailsCreation } from 'src/app/core/model/creation/cleaning_service/details/DisinfectionCleaningDetailsCreation';
 import { CleaningServiceCreation } from 'src/app/core/model/creation/cleaning_service/CleaningServiceCreation';
+import { EmployeeAvailableInterval } from 'src/app/core/model/representation/shared/EmployeeAvailableInterval';
+import { EmployeeApiService } from 'src/app/core/services/employee-api.service';
 
 @Component({
   selector: 'app-cleaning-service-creation',
@@ -30,7 +32,6 @@ export class CleaningServiceCreationComponent implements OnInit {
   paidParkingSpotPrice: number;
   cleaningServicePrice: number = 0;
   cleaningDetailsPrices: number = 0;
-  cleaningFrequency: Frequency;
   discount: number = 0;
   frequency: string = '';
   property: string = '';
@@ -41,10 +42,13 @@ export class CleaningServiceCreationComponent implements OnInit {
   roomPrices: number[] = [];
   propertyPrices: number[] = [];
 
+  employeeAvailableIntervals: EmployeeAvailableInterval[] = [];
+
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private cleaningApi: CleaningApiService,
+    private employeeApi: EmployeeApiService,
     private tokenStorage: TokenStorageService,
     private messageService: MessageService
     ) {}
@@ -54,6 +58,7 @@ export class CleaningServiceCreationComponent implements OnInit {
     this.getCleaningServicePrices();
     this.buildForm();
     this.setBookingSummary();
+    this.getEmployeeAvailableIntervals();
   }
 
   private getRouteData(){
@@ -128,6 +133,10 @@ export class CleaningServiceCreationComponent implements OnInit {
         squareMeters: new FormControl(null, [Validators.required]),
         parking: new FormControl(null, [Validators.required]),
         homeAccess: new FormControl(null, [Validators.required]),
+      }),
+      appointment: this.fb.group({
+        cleaningDate: new FormControl(null, [Validators.required]),
+        interval: new FormControl(null, [Validators.required]),
       }),
       payment: this.fb.group({
         paymentMethod: null,
@@ -280,9 +289,18 @@ export class CleaningServiceCreationComponent implements OnInit {
   private getFrequencyForBookingSummary(){
     this.form.get('frequency')?.valueChanges.subscribe(res => {
       if(res){
-        this.cleaningFrequency = res?.value;
         this.discount = res?.discount;
         this.frequency = res?.label;
+      }
+    })
+  }
+
+  private getEmployeeAvailableIntervals(){
+    this.form.get('appointment').get('cleaningDate')?.valueChanges.subscribe(cleaningDate => {
+      if(cleaningDate && this.timeEstimation){
+        this.employeeApi.getEmployeesAvailableIntervalsForDate(cleaningDate, this.timeEstimation).subscribe(res => {
+          this.employeeAvailableIntervals = res;
+        });
       }
     })
   }

@@ -10,7 +10,7 @@ import { LocationOfHouseComponent } from './components/location-of-house/locatio
 import { DropdownModule } from 'primeng/dropdown';
 import { CleaningFrequencyComponent } from './components/cleaning-frequency/cleaning-frequency.component';
 import { SelectButtonModule } from 'primeng/selectbutton';
-import { CleaningDateComponent } from './components/cleaning-date/cleaning-date.component';
+import { AppointmentCreationComponent } from './components/appointment-creation/appointment-creation.component';
 import { CalendarModule } from 'primeng/calendar';
 import { PaymentDetailsComponent } from './components/payment-details/payment-details.component';
 import { DividerModule } from 'primeng/divider';
@@ -30,7 +30,7 @@ import { NgxTrimDirectiveModule } from 'ngx-trim-directive';
     ContactInfoComponent,
     LocationOfHouseComponent,
     CleaningFrequencyComponent,
-    CleaningDateComponent,
+    AppointmentCreationComponent,
     PaymentDetailsComponent,
     BookingSummaryComponent,
     StandardCleaningServiceDetailComponent,
@@ -55,7 +55,7 @@ import { NgxTrimDirectiveModule } from 'ngx-trim-directive';
     NgxTrimDirectiveModule
   ],
   exports: [
-    CleaningDateComponent
+    AppointmentCreationComponent
   ]
 })
 export class CleaningModule { }

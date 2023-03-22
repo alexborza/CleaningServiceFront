@@ -19,6 +19,9 @@
                     [paidParkingSpotPrice]="paidParkingSpotPrice"
                 ></app-environmental-cleaning-service-detail>
                 <app-cleaning-frequency *ngIf="isStandardOrDeepDetail()"></app-cleaning-frequency>
+                <app-appointment-creation
+                    [employeeAvailableIntervals]="employeeAvailableIntervals"
+                ></app-appointment-creation>
                 <app-payment-details></app-payment-details>
 
                 <div class="row">
