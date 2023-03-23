@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { Frequency } from 'src/app/core/model/representation/cleaning_service/Frequency';
@@ -15,7 +15,6 @@ import { PostConstructionCleaningDetailsCreation } from 'src/app/core/model/crea
 import { DisinfectionCleaningDetailsCreation } from 'src/app/core/model/creation/cleaning_service/details/DisinfectionCleaningDetailsCreation';
 import { CleaningServiceCreation } from 'src/app/core/model/creation/cleaning_service/CleaningServiceCreation';
 import { EmployeeAvailableInterval } from 'src/app/core/model/representation/shared/EmployeeAvailableInterval';
-import { EmployeeApiService } from 'src/app/core/services/employee-api.service';
 
 @Component({
   selector: 'app-cleaning-service-creation',
@@ -41,6 +40,7 @@ export class CleaningServiceCreationComponent implements OnInit {
   kitchenPrices: number[] = [];
   roomPrices: number[] = [];
   propertyPrices: number[] = [];
+  nbOfAppointments: number = 1;
 
   employeeAvailableIntervals: EmployeeAvailableInterval[] = [];
 
@@ -48,7 +48,6 @@ export class CleaningServiceCreationComponent implements OnInit {
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private cleaningApi: CleaningApiService,
-    private employeeApi: EmployeeApiService,
     private tokenStorage: TokenStorageService,
     private messageService: MessageService
     ) {}
@@ -58,7 +57,6 @@ export class CleaningServiceCreationComponent implements OnInit {
     this.getCleaningServicePrices();
     this.buildForm();
     this.setBookingSummary();
-    this.getEmployeeAvailableIntervals();
   }
 
   private getRouteData(){
@@ -134,10 +132,7 @@ export class CleaningServiceCreationComponent implements OnInit {
         parking: new FormControl(null, [Validators.required]),
         homeAccess: new FormControl(null, [Validators.required]),
       }),
-      appointment: this.fb.group({
-        cleaningDate: new FormControl(null, [Validators.required]),
-        interval: new FormControl(null, [Validators.required]),
-      }),
+      appointments: this.fb.array([]),
       payment: this.fb.group({
         paymentMethod: null,
         cardNumber: null,
@@ -151,11 +146,25 @@ export class CleaningServiceCreationComponent implements OnInit {
     this.completeFormGroup(cleaning_details);
   }
 
+  get appointments() {
+    return this.form.controls["appointments"] as FormArray;
+  }
+
+  addAppointment() {
+    const appointmentForm = this.fb.group({
+      cleaningDate: new FormControl(null, [Validators.required]),
+      interval: new FormControl(null, [Validators.required]),
+    });
+    this.appointments.push(appointmentForm);
+  }
+
   private completeFormGroup(cleaning_details: FormGroup){
     switch(this.type){
       case CleaningType.STANDARD:
       case CleaningType.DEEP:
         this.frequency = "One Time";
+        this.nbOfAppointments = 1;
+        this.addAppointment();
         this.form.addControl('frequency', new FormControl({label: "One Time", value: Frequency.OneTime, discount: 0}));
         this.addCleaningDetailsControls(cleaning_details, ['bedrooms', 'bathrooms', 'kitchens']);
         break;
@@ -178,21 +187,22 @@ export class CleaningServiceCreationComponent implements OnInit {
 
   public onSubmit(formValue: any){
     this.checkRequiredFields();
-    if(this.form.valid){
-      const cleaningService = this.createCleaningService(formValue);
-      console.log(cleaningService);
-      const user = this.tokenStorage.getUser();
-      this.cleaningApi.createCleaningService(user?.id === undefined ? null : user.id, cleaningService).subscribe(res => {
-        this.messageService.add({severity:'success', summary:'Success', detail:'Successfully booked a ' + this.type + ' Service'});
-        this.form.reset();
-        const frequencyControl = this.form.get('frequency');
-        if(frequencyControl){
-          frequencyControl.setValue({label: "One Time", value: Frequency.OneTime, discount: 0});
-        }
-      });
-    } else {
-      this.messageService.add({severity:'error', summary:'Error', detail:'The field is required'});
-    }
+    console.log(formValue);
+    // if(this.form.valid){
+    //   const cleaningService = this.createCleaningService(formValue);
+    //   console.log(cleaningService);
+    //   const user = this.tokenStorage.getUser();
+    //   this.cleaningApi.createCleaningService(user?.id === undefined ? null : user.id, cleaningService).subscribe(res => {
+    //     this.messageService.add({severity:'success', summary:'Success', detail:'Successfully booked a ' + this.type + ' Service'});
+    //     this.form.reset();
+    //     const frequencyControl = this.form.get('frequency');
+    //     if(frequencyControl){
+    //       frequencyControl.setValue({label: "One Time", value: Frequency.OneTime, discount: 0});
+    //     }
+    //   });
+    // } else {
+    //   this.messageService.add({severity:'error', summary:'Error', detail:'The field is required'});
+    // }
   }
 
   private createCleaningService(formValue: any): CleaningServiceCreation{
@@ -289,21 +299,45 @@ export class CleaningServiceCreationComponent implements OnInit {
   private getFrequencyForBookingSummary(){
     this.form.get('frequency')?.valueChanges.subscribe(res => {
       if(res){
+        this.nbOfAppointments = this.calculateNumberOfAppointments(res.value);
         this.discount = res?.discount;
         this.frequency = res?.label;
       }
     })
   }
 
-  private getEmployeeAvailableIntervals(){
-    this.form.get('appointment').get('cleaningDate')?.valueChanges.subscribe(cleaningDate => {
-      if(cleaningDate && this.timeEstimation){
-        this.employeeApi.getEmployeesAvailableIntervalsForDate(cleaningDate, this.timeEstimation).subscribe(res => {
-          this.employeeAvailableIntervals = res;
-        });
-      }
-    })
+  private calculateNumberOfAppointments(frequencyValue: Frequency) {
+    switch(frequencyValue) {
+      case Frequency.OneTime:
+        this.appointments.clear();
+        this.addAppointment();
+        return 1;
+      case Frequency.TwoTime:
+        this.appointments.clear();
+        this.addAppointment();
+        this.addAppointment();
+        return 2;
+      case Frequency.FourTime:
+        this.appointments.clear();
+        this.addAppointment();
+        this.addAppointment();
+        this.addAppointment();
+        this.addAppointment();
+        return 4; 
+      case Frequency.SixTime:
+        this.appointments.clear();
+        this.addAppointment();
+        this.addAppointment();
+        this.addAppointment();
+        this.addAppointment();
+        this.addAppointment();
+        this.addAppointment();
+        return 6;
+      default:
+          return null;
+    }
   }
+
 
   private getTimeEstimation() {
     const cleaning_details = this.form.get('cleaning_details') as FormGroup;

@@ -19,9 +19,21 @@
                     [paidParkingSpotPrice]="paidParkingSpotPrice"
                 ></app-environmental-cleaning-service-detail>
                 <app-cleaning-frequency *ngIf="isStandardOrDeepDetail()"></app-cleaning-frequency>
-                <app-appointment-creation
-                    [employeeAvailableIntervals]="employeeAvailableIntervals"
-                ></app-appointment-creation>
+                
+                <ng-container formArrayName="appointments">
+                    <h2>Appointments</h2>
+                    <ng-container *ngFor="let appointmentForm of appointments.controls; let i = index">
+                        <app-appointment-creation
+                            [appointmentForm]="appointmentForm"
+                            [timeEstimation]="timeEstimation"
+                        ></app-appointment-creation>
+                    </ng-container>
+                </ng-container>
+
+                <div class="col-12 p-3">
+                    <p-divider></p-divider>
+                </div>
+
                 <app-payment-details></app-payment-details>
 
                 <div class="row">
