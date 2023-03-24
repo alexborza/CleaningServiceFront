@@ -15,10 +15,10 @@ export class CleaningFrequencyComponent implements OnInit {
 
   ngOnInit(): void {
     this.frequencies = [
-      {label: "One Time", value: Frequency.OneTime, discount: 0},
-      {label: "Two Time -5%",  value: Frequency.TwoTime, discount: 5},
-      {label: "Four Time -10%",  value: Frequency.FourTime, discount: 10},
-      {label: "Six Time -15%",  value: Frequency.SixTime, discount: 15}
+      {label: "One Time", value: Frequency.ONE_TIME, discount: 0},
+      {label: "Two Time -5%",  value: Frequency.TWO_TIME, discount: 5},
+      {label: "Four Time -10%",  value: Frequency.FOUR_TIME, discount: 10},
+      {label: "Six Time -15%",  value: Frequency.SIX_TIME, discount: 15}
     ];
   }
 

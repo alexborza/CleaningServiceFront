@@ -44,15 +44,15 @@ export class EnvironmentalCleaningServiceDetailComponent implements OnInit, OnCh
     ]
 
     this.parking = [
-      {label: "Free parking spot", value: Parking.Free, price: 0},
-      {label: "Paid parking spot", value: Parking.Paid, price: this.paidParkingSpotPrice}
+      {label: "Free parking spot", value: Parking.FREE, price: 0},
+      {label: "Paid parking spot", value: Parking.PAID, price: this.paidParkingSpotPrice}
     ]
 
     this.homeAccess = [
-      {label: "Meet at the location", value: HomeAccess.Meet, price: 0},
-      {label: "Key placed in the mailbox", value: HomeAccess.KeyMailbox, price: 0},
-      {label: "Pick up keys(additional charges)", value: HomeAccess.PickupKey, price: this.pickUpKeysPrice},
-      {label: "Give us a call to organize", value: HomeAccess.Call, price: 0}
+      {label: "Meet at the location", value: HomeAccess.MEET, price: 0},
+      {label: "Key placed in the mailbox", value: HomeAccess.KEY_MAILBOX, price: 0},
+      {label: "Pick up keys(additional charges)", value: HomeAccess.PICKUP_KEY, price: this.pickUpKeysPrice},
+      {label: "Give us a call to organize", value: HomeAccess.CALL, price: 0}
     ]
   }
 

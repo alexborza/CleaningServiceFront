@@ -1,4 +1,4 @@
 export enum Payment {
-    CASH = "Cash",
-    CARD = "Card"
+    CASH = "CASH",
+    CARD = "CARD"
 }

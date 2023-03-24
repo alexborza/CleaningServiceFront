@@ -17,10 +17,32 @@
                 </th>
             </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-cleaningService let-columns="columns">
-            <tr [pSelectableRow]="cleaningService" style="cursor: pointer;">
-                <td *ngFor="let col of columns">
-                        {{ cleaningService[col.field] }}
+
+        <ng-template pTemplate="body" let-cleaningService>
+            <tr class="p-selectable-row">
+                <td>
+                    <span class="p-column-title">Name</span>
+                    {{cleaningService.cleaningType}}
+                </td>
+                <td>
+                    <span class="p-column-title">Name</span>
+                    {{cleaningService.total}}
+                </td>
+                <td>
+                    <span class="p-column-title">Name</span>
+                    {{cleaningService.timeEstimation}}
+                </td>
+                <td>
+                    <span class="p-column-title">Name</span>
+                    {{cleaningService.nextCleaningDate}}
+                </td>
+                <td>
+                    <span class="p-column-title">Name</span>
+                    {{cleaningService.timeSlotRepresentation.startingHour}}
+                </td>
+                <td>
+                    <span class="p-column-title">Name</span>
+                    {{cleaningService.timeSlotRepresentation.finishingHour}}
                 </td>
             </tr>
         </ng-template>

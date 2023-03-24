@@ -1,4 +1,4 @@
 export enum Parking {
-    Free = "Free",
-    Paid = "Paid"
+    FREE = "FREE",
+    PAID = "PAID"
 }

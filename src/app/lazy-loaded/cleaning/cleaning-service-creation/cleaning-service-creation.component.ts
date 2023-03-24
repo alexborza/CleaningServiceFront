@@ -15,6 +15,9 @@ import { PostConstructionCleaningDetailsCreation } from 'src/app/core/model/crea
 import { DisinfectionCleaningDetailsCreation } from 'src/app/core/model/creation/cleaning_service/details/DisinfectionCleaningDetailsCreation';
 import { CleaningServiceCreation } from 'src/app/core/model/creation/cleaning_service/CleaningServiceCreation';
 import { EmployeeAvailableInterval } from 'src/app/core/model/representation/shared/EmployeeAvailableInterval';
+import { Appointment } from 'src/app/core/model/representation/appointment/Appointment';
+import { AppointmentCreation } from 'src/app/core/model/creation/appointment/AppointmentCreation';
+import { TimeSlot } from 'src/app/core/model/representation/appointment/TimeSlot';
 
 @Component({
   selector: 'app-cleaning-service-creation',
@@ -165,7 +168,7 @@ export class CleaningServiceCreationComponent implements OnInit {
         this.frequency = "One Time";
         this.nbOfAppointments = 1;
         this.addAppointment();
-        this.form.addControl('frequency', new FormControl({label: "One Time", value: Frequency.OneTime, discount: 0}));
+        this.form.addControl('frequency', new FormControl({label: "One Time", value: Frequency.ONE_TIME, discount: 0}));
         this.addCleaningDetailsControls(cleaning_details, ['bedrooms', 'bathrooms', 'kitchens']);
         break;
       case CleaningType.POST_CONSTRUCTION:
@@ -187,31 +190,31 @@ export class CleaningServiceCreationComponent implements OnInit {
 
   public onSubmit(formValue: any){
     this.checkRequiredFields();
-    console.log(formValue);
-    // if(this.form.valid){
-    //   const cleaningService = this.createCleaningService(formValue);
-    //   console.log(cleaningService);
-    //   const user = this.tokenStorage.getUser();
-    //   this.cleaningApi.createCleaningService(user?.id === undefined ? null : user.id, cleaningService).subscribe(res => {
-    //     this.messageService.add({severity:'success', summary:'Success', detail:'Successfully booked a ' + this.type + ' Service'});
-    //     this.form.reset();
-    //     const frequencyControl = this.form.get('frequency');
-    //     if(frequencyControl){
-    //       frequencyControl.setValue({label: "One Time", value: Frequency.OneTime, discount: 0});
-    //     }
-    //   });
-    // } else {
-    //   this.messageService.add({severity:'error', summary:'Error', detail:'The field is required'});
-    // }
+    // console.log(formValue);
+    if(this.form.valid){
+      const cleaningService = this.createCleaningService(formValue);
+      console.log(cleaningService);
+      const user = this.tokenStorage.getUser();
+      this.cleaningApi.createCleaningService(user?.id === undefined ? null : user.id, cleaningService).subscribe(res => {
+        this.messageService.add({severity:'success', summary:'Success', detail:'Successfully booked a ' + this.type + ' Service'});
+        this.form.reset();
+        const frequencyControl = this.form.get('frequency');
+        if(frequencyControl){
+          frequencyControl.setValue({label: "One Time", value: Frequency.ONE_TIME, discount: 0});
+        }
+      });
+    } else {
+      this.messageService.add({severity:'error', summary:'Error', detail:'The field is required'});
+    }
   }
 
   private createCleaningService(formValue: any): CleaningServiceCreation{
     const contactInfo = this.createContactInfo(formValue.contact_info);
     const location = this.createLocation(formValue.location);
     const cleaningDetails = this.createCleaningDetails(formValue.cleaning_details);
-    const frequency = this.form.get('frequency') ? formValue.frequency.value : Frequency.OneTime;
+    const frequency = this.form.get('frequency') ? formValue.frequency.value : Frequency.ONE_TIME;
     const total = this.cleaningServicePrice + this.cleaningDetailsPrices - ((this.cleaningServicePrice + this.cleaningDetailsPrices) * this.discount/100);
-    const appointments = [];
+    const appointments = this.createAppointments(formValue.appointments);
     
     return new CleaningServiceCreation(
       contactInfo,
@@ -222,8 +225,7 @@ export class CleaningServiceCreationComponent implements OnInit {
       total,
       this.timeEstimation,
       this.type,
-      appointments,
-
+      appointments
     );
   }
 
@@ -284,6 +286,13 @@ export class CleaningServiceCreationComponent implements OnInit {
     );
   }
 
+  private createAppointments(appointments: any[]) {
+      return appointments.map((ap) => {
+        const timeSlot = new TimeSlot(ap.interval.availableInterval.startingHour, ap.interval.availableInterval.finishingHour);
+        return new AppointmentCreation(ap.interval.employeeId, ap.cleaningDate, timeSlot);
+      })
+  }
+
   private checkRequiredFields(){
     checkRequiredFields((this.form.get('contact_info') as FormGroup).controls);
     checkRequiredFields((this.form.get('location') as FormGroup).controls);
@@ -308,23 +317,23 @@ export class CleaningServiceCreationComponent implements OnInit {
 
   private calculateNumberOfAppointments(frequencyValue: Frequency) {
     switch(frequencyValue) {
-      case Frequency.OneTime:
+      case Frequency.ONE_TIME:
         this.appointments.clear();
         this.addAppointment();
         return 1;
-      case Frequency.TwoTime:
+      case Frequency.TWO_TIME:
         this.appointments.clear();
         this.addAppointment();
         this.addAppointment();
         return 2;
-      case Frequency.FourTime:
+      case Frequency.FOUR_TIME:
         this.appointments.clear();
         this.addAppointment();
         this.addAppointment();
         this.addAppointment();
         this.addAppointment();
         return 4; 
-      case Frequency.SixTime:
+      case Frequency.SIX_TIME:
         this.appointments.clear();
         this.addAppointment();
         this.addAppointment();

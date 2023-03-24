@@ -1,6 +1,6 @@
 export enum Frequency {
-    OneTime = "One Time",
-    TwoTime = "Two Time",
-    FourTime = "Four Time",
-    SixTime = "Six Time"
+    ONE_TIME = "ONE_TIME",
+    TWO_TIME = "TWO_TIME",
+    FOUR_TIME = "FOUR_TIME",
+    SIX_TIME = "SIX_TIME"
 }
