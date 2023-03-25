@@ -8,4 +8,5 @@ export class CleaningServiceMinimal {
     timeEstimation: number;
     nextCleaningDate: string;
     timeSlotRepresentation: TimeSlot;
+    hourInterval: string;
 }

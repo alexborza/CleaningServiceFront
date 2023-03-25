@@ -7,5 +7,6 @@ export class Appointment {
     employeeId: number;
     cleaningDate: string;
     timeSlot: TimeSlot;
+    hourInterval: string;
     status: AppointmentStatus;
 }

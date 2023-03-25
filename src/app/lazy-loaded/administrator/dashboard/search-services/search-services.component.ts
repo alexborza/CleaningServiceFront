@@ -20,7 +20,7 @@ export class SearchServicesComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCleaningServices();
-    this.initHeaderCols();
+    this.initCols();
   }
 
   private getCleaningServices(){
@@ -29,14 +29,13 @@ export class SearchServicesComponent implements OnInit {
     })
   }
 
-  private initHeaderCols(){
+  private initCols(){
     this.cols = [
-      { header: 'Cleaning type'},
-      { header: 'Total'},
-      { header: 'Time estimation'},
-      { header: 'Next cleaning date'},
-      { header: 'Starting hour'},
-      { header: 'Finishing hour'},
+      { field: 'cleaningType', header: 'Cleaning type'},
+      { field: 'total', header: 'Total'},
+      { field: 'timeEstimation', header: 'Time estimation'},
+      { field: 'nextCleaningDate', header: 'Next cleaning date'},
+      { field: 'hourInterval', header: 'Cleaning interval'}
     ];
   }
 

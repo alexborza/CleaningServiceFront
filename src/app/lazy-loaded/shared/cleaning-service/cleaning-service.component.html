@@ -3,31 +3,6 @@
         <div class="col-6">
             <button pButton pRipple type="button" (click)="back()" class="p-button-outlined p-button-rounded back-button" icon="pi pi-arrow-left"></button>
         </div>
-        
-        <div class="text-end col-6" *ngIf="canServiceBeEdited">
-            <button pButton type="button" label="Reschedule" (click)="reschedule()"></button>
-            <div *ngIf="!canEndCleaningService; else enabledButton" style="display: inline-block" pTooltip="Service can be ended if it has been cleaned for minimum of 5 times" tooltipPosition="top">
-                <button    
-                    [disabled]="!canEndCleaningService"
-                    class="end-service p-button-danger"
-                    (click)="confirm()"
-                    label="End service"
-                    pButton>
-                </button>
-            </div>
-            <ng-template #enabledButton>
-                <button    
-                    class="end-service p-button-danger"
-                    (click)="confirm()"
-                    label="End service"
-                    pButton>
-                </button>
-            </ng-template>
-        </div>
-
-        <div class="text-end col-6" *ngIf="canFinishService">
-            <button type="button" (click)="finishService()" pButton label="Finish Service"></button>
-        </div>
 
         <h3 class="text-center mt-3">Cleaning Service Details</h3>
     </div>
@@ -39,27 +14,6 @@
             [ngClass]="{'firstRow': i<3}">
                 <label>{{getLabelForProperty(property)}}</label>
                 <b>{{cleaningService.cleaningDetails[property]}}</b>
-            </div>
-        </div>
-    </div>
-
-    <div class="section" *ngIf="displayCleaningDate && cleaningDateDto">
-        <h4>Cleaning Date</h4>
-        <div class="row">
-            <div class="col-4">
-                <label>Cleaning Date</label>
-                <b>{{ cleaningDateDto?.cleaningDate }}</b>
-            </div>
-            <div class="col-4">
-                <label>Cleaning Hour</label>
-                <b>
-                    {{ cleaningDateDto.startingHour === 9 ? '09:00 - ' : cleaningDateDto.startingHour + ':00 - ' }}
-                    {{ cleaningDateDto.finishingHour + ':00' }}
-                </b>
-            </div>
-            <div class="col-4" *ngIf="cleaningService.cleaningFrequency">
-                <label>Cleaning Frequency</label>
-                <b>{{ cleaningService.cleaningFrequency }}</b>
             </div>
         </div>
     </div>
@@ -107,42 +61,29 @@
     <div class="section">
         <h4>Payment Details</h4>
         <div class="row">
-            <div class="col-4">
+            <div class="col-3">
+                <label>Cleaning Type</label>
+                <b>{{cleaningService.type}}</b>
+            </div>
+            <div class="col-3">
+                <label>Frequency</label>
+                <b>{{cleaningService.frequency}}</b>
+            </div>
+            <div class="col-3">
                 <label>Total</label>
                 <b>{{cleaningService.total}} $</b>
             </div>
-            <div class="col-4">
+            <div class="col-3">
                 <label>Payment Method</label>
-                <b>{{cleaningService.paymentMethod}}</b>
+                <b>{{cleaningService.payment}}</b>
             </div>
         </div>
     </div>
 
-    <div class="section" *ngIf="canDisplayHistory">
-        <a (click)="displayHistory()">Display History of Cleaning Dates</a>
-    </div>
-    <div class="section" *ngIf="displayHistoryOfCleaningDates">
-        <h4>History of Cleaning Dates</h4>
-        <span *ngIf="datesOfCleaning.length === 0">
-            No Cleaning Date History
-        </span>
-        <div class="row" *ngFor="let dateOfCleaning of datesOfCleaning; let i = index">
-            <div class="col-4">
-                <label>Cleaning Date</label>
-                <b>{{ dateOfCleaning.cleaningDate }}</b>
-            </div>
-            <div class="col-4">
-                <label>Cleaning Hour</label>
-                <b>
-                    {{ dateOfCleaning.startingHour === 9 ? '09:00 - ' : dateOfCleaning.startingHour + ':00 - ' }}
-                    {{ dateOfCleaning.finishingHour + ':00' }}
-                </b>
-            </div>
-        </div>
-    </div>
     <div class="section">
         <app-messages-history
             [id]="id"
+            [messages]="cleaningService.messages"
         ></app-messages-history>
     </div>
 </div>
