@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { CleaningService } from 'src/app/core/model/representation/cleaning_service/CleaningService';
 import { formatDate } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EmployeeApiService } from 'src/app/core/services/employee-api.service';
 import { AdministratorApiService } from 'src/app/core/services/administrator-api.service';
-// import { ServicesAgenda } from 'src/app/core/model/ServicesAgenda';
+import { EmployeeAppointment } from 'src/app/core/model/representation/appointment/EmployeeAppointment';
+import { Appointment } from 'src/app/core/model/representation/appointment/Appointment';
 
 @Component({
   selector: 'app-agenda',
@@ -16,8 +16,9 @@ export class AgendaComponent implements OnInit {
   id!: number;
   cleaningDate: string = '';
   dayOfWeek: string = '';
-  cleaningServices: CleaningService[] = [];
-  servicesAgenda: [] = [];
+  appointments: Appointment[] = [];
+  allEmployeesAppointments: EmployeeAppointment[] = [];
+  showAppointments: boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -37,22 +38,24 @@ export class AgendaComponent implements OnInit {
 
   private getAgenda(){
     if(this.router.url.startsWith("/administrator")){
-      this.getServicesAgenda();
+      this.getAllEmployeesAppointments();
     } else {
       this.getEmployeeCleaningServicesForDate();
     }
   }
 
-  private getServicesAgenda(){
-    // this.administratorApi.getServicesAgenda(this.cleaningDate).subscribe(res => {
-    //   this.servicesAgenda = res;
-    // });
+  private getAllEmployeesAppointments(){
+    this.administratorApi.getAllEmployeesAppointmentsByDate(this.cleaningDate).subscribe(res => {
+      this.allEmployeesAppointments = res;
+      this.showAppointments = this.allEmployeesAppointments.some(app => app.appointmentRepresentations.length > 0);
+    });
   }
 
   private getEmployeeCleaningServicesForDate(){
-    // this.employeeApi.getEmployeeCleaningServicesForDate(this.id, this.cleaningDate).subscribe(res => {
-    //   this.cleaningServices = res;
-    // })
+    this.employeeApi.getEmployeesAppointmentsForDate(this.id, this.cleaningDate).subscribe(res => {
+      this.appointments = res;
+      this.showAppointments = this.appointments.length > 0;
+    })
   }
 
   nextDay(){
@@ -90,11 +93,11 @@ export class AgendaComponent implements OnInit {
     this.formatDate(date);
   }
 
-  onClick(cleaningService: CleaningService){
+  onClick(appointment: Appointment){
     if(this.router.url.startsWith("/administrator")){
-      this.router.navigate(["/administrator/cleaning-details", cleaningService.id, {agendaDate: this.cleaningDate}]);
+      this.router.navigate(["/administrator/cleaning-details", appointment.cleaningServiceId, {agendaDate: this.cleaningDate}]);
     } else {
-      this.router.navigate([cleaningService.id, {agendaDate: this.cleaningDate}], {relativeTo: this.route});
+      this.router.navigate([appointment.cleaningServiceId, {agendaDate: this.cleaningDate}], {relativeTo: this.route});
     }
   }
 }

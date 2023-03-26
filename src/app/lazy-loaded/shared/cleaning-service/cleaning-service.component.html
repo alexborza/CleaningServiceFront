@@ -81,9 +81,14 @@
     </div>
 
     <div class="section">
+        <app-appointment
+            [appointments]="cleaningService.appointments"
+        ></app-appointment>
+    </div>
+
+    <div class="section">
         <app-messages-history
             [id]="id"
-            [messages]="cleaningService.messages"
         ></app-messages-history>
     </div>
 </div>

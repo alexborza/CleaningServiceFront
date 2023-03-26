@@ -1,5 +1,4 @@
 import { AfterViewInit, Component, HostListener, Input, OnDestroy, OnInit} from '@angular/core';
-import { CleaningType } from '../../../../core/model/representation/cleaning_service/CleaningType';
 
 @Component({
   selector: 'app-booking-summary',
@@ -12,8 +11,8 @@ export class BookingSummaryComponent implements OnInit, AfterViewInit, OnDestroy
   @Input() cleaningDetailsPrices: number = 0;
   @Input() discount: number = 0;
   @Input() frequency: string = '';
-  @Input() cleaningDate: any;
-  @Input() type!: CleaningType;
+  @Input() squareMeters: any;
+  @Input() cleaningType: string;
   @Input() property: any;
   @Input() timeEstimation: number = 0;
   sticky: boolean = false;

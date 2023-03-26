@@ -31,6 +31,7 @@ import { SelectButtonModule } from 'primeng/selectbutton';
 import { TooltipModule } from 'primeng/tooltip';
 import { NavigationComponent } from './navigation/navigation.component';
 import { ProfileComponent } from './profile/profile.component';
+import { AppointmentComponent } from './cleaning-service/appointment/appointment.component';
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import { ProfileComponent } from './profile/profile.component';
     AgendaComponent,
     MessagesHistoryComponent,
     NavigationComponent,
-    ProfileComponent
+    ProfileComponent,
+    AppointmentComponent
   ],
   imports: [
     CommonModule,

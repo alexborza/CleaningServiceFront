@@ -7,10 +7,19 @@
     justify-content: end;
 }
 
+:host ::ng-deep .p-datatable .p-datatable-thead > tr > th {
+    white-space: nowrap;
+}
+
 :host ::ng-deep .p-datatable .p-datatable-tbody > tr > td {
-    border: none;
-    border-width: 0;
-    padding: 1rem 2rem;
+    font-size: 14px;
+    vertical-align: top;
+    padding-top: 20px;
+}
+
+:host ::ng-deep .p-datatable .p-datatable-thead > tr > th {
+    background: none;
+    border-width: 0 0 2px 0;
 }
 
 :host ::ng-deep .p-button {

@@ -1,13 +1,14 @@
 :host ::ng-deep .p-divider {
     margin-bottom: 20px;
+    width: 76%;
 }
 
 .body {
-    padding: 0px 60px 10px 60px;
+    margin-left: 150px;
+    margin-top: 30px;
 }
 
 .services {
-    cursor: pointer;
     margin: 20px 0px 5px 0px;
 }
 
@@ -15,7 +16,7 @@
     margin: 0px 40px 20px 40px;
 }
 
-i{
+.arrows{
     cursor: pointer;
     font-size: 45px;
     margin: 0px 10px 0px 10px;
@@ -36,6 +37,10 @@ i{
     padding: 15px;
 }
 
+.info {
+    cursor: pointer;
+}
+
 
 label {
     margin-bottom: 4px;
@@ -43,4 +48,8 @@ label {
 
 .displayService {
     margin: 30px 70px 50px 70px;
+}
+
+.empty-message {
+    margin-left: 170px;
 }

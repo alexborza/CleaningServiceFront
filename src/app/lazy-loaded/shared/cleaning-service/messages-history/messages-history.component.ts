@@ -14,8 +14,8 @@ import { TokenStorageService } from 'src/app/core/services/token-storage.service
 })
 export class MessagesHistoryComponent implements OnInit {
 
-  @Input() id: any;
-  @Input() messages: Message[] = [];
+  @Input() id: number;
+  messages: Message[] = [];
   form: FormGroup;
 
   constructor(
@@ -26,6 +26,13 @@ export class MessagesHistoryComponent implements OnInit {
 
   ngOnInit(): void {
     this.buildForm();
+    this.getCleaningServiceMessages();
+  }
+
+  private getCleaningServiceMessages() {
+    this.cleaningApi.getCleaningServiceMessages(this.id).subscribe(res => {
+      this.messages = res;
+    })
   }
 
   private buildForm(){
@@ -49,7 +56,7 @@ export class MessagesHistoryComponent implements OnInit {
     const sender = this.tokenStorage.getUser().username;
     let messageCreation = new MessageCreation(sender, formValue.message);
     this.cleaningApi.addMessageToCleaningService(this.id, messageCreation).subscribe(res => {
-      // this.getMessagesForCleaningService();
+      this.getCleaningServiceMessages();
       this.form.reset();
     })
   }

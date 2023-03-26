@@ -15,7 +15,6 @@ import { PostConstructionCleaningDetailsCreation } from 'src/app/core/model/crea
 import { DisinfectionCleaningDetailsCreation } from 'src/app/core/model/creation/cleaning_service/details/DisinfectionCleaningDetailsCreation';
 import { CleaningServiceCreation } from 'src/app/core/model/creation/cleaning_service/CleaningServiceCreation';
 import { EmployeeAvailableInterval } from 'src/app/core/model/representation/shared/EmployeeAvailableInterval';
-import { Appointment } from 'src/app/core/model/representation/appointment/Appointment';
 import { AppointmentCreation } from 'src/app/core/model/creation/appointment/AppointmentCreation';
 import { TimeSlot } from 'src/app/core/model/representation/appointment/TimeSlot';
 
@@ -44,6 +43,8 @@ export class CleaningServiceCreationComponent implements OnInit {
   roomPrices: number[] = [];
   propertyPrices: number[] = [];
   nbOfAppointments: number = 1;
+  cleaningType: string;
+  squareMeters: string;
 
   employeeAvailableIntervals: EmployeeAvailableInterval[] = [];
 
@@ -190,10 +191,8 @@ export class CleaningServiceCreationComponent implements OnInit {
 
   public onSubmit(formValue: any){
     this.checkRequiredFields();
-    // console.log(formValue);
     if(this.form.valid){
       const cleaningService = this.createCleaningService(formValue);
-      console.log(cleaningService);
       const user = this.tokenStorage.getUser();
       this.cleaningApi.createCleaningService(user?.id === undefined ? null : user.id, cleaningService).subscribe(res => {
         this.messageService.add({severity:'success', summary:'Success', detail:'Successfully booked a ' + this.type + ' Service'});
@@ -300,9 +299,30 @@ export class CleaningServiceCreationComponent implements OnInit {
   }
 
   private setBookingSummary(){
+    this.getCleaningType();
     this.getFrequencyForBookingSummary();
     this.getTimeEstimation();
     this.getCleaningDetailsForBookingSummary(); 
+  }
+
+  private getCleaningType() {
+    switch(this.type) {
+      case CleaningType.STANDARD:
+        this.cleaningType = "Standard";
+        break;
+      case CleaningType.DEEP:
+        this.cleaningType = "Deep";
+        break;
+      case CleaningType.DISINFECTION:
+        this.cleaningType = "Disinfection";
+        break;
+      case CleaningType.POST_CONSTRUCTION:
+        this.cleaningType = "Post Construction";
+        break;
+      default:
+        this.cleaningType = "";
+        break;
+    }
   }
 
   private getFrequencyForBookingSummary(){
@@ -350,7 +370,10 @@ export class CleaningServiceCreationComponent implements OnInit {
 
   private getTimeEstimation() {
     const cleaning_details = this.form.get('cleaning_details') as FormGroup;
-    cleaning_details.get('squareMeters')?.valueChanges.subscribe(res => this.timeEstimation = res ? res.timeEstimation : 0)
+    cleaning_details.get('squareMeters')?.valueChanges.subscribe(res => {
+      this.squareMeters = res.label;
+      this.timeEstimation = res ? res.timeEstimation : 0
+    })
   }
 
   private getCleaningDetailsForBookingSummary() {

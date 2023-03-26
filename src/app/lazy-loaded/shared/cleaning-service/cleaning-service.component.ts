@@ -55,7 +55,11 @@ export class CleaningServiceComponent implements OnInit {
 
   back(){
     if(this.router.url.startsWith("/administrator")){
-      this.router.navigate(['/administrator/dashboard']);
+      if(this.agendaDate){
+        this.router.navigate(['/administrator/services-agenda', {agendaDate: this.agendaDate}]);
+      } else {
+        this.router.navigate(['/administrator/dashboard']);
+      }
     } else if(this.router.url.startsWith("/employee")){
         this.router.navigate(['employee', this.userId, 'agenda', {agendaDate: this.agendaDate}]);
     } else {

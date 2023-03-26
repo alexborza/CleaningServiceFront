@@ -7,6 +7,7 @@ import { CleaningServiceCreation } from '../model/creation/cleaning_service/Clea
 import { CleaningDescription } from '../model/representation/cleaning_service/description/CleaningDescription';
 import { CleaningServiceMinimal } from '../model/representation/cleaning_service/CleaningServiceMinimal';
 import { MessageCreation } from '../model/creation/cleaning_service/MessageCreation';
+import { Message } from '../model/representation/cleaning_service/Message';
 
 @Injectable({
   providedIn: 'root'
@@ -37,6 +38,10 @@ export class CleaningApiService {
 
   addMessageToCleaningService(id: number, messageCreation: MessageCreation) {
     return this.http.post(this.baseUrl + '/message/' + id, messageCreation);
+  }
+
+  getCleaningServiceMessages(cleaningServiceId: number): Observable<Message[]> {
+    return this.http.get<Message[]>(this.baseUrl + "/messages/" + cleaningServiceId);
   }
   
 

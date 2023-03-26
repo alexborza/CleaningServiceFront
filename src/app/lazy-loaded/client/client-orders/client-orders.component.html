@@ -1,17 +1,23 @@
 <div class="container p-4">
     <h3 style="text-align: center;">My Orders</h3>
     <div class="table mt-4">
-        <h5>Cleaning Services History</h5>
         <p-table [value]="cleaningServices" [paginator]="cleaningServices.length > 5 ? true : false" [rows]="5" responsiveLayout="scroll"
         [rowsPerPageOptions]="[5,20,35]">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Cleaning type</th>
+                    <th>Total</th>
+                    <th>Next cleaning date</th>
+                    <th>Hour interval</th>
+                    <th></th>
+                </tr>
+            </ng-template>
             <ng-template pTemplate="body" let-cleaningService>
                 <tr>
                     <td>{{cleaningService.cleaningType}}</td>
                     <td>{{cleaningService.total}} $</td>
-                    <td>{{cleaningService.timeEstimation}}</td>
                     <td>{{cleaningService.nextCleaningDate}}</td>
-                    <td>{{cleaningService.timeSlotRepresentation.startingHour}}</td>
-                    <td>{{cleaningService.timeSlotRepresentation.finishingHour}}</td>
+                    <td>{{cleaningService.hourInterval}}</td>
                     <td>
                         <button pButton type="button" label="Details" (click)="toCleaningService(cleaningService.id)"></button>
                     </td>
