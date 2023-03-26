@@ -1,0 +1,27 @@
+:host ::ng-deep .p-datatable .p-datatable-thead > tr > th {
+    white-space: nowrap;
+}
+
+:host ::ng-deep .p-datatable .p-datatable-tbody > tr > td {
+    font-size: 14px;
+    vertical-align: top;
+    padding-top: 20px;
+}
+
+:host ::ng-deep .p-datatable .p-datatable-thead > tr > th {
+    background: none;
+    border-width: 0 0 2px 0;
+}
+
+:host ::ng-deep .reschedule-button .p-button {
+    padding: 0.2rem 1rem;
+    font-size: 14px;
+}
+
+.table {
+    padding: 15px;
+}
+
+h4{
+    font-size: 22px;
+}

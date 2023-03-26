@@ -136,6 +136,7 @@ export class CleaningServiceCreationComponent implements OnInit {
         parking: new FormControl(null, [Validators.required]),
         homeAccess: new FormControl(null, [Validators.required]),
       }),
+      frequency: new FormControl({label: "One Time", value: Frequency.ONE_TIME, discount: 0}),
       appointments: this.fb.array([]),
       payment: this.fb.group({
         paymentMethod: null,
@@ -146,6 +147,8 @@ export class CleaningServiceCreationComponent implements OnInit {
       })
     })
     
+    this.frequency = "One Time";        
+    this.addAppointment();
     const cleaning_details = this.form.get('cleaning_details') as FormGroup;
     this.completeFormGroup(cleaning_details);
   }
@@ -166,10 +169,6 @@ export class CleaningServiceCreationComponent implements OnInit {
     switch(this.type){
       case CleaningType.STANDARD:
       case CleaningType.DEEP:
-        this.frequency = "One Time";
-        this.nbOfAppointments = 1;
-        this.addAppointment();
-        this.form.addControl('frequency', new FormControl({label: "One Time", value: Frequency.ONE_TIME, discount: 0}));
         this.addCleaningDetailsControls(cleaning_details, ['bedrooms', 'bathrooms', 'kitchens']);
         break;
       case CleaningType.POST_CONSTRUCTION:
