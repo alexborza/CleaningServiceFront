@@ -85,12 +85,16 @@
             [appointments]="cleaningService.appointments"
             [timeEstimation]="cleaningService.timeEstimation"
             [cleaningServiceId]="id"
+            (appointmentCompletion)="onAppointmentCompletion($event)"
+            (appointmentRescheduling)="onAppointmentRescheduling($event)"
         ></app-appointment>
     </div>
 
     <div class="section">
         <app-messages-history
             [id]="id"
+            [messages]="cleaningService.messages"
+            (messageCreation)="onMessageCreation($event)"
         ></app-messages-history>
     </div>
 </div>

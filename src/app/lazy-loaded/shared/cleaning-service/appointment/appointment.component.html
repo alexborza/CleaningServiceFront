@@ -14,8 +14,11 @@
                 <td>{{ appointment.cleaningDate }}</td>
                 <td>{{ appointment.hourInterval }}</td>
                 <td>{{ appointment.status }}</td>
-                <td style="text-align: right; width: 170px;">
+                <td style="text-align: right; width: 170px;" *ngIf="appointment.status === 'ACTIVE' && appointment.cleaningDate !== currentDate && (role === 'ADMIN' || role === 'CLIENT')">
                     <p-button class="reschedule-button" label="Reschedule" (onClick)="reschedule(appointment)"></p-button>
+                </td>
+                <td style="text-align: right; width: 170px;" *ngIf="appointment.status === 'ACTIVE' && role === 'EMPLOYEE' && appointment.cleaningDate === currentDate">
+                    <p-button class="reschedule-button" label="Complete" (onClick)="complete(appointment.id)"></p-button>
                 </td>
             </tr>
         </ng-template>
@@ -32,5 +35,3 @@
         </ng-template>
     </p-table>
 </div>
-
-<p-toast></p-toast>

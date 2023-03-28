@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
+import { MessageCreation } from 'src/app/core/model/creation/cleaning_service/MessageCreation';
 import { CleaningService } from 'src/app/core/model/representation/cleaning_service/CleaningService';
+import { AppointmentApiService } from 'src/app/core/services/appointment-api.service';
 import { CleaningApiService } from 'src/app/core/services/cleaning-api.service';
 
 @Component({
@@ -23,7 +26,9 @@ export class CleaningServiceComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     public dialogService: DialogService,
-    private cleaningApi: CleaningApiService
+    private messageService: MessageService,
+    private cleaningApi: CleaningApiService,
+    private appointmentApi: AppointmentApiService
     ) { 
       this.getRouteData();
     }
@@ -103,6 +108,26 @@ export class CleaningServiceComponent implements OnInit {
       default: 
         return '';
     }
+  }
+
+  onAppointmentCompletion(appointmentId: number) {
+    this.appointmentApi.completeAppointment(appointmentId).subscribe(() => {
+      this.getCleaningService();
+      this.messageService.add({severity:'success', summary: 'Success', detail: 'Successfully completed the appointment!'})
+    });
+  }
+
+  onAppointmentRescheduling(data: any) {
+    this.appointmentApi.rescheduleAppointment(data.appointmentId, this.id, data.appointmentCreation).subscribe(() => {
+      this.getCleaningService();
+      this.messageService.add({severity:'success', summary: 'Success', detail: 'Successfully rescheduled the appointment!'})
+    });
+  }
+
+  onMessageCreation(messageCreation: MessageCreation) {
+    this.cleaningApi.addMessageToCleaningService(this.id, messageCreation).subscribe(() => {
+      this.getCleaningService();
+    })
   }
 
 }

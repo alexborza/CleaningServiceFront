@@ -1,9 +1,7 @@
-import { formatDate } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MessageCreation } from 'src/app/core/model/creation/cleaning_service/MessageCreation';
 import { Message } from 'src/app/core/model/representation/cleaning_service/Message';
-import { CleaningApiService } from 'src/app/core/services/cleaning-api.service';
 import { checkRequiredFields } from 'src/app/core/services/error/validate';
 import { TokenStorageService } from 'src/app/core/services/token-storage.service';
 
@@ -15,24 +13,17 @@ import { TokenStorageService } from 'src/app/core/services/token-storage.service
 export class MessagesHistoryComponent implements OnInit {
 
   @Input() id: number;
-  messages: Message[] = [];
+  @Input() messages: Message[] = [];
   form: FormGroup;
+  @Output() messageCreation = new EventEmitter<MessageCreation>();
 
   constructor(
     private fb: FormBuilder,
-    private tokenStorage: TokenStorageService,
-    private cleaningApi: CleaningApiService
+    private tokenStorage: TokenStorageService
   ) { }
 
   ngOnInit(): void {
     this.buildForm();
-    this.getCleaningServiceMessages();
-  }
-
-  private getCleaningServiceMessages() {
-    this.cleaningApi.getCleaningServiceMessages(this.id).subscribe(res => {
-      this.messages = res;
-    })
   }
 
   private buildForm(){
@@ -55,10 +46,8 @@ export class MessagesHistoryComponent implements OnInit {
   private submitForm(formValue){
     const sender = this.tokenStorage.getUser().username;
     let messageCreation = new MessageCreation(sender, formValue.message);
-    this.cleaningApi.addMessageToCleaningService(this.id, messageCreation).subscribe(res => {
-      this.getCleaningServiceMessages();
-      this.form.reset();
-    })
+    this.messageCreation.emit(messageCreation);
+    this.form.reset();
   }
 
 }

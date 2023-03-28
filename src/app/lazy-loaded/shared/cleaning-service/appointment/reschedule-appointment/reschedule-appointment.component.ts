@@ -1,11 +1,9 @@
-import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { AppointmentCreation } from 'src/app/core/model/creation/appointment/AppointmentCreation';
 import { Appointment } from 'src/app/core/model/representation/appointment/Appointment';
 import { EmployeeAvailableInterval } from 'src/app/core/model/representation/shared/EmployeeAvailableInterval';
-import { AppointmentApiService } from 'src/app/core/services/appointment-api.service';
 import { checkRequiredFields } from 'src/app/core/services/error/validate';
 
 @Component({
@@ -18,18 +16,15 @@ export class RescheduleAppointmentComponent implements OnInit {
   rescheduleForm: FormGroup;
   appointment: Appointment;
   timeEstimation: number;
-  cleaningServiceId: number;
   minimumDate: Date = new Date();
   employeeAvailableIntervals: EmployeeAvailableInterval[] = [];
 
   constructor(
     public config: DynamicDialogConfig,
-    public ref: DynamicDialogRef,
-    private appointmentApi: AppointmentApiService
+    public ref: DynamicDialogRef
   ) {
     this.appointment = this.config.data?.appointment;
     this.timeEstimation = this.config.data?.timeEstimation;
-    this.cleaningServiceId = this.config.data?.cleaningServiceId;
   }
 
   ngOnInit(): void {
@@ -47,7 +42,7 @@ export class RescheduleAppointmentComponent implements OnInit {
     checkRequiredFields(this.rescheduleForm.controls);
     if(this.rescheduleForm.valid){
       const appointmentCreation = new AppointmentCreation(formValue.interval.employeeId, formValue.cleaningDate, formValue.interval.availableInterval);
-      this.appointmentApi.rescheduleAppointment(this.appointment.id, this.cleaningServiceId, appointmentCreation).subscribe(res => this.ref.close(appointmentCreation));
+      this.ref.close(appointmentCreation)
     }
   }
 
