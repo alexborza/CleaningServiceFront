@@ -371,7 +371,8 @@ export class CleaningServiceCreationComponent implements OnInit {
     const cleaning_details = this.form.get('cleaning_details') as FormGroup;
     cleaning_details.get('squareMeters')?.valueChanges.subscribe(res => {
       this.squareMeters = res.label;
-      this.timeEstimation = res ? res.timeEstimation : 0
+      this.timeEstimation = res ? res.timeEstimation : 0;
+      this.appointments.reset();
     })
   }
 

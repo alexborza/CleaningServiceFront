@@ -17,11 +17,7 @@ export class AppointmentApiService {
     return this.http.put(this.baseUrl + "/complete/" + id, {});
   }
 
-  cancelAppointment(id: number) {
-    return this.http.put(this.baseUrl + "/cancel/" + id, {});
-  }
-
-  addApointment(cleaningServiceId: number, employeeId: number, appointmentCreation: AppointmentCreation) {
-    return this.http.put(this.baseUrl + "/add/" + cleaningServiceId + "/" + employeeId, appointmentCreation);
+  rescheduleAppointment(id: number, cleaningServiceId: number, appointmentCreation: AppointmentCreation) {
+    return this.http.put(this.baseUrl + "/reschedule/" + id + "/" + cleaningServiceId, appointmentCreation);
   }
 }

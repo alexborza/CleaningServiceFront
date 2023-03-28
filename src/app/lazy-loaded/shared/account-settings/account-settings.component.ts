@@ -22,7 +22,7 @@ import { ModifyPersonalInfoComponent } from '../components/modify-personal-info/
 export class AccountSettingsComponent implements OnInit {
 
   id!: number;
-  userDto!: any;
+  user!: any;
   isEmployee = false;
 
   constructor(
@@ -44,10 +44,10 @@ export class AccountSettingsComponent implements OnInit {
     const user = this.tokenStorage.getUser();
     this.userApi.getUser(this.id).subscribe(res => {
       if(user.role === Role.EMPLOYEE) {
-        this.userDto = <Employee> res;
+        this.user = <Employee> res;
         this.isEmployee = true;
       } else {
-        this.userDto = res;
+        this.user = res;
         this.isEmployee = false;
       }
     })
@@ -56,7 +56,7 @@ export class AccountSettingsComponent implements OnInit {
   modifyEmail(){
     const ref = this.dialogService.open(ModifyEmailComponent, {
       data: {
-          email: this.userDto.email,
+          email: this.user.email,
           id: this.id
       },
       header: 'Modify email',
@@ -92,7 +92,7 @@ export class AccountSettingsComponent implements OnInit {
     const ref = this.dialogService.open(ModifyPersonalInfoComponent, {
       data: {
         id: this.id,
-        dto: this.userDto.userInformation
+        dto: this.user.userInformation
       },
       header: 'Modify personal information',
       width: '50%'
@@ -109,7 +109,7 @@ export class AccountSettingsComponent implements OnInit {
   onJobInfoDetails() {
     this.dialogService.open(JobInfoDetailsComponent, {
       data: {
-        dto: this.userDto.jobInformationRepresentation
+        dto: this.user.jobInformationRepresentation
       },
       header: 'Job Information Details',
       width: '50%'

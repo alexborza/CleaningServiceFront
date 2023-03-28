@@ -32,6 +32,7 @@ import { TooltipModule } from 'primeng/tooltip';
 import { NavigationComponent } from './navigation/navigation.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AppointmentComponent } from './cleaning-service/appointment/appointment.component';
+import { RescheduleAppointmentComponent } from './cleaning-service/appointment/reschedule-appointment/reschedule-appointment.component';
 
 
 @NgModule({
@@ -47,7 +48,8 @@ import { AppointmentComponent } from './cleaning-service/appointment/appointment
     MessagesHistoryComponent,
     NavigationComponent,
     ProfileComponent,
-    AppointmentComponent
+    AppointmentComponent,
+    RescheduleAppointmentComponent
   ],
   imports: [
     CommonModule,

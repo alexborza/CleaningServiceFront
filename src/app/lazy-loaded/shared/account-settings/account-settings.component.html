@@ -1,10 +1,10 @@
-<div class="container" style="margin-bottom: 80px;" *ngIf="userDto">
+<div class="container" style="margin-bottom: 80px;" *ngIf="user">
     <h3>Account Settings</h3>
     
     <div class="row section">
         <div class="col-9">
             <b>EMAIL</b>
-            <label>{{userDto.email}}</label>
+            <label>{{user.email}}</label>
         </div>
         <div class="col-2">
             <button pButton type="button" label="Modify" (click)="modifyEmail()"></button>
@@ -30,7 +30,7 @@
                     <span>Name:</span>
                 </div>
                 <div class="col-8">
-                    <label>{{ userDto.userInformation ? userDto.userInformation.fullName : 'Not specified' }}</label>
+                    <label>{{ user.userInformation ? user.userInformation.fullName : 'Not specified' }}</label>
                 </div>
             </div>
             <div class="row">
@@ -38,7 +38,7 @@
                     <span>Date of birth:</span>
                 </div>
                 <div class="col-8">
-                    <label>{{ userDto.userInformation ? userDto.userInformation.birthDate : 'Not specified' }}</label>
+                    <label>{{ user.userInformation ? user.userInformation.birthDate : 'Not specified' }}</label>
                 </div>
             </div>
 
@@ -47,7 +47,7 @@
                     <span>Address:</span>
                 </div>
                 <div class="col-8">
-                    <label>{{ userDto.userInformation ? userDto.userInformation.address : 'Not specified' }}</label>
+                    <label>{{ user.userInformation ? user.userInformation.address : 'Not specified' }}</label>
                 </div>
             </div>
 
@@ -56,7 +56,7 @@
                     <span>Phone number:</span>
                 </div>
                 <div class="col-8">
-                    <label>{{ userDto.userInformation ? userDto.userInformation.phoneNumber : 'Not specified' }}</label>
+                    <label>{{ user.userInformation ? user.userInformation.phoneNumber : 'Not specified' }}</label>
                 </div>
             </div>
         </div>
@@ -73,7 +73,7 @@
                     <span>Hiring date:</span>
                 </div>
                 <div class="col-8">
-                    <label>{{userDto.jobInformationRepresentation.hiringDate}}</label>
+                    <label>{{user.jobInformationRepresentation.hiringDate}}</label>
                 </div>
             </div>
             <div class="row">
@@ -81,7 +81,7 @@
                     <span>Salary:</span>
                 </div>
                 <div class="col-8">
-                    <label>{{userDto.jobInformationRepresentation.salary}} $</label>
+                    <label>{{user.jobInformationRepresentation.salary}} $</label>
                 </div>
             </div>
         </div>
