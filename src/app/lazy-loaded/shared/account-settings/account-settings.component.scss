@@ -1,0 +1,40 @@
+h3{
+    padding: 40px;
+    text-align: center;
+}
+
+b{
+    margin-bottom: 5px;
+}
+
+label {
+    font-size: 13px;
+    line-height: 1.62;
+    letter-spacing: .4px;
+}
+
+.section {
+    padding: 30px 25px;
+    background-color: #fafafa;
+    margin: 0 80px 20px 80px;
+}
+
+.col-9{
+    display: grid;
+    margin-left: 35px;
+}
+
+.col-2{
+    align-self: center;
+}
+
+span {
+    font-size: 13px;
+    line-height: 1.67;
+    letter-spacing: 0.4px;
+    color: #a5a5a5;
+}
+
+:host ::ng-deep .p-button {
+    padding: 0.2rem 1.25rem;
+}

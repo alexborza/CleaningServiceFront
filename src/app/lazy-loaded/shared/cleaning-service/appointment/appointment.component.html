@@ -1,0 +1,37 @@
+<h4>Appointments</h4>
+<div class="col-12 mb-2">
+    <p-table [value]="appointments">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Cleaning Date</th>
+                <th>Hour Interval</th>
+                <th>Status</th>
+                <th></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-appointment>
+            <tr>
+                <td>{{ appointment.cleaningDate }}</td>
+                <td>{{ appointment.hourInterval }}</td>
+                <td>{{ appointment.status }}</td>
+                <td style="text-align: right; width: 170px;" *ngIf="appointment.status === 'ACTIVE' && appointment.cleaningDate !== currentDate && (role === 'ADMIN' || role === 'CLIENT')">
+                    <p-button class="reschedule-button" label="Reschedule" (onClick)="reschedule(appointment)"></p-button>
+                </td>
+                <td style="text-align: right; width: 170px;" *ngIf="appointment.status === 'ACTIVE' && role === 'EMPLOYEE' && appointment.cleaningDate === currentDate">
+                    <p-button class="reschedule-button" label="Complete" (onClick)="complete(appointment.id)"></p-button>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+            <tr>
+                <td colspan="3">No appointments found.</td>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="summary">
+            <div class="flex align-items-center justify-content-between">
+                In total there are {{appointments ? appointments.length : 0 }} appointments.
+            </div>
+        </ng-template>
+    </p-table>
+</div>

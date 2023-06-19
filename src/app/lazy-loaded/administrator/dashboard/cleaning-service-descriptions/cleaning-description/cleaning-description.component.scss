@@ -1,0 +1,13 @@
+.control {
+    display: grid;
+    margin-bottom: 10px;
+}
+
+:host ::ng-deep .p-inputtextarea {
+    height: 200px;
+}
+
+:host ::ng-deep .p-button {
+    float: right;
+    margin-top: 10px;
+}

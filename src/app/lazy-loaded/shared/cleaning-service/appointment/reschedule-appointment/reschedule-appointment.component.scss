@@ -1,0 +1,15 @@
+.controls {
+    display: grid;
+    padding: 10px;
+}
+
+:host ::ng-deep .rightButton {
+    float: right;
+}
+
+:host ::ng-deep .p-calendar .p-datepicker {
+    position: fixed !important;
+    display: unset !important;
+    z-index: 3000;
+    top: -60px !important;
+}

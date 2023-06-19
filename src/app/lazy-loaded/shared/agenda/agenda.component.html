@@ -1,0 +1,55 @@
+<div class="container">
+    <div class="row">
+        <div class="col-12 text-end">
+            <i style="color: #f09b0b;" class="fa fa-arrow-left arrows" aria-hidden="true" (click)="previousDay()"></i>
+            <i style="color: #349134;" class="fa fa-arrow-right arrows" aria-hidden="true" (click)="nextDay()"></i>
+        </div>
+        <div class="col-12">
+            <h2 class="text-center">{{dayOfWeek}}</h2>
+        </div>
+        <div class="col-12">
+            <h5 class="text-center">{{cleaningDate}}</h5>
+        </div>
+    </div>
+
+    <div class="body">
+        <p-divider></p-divider>
+
+        <div class="col-12 empty-message" *ngIf="!showAppointments; else displayAgenda">
+            <span>No scheduled appointments for this day</span>
+        </div>
+
+        <ng-template #displayAgenda>
+            <div class="row services" *ngFor="let appointment of appointments; let i = index">
+                <div class="col-3">
+                    <span >{{ appointment.hourInterval }}</span>
+                </div>
+                <div class="col-3 text-center">
+                    <span >{{ appointment.status }}</span>
+                </div>
+                <div class="col-3 text-end">
+                    <span pTooltip="View cleaning service"><i class="pi pi-info-circle info" (click)="onClick(appointment)"></i></span>
+                </div>
+            </div>
+            
+            <div class="employee-services" *ngFor="let employeeAppointment of allEmployeesAppointments; let i = index">
+                <div class="employee-name col-12">
+                    <span>{{ employeeAppointment.employeeFullName }}</span>
+                </div>
+                <div class="row services" *ngFor="let appointment of employeeAppointment.appointmentRepresentations; let i = index">
+                    <div class="col-3">
+                        <span >{{ appointment.hourInterval }}</span>
+                    </div>
+                    <div class="col-3 text-center">
+                        <span >{{ appointment.status }}</span>
+                    </div>
+                    <div class="col-3 text-end">
+                        <span pTooltip="View cleaning service"><i class="pi pi-info-circle info" (click)="onClick(appointment)"></i></span>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+        
+        <p-divider></p-divider>
+    </div>
+</div>

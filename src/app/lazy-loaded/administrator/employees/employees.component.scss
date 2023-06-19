@@ -1,0 +1,31 @@
+:host ::ng-deep .p-datatable .p-paginator-bottom {
+    border-width: 0;
+}
+
+:host ::ng-deep .p-paginator {
+    margin-top: 15px;
+    justify-content: end;
+}
+
+:host ::ng-deep .p-datatable .p-datatable-tbody > tr > td {
+    border: none;
+    border-width: 0;
+    word-break: break-word;
+}
+
+:host ::ng-deep .details-button {
+    padding: 0.1rem 1.25rem;
+}
+
+:host ::ng-deep .add-employee {
+    margin-right: 58px;
+    background-color: #6366f1;
+    padding-right: 20px;
+    padding-left: 20px;
+    float: right;
+}
+
+.table {
+    padding: 25px 40px;
+    margin-left: 60px;
+}

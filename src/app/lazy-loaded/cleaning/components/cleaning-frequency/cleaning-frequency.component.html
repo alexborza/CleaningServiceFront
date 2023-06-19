@@ -1,0 +1,21 @@
+<p-panel [toggleable]="false" class="no-borders">
+    <ng-template pTemplate="header">
+        <h2>Cleaning Frequency</h2>
+    </ng-template>
+    <ng-template pTemplate="content">
+        <ng-container [formGroup]="$any(controlContainer.control)">
+            <div class="row mt-2">
+                <div class="col-12 controls">
+                    <label>How often?</label>
+                    <div class="frequencies">
+                        <p-selectButton [options]="frequencies" optionLabel="label" formControlName="frequency"></p-selectButton>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <p-divider></p-divider>
+                </div>
+            </div>
+        </ng-container>
+    </ng-template>
+</p-panel>

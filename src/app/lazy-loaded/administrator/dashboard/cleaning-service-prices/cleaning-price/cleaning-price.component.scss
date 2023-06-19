@@ -1,0 +1,17 @@
+.control {
+    display: grid;
+    margin-bottom: 10px;
+}
+
+.row {
+    margin: 0px 60px 0px 60px;
+}
+
+:host ::ng-deep .p-button {
+    float: right;
+    margin-top: 10px;
+}
+
+small {
+    margin-bottom: 10px;
+}

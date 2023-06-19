@@ -1,0 +1,41 @@
+h4 {
+    font-weight: 600;
+    font-size: 1.65rem;
+    margin-bottom: 3.5rem;
+    font-family: sans-serif;
+}
+
+:host ::ng-deep .p-datatable .p-datatable-thead > tr > th {
+    white-space: nowrap;
+    text-align: center;
+    background: #0D5477;
+    color: #ffffff;
+}
+
+:host ::ng-deep .p-datatable .p-datatable-tbody > tr > td {
+    white-space: nowrap;
+    text-align: center;
+    padding-top: 20px;
+}
+
+.sent {
+    background-color: #c8e6c9;
+    color: #256029;
+}
+
+.not-sent {
+    background-color: #ffcdd2;
+    color: #c63737;
+}
+
+:host ::ng-deep .p-datatable .p-datatable-header {
+    text-align: right;
+    background: none;
+    border: none;
+}
+
+:host ::ng-deep .p-datatable .p-paginator-bottom {
+    justify-content: right;
+    border-width: 0;
+    margin-top: 10px;
+}

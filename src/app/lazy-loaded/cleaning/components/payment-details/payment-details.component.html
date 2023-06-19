@@ -1,0 +1,46 @@
+
+<p-panel [toggleable]="false" class="no-borders">
+    <ng-template pTemplate="header">
+        <h2>Payment Details</h2>
+    </ng-template>
+    <ng-template pTemplate="content">
+        <ng-container [formGroup]="$any(controlContainer.control)">
+            <div formGroupName="payment">
+                <div class="row mt-2">
+                    <div class="col-12 controls">
+                        <label>At the time of service, we do allow for cash or check payment. Please let us know prior to the cleaning
+                        </label>
+                        <div class="paymentMethod">
+                            <p-selectButton 
+                                [options]="paymentMethods" 
+                                optionLabel="label" 
+                                optionValue="method"
+                                formControlName=paymentMethod>
+                            </p-selectButton>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <ng-container *ngIf="showCreditCardDetails">
+                        <div class="col-8 controls">
+                            <p-inputMask placeholder="Card Number" mask="9999-9999-9999-9999" formControlName=cardNumber></p-inputMask>
+                        </div>
+                        <div class="col-2 controls">
+                            <p-inputMask class="cardDetails" placeholder="MM/YY" mask="99/99" formControlName=expirationDate></p-inputMask>
+                        </div>
+                        <div class="col-2 controls">
+                            <p-inputMask class="cardDetails" placeholder="CVC" mask="999" formControlName=cvc></p-inputMask>
+                        </div>
+                        <div class="col-12 controls">
+                            <input type=text pInputText placeholder="Card Holder Name" formControlName=holderName trim="blur">
+                        </div>
+                    </ng-container>
+
+                    <div class="col-12">
+                        <p-divider></p-divider>
+                    </div>
+            </div>                
+            </div>
+        </ng-container>
+    </ng-template>
+</p-panel>

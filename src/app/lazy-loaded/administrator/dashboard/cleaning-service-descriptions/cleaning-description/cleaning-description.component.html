@@ -1,0 +1,11 @@
+<div class="container">
+    <div class="row">
+        <div class="col-12 control">
+            <label for="description">{{descriptionType}} Cleaning Description</label>
+            <textarea pInputTextarea #description="ngModel" name="description" id="description" placeholder="Description" type="text" required pInputText [(ngModel)]="serviceDescription" [ngClass]="{'ng-dirty': (description.touched && description.invalid) || (description.dirty && description.invalid) || (description.invalid && submitted)}"></textarea> 
+            <small class="p-error" *ngIf="(description.dirty && description.invalid) || (description.invalid && submitted) || (description.touched && description.invalid)">Description is required.</small>
+        </div>
+    </div>
+    
+    <p-button label="Save" (onClick)="save(description.control)"></p-button>
+</div>

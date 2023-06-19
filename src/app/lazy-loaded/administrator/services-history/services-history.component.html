@@ -1,0 +1,28 @@
+
+<div class="container p-4">
+    <h4 style="text-align: center;">Cleaning Services History</h4>
+
+    <p-table [value]="cleaningServices" [paginator]="true" [rows]="10" responsiveLayout="scroll"
+    [rowsPerPageOptions]="[10,25,50]" selectionMode="single" (onRowSelect)="onRowSelect($event)">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Cleaning Type</th>
+            <th>Total</th>
+            <th>Square Meters</th>
+            <th>Date</th>
+            <th>Hour</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-cleaningService>
+        <tr [pSelectableRow]="cleaningService" style="cursor: pointer;">
+            <td>{{cleaningService.type}}</td>
+            <td>{{cleaningService.total}} $</td>
+            <td>{{cleaningService.cleaningDetails.squareMeters}} m²</td>
+            <td>{{cleaningService.cleaningDate.cleaningDate}}</td>
+            <td>{{ cleaningService.cleaningDate.startingHour === 9 ? '09:00 - ' : cleaningService.cleaningDate.startingHour + ':00' }}
+                {{ cleaningService.cleaningDate.finishingHour + ':00' }}</td>
+        </tr>
+    </ng-template>
+</p-table>
+</div>
+

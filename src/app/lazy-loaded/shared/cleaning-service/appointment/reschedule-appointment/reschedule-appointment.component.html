@@ -1,0 +1,16 @@
+<div class="container">
+    <form [formGroup]="rescheduleForm" (ngSubmit)="onSubmit(rescheduleForm.value)">
+        <div class="row mt-2">
+            <app-appointment-creation
+                [timeEstimation]="timeEstimation"
+                [appointmentForm]="rescheduleForm"
+            ></app-appointment-creation>
+
+            <div class="mt-3">
+                <button pButton class="p-button-danger" pRipple type="button" label="Cancel" (click)="onClose()"></button>
+                <button pButton class="rightButton" pRipple type="submit" label="Reschedule"></button>
+            </div>
+        </div>
+
+    </form>
+</div>

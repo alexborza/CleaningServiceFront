@@ -1,0 +1,50 @@
+.col-4 {
+    display: grid;
+}
+
+.col-3 {
+    display: grid;
+}
+
+.section {
+    .row {
+        margin: 20px 20px 10px 20px;
+    }
+    padding: 15px;
+}
+
+h4{
+    font-size: 22px;
+}
+
+label {
+    margin-bottom: 4px;
+}
+
+.firstRow {
+    margin-bottom: 30px;
+}
+
+:host ::ng-deep .p-button {
+    margin-right: 10px;
+}
+
+.end-service {
+    background: #f60404;
+}
+
+a{
+    cursor: pointer;
+    text-decoration: underline !important;
+    color: #3b8bb3 !important;
+}
+
+
+:host ::ng-deep .back-button {
+    color: #124c69 !important;
+}
+
+:host ::ng-deep .p-button:disabled{
+    cursor: not-allowed;
+    pointer-events: all !important;
+}

@@ -1,0 +1,105 @@
+<p-panel [toggleable]="false" class="no-borders">
+    <ng-template pTemplate="header">
+        <h2>Cleaning Details</h2>
+    </ng-template>
+    <ng-template pTemplate="content">
+        <ng-container [formGroup]="environmentCleaningForm">
+            <div formGroupName="cleaning_details">
+                <div class="row mt-2">
+                    <div class="col-6 p-3 controls">
+                        <label class="label-title">Property type<span class="required-star">*</span></label>
+                    </div>
+                    <div class="col-6 p-3 controls">
+                        <p-dropdown 
+                            [options]="properties" 
+                            optionLabel="label"
+                            placeholder="Select property type"
+                            [showClear]="true"
+                            formControlName="property">
+                        </p-dropdown>
+                        <small class="p-error" 
+                        *ngIf="(environmentCleaningForm.get('cleaning_details').get('property')?.touched && 
+                                environmentCleaningForm.get('cleaning_details').get('property')?.errors?.required) ||
+                                environmentCleaningForm.get('cleaning_details').get('property').hasError('missing')"
+                        >The field is required</small>
+                    </div>
+
+                    <ng-container *ngIf="isPostConstructionCleaning">
+                        <div class="col-6 p-3 controls">
+                            <label class="label-title">Total number of rooms<span class="required-star">*</span></label>
+                        </div>
+                        <div class="col-6 p-3 controls">
+                            <p-dropdown 
+                                [options]="rooms" 
+                                optionLabel="label"
+                                placeholder="Select number of rooms"
+                                [showClear]="true"
+                                formControlName="rooms">
+                            </p-dropdown>
+                            <small class="p-error" 
+                                *ngIf="(environmentCleaningForm.get('cleaning_details').get('rooms')?.touched && 
+                                        environmentCleaningForm.get('cleaning_details').get('rooms')?.errors?.required) ||
+                                        environmentCleaningForm.get('cleaning_details').get('rooms').hasError('missing')"
+                                >The field is required</small>
+                        </div>
+                    </ng-container>
+      
+                    <div class="col-6 p-3 controls">
+                        <label class="label-title">Total Square Meters<span class="required-star">*</span></label>
+                    </div>
+                    <div class="col-6 p-3 controls">
+                        <p-dropdown 
+                            [options]="squareMeters" 
+                            optionLabel="label"
+                            placeholder="Select total square meters"
+                            [showClear]="true"
+                            formControlName="squareMeters">
+                        </p-dropdown>
+                        <small class="p-error" 
+                        *ngIf="(environmentCleaningForm.get('cleaning_details').get('squareMeters')?.touched && 
+                                environmentCleaningForm.get('cleaning_details').get('squareMeters')?.errors?.required) ||
+                                environmentCleaningForm.get('cleaning_details').get('squareMeters').hasError('missing')"
+                        >The field is required</small>
+                    </div>
+    
+                    <div class="col-6 p-3 controls">
+                        <label class="label-title">Parking<span class="required-star">*</span></label>
+                    </div>
+                    <div class="col-6 p-3 controls">
+                        <p-selectButton
+                        [options]="parking" 
+                        optionLabel="label" 
+                        formControlName="parking"></p-selectButton>
+                        <small class="p-error" 
+                        *ngIf="(environmentCleaningForm.get('cleaning_details').get('parking')?.touched && 
+                                environmentCleaningForm.get('cleaning_details').get('parking')?.errors?.required) ||
+                                environmentCleaningForm.get('cleaning_details').get('parking').hasError('missing')"
+                        >The field is required</small>
+                    </div>
+    
+                    <div class="col-6 p-3 controls">
+                        <label class="label-title">How to access the home?<span class="required-star">*</span></label>
+                    </div>
+                    <div class="col-6 p-3 controls">
+                        <p-dropdown 
+                            [options]="homeAccess" 
+                            optionLabel="label"
+                            placeholder="Select home access way"
+                            [showClear]="true"
+                            formControlName="homeAccess">
+                        </p-dropdown>
+                        <small class="p-error" 
+                        *ngIf="(environmentCleaningForm.get('cleaning_details').get('homeAccess')?.touched && 
+                                environmentCleaningForm.get('cleaning_details').get('homeAccess')?.errors?.required) ||
+                                environmentCleaningForm.get('cleaning_details').get('homeAccess').hasError('missing')"
+                        >The field is required</small>
+                    </div>
+    
+                    <div class="col-12 p-3">
+                        <p-divider></p-divider>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+    </ng-template>
+</p-panel>   

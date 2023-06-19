@@ -1,0 +1,16 @@
+.col-12{
+    display: grid;
+    padding-bottom: 10px;
+}
+
+.row {
+    margin: 15px 60px 0 60px;
+}
+
+:host ::ng-deep .rightButton {
+    float: right;
+}
+
+small{
+    margin-bottom: 10px;
+}

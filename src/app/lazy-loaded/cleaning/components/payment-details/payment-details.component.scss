@@ -1,0 +1,38 @@
+.controls {
+    display: grid;
+    padding: 10px;
+}
+
+:host ::ng-deep .no-borders {
+    .p-panel .p-panel-content {
+        padding: 0;
+        margin-left: 15px;
+        border: none;
+    }
+
+    .p-panel .p-panel-header {
+        padding: 0;
+        background: #ffffff;
+        border: none;
+    }
+}
+
+
+.paymentMethod {
+    text-align: center; 
+    margin-top: 20px;
+}
+
+:host ::ng-deep .p-inputmask {
+    min-width: -webkit-fill-available;
+    width: 100%;
+}
+
+:host ::ng-deep .cardDetails .p-inputtext {
+    text-align: center;
+}
+
+h2 {
+    font-size: 24px;
+    color: #65686a;
+}

@@ -1,0 +1,49 @@
+<p-card [ngClass]="sticky ? 'sticky': ''">
+    <ng-template pTemplate="header">
+        <h4 style="font-size: 20px; text-align: center; color: #65686a">Booking Summary</h4>
+    </ng-template>
+    <ng-template pTemplate="content">
+        <div class="row">
+            <div class="col-12" *ngIf="property">
+                <i class="fa fa-building-o" aria-hidden="true"></i>
+                <span style="float: right;">{{property.label}}</span>
+            </div>
+
+            <div class="col-12" *ngIf="frequency != ''">
+                <i class="fa fa-refresh" aria-hidden="true"></i>
+                <span style="float: right;">{{frequency}}</span>
+            </div>
+
+            <div class="col-12" *ngIf="squareMeters">
+                <i class="pi pi-home" aria-hidden="true"></i>
+                <span style="float: right;">{{ squareMeters }}</span>
+            </div>
+
+
+            <div class="col-12" *ngIf="timeEstimation">
+                <i class="fa fa-bell-o" aria-hidden="true"></i>
+                <span style="float: right;">{{timeEstimation}} h</span>
+            </div>
+            <p-divider></p-divider>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <span>{{cleaningType}}</span>
+                <span style="float: right;">${{cleaningServicePrice + cleaningDetailsPrices}}</span>
+            </div>
+
+            <div class="col-12">
+                <span>Discounts</span>
+                <span style="float: right;">${{(cleaningServicePrice + cleaningDetailsPrices) * discount/100}}</span>
+            </div>
+            <p-divider></p-divider>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <span style="font-weight: bold; font-size: 18px;">TOTAL</span>
+                <span style="float: right;">${{cleaningServicePrice + cleaningDetailsPrices - ((cleaningServicePrice + cleaningDetailsPrices) * discount/100)}}</span>
+            </div>
+        </div>
+    </ng-template>
+</p-card>

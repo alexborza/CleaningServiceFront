@@ -1,0 +1,40 @@
+<div class="container p-4" style="text-align: -webkit-center;">
+    <p-card [style]="{'width': '450px'}">
+        <h3>{{ setHeader() }}</h3>
+
+        <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+            <div class="control">
+                <label class="label">Username<span class="required-star">*</span></label>
+                <input type=text pInputText placeholder="Username" formControlName=username trim="blur">
+                <small class="p-error" 
+                *ngIf="(form.get('username')?.touched && 
+                        form.get('username')?.errors?.['required']) ||
+                        form.get('username')?.hasError('missing')"
+                >The field is required</small>
+            </div>
+            <div class="control">
+                <label class="label">Password<span class="required-star">*</span></label>
+                <p-password class="pass" placeholder="Password" formControlName="password" [toggleMask]="showEye" [feedback]="false" (onFocus)="onFocus()"></p-password>
+                <small class="p-error" 
+                *ngIf="(form.get('password')?.touched && 
+                        form.get('password')?.errors?.['required']) ||
+                        form.get('password')?.hasError('missing')"
+                >The field is required</small>
+            </div>
+            <div class="control" *ngIf="action === 'signup'">
+                <label class="label">Email<span class="required-star">*</span></label>
+                <input type=text pInputText placeholder="Email" formControlName=email trim="blur">
+                <small class="p-error" 
+                *ngIf="(form.get('email')?.touched && 
+                        form.get('email')?.errors?.['required']) ||
+                        form.get('email')?.hasError('missing')"
+                >The field is required</small>
+            </div>
+            <div class="control">
+                <button pButton pRipple type="submit" [label]="setButtonLabel()" style="margin-top: 15px;"></button>
+            </div>
+        </form>
+    </p-card>
+</div>
+
+<p-toast></p-toast>

@@ -1,0 +1,55 @@
+:host ::ng-deep .p-divider {
+    margin-bottom: 20px;
+    width: 76%;
+}
+
+.body {
+    margin-left: 150px;
+    margin-top: 30px;
+}
+
+.services {
+    margin: 20px 0px 5px 0px;
+}
+
+.employee-services{
+    margin: 0px 40px 20px 40px;
+}
+
+.arrows{
+    cursor: pointer;
+    font-size: 45px;
+    margin: 0px 10px 0px 10px;
+}
+
+.firstRow {
+    margin-bottom: 30px;
+}
+
+.col-4 {
+    display: grid;
+}
+
+.section {
+    .row {
+        padding: 15px;
+    }
+    padding: 15px;
+}
+
+.info {
+    cursor: pointer;
+}
+
+
+label {
+    margin-bottom: 4px;
+}
+
+.displayService {
+    margin: 30px 70px 50px 70px;
+}
+
+.empty-message {
+    margin-left: 170px;
+}

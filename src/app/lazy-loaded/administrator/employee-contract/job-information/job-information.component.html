@@ -1,0 +1,34 @@
+<div style="margin-bottom: 80px;">
+    <p-card>
+        <ng-template pTemplate="title">
+            Job Information
+        </ng-template>
+        <ng-template pTemplate="subtitle">
+            Enter employee's job information
+        </ng-template>
+        <ng-template pTemplate="content">
+            <div class="row">
+                <div class="col-4">
+                    <label for="phoneNumber">Work phone</label>
+                    <p-inputMask placeholder="Work phone" mask="9999 999 999" [required]="true" #workPhone="ngModel" [(ngModel)]="employeeContractCreation.jobInformationCreation.workPhone" [ngClass]="{'ng-dirty': (workPhone.touched && workPhone.invalid) || (workPhone.invalid && submitted) || (workPhone.dirty && workPhone.invalid)}"></p-inputMask>
+                    <small class="p-error" *ngIf="(workPhone.invalid && submitted) || (workPhone.dirty && workPhone.invalid) || (workPhone.touched && workPhone.invalid)">Phone number is required.</small>
+                </div>
+        
+                <div class="col-4">
+                    <label for="hiringDate">Hiring Date</label>
+                    <p-calendar [required]="true" #hiringDate="ngModel" [(ngModel)]="employeeContractCreation.jobInformationCreation.hiringDate" dateFormat="yy-mm-dd" dataType="string" [ngClass]="{'ng-dirty': (hiringDate.touched && hiringDate.invalid) || (hiringDate.invalid && submitted) || (hiringDate.dirty && hiringDate.invalid)}"></p-calendar>
+                    <small class="p-error" *ngIf="(hiringDate.invalid && submitted) || (hiringDate.dirty && hiringDate.invalid) || (hiringDate.touched && hiringDate.invalid)">Hiring date is required.</small>
+                </div>
+                <div class="col-4">
+                    <label for="salary">Salary</label>
+                    <input #salary="ngModel" placeholder="Salary" id="salary" type="number" required pInputText [(ngModel)]="employeeContractCreation.jobInformationCreation.salary" [ngClass]="{'ng-dirty': (salary.touched && salary.invalid) || (salary.invalid && submitted) || (salary.dirty && salary.invalid)}"> 
+                    <small class="p-error" *ngIf="(salary.invalid && submitted) || (salary.dirty && salary.invalid) || (salary.touched && salary.invalid)">Salary is required.</small>
+                </div>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="footer">
+            <p-button label="Back" (onClick)="prevPage()" icon="pi pi-angle-left"></p-button>
+            <p-button class="rightButton" label="Next" (onClick)="nextPage()" icon="pi pi-angle-right" iconPos="right"></p-button>
+        </ng-template>
+    </p-card>
+</div>

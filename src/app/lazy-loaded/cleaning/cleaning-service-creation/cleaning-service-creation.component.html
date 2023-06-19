@@ -1,0 +1,61 @@
+<div class="mt-5 container">
+    <h1>{{title}}</h1>
+    <div class="mt-5 row">
+        <div class="col-8">
+            <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+                <app-contact-info></app-contact-info>
+                <app-location-of-house></app-location-of-house>
+                <app-standard-cleaning-service-detail *ngIf="isStandardOrDeepDetail()"
+                    [bedroomPrices]="bedroomPrices"
+                    [bathroomPrices]="bathroomPrices"
+                    [kitchenPrices]="kitchenPrices"
+                    [pickUpKeysPrice]="pickUpKeysPrice"
+                    [paidParkingSpotPrice]="paidParkingSpotPrice"
+                ></app-standard-cleaning-service-detail>
+                <app-environmental-cleaning-service-detail *ngIf="!isStandardOrDeepDetail()"
+                    [propertyPrices]="propertyPrices"
+                    [roomPrices]="roomPrices"
+                    [pickUpKeysPrice]="pickUpKeysPrice"
+                    [paidParkingSpotPrice]="paidParkingSpotPrice"
+                ></app-environmental-cleaning-service-detail>
+                <app-cleaning-frequency *ngIf="isStandardOrDeepDetail()"></app-cleaning-frequency>
+                
+                <ng-container formArrayName="appointments">
+                    <h2>Appointments</h2>
+                    <ng-container *ngFor="let appointmentForm of appointments.controls; let i = index">
+                        <app-appointment-creation
+                            [appointmentForm]="appointmentForm"
+                            [timeEstimation]="timeEstimation"
+                        ></app-appointment-creation>
+                    </ng-container>
+                </ng-container>
+
+                <div class="col-12 p-3">
+                    <p-divider></p-divider>
+                </div>
+
+                <app-payment-details></app-payment-details>
+
+                <div class="row">
+                    <div class="col-12 p-5" style="text-align: center;">
+                        <button pButton pRipple type="submit" label="Book Now"></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-4 summary">
+            <app-booking-summary
+                [cleaningServicePrice]="cleaningServicePrice"
+                [cleaningDetailsPrices]="cleaningDetailsPrices"
+                [discount]="discount"
+                [frequency]="frequency"
+                [cleaningType]="cleaningType"
+                [property]="property"
+                [timeEstimation]="timeEstimation"
+                [squareMeters]="squareMeters"
+            ></app-booking-summary>
+        </div>
+    </div>
+</div>
+
+<p-toast></p-toast>

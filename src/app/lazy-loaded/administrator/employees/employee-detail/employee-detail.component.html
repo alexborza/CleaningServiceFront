@@ -1,0 +1,50 @@
+<div class="container mb-5 p-4" *ngIf="employee">
+    <div class="mb-5">
+        <button pButton pRipple type="button" (click)="back()" class="p-button-outlined p-button-rounded" icon="pi pi-arrow-left"></button>
+        <h3 class="text-center">Employee Details</h3>
+    </div>
+    <div class="section">
+        <h4>Personal information</h4>
+        <div class="row">
+            <div class="col-4">
+                <label>Full name</label>
+                <b>{{employee.userInformation.fullName}}</b>
+            </div>
+            <div class="col-4">
+                <label>Address</label>
+                <b>{{employee.userInformation.address}}</b>
+            </div>
+            <div class="col-4">
+                <label>Phone number</label>
+                <b>{{employee.userInformation.phoneNumber}}</b>
+            </div>
+            <div class="col-4">
+                <label>Birth date</label>
+                <b>{{employee.userInformation.birthDate}}</b>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-header">
+            <h4>Job information</h4>
+            <i class="fa fa-pencil-square-o m-1" style="cursor: pointer;" aria-hidden="true" (click)="onEditJobInfo()"></i>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <label>Work Phone</label>
+                <b>{{employee.jobInformationRepresentation.workPhone}}</b>
+            </div>
+            <div class="col-4">
+                <label>Hiring Date</label>
+                <b>{{employee.jobInformationRepresentation.hiringDate}}</b>
+            </div>
+            <div class="col-4">
+                <label>Salary</label>
+                <b>{{employee.jobInformationRepresentation.salary}} $</b>
+            </div>
+        </div>
+    </div>
+</div>
+
+<p-toast></p-toast>

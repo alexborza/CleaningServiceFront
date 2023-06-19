@@ -1,0 +1,31 @@
+:host ::ng-deep .p-datatable .p-paginator-bottom {
+    border-width: 0;
+}
+
+:host ::ng-deep .p-paginator {
+    margin-top: 15px;
+    justify-content: end;
+}
+
+:host ::ng-deep .p-datatable .p-datatable-thead > tr > th {
+    white-space: nowrap;
+}
+
+:host ::ng-deep .p-datatable .p-datatable-tbody > tr > td {
+    font-size: 14px;
+    vertical-align: top;
+    padding-top: 20px;
+}
+
+:host ::ng-deep .p-datatable .p-datatable-thead > tr > th {
+    background: none;
+    border-width: 0 0 2px 0;
+}
+
+:host ::ng-deep .p-button {
+    padding: 0.1rem 1.25rem;
+}
+
+.table {
+    padding: 10px 30px;
+}

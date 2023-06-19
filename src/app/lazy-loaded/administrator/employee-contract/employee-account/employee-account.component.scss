@@ -1,0 +1,29 @@
+:host ::ng-deep .p-inputtext {
+    width: 100%;
+}
+
+:host ::ng-deep .p-card-body {
+    margin: 65px;
+    padding: 2.5rem;
+}
+
+:host ::ng-deep .pass .p-password {
+    width: 100%;
+}
+
+:host ::ng-deep .pass .p-inputtext {
+    width: 100% !important;
+}
+
+:host ::ng-deep .p-button {
+    float: right;
+}
+
+.control {
+    display: grid;
+    margin-bottom: 10px;
+}
+
+small {
+    margin-bottom: 10px;
+}

@@ -1,0 +1,55 @@
+<p-panel [toggleable]="false" class="no-borders">
+    <ng-template pTemplate="header">
+        <h2>Location of the house</h2>
+    </ng-template>
+    <ng-template pTemplate="content">
+        <ng-container [formGroup]="locationForm">
+            <div formGroupName="location">
+                <div class="row mt-2">
+                    <div class="col-6 p-3 controls">
+                        <label>County<span class="required-star">*</span></label>
+                        <p-dropdown 
+                            [options]="counties" 
+                            optionLabel="nume"
+                            optionValue="nume"
+                            placeholder="Select a Country"
+                            [showClear]="true"
+                            formControlName="county">
+                        </p-dropdown>
+                        <small class="p-error" 
+                        *ngIf="(locationForm.get('location').get('county')?.touched && 
+                                locationForm.get('location').get('county')?.errors?.required) ||
+                                locationForm.get('location').get('county').hasError('missing')"
+                        >The field is required</small>
+                    </div>
+                    
+                    <div class="col-6 p-3 controls">
+                        <label>City<span class="required-star">*</span></label>
+                        <input type=text pInputText placeholder="City" formControlName=city trim="blur">
+                        <small class="p-error" 
+                        *ngIf="(locationForm.get('location').get('city')?.touched && 
+                                locationForm.get('location').get('city')?.errors?.required) ||
+                                locationForm.get('location').get('city').hasError('missing')"
+                        >The field is required</small>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-12 p-3 controls">
+                        <label>Street Address<span class="required-star">*</span></label>
+                        <input type=text pInputText placeholder="Address(Str, Nr, Bl, Sc)" formControlName=address trim="blur">
+                        <small class="p-error" 
+                        *ngIf="(locationForm.get('location').get('address')?.touched && 
+                                locationForm.get('location').get('address')?.errors?.required) ||
+                                locationForm.get('location').get('address').hasError('missing')"
+                        >The field is required</small>
+                    </div>
+
+                    <div class="col-12 p-3">
+                        <p-divider></p-divider>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+    </ng-template>
+</p-panel>

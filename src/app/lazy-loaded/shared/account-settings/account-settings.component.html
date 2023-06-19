@@ -1,0 +1,94 @@
+<div class="container" style="margin-bottom: 80px;" *ngIf="user">
+    <h3>Account Settings</h3>
+    
+    <div class="row section">
+        <div class="col-9">
+            <b>EMAIL</b>
+            <label>{{user.email}}</label>
+        </div>
+        <div class="col-2">
+            <button pButton type="button" label="Modify" (click)="modifyEmail()"></button>
+        </div>
+    </div>
+
+
+    <div class="row section">
+        <div class="col-9">
+            <b>PASSWORD</b>
+            <label>**********</label>
+        </div>
+        <div class="col-2">
+            <button pButton type="button" label="Modify" (click)="modifyPasssword()"></button>
+        </div>
+    </div>
+
+    <div class="row section">
+        <div class="col-9">
+            <b>PERSONAL INFORMATION</b>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <span>Name:</span>
+                </div>
+                <div class="col-8">
+                    <label>{{ user.userInformation ? user.userInformation.fullName : 'Not specified' }}</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <span>Date of birth:</span>
+                </div>
+                <div class="col-8">
+                    <label>{{ user.userInformation ? user.userInformation.birthDate : 'Not specified' }}</label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-4">
+                    <span>Address:</span>
+                </div>
+                <div class="col-8">
+                    <label>{{ user.userInformation ? user.userInformation.address : 'Not specified' }}</label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-4">
+                    <span>Phone number:</span>
+                </div>
+                <div class="col-8">
+                    <label>{{ user.userInformation ? user.userInformation.phoneNumber : 'Not specified' }}</label>
+                </div>
+            </div>
+        </div>
+        <div class="col-2">
+            <button pButton type="button" label="Modify" (click)="modifyPersonalInfo()"></button>
+        </div>
+    </div>
+
+    <div class="row section" *ngIf="isEmployee">
+        <div class="col-9">
+            <b>JOB INFORMATION</b>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <span>Hiring date:</span>
+                </div>
+                <div class="col-8">
+                    <label>{{user.jobInformationRepresentation.hiringDate}}</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <span>Salary:</span>
+                </div>
+                <div class="col-8">
+                    <label>{{user.jobInformationRepresentation.salary}} $</label>
+                </div>
+            </div>
+        </div>
+        <div class="col-2">
+            <button pButton type="button" label="Details" (click)="onJobInfoDetails()"></button>
+        </div>
+    </div>
+</div>
+
+<p-toast></p-toast>

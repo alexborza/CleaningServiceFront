@@ -1,1 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
+@import 'assets/style/components/prime';
+* {
+    font-family: sans-serif;
+}
+
+small {
+    contain: size;
+    text-align: left;
+    // margin-bottom: 15px;
+}
+
+.required-star {
+    color:red;
+}
